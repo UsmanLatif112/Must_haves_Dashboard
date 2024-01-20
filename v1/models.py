@@ -17,6 +17,8 @@ class ApiResponse(db.Model):
     __tablename__ = "api_response"
 
     id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to users table
+    user = db.relationship('User', backref=db.backref('api_responses', lazy=True))
     description = Column(String(256))
     api = Column(String(512))
     method = Column(String(128))
