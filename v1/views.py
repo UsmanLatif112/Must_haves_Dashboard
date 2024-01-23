@@ -15,8 +15,11 @@ from models import ApiResponse, db
 
 @app.route("/", methods=["GET", "POST"])
 def login():
+    # import pdb;pdb.set_trace()
     if request.method == "GET":
         return render_template("index.html")
+    
+     
     elif request.method == "POST":
         data = request.get_json()
         email = data.get("email")
@@ -26,6 +29,7 @@ def login():
         )  # For debugging purposes
 
         if email and password:
+           
             user = authenticate(email, password)
             if user:
                 # import pdb;pdb.set_trace()
