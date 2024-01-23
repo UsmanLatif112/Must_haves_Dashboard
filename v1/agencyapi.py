@@ -207,7 +207,7 @@ def init_the_testing():
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(5)
+                    time.sleep(1)
 
                 except Exception as e:
                     print("==============================================")
@@ -301,15 +301,15 @@ def init_the_testing():
             #         },
             # },
             
-            # {
-            #     "description": "Get all User list",
-            #     "url": f"http://69.167.136.19:8010/users/list/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get all User list",
+                "url": f"http://69.167.136.19:8010/users/list/",
+                "method": "GET",
+                "params": None
+            },
             
             {
-                "description": "Get SOS link of user with correct data",
+                "description": "Get SS0 link of user with correct data",
                 "url": f"http://69.167.136.19:8010/users/login_link/",
                 "method": "POST",
                 "params": 
@@ -320,7 +320,7 @@ def init_the_testing():
             },
             
             # {
-            #     "description": "Get SOS link of user with incorrect username",
+            #     "description": "Get SSO link of user with incorrect username",
             #     "url": f"http://69.167.136.19:8010/users/login_link/",
             #     "method": "POST",
             #     "params": 
@@ -394,22 +394,22 @@ def init_the_testing():
             #     "method": "GET",
             #     "params": None
             # },
-            # {
-            #     "description": "Get campaign by providing incorrect campaign ID",
-            #     "url": "http://69.167.136.19:8010/campaigns/177/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get campaign by providing incorrect campaign ID",
+                "url": "http://69.167.136.19:8010/campaigns/177/",
+                "method": "GET",
+                "params": None
+            },
             
             
             # # # =============================================================
             
-            # {
-            #     "description": "Get list of all campaigns",
-            #     "url": "http://69.167.136.19:8010/campaigns/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of all campaigns",
+                "url": "http://69.167.136.19:8010/campaigns/list/all/",
+                "method": "GET",
+                "params": None
+            },
             
             # # # =============================================================
             
@@ -472,25 +472,25 @@ def init_the_testing():
             
             # # ======================================
             
-            # {
-            #     "description": "Get list of all clients",
-            #     "url": f"http://69.167.136.19:8010/clients/clients/list/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of all clients",
+                "url": f"http://69.167.136.19:8010/clients/clients/list/",
+                "method": "GET",
+                "params": None
+            },
             
             # # ======================================
             
-            # {
-            #     "description": "Get list of all Geo Gifs URLs",
-            #     "url": "http://69.167.136.19:8010/geo/gifs/urls/list/",
-            #     "method": "GET",
-            #     "params":
-            #         {
-            #         "Page": 1,
-            #         "Size": 50
-            #         }   
-            # },
+            {
+                "description": "Get list of all Geo Gifs URLs",
+                "url": "http://69.167.136.19:8010/geo/gifs/urls/list/",
+                "method": "GET",
+                "params":
+                    {
+                    "Page": 1,
+                    "Size": 50
+                    }   
+            },
             
             # # ======================================
             
@@ -500,21 +500,21 @@ def init_the_testing():
             #     "method": "GET",
             #     "params": None
             # },
-            # {
-            #     "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-            #     "url": f"http://69.167.136.19:8010/geo/gifs/urls/campaign/1205",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
+                "url": f"http://69.167.136.19:8010/geo/gifs/urls/campaign/1205",
+                "method": "GET",
+                "params": None
+            },
             
             # # ======================================
             
-            # {
-            #     "description": "Get list of all Geo Grids URLs",
-            #     "url": "http://69.167.136.19:8010/geo/grid/urls/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of all Geo Grids URLs",
+                "url": "http://69.167.136.19:8010/geo/grid/urls/list/all/",
+                "method": "GET",
+                "params": None
+            },
             
             # # ======================================
             
@@ -526,12 +526,12 @@ def init_the_testing():
             #     "params": None
             # },
             
-            # {
-            #     "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
-            #     "url": f"http://69.167.136.19:8010/geo/grid/urls/1496/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
+                "url": f"http://69.167.136.19:8010/geo/grid/urls/1496/",
+                "method": "GET",
+                "params": None
+            },
             
             # # ======================================
             
@@ -542,12 +542,12 @@ def init_the_testing():
             #     "params": None
             # },
             
-            # {
-            #     "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-            #     "url": f"http://69.167.136.19:8010/geo/grid/urls/latest/8573",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
+                "url": f"http://69.167.136.19:8010/geo/grid/urls/latest/8573",
+                "method": "GET",
+                "params": None
+            },
             
             # # # ======================================
             
