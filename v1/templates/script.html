@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- j query library for java script -->
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style>
     .breadcrumb {
       margin-top: 10px;
-      margin-left: 22px;
+      margin-left: 42px;
+
     }
     .breadcrumb a {
       text-decoration: none;
-      color: #3366cc;
+      color: #003366;
     }
     .loader {
       position: fixed;
@@ -54,20 +56,22 @@
       color: #000;
     }
     #header {
-      background-color: #003366;
+      background-color: #1d455b;
       color: #ffffff;
-      text-align: center;
+      text-align: left;
       padding: 20px;
       display: flex; /* Add this line to use flexbox */
       justify-content: space-between;
       align-items: center;
-      height: 50px;
+      height: 35px;
+      border-radius: 100px;
+      margin: 10px  10px  10px  10px;
 
       
     }
 
     #header h1 {
-    margin: 0; /* Remove default margin for h1 */
+    margin-left: 35px; /* Remove default margin for h1 */
     flex-grow: 1; /* Allow the h1 to take up available space */
     }
     table {
@@ -80,7 +84,7 @@
       border-radius: 500px;
     }
     th {
-      background-color: #3366cc;
+      background-color: #5ea5cc;
       padding-bottom: 8px;  
       padding-top: 8px;
       border: 1px solid lightgrey;
@@ -137,7 +141,7 @@
       color: red;
     }
     #run-script-container {
-      margin-top: 22px;
+      margin-top: 50px;
       
       text-align: center;
     }
@@ -170,7 +174,7 @@
       background-color: #ff0000;
       color: #ffffff;
       padding: 5px;
-      border-radius: 5px;
+      border-radius: 10px;
       margin-top: -30px;
       margin-left: 270px;
       width:210px;
@@ -196,7 +200,7 @@
 
     #run-script-button:hover {
       color: #ffffff; /* Hover text color */
-      background-color: #3366cc; /* Hover background color */
+      background-color: #357fa8; /* Hover background color */
       
     }
     .custom-tooltip {
@@ -237,7 +241,7 @@
         display: none;
         position: absolute;
         right: 0;
-        background-color: #f9f9f9;
+        background-color: #DDDDDD;
         min-width: 160px;
         z-index: 1;
         border-radius: 10px;
@@ -250,7 +254,7 @@
         text-align: left;
     }
     .dropdown-content a:hover {
-        background-color: #f1f1f1;
+        background-color: #A0DBFD;
         border-radius: 10px;
     }
     .dropdown:hover .dropdown-content {
@@ -260,10 +264,10 @@
   </style>
 </head>
 <body>
-<div id="header" style="margin: -8px; height: 50px;">
-  <h1 style="text-align: -webkit-center; margin: 2px; padding: 3px;">Agency API Must Have</h1>
+<div id="header">
+  <h1 >Agency API Must Have</h1>
     <div class="dropdown">
-      <i class="fa fa-user" style="font-size: 24px; color: #ffffff;"></i>
+      <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
       <div class="dropdown-content">
           <a href="/" onclick="return confirm('Are you sure you want to logout?');">Logout</a>
       </div>

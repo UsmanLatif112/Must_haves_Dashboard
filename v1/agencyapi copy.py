@@ -22,12 +22,12 @@ def init_the_testing():
     # Campaign IDd which is used for other apis in which we need campaign id to get data
     # (Dont Delete Cam1)
 
-    Campaign_IDd = "19458" 
+    Campaign_IDd = "19460" 
 
     # Campaign IDdd which is used to add 8th keyword in campaign already having 7 keywords
     # (Dont Delete Cam2)
 
-    Campaign_IDdd = "19359"
+    Campaign_IDdd = "19491"
 
     # Campaign IDdr which is used to delete last keyword of campaign
     # (Dont Delete Cam3)
@@ -38,6 +38,11 @@ def init_the_testing():
     # (Business campaign Del 4)
 
     Campaign_IDdt = "19361"
+    
+    # Campaign IDdt which is used to deauthorize business.
+    # (Business campaign Del 4)
+    
+    Campaign_IDde = "19516"
 
     # Client id is used to get client api
 
@@ -45,8 +50,8 @@ def init_the_testing():
 
     # Keyword which is used to create keyword add keyword or delete keyword
 
-    Keyword_new = f"apimust{id}"
-    # Keyword_new = "hello"
+    # Keyword_new = f"apimust{id}"
+    Keyword_new = f"hello{id}"
     
     # Client name which is used to create new client
 
@@ -54,8 +59,8 @@ def init_the_testing():
 
     # ================================================
 
-    user_name = f"Apimust{idD}12"
-    email = f"Apimust12{idD}@gmail.com"
+    user_name = f"Apimust{id}12"
+    email = f"Apimust12{id}@gmail.com"
     password =  "Usman@112"
     
     # data which is used to create new campaign
@@ -309,7 +314,7 @@ def init_the_testing():
             },
             
             {
-                "description": "Get SOS link of user with correct data",
+                "description": "Get SS0 link of user with correct data",
                 "url": f"http://69.167.136.19:8010/users/login_link/",
                 "method": "POST",
                 "params": 
@@ -320,7 +325,7 @@ def init_the_testing():
             },
             
             {
-                "description": "Get SOS link of user with incorrect username",
+                "description": "Get SSO link of user with incorrect username",
                 "url": f"http://69.167.136.19:8010/users/login_link/",
                 "method": "POST",
                 "params": 
@@ -341,7 +346,7 @@ def init_the_testing():
                         }
             },
             
-            # =========================================
+            # # =========================================
             
             {
                 "description": "Create campaign with correct data",
@@ -386,7 +391,7 @@ def init_the_testing():
             },
             
             
-            # =============================================================
+            # # # =============================================================
             
             {
                 "description": "Get campaign by providing campaign ID",
@@ -402,7 +407,7 @@ def init_the_testing():
             },
             
             
-            # # =============================================================
+            # # # # =============================================================
             
             {
                 "description": "Get list of all campaigns",
@@ -411,7 +416,7 @@ def init_the_testing():
                 "params": None
             },
             
-            # # =============================================================
+            # # # =============================================================
             
             {
                 "description": "Delete campaign by providing campaign ID",
@@ -434,7 +439,7 @@ def init_the_testing():
                 "params": None
             },
             
-            # =============================================================
+            # # =============================================================
             
             {
                 "description": "Create Client",
@@ -455,7 +460,7 @@ def init_the_testing():
                         }
             },
             
-            # # ======================================
+            # # # # ======================================
             
             {
                 "description": "Get client by providing client ID",
@@ -470,7 +475,7 @@ def init_the_testing():
                 "params": None
             },
             
-            # ======================================
+            # # ======================================
             
             {
                 "description": "Get list of all clients",
@@ -479,7 +484,7 @@ def init_the_testing():
                 "params": None
             },
             
-            # ======================================
+            # # # ======================================
             
             {
                 "description": "Get list of all Geo Gifs URLs",
@@ -492,7 +497,7 @@ def init_the_testing():
                     }   
             },
             
-            # ======================================
+            # # # ======================================
             
             {
                 "description": "Get list of Geo Gifs URLs by providing campaign ID",
@@ -507,7 +512,7 @@ def init_the_testing():
                 "params": None
             },
             
-            # ======================================
+            # # # ======================================
             
             {
                 "description": "Get list of all Geo Grids URLs",
@@ -516,7 +521,7 @@ def init_the_testing():
                 "params": None
             },
             
-            # ======================================
+            # # ======================================
             
             
             {
@@ -533,7 +538,7 @@ def init_the_testing():
                 "params": None
             },
             
-            # ======================================
+            # # ======================================
             
             {
                 "description": "Get list of latest Grids URLs by providing campaign ID",
@@ -557,7 +562,7 @@ def init_the_testing():
                 "method": "POST",
                 "params":
                     {
-                    "campaign_id": Campaign_IDd,
+                    "campaign_id": Campaign_IDde,
                     "keyword": Keyword_new
                     }
             },
@@ -567,7 +572,7 @@ def init_the_testing():
                 "method": "POST",
                 "params":
                     {
-                    "campaign_id": Campaign_IDd,
+                    "campaign_id": Campaign_IDde,
                     "keyword": Keyword_new
                     }
             },
@@ -582,7 +587,7 @@ def init_the_testing():
                     }
             },
             
-            # ======================================
+            # # ======================================
             
             {
                 "description": "Deauthroize business by providing campaign ID",
@@ -603,23 +608,23 @@ def init_the_testing():
                 "params": None
             }, 
             
-            # ======================================
+            # # ======================================
             
             {
                 "description": "Delete keyword from campaign by providing campaign ID",
-                "url": f"http://69.167.136.19:8010/keyword/delete/{Keyword_new}/{Campaign_IDd}",
+                "url": f"http://69.167.136.19:8010/keyword/delete/{Keyword_new}/{Campaign_IDde}",
                 "method": "DELETE",
                 "params": None
             },
             {
                 "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-                "url": f"http://69.167.136.19:8010/keyword/delete/{Keyword_new}/{Campaign_IDd}",
+                "url": f"http://69.167.136.19:8010/keyword/delete/{Keyword_new}/{Campaign_IDde}",
                 "method": "DELETE",
                 "params": None
             },
             {
                 "description": "Try to delete last keyword of campaign by providing campaign ID",
-                "url": f"http://69.167.136.19:8010/keyword/delete/ramen/{Campaign_IDdr}",
+                "url": f"http://69.167.136.19:8010/keyword/delete/hello/{Campaign_IDdr}",
                 "method": "DELETE",
                 "params": None
             },
