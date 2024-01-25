@@ -3,16 +3,21 @@ import csv
 from csv import reader
 import time
 from flask import  request
-def init_the_testing():
+def init_the_testing(campaign_id, quick_analysis_campaign_id):
     # Retrieve the campaign_id from the form data
-    campaign_idd = request.form.get("campaign_id")
+    # campaign_idd = request.form.get("campaign_id")
     Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBaW1hbFJhemFfMjIiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSkJhVzFoYkZKaGVtRmZNaklpTENKelkyOXdaWE1pT2x0ZExDSnBaQ0k2TVRFd05Dd2laWGh3SWpveE56QTNNVE00TmprNGZRLnUydDl0ZWxWem1WUHRkWmllUWE2TkVPRTE3NGVmZlFSNExJamtQdW52N1kiLCJleHAiOjIwMjAzMzg2OTh9.-Vo3eyz3OQGViYypBo4Oe5emU3_fCQ2fsE-wvB4_U8k"
+    Campaign_IDd = str(campaign_id)
+    Quick_Camp_Id = str(quick_analysis_campaign_id)
     # ======================================
     auth_token = Piroty_token
     # ======================================
-    id = f'{campaign_idd}'
+    id = f'{Campaign_IDd}'
     
-    idD = str(f'{campaign_idd}')
+    idD = str(f'{Campaign_IDd}')
+    # ================================================
+    Quick_Camp_ID = f'{Quick_Camp_Id}'
+    # Campaign ID which is deleted firs
     # ================================================
 
     # Campaign ID which is deleted first in delete api and get single campaign data with campaign id.

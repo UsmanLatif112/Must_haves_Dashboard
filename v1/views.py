@@ -64,7 +64,11 @@ def run_script():
         from agencyapi import init_the_testing
 
         # Call a function that initializes testing and returns data
-        result_content = init_the_testing()
+        campaign_id = request.form.get("C_id")
+        quick_analysis_campaign_id = request.form.get("Q_id")
+
+        # Pass these IDs to the init_the_testing function
+        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id)
         
         # Commit the API responses to the database
         db.session.commit()
