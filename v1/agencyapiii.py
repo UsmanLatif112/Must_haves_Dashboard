@@ -225,7 +225,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id):
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(1)
+                    time.sleep(5)
 
                 except Exception as e:
                     print("==============================================")
@@ -245,143 +245,99 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id):
     # For example, let's assume your script's function is `hit_apis_and_save_results`
     auth_token = Piroty_token
     api_list = [
-         # ====//// == Agency API == ////=======
-    
+            
             {
-                "description": "Get all User list",
-                "url": f"http://69.167.136.19:8010/users/list/",
+                "description": "Get Reporting PDF with correct Campaign ID",
+                "url": f"http://69.167.136.19:8010/reporting/pdf/{Campaign_IDd}",
                 "method": "GET",
-                "params": None
+                "params":None
             },
             
             {
-                "description": "Get SS0 link of user with correct data",
-                "url": f"http://69.167.136.19:8010/users/login_link/",
+                "description": "Get Reporting PDF with Incorrect Campaign ID",
+                "url": f"http://69.167.136.19:8010/reporting/pdf/789456123",
+                "method": "GET",
+                "params":None
+            },
+            
+            # ======================================
+            {
+                "description": "Create Quick Analysis Campaign with correct data",
+                "url": "http://69.167.136.19:8010/quick_analysis/campaigns/create/",
                 "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Aimalraza_22",
-                        "password": "Aimal@11"
-                        }
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
             },
-            
+            # # ======================================
             {
-                "description": "Get SSO link of user with incorrect username",
-                "url": f"http://69.167.136.19:8010/users/login_link/",
+                "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
+                "url": "http://69.167.136.19:8010/quick_analysis/campaigns/create/",
                 "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Aimalraza_",
-                        "password": "Aimal@11"
-                        }
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": 159753456978634159494945642368,
+                    "campaign_name": Campaign_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
             },
-            
+            # # ======================================
             {
-                "description": "Get SOS link of user with incorrect password",
-                "url": f"http://69.167.136.19:8010/users/login_link/",
+                "description": "Create Quick Analysis Campaign with Inccorrect User ID",
+                "url": "http://69.167.136.19:8010/quick_analysis/campaigns/create/",
                 "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Aimalraza_22",
-                        "password": "Usman@1"
-                        }
-            },
-            
-            
-            # # # =============================================================
-            
-            {
-                "description": "Get campaign by providing campaign ID",
-                "url": f"http://69.167.136.19:8010/campaigns/{Campaign_ID}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get campaign by providing incorrect campaign ID",
-                "url": "http://69.167.136.19:8010/campaigns/177/",
-                "method": "GET",
-                "params": None
-            },
-            
-            
-            # # # # =============================================================
-            
-            {
-                "description": "Get list of all campaigns",
-                "url": "http://69.167.136.19:8010/campaigns/list/all/",
-                "method": "GET",
-                "params": None
-            },
-            
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get client by providing client ID",
-                "url": f"http://69.167.136.19:8010/clients/{Client_id}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get client by providing incorrect client ID",
-                "url": f"http://69.167.136.19:8010/clients/128/",
-                "method": "GET",
-                "params": None
+                "params":
+                    {
+                    "user_id": 798456,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
             },
             
             # # ======================================
             
             {
-                "description": "Get list of all clients",
-                "url": f"http://69.167.136.19:8010/clients/clients/list/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # ======================================
-            
-            {
-                "description": "Get list of all Geo Gifs URLs",
-                "url": "http://69.167.136.19:8010/geo/gifs/urls/list/",
-                "method": "GET",
-                "params":
-                    {
-                    "Page": 1,
-                    "Size": 50
-                    }   
-            },
-            
-            # # # ======================================
-            
-            {
-                "description": "Get list of Geo Gifs URLs by providing campaign ID",
-                "url": f"http://69.167.136.19:8010/geo/gifs/urls/campaign/{Campaign_IDd}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-                "url": f"http://69.167.136.19:8010/geo/gifs/urls/campaign/1205",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # ======================================
-            
-            {
-                "description": "Get list of latest Grids URLs by providing campaign ID",
-                "url": f"http://69.167.136.19:8010/geo/grid/urls/latest/{Campaign_IDd}",
+                "description": "Get list of Quick Analysis Campaign with correct campaign ID",
+                "url": f"http://69.167.136.19:8010/quick_analysis/campaigns/{Quick_Camp_ID}/",
                 "method": "GET",
                 "params": None
             },
             
             {
-                "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-                "url": f"http://69.167.136.19:8010/geo/grid/urls/latest/8573",
+                "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
+                "url": f"http://69.167.136.19:8010/quick_analysis/campaigns/741528/",
                 "method": "GET",
                 "params": None
             },
-            # ======================================
+            
+            {
+                "description": "Get list of all Quick Analysis Campaigns",
+                "url": f"http://69.167.136.19:8010/quick_analysis/campaigns/list/all/",
+                "method": "GET",
+                "params": None
+            },
+            
+            {
+                "description": "Delete Quick Analysis Campaigns with campaign id",
+                "url": f"http://69.167.136.19:8010/quick_analysis/campaigns/delete/{Quick_Camp_ID}/",
+                "method": "DELETE",
+                "params": None
+            },
+            
+            {
+                "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
+                "url": f"http://69.167.136.19:8010/quick_analysis/campaigns/delete/978456185/",
+                "method": "DELETE",
+                "params": None
+            },
+            
+            
         ] # Your API list
 
     # Call the function to hit the APIs and save the results
