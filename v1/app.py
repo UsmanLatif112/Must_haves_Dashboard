@@ -22,7 +22,7 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 
 if __name__ == "__main__":
-    app.run(host='164.68.114.111', port=5005, debug=False)
+    app.run(host='0.0.0.0', port=5005, debug=False)
 
     # app.run(host='0.0.0.0', port=5005)
 
