@@ -120,7 +120,7 @@
       margin: auto;
       margin-top: 24px;
       table-layout: fixed;
-      width: 1433px;
+      width: 1200px;
       border-radius: 500px;
       text-align: center;
     }
@@ -265,6 +265,11 @@
       border: none;
       border-radius: 15px;
       cursor: pointer;
+      display: inline-block;
+      height: 39px;
+      /* padding-bottom: 5px; */
+      text-align: center;
+      line-height: 2px;
       
       margin-right: 18px;
       display: none; /* Hide the button by default */
@@ -325,7 +330,7 @@
 
   <!-- New Upload Data button that opens a modal -->
   <button id="download-button" style="display:none;">Download CSV</button>
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadDataModal" style="border-radius: 15px;">Run Script</button>
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadDataModal" style="border-radius: 15px;height: -webkit-fill-available;">Run Script</button>
   
   <!-- Modal -->
   <div class="modal fade" id="uploadDataModal" tabindex="-1" role="dialog" aria-labelledby="uploadDataModalLabel" aria-hidden="true">
@@ -339,13 +344,27 @@
         </div>
         <div class="modal-body">
           <form id="campaignIdForm">
+            
             <div class="form-group">
               <label for="campaignId">Campaign ID:</label>
               <input type="text" class="form-control" id="campaignId" required>
+              <div id="C_error-message" style="display: none; color: red;"></div>
             </div>
             <div class="form-group">
               <label for="quickAnalysisCampaignId">Quick Analysis Campaign ID:</label>
               <input type="text" class="form-control" id="quickAnalysisCampaignId" required>
+              <div id="QC_error-message" style="display: none; color: red;"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="businessGMB">Business GBM CID:</label>
+              <input type="text" class="form-control" id="businessGMB" required>
+              <div id="B-error-message" style="display: none; color: red;"></div>
+            </div>
+            <div class="form-group">
+              <label for="keywordname">keyword name:</label>
+              <input type="text" class="form-control" id="keywordname" required>
+              <div id="error-message" style="display: none; color: red;"></div>
             </div>
             <button type="submit" class="btn btn-info" style="border-radius: 15px;">Run Script</button>
           </form>
@@ -355,10 +374,11 @@
   </div>
 </div>
 </div>
-<div id="results"style="margin-bottom: 50px;">
+
+<div id="results"style="margin-bottom: 50px; font-size: 12px;">
   
   <table id="results-table">
-    <thead style="font-size: medium;">
+    <thead style="font-size: 13px;">
       <tr>
         <th class="desc">Description</th>
         <th class="api">API</th>
@@ -381,6 +401,108 @@
 </div>
 
 <script>
+  // Get the input field
+const keywordInput = document.getElementById('keywordname');
+
+// Add event listener for key press
+keywordInput.addEventListener('keypress', function(event) {
+  // Get the pressed key
+  const keyPressed = String.fromCharCode(event.keyCode);
+
+  // Create a regular expression to match only numbers
+  const numberRegex = /^[a-zA-Z0-9,]+$/;
+
+  // Check if the pressed key is a number
+  if (!numberRegex.test(keyPressed)) {
+    // Display the error message
+    showError('Special characters are not allowed.','error-message');
+    event.preventDefault(); // Prevent the key from being entered
+  } else {
+    // Clear the error message
+    clearError('error-message');
+  }
+});
+ // Get the input field
+ const CInput = document.getElementById('campaignId');
+
+ // Add event listener for key press
+ CInput.addEventListener('keypress', function(event) {
+   // Get the pressed key
+   const keyPressed = String.fromCharCode(event.keyCode);
+ 
+   // Create a regular expression to match only numbers
+   const numberRegex = /^[0-9]+$/;
+ 
+   // Check if the pressed key is a number
+   if (!numberRegex.test(keyPressed)) {
+     // Display the error message
+     showError('Please enter numeric value only.','C_error-message');
+     event.preventDefault(); // Prevent the key from being entered
+   } else {
+     // Clear the error message
+     clearError('C_error-message');
+   }
+ });
+ // Get the input field
+ const QInput = document.getElementById('quickAnalysisCampaignId');
+
+ // Add event listener for key press
+ QInput.addEventListener('keypress', function(event) {
+   // Get the pressed key
+   const keyPressed = String.fromCharCode(event.keyCode);
+ 
+   // Create a regular expression to match only numbers
+   const numberRegex = /^[0-9]+$/;
+ 
+   // Check if the pressed key is a number
+   if (!numberRegex.test(keyPressed)) {
+     // Display the error message
+     showError('Please enter numeric value only.','QC_error-message');
+     event.preventDefault(); // Prevent the key from being entered
+   } else {
+     // Clear the error message
+     clearError('QC_error-message');
+   }
+ });
+ // Get the input field
+ const BInput = document.getElementById('businessGMB');
+
+ // Add event listener for key press
+ BInput.addEventListener('keypress', function(event) {
+   // Get the pressed key
+   const keyPressed = String.fromCharCode(event.keyCode);
+ 
+   // Create a regular expression to match only numbers
+   const numberRegex = /^[0-9]+$/;
+ 
+   // Check if the pressed key is a number
+   if (!numberRegex.test(keyPressed)) {
+     // Display the error message
+     showError('Please enter numeric value only.','B-error-message');
+     event.preventDefault(); // Prevent the key from being entered
+   } else {
+     // Clear the error message
+     clearError('B-error-message');
+   }
+ });
+
+
+// Function to display the error message
+function showError(message,id) {
+  const errorElement = document.getElementById(id);
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+  setTimeout(function() {
+    errorElement.style.display = 'none';
+  }, 2000); // Delay hiding the error message for 2 seconds (2000 milliseconds)
+}
+
+// Function to clear the error message after 2 seconds
+function clearError(id) {
+  const errorElement = document.getElementById(id);
+  errorElement.style.display = 'none';
+}
+
   var responseData; // Global variable to store response data
 
   function goBack() {
@@ -426,7 +548,10 @@
       event.preventDefault();
       var campaignId = $("#campaignId").val();
       var quickAnalysisCampaignId = $("#quickAnalysisCampaignId").val();
+      var businessCId = $("#businessGMB").val();
+      var keywordname = $("#keywordname").val();
 
+      console.log (keywordname)
       // Start the loader
       $('.loader').show();
 
@@ -436,7 +561,9 @@
         type: "post",
         data: {
           'C_id': campaignId,
-          'Q_id': quickAnalysisCampaignId
+          'Q_id': quickAnalysisCampaignId,
+          'K_id': keywordname,
+          'B_id': businessCId,
         },
         success: function(response) {
           console.log("Response:", response);
@@ -494,35 +621,7 @@
       // Close the modal after submitting
       $('#uploadDataModal').modal('hide');
     });
-    $("#download-button").click(function(){
-      downloadCSV();
-    });
 
-    // Function to trigger CSV download
-    function downloadCSV() {
-      var csvContent = "data:text/csv;charset=utf-8;";
-
-      // Header row
-      csvContent += "Description,Description,API,Method,Response Code,Result (according to response code),Response Time,Response Message,Response Data,Response Data Result\n";
-
-      // Data rows
-      responseData.forEach(function(item){
-        csvContent += item.join(",") + "\n";
-      });
-
-      var encodedUri = encodeURI(csvContent);
-
-      // Create a unique filename based on the header name
-      var headerName = "Agency_API_Must_Have";
-      var timestamp = new Date().toISOString().replace(/[:.]/g, "_");
-      var filename = headerName + ".csv";
-
-      var link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-    }
   });
 </script>
 
