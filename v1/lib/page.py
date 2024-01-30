@@ -104,19 +104,19 @@ class HomePage(BasePage):
             print("Dropdown does not have enough options to select from.")
 
 
-    # def get_key_words(
-    #     driver,
-    #     # xpath="div.potential-keywords:not(.Local-keywords)  ul.potential-keyword-list li",
-    #     xpath=Campaigns.Keyword_list,
-    #     ):
-    #     select_Keyword = driver.find_elements(By.XPATH, xpath)
-    #     rand_option = random.choice(select_Keyword)
-    #     try:
-    #         rand_option.click()
-    #         return rand_option
-    #         time.sleep(0.5)
-    #     except:
-    #         pass
+    def get_key_words(
+        driver,
+        # xpath="div.potential-keywords:not(.Local-keywords)  ul.potential-keyword-list li",
+        xpath=QuickAnalysispage.Keyword_list,
+        ):
+        select_Keyword = driver.find_elements(By.XPATH, xpath)
+        rand_option = random.choice(select_Keyword)
+        try:
+            rand_option.click()
+            return rand_option
+            time.sleep(0.5)
+        except:
+            pass
 
 
     # # def click_random_elements(self, xpath: str, num_clicks=3):
