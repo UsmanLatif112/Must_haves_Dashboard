@@ -126,25 +126,28 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
     time.sleep(0.5)
     
     try:
-        while True:
-
-            time.sleep(5)
-            time.sleep(0.5)
-            driver.refresh()
-            time.sleep(0.5)
-            Noti = HomePage(driver)
-            Noti.click_btn(QuickAnalysispage.Notification)
-            time.sleep(0.5)
-            Notifications = f"//*[@class='card text-white notification-unread-bg mb-3 nf-card  '][contains(normalize-space(), 'few seconds ago')]/*[@class='card-body'][contains(normalize-space(), 'Your campaign {business_name.text} quick analysis completed.')]/h6"
-            Noti =driver.find_element(By.XPATH, Notifications)
-            if Noti:
-                print("Successfull")
-                csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign {Noti.text},Pass\n', new=False)
-                break
-            else:
-                print("fail")
+        time.sleep(5)
+        time.sleep(0.5)
+        driver.refresh()
+        time.sleep(0.5)
+        Noti = HomePage(driver)
+        Noti.click_btn(QuickAnalysispage.Notification)
+        time.sleep(1)
+        Notifications = f"//*[@class='card text-white notification-unread-bg mb-3 nf-card  '][contains(normalize-space(), 'few seconds ago')]/*[@class='card-body'][contains(normalize-space(), 'Your campaign {business_name.text} quick analysis completed.')]/h6"
+        Noti =driver.find_element(By.XPATH, Notifications)
+        time.sleep(1)
+        if Noti:
+            time.sleep(1)
+            print("Successfull")
+            print(Noti.text)
+            time.sleep(1)
+            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign {Noti.text},Pass\n', new=False)
+        else:
+            time.sleep(1)
+            print("fail")
                 
     except:
+        time.sleep(1)
         csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign with correct data,fail\n', new=False)
         pass
     
