@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Agency API</title>
+  <title>Quick analysis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- Additional styles and scripts here -->
-  <!-- Bootstrap CSS for modal -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- Bootstrap JS for modal -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
   <style>
     .container{
       margin: auto;
@@ -65,7 +64,7 @@
       top: 0px;
       width: 100%;
       height: 100%;
-      background: rgba(128, 128, 128, 0.5);
+      background: rgba(122, 122, 122, 0.5);
       z-index: 9999;
       display: none;
     }
@@ -127,31 +126,32 @@
       width: 1200px;
       border-radius: 500px;
       text-align: center;
+      height: 57px;
     }
     th {
       background-color: #5ea5cc;
-      padding-bottom: 8px;  
-      padding-top: 8px;
+      padding-bottom: 2px;  
+      padding-top: 2px;
       border: 1px solid lightgrey;
     }
-    .desc { width: 160px; }
+    .desc { width: 120px; }
     .api { width: 300px; }
-    .method { width: 70px; }
-    .code { width: 80px; }
-    .result { width: 130px; }
-    .time { width: 80px; }
-    .message { width: 80px; }
-    .data { width: 230px; }
     .dataRes { width: 90px; }
 
     td {
-      height: 38px;
+      height: 32px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       text-align: center;
       border: 1px solid darkgrey;
+      
     }
+    td:nth-child(2)
+    {
+    text-align: left;
+    margin-left: 20px
+    }   
     tbody tr:nth-child(odd) {
       background-color: #efefef;
     }
@@ -160,13 +160,14 @@
     }
     #results-body {
       display: none;
+      height: 45px;
     }
 
     /* Responsive layout */
     @media (max-width: 600px) {
       #run-script-button {
-        width: 80%; 
-        font-size: 18px;
+        width: 20%; 
+        font-size: 12px;
         padding: 10px;
         margin: 10px auto; 
       }
@@ -193,7 +194,7 @@
 
     #campaign-id-input {
       width: 200px; /* Adjust the width as needed */
-      height: 28px;
+      height: 22px;
       margin-right: 941px;
       margin-top: 7px;
       border-radius: 15px;
@@ -245,7 +246,7 @@
 
     #run-script-button:hover {
       color: #ffffff; /* Hover text color */
-      background-color: #357fa8; /* Hover background color */
+      background-color: #357fa2; /* Hover background color */
       
     }
     .custom-tooltip {
@@ -275,7 +276,7 @@
       text-align: center;
       line-height: 2px;
       
-      margin-right: 18px;
+      margin-right: 12px;
       display: none; /* Hide the button by default */
     }
     
@@ -315,7 +316,7 @@
 </head>
 <body>
 <div id="header">
-  <h1 >Agency API Must Have</h1>
+  <h1 >Quick analysis Must Have</h1>
     <div class="dropdown">
       <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
       <div class="dropdown-content">
@@ -324,19 +325,18 @@
 </div>
 </div>
 
-<!-- Breadcrumb navigation -->
+
 <div class="breadcrumb">
-  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="">Agency API</a>
+  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/BSWA-must-haves">BSWA Must have</a>&nbsp;>&nbsp;<a href="">Quick analysis</a>
 </div>
 <div class="container">
 <div class="d-flex justify-content-end ">
-  <!-- Removed Campaign ID input field and tooltip -->
 
-  <!-- New Upload Data button that opens a modal -->
+
   <button id="download-button" style="display:none;">Download CSV</button>
   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadDataModal" style="border-radius: 15px;height: -webkit-fill-available;">Run Script</button>
   
-  <!-- Modal -->
+
   <div class="modal fade" id="uploadDataModal" tabindex="-1" role="dialog" aria-labelledby="uploadDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -350,25 +350,19 @@
           <form id="campaignIdForm">
             
             <div class="form-group">
-              <label for="campaignId">Campaign ID:</label>
+              <label for="Username">Username:</label>
+              <input type="text" class="form-control" id="Username" required>
+              <div id="U_error-message" style="display: none; color: red;"></div>
+            </div>
+            <div class="form-group">
+              <label for="Password">Password:</label>
+              <input type="text" class="form-control" id="Password" required>
+              <div id="P_error-message" style="display: none; color: red;"></div>
+            </div>
+            <div class="form-group">
+              <label for="campaignId">GMB CID:</label>
               <input type="text" class="form-control" id="campaignId" required>
               <div id="C_error-message" style="display: none; color: red;"></div>
-            </div>
-            <div class="form-group">
-              <label for="quickAnalysisCampaignId">Quick Analysis Campaign ID:</label>
-              <input type="text" class="form-control" id="quickAnalysisCampaignId" required>
-              <div id="QC_error-message" style="display: none; color: red;"></div>
-            </div>
-            
-            <div class="form-group">
-              <label for="businessGMB">Business GBM CID:</label>
-              <input type="text" class="form-control" id="businessGMB" required>
-              <div id="B-error-message" style="display: none; color: red;"></div>
-            </div>
-            <div class="form-group">
-              <label for="keywordname">keyword name:</label>
-              <input type="text" class="form-control" id="keywordname" required>
-              <div id="error-message" style="display: none; color: red;"></div>
             </div>
             <button type="submit" class="btn btn-info" style="border-radius: 15px;">Run Script</button>
           </form>
@@ -382,17 +376,11 @@
 <div id="results"style="margin-bottom: 50px; font-size: 12px;">
   
   <table id="results-table">
-    <thead style="font-size: 13px;">
-      <tr>
-        <th class="desc">Description</th>
-        <th class="api">API</th>
-        <th class="method">Method</th>
-        <th class="code">Response Code</th>
-        <th class="result">Result (according to response code)</th>
-        <th class="time">Response Time</th>
-        <th class="message">Response Message</th>
-        <th class="data">Response Data</th>
-        <th class="dataRes">Response Data Result</th>
+    <thead style="font-size: 15px; height: 57px;">
+      <tr style="font-size: 13px;">
+        <th class="desc">Test Case</th>
+        <th class="api">Use Case / Scenario</th>
+        <th class="dataRes">Result</th>=
       </tr>
     </thead>
     <tbody id="results-body">
@@ -405,137 +393,106 @@
 </div>
 
 <script>
-  // Get the input field
-const keywordInput = document.getElementById('keywordname');
+ // Get the input field
+const QInput = document.getElementById('campaignId');
 
 // Add event listener for key press
-keywordInput.addEventListener('keypress', function(event) {
-  // Get the pressed key
-  const keyPressed = String.fromCharCode(event.keyCode);
+QInput.addEventListener('keypress', function(event) {
+  // Check the entire value of the input field together with the new character
+  const proposedValue = QInput.value + String.fromCharCode(event.keyCode);
 
-  // Create a regular expression to match only numbers
-  const numberRegex = /^[a-zA-Z0-9,]+$/;
+  // Create a regular expression to match only numbers and with a maximum of 21 digits
+  const numberRegex = /^\d{1,21}$/;
 
-  // Check if the pressed key is a number
-  if (!numberRegex.test(keyPressed)) {
+  // Check if the proposed value matches the regular expression
+  if (!numberRegex.test(proposedValue)) {
     // Display the error message
-    showError('Special characters are not allowed.','error-message');
+    showError('Incorrect GMB CID please enter correct CID.','C_error-message');
     event.preventDefault(); // Prevent the key from being entered
   } else {
     // Clear the error message
-    clearError('error-message');
+    clearError('C_error-message');
   }
 });
- // Get the input field
- const CInput = document.getElementById('campaignId');
 
- // Add event listener for key press
- CInput.addEventListener('keypress', function(event) {
-   // Get the pressed key
-   const keyPressed = String.fromCharCode(event.keyCode);
- 
-   // Create a regular expression to match only numbers
-   const numberRegex = /^[0-9]+$/;
- 
-   // Check if the pressed key is a number
-   if (!numberRegex.test(keyPressed)) {
-     // Display the error message
-     showError('Please enter numeric value only.','C_error-message');
-     event.preventDefault(); // Prevent the key from being entered
-   } else {
-     // Clear the error message
-     clearError('C_error-message');
-   }
- });
- // Get the input field
- const QInput = document.getElementById('quickAnalysisCampaignId');
+// Get the input field
+const UInput = document.getElementById('Username');
 
- // Add event listener for key press
- QInput.addEventListener('keypress', function(event) {
-   // Get the pressed key
-   const keyPressed = String.fromCharCode(event.keyCode);
- 
-   // Create a regular expression to match only numbers
-   const numberRegex = /^[0-9]+$/;
- 
-   // Check if the pressed key is a number
-   if (!numberRegex.test(keyPressed)) {
-     // Display the error message
-     showError('Please enter numeric value only.','QC_error-message');
-     event.preventDefault(); // Prevent the key from being entered
-   } else {
-     // Clear the error message
-     clearError('QC_error-message');
-   }
- });
- // Get the input field
- const BInput = document.getElementById('businessGMB');
+// Add event listener for input changes
+UInput.addEventListener('input', function() {
+  // The current value of the input field
+  const currentValue = UInput.value;
 
- // Add event listener for key press
- BInput.addEventListener('keypress', function(event) {
-   // Get the pressed key
-   const keyPressed = String.fromCharCode(event.keyCode);
- 
-   // Create a regular expression to match only numbers
-   const numberRegex = /^[0-9]+$/;
- 
-   // Check if the pressed key is a number
-   if (!numberRegex.test(keyPressed)) {
-     // Display the error message
-     showError('Please enter numeric value only.','B-error-message');
-     event.preventDefault(); // Prevent the key from being entered
-   } else {
-     // Clear the error message
-     clearError('B-error-message');
-   }
- });
+  // Create a regular expression to match alphanumeric characters, underscores, hyphens, and spaces
+  // and to limit the length to a maximum of 50 characters.
+  // This pattern ensures that double hyphens and double underscores are not allowed,
+  // but allows single and double spaces.
+  const usernameRegex = /^(?!.*[-_]{2})[a-zA-Z0-9 _-]{0,50}$/;
 
+  // Check if the current value matches the regular expression
+  if (!usernameRegex.test(currentValue)) {
+    // Display the error message
+    showError('Usernames must be 50 characters or less and may contain alphanumeric characters, spaces, underscores, and hyphens. No double hyphens or double underscores are allowed.','U_error-message');
+  } else {
+    // Clear the error message
+    clearError('U_error-message');
+  }
+});
 
-// Function to display the error message
+// Get the input field
+const PInput = document.getElementById('Password');
+
+// Add event listener for input changes
+PInput.addEventListener('input', function() {
+  // The current value of the input field
+  const currentValue = PInput.value;
+
+  // Create a regular expression to match the password criteria
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_-])[A-Za-z\d_-]{8,50}$/;
+
+  // Check if the current value matches the regular expression
+  if (!passwordRegex.test(currentValue)) {
+    // Display the error message
+    showError('Password must be 8-50 characters long and include at least one letter, one number, and one special character (underscore or hyphen).','P_error-message');
+  } else {
+    // Clear the error message
+    clearError('P_error-message');
+  }
+});
+
 function showError(message,id) {
   const errorElement = document.getElementById(id);
   errorElement.textContent = message;
   errorElement.style.display = 'block';
   setTimeout(function() {
     errorElement.style.display = 'none';
-  }, 2000); // Delay hiding the error message for 2 seconds (2000 milliseconds)
+  }, 5000);
 }
-
-// Function to clear the error message after 2 seconds
 function clearError(id) {
   const errorElement = document.getElementById(id);
   errorElement.style.display = 'none';
 }
 
-  var responseData; // Global variable to store response data
+  var responseData;
 
   function goBack() {
-    // Navigate to the homepage
     window.location.href = "/dashboard";
   }
-
   $(document).ready(function() {
-    // Download button click handler
     $("#download-button").click(function() {
       downloadCSV();
     });
-
-    // Function to trigger CSV download
     function downloadCSV() {
-      var csvContent = "data:text/csv;charset=utf-8,";
+      var csvContent = "data:text/csv;charset=utf-2,";
 
-      // Header row
-      csvContent += "Description,API,Method,Response Code,Result (according to response code),Response Time,Response Message,Response Data,Response Data Result\n";
-
-      // Data rows
+      csvContent += "Test Case,Use case / Scenario,Result\n";
       responseData.forEach(function(item) {
         csvContent += item.join(",") + "\n";
       });
 
       var encodedUri = encodeURI(csvContent);
 
-      // Create a unique filename based on the header name
-      var headerName = "Agency_API_Must_Have";
+      var headerName = "Quick_Analysis_Must_Have";
       var timestamp = new Date().toISOString().replace(/[:.]/g, "_");
       var filename = headerName + "_Results.csv";
 
@@ -551,23 +508,19 @@ function clearError(id) {
     $("#campaignIdForm").submit(function(event) {
       event.preventDefault();
       var campaignId = $("#campaignId").val();
-      var quickAnalysisCampaignId = $("#quickAnalysisCampaignId").val();
-      var businessCId = $("#businessGMB").val();
-      var keywordname = $("#keywordname").val();
-
-      console.log (keywordname)
+      var Username = $("#Username").val();
+      var Password = $("#Password").val();
       // Start the loader
       $('.loader').show();
 
-      // Perform an AJAX request using the campaignId and quickAnalysisCampaignId
+      // Perform an AJAX request using the campaignId
       $.ajax({
-        url: "/run_script",
+        url: "/Quick-analysis-script",
         type: "post",
         data: {
           'C_id': campaignId,
-          'Q_id': quickAnalysisCampaignId,
-          'K_id': keywordname,
-          'B_id': businessCId,
+          'U_id': Username,
+          'P_id': Password,
         },
         success: function(response) {
           console.log("Response:", response);
@@ -582,30 +535,20 @@ function clearError(id) {
             var result_class = '';
             var result_class_last = '';
 
-            if (item[4].trim().toLowerCase() == 'pass') {
-              result_class = 'pass';
-            } else if (item[4].trim().toLowerCase() == 'fail') {
-              result_class = 'fail';
-            }
-
-            if (item[8].trim().toLowerCase() == 'pass') {
+            if (item[2].trim().toLowerCase() == 'pass') {
               result_class_last = 'pass';
-            } else if (item[8].trim().toLowerCase() == 'fail') {
+            } else if (item[2].trim().toLowerCase() == 'fail') {
               result_class_last = 'fail';
             }
+
+            
 
             // Append rows to the table
             $('#results-body').append(
               '<tr>' +
               '<td class="desc ellipsis-tooltip" title="' + item[0] + '"><div class="custom-tooltip">' + item[0] + '</div>' + item[0] + '</td>' +
               '<td class="api ellipsis-tooltip" title="' + item[1] + '"><div class="custom-tooltip">' + item[1] + '</div>' + item[1] + '</td>' +
-              '<td class="method ellipsis-tooltip" title="' + item[2] + '"><div class="custom-tooltip">' + item[2] + '</div>' + item[2] + '</td>' +
-              '<td class="code ellipsis-tooltip" title="' + item[3] + '"><div class="custom-tooltip">' + item[3] + '</div>' + item[3] + '</td>' +
-              '<td class="' + result_class + ' ellipsis-tooltip" title="' + item[4] + '"><div class="custom-tooltip">' + item[4] + '</div>' + item[4] + '</td>' +
-              '<td class="time ellipsis-tooltip" title="' + item[5] + '"><div class="custom-tooltip">' + item[5] + '</div>' + item[5] + '</td>' +
-              '<td class="message ellipsis-tooltip" title="' + item[6] + '"><div class="custom-tooltip">' + item[6] + '</div>' + item[6] + '</td>' +
-              '<td class="data ellipsis-tooltip" title="' + item[7].slice(1, -1) + '"><div class="custom-tooltip">' + item[7].slice(1, -1) + '</div>' + item[7] + '</td>' +
-              '<td class="' + result_class_last + ' ellipsis-tooltip" title="' + item[8] + '"><div class="custom-tooltip">' + item[8] + '</div>' + item[8] + '</td>' +
+              '<td class="' + result_class_last + ' ellipsis-tooltip" title="' + item[2] + '"><div class="custom-tooltip">' + item[2] + '</div>' + item[2] + '</td>' +
               '</tr>'
             );
           });

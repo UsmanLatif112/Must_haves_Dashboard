@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Must Haves</title>
+    <title>BSWA Must Haves</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -29,10 +29,24 @@
             font-size: 2rem;
             font-family: system-ui;
         }
+        
+        .breadcrumb {
+        margin-top: 4px;
+        margin-left: 42px;
+        background-color: #fff !important;
+        padding: 0px
+        
+
+        }
+        .breadcrumb a {
+        font-size: 13px;
+        text-decoration: none;
+        color: #3366cc;
+        }
         #content {
-            display: flex;
-            justify-content: center;
-            gap: 100px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px; /* Adjust the gap size to your preference */
             text-align: center;
             padding: 65px;
         }
@@ -92,7 +106,7 @@
 </head>
 <body>
     <div id="header">
-        <h1>Must have Dashboard</h1>
+        <h1>BSWA Must have</h1>
         <div class="dropdown">
             <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
             <div class="dropdown-content">
@@ -100,10 +114,23 @@
             </div>
         </div>
     </div>
+    <div class="breadcrumb">
+        <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="">BSWA Must have</a>
+      </div>
     <div id="content">
-        <a href="/script"><button>Agency Api</button></a>
-        <a href="/BSWA-must-haves"><button>BSWA Must &nbsp;Haves</button></a>
-        <a><button>Chatbot Must Haves</button></a>
+        <!--<a href="/script"><button>Campaigns</button></a> -->
+           <a><button>Campaigns</button></a> 
+           <a><button>Clients</button></a>
+           <a><button>Users</button></a> 
+           <a><button>Teams</button></a> 
+           <a href="/Quick-analysis"><button>Quick Analysis</button></a>
     </div>
+
+<script>
+function goBack() {
+    // Navigate to the homepage
+    window.location.href = "/dashboard";
+  }
+</script>
 </body>
 </html>

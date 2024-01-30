@@ -12,6 +12,14 @@ class User(UserMixin, db.Model):
     is_active = db.Column(db.Boolean)
     password = db.Column(db.String(255), nullable=False)  # Plain text password
 
+class QuickAnalysisModel(UserMixin, db.Model):
+    __tablename__ = "quick_analysis"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), unique=True, nullable=False)
+    use_case = db.Column(db.String(500), unique=True, nullable=False)
+    result = db.Column(db.String(500), unique=True, nullable=False)  # Plain text password
+    user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)
 
 class ApiResponse(db.Model):
     __tablename__ = "api_response"
