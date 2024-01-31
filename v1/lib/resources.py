@@ -22,3 +22,13 @@ class QuickAnalysispage:
     Keyword_list = "//*[@class='potential-keywords']/ul/li/a"
     submit_btn = "//button[contains(normalize-space(), 'Submit for Analysis')]"
     Notification = "//*[@id='navbarSupportedContent']//ul[@class='admin-panel-list']/li/a"
+    key_feild = "//input[@class='tagsinputfield']"
+    Quick_tab = "//button[@id='campaign-tab06']"
+    Edit_Quick_tab = "//*[@class='add-compaign-inner'][contains(normalize-space(), 'Edit Campaign')]"
+    Edit_Quick_Cam = "//*[@placeholder='Campaign Name']"
+    Key_count = "//*[@class='bootstrap-tagsinput']/input"
+    Quick_tab_table = "//div[@id='campaign-tab-content06']//tbody/tr//td[@class=' mdc-data-table__cell']/div/h6"
+    re_button = "//*[@id='campaignbtnresubmit']"
+    Cam_tab_button = "//a[@id='campaignbuttonfordisablenavbar'][contains(normalize-space(), 'Campaigns')]"
+    delete_modal = '//*[@class="modal-content"][contains(normalize-space(), "Are you sure you want to delete this campaign")]'
+    delete_modal_btn = '//*[@class="modal-footer"]//button[@onclick="Delete_confirm_the_Campaign()"][contains(normalize-space(), "Yes")]'
