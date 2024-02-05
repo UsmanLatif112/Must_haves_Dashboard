@@ -18,6 +18,7 @@ class QuickAnalysispage:
     gmb_cid_feild = '//*[@placeholder="Enter GMB CID"]'
     business_location = '//p[@id="business-location"]/span'
     check_gmb_cid = '//button[contains(normalize-space(), "Check")]'
+    check_gmb_cid_incorrect = '//div[@class="potential-keywords"]//ul[contains(normalize-space(), "Incorrect CID, Please try again")]'
     check_gmb_cid_k = '(//div[@class="potential-keywords"]//li/a[@type="button"])[3]'
     Keyword_list = "//*[@class='potential-keywords']/ul/li/a"
     submit_btn = "//button[contains(normalize-space(), 'Submit for Analysis')]"

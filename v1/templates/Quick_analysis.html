@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
@@ -284,6 +286,26 @@
       background-color: #45a049;
     }
 
+    #download-pdf-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      display: inline-block;
+      height: 39px;
+      /* padding-bottom: 5px; */
+      text-align: center;
+      line-height: 2px;
+      
+      margin-right: 12px;
+      display: none; /* Hide the button by default */
+    }
+    
+    #download-pdf-button:hover {
+      background-color: #45a049;
+    }
     .dropdown {
       position: relative;
       display: inline-block;
@@ -311,7 +333,50 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
+
     
+    .image-container {
+      width: 1200px; /* Same as the table width */
+      margin: auto; /* Center the container */
+      display: block; /* ensure the image-container is shown */
+      display: none;
+    }
+    
+    
+    .image-container img {
+      width: 100%; /* Make image fill its container */
+      height: auto; /* Maintain the aspect ratio */
+    }
+    .image-container h4 {
+      text-align: left; /* Aligns the heading to the left */
+      margin-left: 0; /* Aligns the heading with the image */
+      width: 100%; /* Ensures the heading extends the full container width */
+    }
+    .image-container {
+      width: 1200px; /* Same as the table width */
+      margin: auto; /* Center the container */
+      display: block; /* ensure the image-container is shown */
+      display: none;
+      margin-bottom: 50px;
+    }
+    
+    
+    .image-containerr img {
+      width: 100%; /* Make image fill its container */
+      height: auto; /* Maintain the aspect ratio */
+    }
+    .image-containerr h4 {
+      text-align: left; /* Aligns the heading to the left */
+      margin-left: 0; /* Aligns the heading with the image */
+      width: 100%; /* Ensures the heading extends the full container width */
+    }
+    .image-containerr {
+      width: 1200px; /* Same as the table width */
+      margin: auto; /* Center the container */
+      display: block; /* ensure the image-container is shown */
+      margin-bottom: 50px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -334,6 +399,7 @@
 
 
   <button id="download-button" style="display:none;">Download CSV</button>
+  <button id="download-pdf-button" style="display:none;">Download PDF</button>
   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadDataModal" style="border-radius: 15px;height: -webkit-fill-available;">Run Script</button>
   
 
@@ -380,7 +446,7 @@
       <tr style="font-size: 13px;">
         <th class="desc">Test Case</th>
         <th class="api">Use Case / Scenario</th>
-        <th class="dataRes">Result</th>=
+        <th class="dataRes">Result</th>
       </tr>
     </thead>
     <tbody id="results-body">
@@ -388,12 +454,25 @@
   </table>
 </div>
 
+
+<div class="image-container">
+  <h4>After Campaign Creation</h4>
+  <img src="{{url_for('static', filename='screenshot.png')}}" alt="Descriptive alt text">
+</div>
+<div class="image-containerr">
+  <h4>After Edit Campaign</h4>
+  <img src="{{url_for('static', filename='screenshott.png')}}" alt="Descriptive alt text">
+</div>
 <div class="loader">
   <p>Script is running, please wait...</p>
 </div>
 
 <script>
  // Get the input field
+
+ 
+
+ 
 const QInput = document.getElementById('campaignId');
 
 // Add event listener for key press
@@ -482,6 +561,9 @@ function clearError(id) {
     $("#download-button").click(function() {
       downloadCSV();
     });
+  $("#download-pdf-button").click(function() {
+    downloadPDF(); // This function will be defined below
+  });
     function downloadCSV() {
       var csvContent = "data:text/csv;charset=utf-2,";
 
@@ -504,6 +586,29 @@ function clearError(id) {
       document.body.removeChild(link); // Clean up the DOM by removing the link after clicking it
     }
 
+    function downloadPDF() {
+      html2canvas(document.body).then(canvas => {
+        // Get the canvas data as image
+        var imgData = canvas.toDataURL('image/png');
+  
+        // Initialize jsPDF
+        var pdf = new jspdf.jsPDF({
+          orientation: 'portrait', 
+          unit: 'px', 
+          format: [canvas.width, canvas.height]
+        });
+  
+        // Add the canvas image to the PDF
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+        
+        // Set the filename
+        var timestamp = new Date().toISOString().replace(/[:.]/g, "_");
+        var filename = "Quick Analysis Report" + ".pdf";
+  
+        // Save the PDF
+        pdf.save(filename);
+      });
+    }
     // Handle form submission from modal
     $("#campaignIdForm").submit(function(event) {
       event.preventDefault();
@@ -541,8 +646,6 @@ function clearError(id) {
               result_class_last = 'fail';
             }
 
-            
-
             // Append rows to the table
             $('#results-body').append(
               '<tr>' +
@@ -551,11 +654,27 @@ function clearError(id) {
               '<td class="' + result_class_last + ' ellipsis-tooltip" title="' + item[2] + '"><div class="custom-tooltip">' + item[2] + '</div>' + item[2] + '</td>' +
               '</tr>'
             );
+         
           });
-
           // Show the download button and the results body
           $("#download-button").show();
+          $("#download-pdf-button").show();
+          $('.image-container').show();
+          $('.image-containerr').show();
           $("#results-body").show();
+          var delayInMilliseconds = 5000; // Adjust the delay as needed
+          setTimeout(function() {
+            // After the delay, update the image source attributes
+            var timestamp = new Date().getTime();
+            var screenshotPath = "/static/screenshot.png?" + timestamp;
+            var screenshottPath = "/static/screenshott.png?" + timestamp;
+            $(".image-container img").attr("src", screenshotPath);
+            $(".image-containerr img").attr("src", screenshottPath);
+            $('.image-container').show();
+            $('.image-containerr').show();
+          }, delayInMilliseconds);
+
+          // Hide the loader
           $('.loader').hide();
         },
         error: function(error) {

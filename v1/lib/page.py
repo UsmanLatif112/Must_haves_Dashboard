@@ -87,6 +87,15 @@ class HomePage(BasePage):
         except Exception as e:
             print(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
             raise e
+    def waitte(self, xpath, timeout=30):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            print(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            raise e
         
     def make_csv(self, filename: str, data, new=True):
         mode = 'w' if new else 'a'
@@ -113,8 +122,11 @@ class HomePage(BasePage):
         rand_option = random.choice(select_Keyword)
         try:
             rand_option.click()
-            return rand_option
             time.sleep(0.5)
+            rand_option.click()
+            return rand_option
+                
+            
         except:
             pass
 
