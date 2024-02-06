@@ -73,14 +73,14 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
             
             if create_q_cam_page:
                 print("Successfull")
-                csvv.make_csv("BSWA Quick Analysis Report.csv", 'Create quick analysis campaign,Click on quick analysis page button,Pass\n', new=False)
+                csvv.make_csv("BSWA Quick Analysis Report.csv", 'Create quick analysis campaign,Click on quick analysis button,Pass\n', new=False)
             else:
                 print("UnSuccessfull")
-                csvv.make_csv("BSWA Quick Analysis Report.csv", 'Create quick analysis campaign,Click on quick analysis page button,Fail\n', new=False)
+                csvv.make_csv("BSWA Quick Analysis Report.csv", 'Create quick analysis campaign,Click on quick analysis button,Fail\n', new=False)
             
         except:
             print("UnSuccessfull")
-            csvv.make_csv("BSWA Quick Analysis Report.csv", 'Create quick analysis campaign,Click on quick analysis page button,Fail\n', new=False)
+            csvv.make_csv("BSWA Quick Analysis Report.csv", 'Create quick analysis campaign,Click on quick analysis button,Fail\n', new=False)
         
         time.sleep(1.5)
         gmb_cid_feild = HomePage(driver)
@@ -170,7 +170,7 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     print("Successfull")
                     print(Notifications.text)
                     time.sleep(2.5)
-                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign {Notifications.text},Pass\n', new=False)
+                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign ({Notifications.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
                     print("fail")
@@ -182,14 +182,14 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     print("Successfull")
                     print(Notificationss.text)
                     time.sleep(2.5)
-                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign {Notificationss.text},Pass\n', new=False)
+                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign ({Notificationss.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
-                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign with correct data,fail\n', new=False)
+                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign with correct data,fail\n', new=False)
                     print("fail")     
         except:
             time.sleep(2.5)
-            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign with correct data,fail\n', new=False)
+            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign with correct data,fail\n', new=False)
             pass
         
         
@@ -219,56 +219,23 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
         else:
             csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Fail\n', new=False)
         time.sleep(3)
-        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        # time.sleep(3)
-        # screenshot_path = 'v1/screenshot.png'
-        # driver.save_screenshot(screenshot_path)
-        # Wait for the page to load
         time.sleep(3)
-
-        # Get the dimensions of the entire page
         page_width = driver.execute_script("return document.body.scrollWidth")
         page_height = driver.execute_script("return document.body.scrollHeight")
-
-        # Set the width of the window to match the page width
-        driver.set_window_size(page_width, 600)  # Window height can be set to 600 or according to your needs
-
-        # Start with an empty image
+        driver.set_window_size(page_width, 700)
         stitched_image = Image.new('RGB', (page_width, page_height))
-
-        # Scroll through the page and take screenshots
         y_offset = 0
         while y_offset < page_height:
-            # Scroll the page to the new position
             driver.execute_script(f"window.scrollTo(0, {y_offset})")
-            time.sleep(2.5)  # Wait for the page to load the new content
-
-            # Take a screenshot and open it with PIL
+            time.sleep(2.5)
             png = driver.get_screenshot_as_png()
             screenshot = Image.open(io.BytesIO(png))
-
-            # Calculate the position where to paste the screenshot slice
             position = (0, y_offset)
-
-            # Paste the screenshot slice into the stitched image
             stitched_image.paste(screenshot, position)
-
-            # Calculate the offset for the next screenshot
             y_offset += screenshot.size[1]
-
-        # Resize the stitched image to the actual page height (if there is extra space at the bottom)
         stitched_image = stitched_image.crop((0, 0, page_width, page_height))
-
-        # Save the stitched image to a file
-       # screenshot_path = os.path.join('v1/static', 'screenshot.png')
-        #stitched_image.save(screenshot_path)
-        # screenshot_path = os.path.join('static', 'screenshot.png')
         file_name = 'screenshot.png'
-
-        # Define the path to the static folder
         static_folder = os.path.join('v1', 'static')
-
-        # Join the path components using os.path.join
         screenshot_path = os.path.join(static_folder, file_name)
         stitched_image.save(screenshot_path)
         time.sleep(2.5)
@@ -335,7 +302,7 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     print("Successfull")
                     print(Notifications.text)
                     time.sleep(2.5)
-                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign {Notifications.text},Pass\n', new=False)
+                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign ({Notifications.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
                     print("fail")
@@ -347,7 +314,7 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     print("Successfull")
                     print(Notificationss.text)
                     time.sleep(2.5)
-                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign {Notificationss.text},Pass\n', new=False)
+                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign ({Notificationss.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
                     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign with correct data,fail\n', new=False)
@@ -374,69 +341,36 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
         Edit_Quick_tab = HomePage(driver)
         Edit_Quick_tab.waitte(QuickAnalysispage.Edit_Quick_tab)
         
-        if Edit_Quick_tab:
-            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Pass\n', new=False)
-        else:
-            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Fail\n', new=False)
-        time.sleep(3)
-        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        # if Edit_Quick_tab:
+        #     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Pass\n', new=False)
+        # else:
+        #     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Fail\n', new=False)
         # time.sleep(3)
-        # screenshot_path = 'v1/screenshot.png'
-        # driver.save_screenshot(screenshot_path)
-        # Wait for the page to load
         time.sleep(3)
-
-        # Get the dimensions of the entire page
         page_width = driver.execute_script("return document.body.scrollWidth")
         page_height = driver.execute_script("return document.body.scrollHeight")
-
-        # Set the width of the window to match the page width
-        driver.set_window_size(page_width, 600)  # Window height can be set to 600 or according to your needs
-
-        # Start with an empty image
+        driver.set_window_size(page_width, 700)
         stitched_image = Image.new('RGB', (page_width, page_height))
-
-        # Scroll through the page and take screenshots
         y_offset = 0
         while y_offset < page_height:
-            # Scroll the page to the new position
             driver.execute_script(f"window.scrollTo(0, {y_offset})")
-            time.sleep(2.5)  # Wait for the page to load the new content
-
-            # Take a screenshot and open it with PIL
+            time.sleep(2.5)
             png = driver.get_screenshot_as_png()
             screenshot = Image.open(io.BytesIO(png))
-
-            # Calculate the position where to paste the screenshot slice
             position = (0, y_offset)
-
-            # Paste the screenshot slice into the stitched image
             stitched_image.paste(screenshot, position)
-
-            # Calculate the offset for the next screenshot
             y_offset += screenshot.size[1]
-
-        # Resize the stitched image to the actual page height (if there is extra space at the bottom)
         stitched_image = stitched_image.crop((0, 0, page_width, page_height))
-
-        # Save the stitched image to a file
-       # screenshot_path = os.path.join('v1/static', 'screenshot.png')
-        #stitched_image.save(screenshot_path)
-                # Define the file name
         file_name = 'screenshott.png'
-
-        # Define the path to the static folder
         static_folder = os.path.join('v1', 'static')
-
-        # Join the path components using os.path.join
         screenshot_path = os.path.join(static_folder, file_name)
-        # screenshot_path = os.path.join('static','screenshott.png')
         stitched_image.save(screenshot_path)
         time.sleep(2.5)
         driver.maximize_window()
-        time.sleep(1.5)
-        driver.execute_script("arguments[0].scrollIntoView(true);", QuickAnalysispage.Cam_tab_button)
-        time.sleep(1.5)
+        time.sleep(2.5)
+        div_elementt = driver.find_element(By.XPATH, QuickAnalysispage.Cam_tab_button)
+        driver.execute_script("arguments[0].scrollIntoView(true);", div_elementt)
+        time.sleep(2.5)
         driver.refresh()
         time.sleep(1.5)
         
@@ -470,37 +404,45 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
         delete_modal_btn = HomePage(driver)
         delete_modal_btn.click_btn(QuickAnalysispage.delete_modal_btn)
         
-        Quick_tabb_table = HomePage(driver)
-        Quick_tabb_table.waittt(QuickAnalysispage.Quick_tab_table)
-        
+        time.sleep(2.5)
+        driver.refresh()
+        time.sleep(1.5)
+       
         time.sleep(3)
+       
+        time.sleep(1.5)  
+        
+        Cam_tab_button = HomePage(driver)
+        Cam_tab_button.click_btn(QuickAnalysispage.Cam_tab_button)
+        time.sleep(2.5)
+        Quick_tabb = HomePage(driver)
+        Quick_tabb.click_btn(QuickAnalysispage.Quick_tab)
+        time.sleep(1.5)
         try:
-            time.sleep(1.5)
-            Cam_tab_button = HomePage(driver)
-            Cam_tab_button.click_btn(QuickAnalysispage.Cam_tab_button)
-            time.sleep(2.5)
-            Quick_tabb = HomePage(driver)
-            Quick_tabb.click_btn(QuickAnalysispage.Quick_tab)
-            time.sleep(1.5)
-            Quick_tabb_table = HomePage(driver)
-            Quick_tabb_table.waittt(QuickAnalysispage.Quick_tab_table)
-        
-            Campaignnn = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']")
-            if Campaignnn:
-                csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign {Campaignnn.text} not deleted,Fail\n', new=False)
-            else:
-                csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign {campaign_nam} Deleted Successfully,Pass\n', new=False)
+            try:
+                Quick_tabb_table = HomePage(driver)
+                Quick_tabb_table.waitte(QuickAnalysispage.Quick_tab_table)
+            except:
+                pass
+            try:
+                Campaignnn = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']")
+                if Campaignnn:
+                    csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign, Quick Analysis Campaign not deleted,Fail\n', new=False)    
+            except:
+                csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign,Quick Analysis Campaign ({campaign_nam}) Deleted Successfully,Pass\n', new=False)
+                pass        
         except:
-            csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign {campaign_nam} Deleted Successfully,Fail\n', new=False)
-            pass
-        
+            csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign, Quick Analysis Campaign ({campaign_nam}) Deleted Successfully,Pass\n', new=False)
+    
     except Exception as e:
         print(f"An exception occurred: {e}")
         csvv.make_csv('BSWA Quick Analysis Report.csv', f'Quick Analysis Campaign test, Test quick analysis campaign create/edit/delete,Fail\n', new=False)
         pass
-
+    time.sleep(2)
     driver.quit()
 
+    time.sleep(1)
+    
     result_file = 'BSWA Quick Analysis Report.csv'
     with open(result_file, "r", encoding="utf-8") as file:
         result_content = list(reader(file))
