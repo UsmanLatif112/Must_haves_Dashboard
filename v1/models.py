@@ -35,4 +35,5 @@ class ApiResponse(db.Model):
     response_time = Column(Float)
     response_message = Column(String(1024))
     response_data = Column(db.Text)
+    payload_data = db.Column(db.String(255), nullable=True)
     response_data_result = Column(String(256))

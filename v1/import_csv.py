@@ -17,6 +17,7 @@ def import_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a par
                 response_time=float(row["Response Time"]) if row["Response Time"] else None,
                 response_message=row["Response Message"],
                 response_data=row["Response Data"],
+                payload_data=row.get("Payload Data"),
                 response_data_result=row["Response Data Result"],
             )
 

@@ -141,7 +141,8 @@
     .result { width: 130px; }
     .time { width: 80px; }
     .message { width: 80px; }
-    .data { width: 230px; }
+    .data { width: 115px; }
+    .pay { width: 115px; }
     .dataRes { width: 90px; }
 
     td {
@@ -173,7 +174,7 @@
       table {
         width: 100%;
       }
-      .desc, .api, .method, .code, .result, .time, .message, .data, .dataRes {
+      .desc, .api, .method, .code, .result, .time, .message, .data, .pay, .dataRes {
         width: 100%;
         overflow-x: auto; 
       }
@@ -326,7 +327,7 @@
 
 <!-- Breadcrumb navigation -->
 <div class="breadcrumb">
-  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="">Agency API</a>
+  <a href="javascript:void(0);" onclick="goBack()">Homepage</a> / <a href="#">Agency API</a>
 </div>
 <div class="container">
 <div class="d-flex justify-content-end ">
@@ -381,8 +382,6 @@
 
 <div id="results"style="margin-bottom: 50px; font-size: 12px;">
   
-  
-
   <table id="results-table">
     <thead style="font-size: 13px;">
       <tr>
@@ -394,6 +393,7 @@
         <th class="time">Response Time</th>
         <th class="message">Response Message</th>
         <th class="data">Response Data</th>
+        <th class="pay">Payload Data</th>
         <th class="dataRes">Response Data Result</th>
       </tr>
     </thead>
@@ -527,7 +527,7 @@ function clearError(id) {
       var csvContent = "data:text/csv;charset=utf-8,";
 
       // Header row
-      csvContent += "Description,API,Method,Response Code,Result (according to response code),Response Time,Response Message,Response Data,Response Data Result\n";
+      csvContent += "Description,API,Method,Response Code,Result (according to response code),Response Time,Response Message,Response Data,Payload Data,Response Data Result\n";
 
       // Data rows
       responseData.forEach(function(item) {
@@ -590,9 +590,9 @@ function clearError(id) {
               result_class = 'fail';
             }
 
-            if (item[8].trim().toLowerCase() == 'pass') {
+            if (item[9].trim().toLowerCase() == 'pass') {
               result_class_last = 'pass';
-            } else if (item[8].trim().toLowerCase() == 'fail') {
+            } else if (item[9].trim().toLowerCase() == 'fail') {
               result_class_last = 'fail';
             }
 
@@ -607,10 +607,10 @@ function clearError(id) {
               '<td class="time ellipsis-tooltip" title="' + item[5] + '"><div class="custom-tooltip">' + item[5] + '</div>' + item[5] + '</td>' +
               '<td class="message ellipsis-tooltip" title="' + item[6] + '"><div class="custom-tooltip">' + item[6] + '</div>' + item[6] + '</td>' +
               '<td class="data ellipsis-tooltip" title="' + item[7].slice(1, -1) + '"><div class="custom-tooltip">' + item[7].slice(1, -1) + '</div>' + item[7] + '</td>' +
-              '<td class="' + result_class_last + ' ellipsis-tooltip" title="' + item[8] + '"><div class="custom-tooltip">' + item[8] + '</div>' + item[8] + '</td>' +
+              '<td class="pay ellipsis-tooltip" title="' + item[8].slice(1, -1) + '"><div class="custom-tooltip">' + item[8].slice(1, -1) + '</div>' + item[8] + '</td>' +
+              '<td class="' + result_class_last + ' ellipsis-tooltip" title="' + item[9] + '"><div class="custom-tooltip">' + item[9] + '</div>' + item[9] + '</td>' +
               '</tr>'
             );
-
           });
 
           // Show the download button and the results body
