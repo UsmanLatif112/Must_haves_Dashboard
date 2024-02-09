@@ -1,6 +1,0 @@
-Test Case,Use Case / Scenario,Result
-Login,Login with correct username and password,Pass
-Create quick analysis campaign,Click on quick analysis button,Pass
-Check GMB CID,Click on check button to check GMB CID,Pass
-Create quick analysis campaign,Create quick analysis campaign with correct data,fail
-Quick Analysis Campaign test, Test quick analysis campaign create/edit/delete,Fail

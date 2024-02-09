@@ -6,7 +6,7 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTURnNU16TXpPVEY5Li1iNUNJeUN5VDFOQnJJYXdZMjBOSHk5dk8xSjZ1WTVRNDFYdGw4cGtrOGMiLCJleHAiOjIwMjIxMzMzOTV9.drbD-8npRQGJ28gf7NT7GNl1KdT-YSzxTzNUAhzsbx8"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMiIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ01pSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt5TENKbGVIQWlPakUzTURrMk16a3pOREI5LjczX3FwdldiR0VJOFg0S280UUV3cnMzTWdxamwyc3lmaHJDazdOWHZjNnciLCJleHAiOjIwMjI4MzkzNDB9.NjE9vtY1jaQfaUrzhI325fOJRzeO8tX5mR1knXxJ7ZA"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
@@ -29,33 +29,33 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDd which is used for other apis in which we need campaign id to get data
     # (Dont Delete Cam1)
 
-    Campaign_IDd = "19751" 
+    Campaign_IDd = "18335" 
 
     # Campaign IDdd which is used to add 8th keyword in campaign already having 7 keywords
     # (Dont Delete Cam2)
 
-    Campaign_IDdd = "19752"
+    Campaign_IDdd = "18544"
 
     # Campaign IDdr which is used to delete last keyword of campaign
     # (Dont Delete Cam3)
 
-    Campaign_IDdr = "19753"
+    Campaign_IDdr = "18390"
 
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 4)
 
-    Campaign_IDdt = "19754"
+    Campaign_IDdt = "18391"
     
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "19763"
+    Campaign_IDde = "18338"
 
     # Client id is used to get client api
 
     Quick_Camp_ID = Quick_Camp_Id
     
-    Client_id = "1050"
+    Client_id = "2938"
 
     # Keyword which is used to create keyword add keyword or delete keyword
 
@@ -68,7 +68,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
 
     # ================================================
 
-    user_idd = "500",
+    user_idd = "2892",
     business_CID = f"{business_CID_Id}"
     cam_namee = f"-AI-TEST-QuickCam{id}"
     keywords_for_analysiss = f"{keywordname_Id}"
@@ -80,7 +80,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     
     # data which is used to create new campaign
 
-    User_id = "500"
+    User_id = "2892"
     business_gmb_CID = f"{business_CID_Id}"
     Campaign_name = f"-AI-TEST-API must haves {id}"
     Client_name = "-AI-TEST-APITEST0026"
@@ -242,7 +242,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             print("API hits completed.")
 
     # Call the function to hit the APIs and save the results
-    hit_apis_and_save_results(api_list, auth_token, "API_result.csv")
+    hit_apis_and_save_results(api_list, auth_token, "umbrella_API_result.csv")
 
     # =====================================================================================
     # For example, let's assume your script's function is `hit_apis_and_save_results`
@@ -251,7 +251,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
         #  ====//// == Agency API == ////=======
     
             {
-                "description": "Create User with correct data",
+                "description": "Create User with correct data (Only managers for the Umbrella Agency are created by admin role considering swagger is shared with it exclusively)",
                 "url": "https://agency.brandsignals.io/users/create_user/",
                 "method": "POST",
                 "params":
@@ -323,20 +323,20 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             },
             
             {
-                "description": "Get all User list",
+                "description": "Get all User list (Admin role gets the list of all users considering swagger is shared with it only.",
                 "url": f"https://agency.brandsignals.io/users/list/",
                 "method": "GET",
                 "params": None
             },
             
             {
-                "description": "Get SS0 link of user with correct data",
+                "description": "Get SS0 link of user with correct data (Admin role generates SSO links for users. considering swagger is shared with it only.)",
                 "url": f"https://agency.brandsignals.io/users/login_link/",
                 "method": "POST",
                 "params": 
                         {
-                        "user_name": "Aimalraza_22",
-                        "password": "Aimal@11"
+                        "user_name": "Usman SQA 2",
+                        "password": "Usman@112"
                         }
             },
             
@@ -346,8 +346,8 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "method": "POST",
                 "params": 
                         {
-                        "user_name": "Aimalraza_",
-                        "password": "Aimal@11"
+                        "user_name": "Usman SQA 22222",
+                        "password": "Usman@112"
                         }
             },
             
@@ -357,7 +357,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "method": "POST",
                 "params": 
                         {
-                        "user_name": "Aimalraza_22",
+                        "user_name": "AUsman SQA 2",
                         "password": "Usman@1"
                         }
             },
@@ -365,7 +365,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # # # =========================================
             
             {
-                "description": "Create campaign with correct data",
+                "description": "Create campaign with correct data (Admin role is capable of creating campaigns with respect to manager considering swagger is shared with it only)",
                 "url": "https://agency.brandsignals.io/campaigns/create/",
                 "method": "POST",
                 "params":
@@ -410,7 +410,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # # # # =============================================================
             
             {
-                "description": "Get campaign by providing campaign ID",
+                "description": "Get campaign by providing campaign ID (Admin role retrieves campaign information by ID considering swagger is shared with it only)",
                 "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
                 "method": "GET",
                 "params": None
@@ -426,7 +426,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # # # # # =============================================================
             
             {
-                "description": "Get list of all campaigns",
+                "description": "Get list of all campaigns ( Only Role id 2 will be able to get campaigns as Swagger is shared with only role id 2)",
                 "url": "https://agency.brandsignals.io/campaigns/list/all/",
                 "method": "GET",
                 "params": None
@@ -435,7 +435,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # # =============================================================
             
             {
-                "description": "Delete campaign by providing campaign ID",
+                "description": "Delete campaign by providing campaign ID (Admin role has the authority to delete campaigns by ID considering swagger is shared with it only)",
                 "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
                 "method": "DELETE",
                 "params": None
@@ -458,7 +458,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # =============================================================
             
             {
-                "description": "Create Client",
+                "description": "Create Client (Admin role has the privilege to create clients under the umbrella agency considering swagger is shared with it only)",
                 "url": "https://agency.brandsignals.io/client/create/",
                 "method": "POST",
                 "params":
@@ -479,7 +479,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # # # ======================================
             
             {
-                "description": "Get client by providing client ID",
+                "description": "Get client by providing client ID ( Admin role can obtain client details by ID considering swagger is shared with it only.)",
                 "url": f"https://agency.brandsignals.io/client/{Client_id}/",
                 "method": "GET",
                 "params": None
@@ -494,7 +494,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # ======================================
             
             {
-                "description": "Get list of all clients",
+                "description": "Get list of all clients ( Admin role can view all clients considering swagger is shared with it only.)",
                 "url": f"https://agency.brandsignals.io/client/clients/list/",
                 "method": "GET",
                 "params": None
@@ -574,7 +574,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # # ======================================
             
             {
-                "description": "Deauthroize business by providing campaign ID",
+                "description": "Deauthroize business by providing campaign ID ( Admins can deauthorize business by campaign ID as swagger is shared with them only.)",
                 "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
                 "method": "GET",
                 "params": None
@@ -596,7 +596,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # ======================================
             
             {
-                "description": "Get Reporting PDF with correct Campaign ID",
+                "description": "Get Reporting PDF with correct Campaign ID (Admins generate reporting PDFs for campaigns considering swagger is shared with them only.)",
                 "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDd}",
                 "method": "GET",
                 "params":None
@@ -611,7 +611,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             # # ======================================
             {
-                "description": "Create Quick Analysis Campaign with correct data",
+                "description": "Create Quick Analysis Campaign with correct data (Admin role can create Quick Analysis Campaigns as swagger is shared with it only.)",
                 "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
                 "method": "POST",
                 "params":
@@ -652,7 +652,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # # ======================================
             
             {
-                "description": "Get list of Quick Analysis Campaign with correct campaign ID",
+                "description": "Get list of Quick Analysis Campaign with correct campaign ID (Admins retrieve Quick Analysis Campaign details by ID as swagger is shared with them only.)",
                 "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
                 "method": "GET",
                 "params": None
@@ -666,14 +666,14 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             },
             
             {
-                "description": "Get list of all Quick Analysis Campaigns",
+                "description": "Get list of all Quick Analysis Campaigns  (Admin role can view all Quick Analysis Campaigns as swagger is shared with it only.)",
                 "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
                 "method": "GET",
                 "params": None
             },
             
             {
-                "description": "Delete Quick Analysis Campaigns with campaign id",
+                "description": "Delete Quick Analysis Campaigns with campaign id (Admins are authorized to delete Quick Analysis Campaigns by ID as swagger is shared with them only.)",
                 "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
                 "method": "DELETE",
                 "params": None
@@ -690,7 +690,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # ======================================
             
             {
-                "description": "Add keyword in campaign by providing campaign id",
+                "description": "Add keyword in campaign by providing campaign id (Admins add keywords to campaigns by ID as swagger is shared with them only.)",
                 "url": "https://agency.brandsignals.io/keyword/create/",
                 "method": "POST",
                 "params":
@@ -722,7 +722,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # ======================================
             
             {
-                "description": "Delete keyword from campaign by providing campaign ID",
+                "description": "Delete keyword from campaign by providing campaign ID (Admins have the authority to remove keywords from campaigns as swagger is shared with them only.)",
                 "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
                 "method": "DELETE",
                 "params": None
@@ -744,7 +744,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
         ] # Your API list
 
     # Call the function to hit the APIs and save the results
-    result_file = "API_result.csv"
+    result_file = "umbrella_API_result.csv"
     hit_apis_and_save_results(api_list, auth_token, result_file)
 
     # Read the CSV file and convert its content into a list of lists

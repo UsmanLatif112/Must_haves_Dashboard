@@ -37,3 +37,37 @@ class ApiResponse(db.Model):
     response_data = Column(db.Text)
     payload_data = db.Column(db.String(255), nullable=True)
     response_data_result = Column(String(256))
+
+class umbrellaResponse(db.Model):
+    __tablename__ = "umbrella_agency"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to users table
+    user = db.relationship('User', backref=db.backref('umbrella_agency', lazy=True))
+    description = Column(String(256))
+    api = Column(String(512))
+    method = Column(String(128))
+    response_code = Column(Integer)
+    result_according_to_response = Column(String(256))
+    response_time = Column(Float)
+    response_message = Column(String(1024))
+    response_data = Column(db.Text)
+    payload_data = db.Column(db.String(255), nullable=True)
+    response_data_result = Column(String(256))
+
+class stagingapiaResponse(db.Model):
+    __tablename__ = "Agency_API_Staging"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to users table
+    user = db.relationship('User', backref=db.backref('Agency_API_Staging', lazy=True))
+    description = Column(String(256))
+    api = Column(String(512))
+    method = Column(String(128))
+    response_code = Column(Integer)
+    result_according_to_response = Column(String(256))
+    response_time = Column(Float)
+    response_message = Column(String(1024))
+    response_data = Column(db.Text)
+    payload_data = db.Column(db.String(255), nullable=True)
+    response_data_result = Column(String(256))

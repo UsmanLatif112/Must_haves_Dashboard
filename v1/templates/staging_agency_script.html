@@ -327,8 +327,7 @@
 
 <!-- Breadcrumb navigation -->
 <div class="breadcrumb">
-  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/Agency_api">Agency API</a>&nbsp;>&nbsp;<a href="#">Normal Agency</a> 
-</div>
+  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/Agency_api">Agency API</a>&nbsp;>&nbsp;<a href="#">Agency API Staging</a> 
 <div class="container">
 <div class="d-flex justify-content-end ">
   <!-- Removed Campaign ID input field and tooltip -->
@@ -563,7 +562,7 @@ function clearError(id) {
 
       // Perform an AJAX request using the campaignId and quickAnalysisCampaignId
       $.ajax({
-        url: "/run_script",
+        url: "/Staging_agencyapi_script",
         type: "post",
         data: {
           'C_id': campaignId,

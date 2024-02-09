@@ -4,7 +4,7 @@ from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import login_user, login_required, logout_user
 from app import app, login_manager
 from user_management import User
-from import_csv import import_csv_to_db, import_quick_csv_to_db
+from import_csv import import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db
 from models import ApiResponse, db
 from helpers import delete_file_if_exists
 from user_management import authenticate
@@ -55,6 +55,23 @@ def dashboard():
 @login_required
 def script():
     return render_template("script.html")
+
+@app.route("/umbrella_script")
+@login_required
+def umbrella_script():
+    return render_template("umbrella_script.html")
+
+
+
+@app.route("/Agency_api")
+@login_required
+def Agency_api():
+    return render_template("Agency API dashboard.html")
+
+@app.route("/staging_agency_script")
+@login_required
+def staging_agency_script():
+    return render_template("staging_agency_script.html")
 
 
 @app.route("/BSWA-must-haves")
@@ -168,36 +185,79 @@ def export_the_data_to_db():
         return jsonify({"message": "Unable to export the API report to database", "error": str(e)})
     
     
-# @app.route('/perform_operation', methods=['POST'])
-# @login_required
-# def perform_operation():
-#     try:
-#         # Perform some operation and get a response
-#         # For example, calling an external API
-#         response = call_external_api()  # This is just a placeholder function
+@app.route("/run_umbrella_script", methods=["POST"])
+@login_required
+def run_umbrella_script():
+    try:
+        from umbrella_agency import init_the_testing
+
+        # Call a function that initializes testing and returns data
+        campaign_id = request.form.get("C_id")
+        print(f'{campaign_id}')
+        quick_analysis_campaign_id = request.form.get("Q_id")
+        print(f'{quick_analysis_campaign_id}')
+        keywordname_id = request.form.get("K_id")
+        print(f'{keywordname_id}')
+        business_id = request.form.get("B_id")
+        print(f'{business_id}')
+        # Pass these IDs to the init_the_testing function
+        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id)
         
-#         # Now, create an ApiResponse object populated with actual response details
-#         api_response = ApiResponse(
-#             user_id=current_user.id,  # Set the user_id to the current user's ID
-#             description="Description of the operation",
-#             api="URL of the external API",
-#             method="POST",  # Assuming it was a POST request
-#             response_code=response.status_code,  # Assuming 'response' has a 'status_code' attribute
-#             result_according_to_response=response.reason,  # The textual reason of the HTTP response
-#             response_time=0.123,  # You would measure this in your actual operation
-#             response_message=response.text,  # Assuming 'response' has a 'text' attribute with the response content
-#             response_data=response.content,  # Assuming 'response' has a 'content' attribute with raw response data
-#             response_data_result="Result based on the content",
-#         )
+        # Commit the API responses to the database
+        db.session.commit()
         
-#         # Add the ApiResponse object to the session and commit it to the database
-#         db.session.add(api_response)
-#         db.session.commit()
+        # Import the CSV file data into the database, now passing the user_id
+        csv_file_path = "umbrella_API_result.csv"
+        import_umbrella_csv_to_db(db.session, csv_file_path, current_user.id)
         
-#         # Return a success message or any other appropriate response
-#         return jsonify({"message": "Operation performed and response recorded"})
+        # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
+
+        # Return the results as JSON
+        return jsonify(result_content)
+    except Exception as e:
+        # Print the full traceback to help diagnose the issue
+        traceback.print_exc()
+        # Rollback the session in case of an error
+        db.session.rollback()
+        # Return a JSON response indicating an error
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
     
-#     except Exception as e:
-#         # Handle exceptions and errors appropriately
-#         db.session.rollback()
-#         return jsonify({"message": "An error occurred", "error": str(e)})
+    
+@app.route("/Staging_agencyapi_script", methods=["POST"])
+@login_required
+def Staging_agencyapi_script():
+    try:
+        from Staging_agencyapi import init_the_testing
+
+        # Call a function that initializes testing and returns data
+        campaign_id = request.form.get("C_id")
+        print(f'{campaign_id}')
+        quick_analysis_campaign_id = request.form.get("Q_id")
+        print(f'{quick_analysis_campaign_id}')
+        keywordname_id = request.form.get("K_id")
+        print(f'{keywordname_id}')
+        business_id = request.form.get("B_id")
+        print(f'{business_id}')
+        # Pass these IDs to the init_the_testing function
+        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id)
+        
+        # Commit the API responses to the database
+        db.session.commit()
+        
+        # Import the CSV file data into the database, now passing the user_id
+        csv_file_path = "Staging_API_result.csv"
+        import_staging_csv_to_db(db.session, csv_file_path, current_user.id)
+        
+        # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
+
+        # Return the results as JSON
+        return jsonify(result_content)
+    except Exception as e:
+        # Print the full traceback to help diagnose the issue
+        traceback.print_exc()
+        # Rollback the session in case of an error
+        db.session.rollback()
+        # Return a JSON response indicating an error
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
