@@ -6,7 +6,7 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMiIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ01pSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt5TENKbGVIQWlPakUzTURrMk16a3pOREI5LjczX3FwdldiR0VJOFg0S280UUV3cnMzTWdxamwyc3lmaHJDazdOWHZjNnciLCJleHAiOjIwMjI4MzkzNDB9.NjE9vtY1jaQfaUrzhI325fOJRzeO8tX5mR1knXxJ7ZA"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZ2VuY3lfYXBpMSIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKaFoyVnVZM2xmWVhCcE1TSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3pNRFV5TENKbGVIQWlPakUzTURrNE9EUTVOamQ5Lm9nek96bnkxWkZPNXAyenJHT0pXOENHbWllVUlzaW9GQl9EbDZDaVUzY1EiLCJleHAiOjIwMjMwODQ5Njd9.UeUGNXscO54EMmZBiDuJByEEybOLp6bTQR1WOCN0inY"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
@@ -29,33 +29,33 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDd which is used for other apis in which we need campaign id to get data
     # (Dont Delete Cam1)
 
-    Campaign_IDd = "18335" 
+    Campaign_IDd = "18671"
 
     # Campaign IDdd which is used to add 8th keyword in campaign already having 7 keywords
     # (Dont Delete Cam2)
 
-    Campaign_IDdd = "18544"
+    Campaign_IDdd = "18679"
 
     # Campaign IDdr which is used to delete last keyword of campaign
     # (Dont Delete Cam3)
 
-    Campaign_IDdr = "18390"
+    Campaign_IDdr = "18670"
 
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 4)
 
-    Campaign_IDdt = "18391"
+    Campaign_IDdt = "18672"
     
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "18338"
+    Campaign_IDde = "18672"
 
     # Client id is used to get client api
 
     Quick_Camp_ID = Quick_Camp_Id
     
-    Client_id = "2938"
+    Client_id = "3038"
 
     # Keyword which is used to create keyword add keyword or delete keyword
 
@@ -64,26 +64,26 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     
     # Client name which is used to create new client
 
-    Client_Name_New = f"-AI-TEST-apimust{id}"
+    Client_Name_New = f"-AI-TEST-apiAA{id}"
 
     # ================================================
 
-    user_idd = "2892",
+    user_idd = "3052",
     business_CID = f"{business_CID_Id}"
     cam_namee = f"-AI-TEST-QuickCam{id}"
     keywords_for_analysiss = f"{keywordname_Id}"
                         
                         
-    user_name = f"-AI-TEST-Apimust{id}"
-    email = f"Apimust12{id}@gmail.com"
-    password =  "Usman@112"
+    user_name = f"api0-3{id}"
+    email = f"api0-3{id}@gmail.com"
+    password =  "Aimal@11"
     
     # data which is used to create new campaign
 
-    User_id = "2892"
+    User_id = "3083"
     business_gmb_CID = f"{business_CID_Id}"
     Campaign_name = f"-AI-TEST-API must haves {id}"
-    Client_name = "-AI-TEST-APITEST0026"
+    Client_name = "A12feb"
     keywords_for_analysis = f"{keywordname_Id}"
     # ======================================
     api_list = []
@@ -250,489 +250,489 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     api_list = [
         #  ====//// == Agency API == ////=======
     
-            # {
-            #     "description": "Create User with correct data",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": user_name,
-            #             "email": email,
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with correct data",
+                "url": "http://67.225.255.186:8010/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": user_name,
+                        "email": email,
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with same username",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": user_name,
-            #             "email": email,
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with same username",
+                "url": "http://67.225.255.186:8010/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": user_name,
+                        "email": email,
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with same email",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name",
-            #             "email": email,
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with same email",
+                "url": "http://67.225.255.186:8010/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name",
+                        "email": email,
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with special charcter in Username",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name@@",
-            #             "email": "apimusthavestest10987@gmail.com",
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with special charcter in Username",
+                "url": "http://67.225.255.186:8010/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name@@",
+                        "email": "apimusthavestest10987@gmail.com",
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with incorrect email format",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name120",
-            #             "email": "api 10987@gmail.com",
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with incorrect email format",
+                "url": "http://67.225.255.186:8010/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name120",
+                        "email": "api 10987@gmail.com",
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with incorect password",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name1201",
-            #             "email": "api10987@gmail.com",
-            #             "password": "Usman"
-            #         },
-            # },
+            {
+                "description": "Create User with incorect password",
+                "url": "http://67.225.255.186:8010/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name1201",
+                        "email": "api10987@gmail.com",
+                        "password": "Usman"
+                    },
+            },
             
-            # {
-            #     "description": "Get all User list",
-            #     "url": f"http://67.225.255.186:8010/users/list/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get all User list",
+                "url": f"http://67.225.255.186:8010/users/list/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get SS0 link of user with correct data",
-            #     "url": f"http://67.225.255.186:8010/users/login_link/",
-            #     "method": "POST",
-            #     "params": 
-            #             {
-            #             "user_name": "Usman SQA 2",
-            #             "password": "Usman@112"
-            #             }
-            # },
+            {
+                "description": "Get SS0 link of user with correct data",
+                "url": f"http://67.225.255.186:8010/users/login_link/",
+                "method": "POST",
+                "params": 
+                        {
+                        "user_name": "Usman SQA 2",
+                        "password": "Usman@112"
+                        }
+            },
             
-            # {
-            #     "description": "Get SSO link of user with incorrect username",
-            #     "url": f"http://67.225.255.186:8010/users/login_link/",
-            #     "method": "POST",
-            #     "params": 
-            #             {
-            #             "user_name": "Usman SQA 22222",
-            #             "password": "Usman@112"
-            #             }
-            # },
+            {
+                "description": "Get SSO link of user with incorrect username",
+                "url": f"http://67.225.255.186:8010/users/login_link/",
+                "method": "POST",
+                "params": 
+                        {
+                        "user_name": "Usman SQA 22222",
+                        "password": "Usman@112"
+                        }
+            },
             
-            # {
-            #     "description": "Get SOS link of user with incorrect password",
-            #     "url": f"http://67.225.255.186:8010/users/login_link/",
-            #     "method": "POST",
-            #     "params": 
-            #             {
-            #             "user_name": "AUsman SQA 2",
-            #             "password": "Usman@1"
-            #             }
-            # },
+            {
+                "description": "Get SOS link of user with incorrect password",
+                "url": f"http://67.225.255.186:8010/users/login_link/",
+                "method": "POST",
+                "params": 
+                        {
+                        "user_name": "AUsman SQA 2",
+                        "password": "Usman@1"
+                        }
+            },
             
-            # # # # # =========================================
+            # # # # =========================================
             
-            # {
-            #     "description": "Create campaign with correct data",
-            #     "url": "http://67.225.255.186:8010/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": User_id,
-            #         "business_gmb_cid": business_gmb_CID,
-            #         "campaign_name": Campaign_name,
-            #         "client_name": Client_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
+            {
+                "description": "Create campaign with correct data",
+                "url": "http://67.225.255.186:8010/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "client_name": Client_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
             
-            # {
-            #     "description": "Create campaign with incorrect user id",
-            #     "url": "http://67.225.255.186:8010/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": 143789,
-            #         "business_gmb_cid": business_gmb_CID,
-            #         "campaign_name": Campaign_name,
-            #         "client_name": Client_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
+            {
+                "description": "Create campaign with incorrect user id",
+                "url": "http://67.225.255.186:8010/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": 143789,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "client_name": Client_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
             
-            # {
-            #     "description": "Create campaign with incorrect GMB CID",
-            #     "url": "http://67.225.255.186:8010/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": User_id,
-            #         "business_gmb_cid": "98649953187944340729864995318",
-            #         "campaign_name": Campaign_name,
-            #         "client_name": Client_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
+            {
+                "description": "Create campaign with incorrect GMB CID",
+                "url": "http://67.225.255.186:8010/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": "98649953187944340729864995318",
+                    "campaign_name": Campaign_name,
+                    "client_name": Client_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
+            
+            
+            # # # # # =============================================================
+            
+            {
+                "description": "Get campaign by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/campaigns/{Campaign_IDd}/",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Get campaign by providing incorrect campaign ID",
+                "url": "http://67.225.255.186:8010/campaigns/177/",
+                "method": "GET",
+                "params": None
+            },
             
             
             # # # # # # =============================================================
             
-            # {
-            #     "description": "Get campaign by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/campaigns/{Campaign_IDd}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Get campaign by providing incorrect campaign ID",
-            #     "url": "http://67.225.255.186:8010/campaigns/177/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            
-            # # # # # # # =============================================================
-            
-            # {
-            #     "description": "Get list of all campaigns",
-            #     "url": "http://67.225.255.186:8010/campaigns/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # # # # =============================================================
-            
-            # {
-            #     "description": "Delete campaign by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/campaigns/delete/{Campaign_ID}/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Delete campaign by providing incorrect campaign ID",
-            #     "url": f"http://67.225.255.186:8010/campaigns/delete/1289/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Delete campaign by providing already deleted campaign ID",
-            #     "url": f"http://67.225.255.186:8010/campaigns/delete/{Campaign_ID}/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of all campaigns",
+                "url": "http://67.225.255.186:8010/campaigns/list/all/",
+                "method": "GET",
+                "params": None
+            },
             
             # # # =============================================================
             
-            # {
-            #     "description": "Create Client",
-            #     "url": "http://67.225.255.186:8010/client/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "client_name": Client_Name_New
-            #             }
-            # },
-            # {
-            #     "description": "Create client with already created client name",
-            #     "url": "http://67.225.255.186:8010/client/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "client_name": Client_Name_New
-            #             }
-            # },
+            {
+                "description": "Delete campaign by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/campaigns/delete/{Campaign_ID}/",
+                "method": "DELETE",
+                "params": None
+            },
             
-            # # # # # ======================================
+            {
+                "description": "Delete campaign by providing incorrect campaign ID",
+                "url": f"http://67.225.255.186:8010/campaigns/delete/1289/",
+                "method": "DELETE",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get client by providing client ID",
-            #     "url": f"http://67.225.255.186:8010/client/{Client_id}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Get client by providing incorrect client ID",
-            #     "url": f"http://67.225.255.186:8010/client/128/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Delete campaign by providing already deleted campaign ID",
+                "url": f"http://67.225.255.186:8010/campaigns/delete/{Campaign_ID}/",
+                "method": "DELETE",
+                "params": None
+            },
+            
+            # # =============================================================
+            
+            {
+                "description": "Create Client",
+                "url": "http://67.225.255.186:8010/client/create/",
+                "method": "POST",
+                "params":
+                    {
+                        "client_name": Client_Name_New
+                        }
+            },
+            {
+                "description": "Create client with already created client name",
+                "url": "http://67.225.255.186:8010/client/create/",
+                "method": "POST",
+                "params":
+                    {
+                        "client_name": Client_Name_New
+                        }
+            },
+            
+            # # # # ======================================
+            
+            {
+                "description": "Get client by providing client ID",
+                "url": f"http://67.225.255.186:8010/client/{Client_id}/",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Get client by providing incorrect client ID",
+                "url": f"http://67.225.255.186:8010/client/128/",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # ======================================
+            
+            {
+                "description": "Get list of all clients",
+                "url": f"http://67.225.255.186:8010/client/clients/list/",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # # # ======================================
+            
+            {
+                "description": "Get list of all Geo Gifs URLs",
+                "url": "http://67.225.255.186:8010/geo/gifs/urls/list/",
+                "method": "GET",
+                "params":
+                    {
+                    "Page": 1,
+                    "Size": 50
+                    }   
+            },
+            
+            # # # # ======================================
+            
+            {
+                "description": "Get list of Geo Gifs URLs by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/geo/gifs/urls/campaign/{Campaign_IDd}",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
+                "url": f"http://67.225.255.186:8010/geo/gifs/urls/campaign/1205",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # # # ======================================
+            
+            {
+                "description": "Get list of all Geo Grids URLs",
+                "url": "http://67.225.255.186:8010/geo/grid/urls/list/all/",
+                "method": "GET",
+                "params": None
+            },
             
             # # # ======================================
             
-            # {
-            #     "description": "Get list of all clients",
-            #     "url": f"http://67.225.255.186:8010/client/clients/list/",
-            #     "method": "GET",
-            #     "params": None
-            # },
             
-            # # # # # ======================================
+            {
+                "description": "Get list of Geo Grids URLs by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/geo/grid/urls/{Campaign_IDd}/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get list of all Geo Gifs URLs",
-            #     "url": "http://67.225.255.186:8010/geo/gifs/urls/list/",
-            #     "method": "GET",
-            #     "params":
-            #         {
-            #         "Page": 1,
-            #         "Size": 50
-            #         }   
-            # },
+            {
+                "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
+                "url": f"http://67.225.255.186:8010/geo/grid/urls/1496/",
+                "method": "GET",
+                "params": None
+            },
             
-            # # # # # ======================================
+            # # # ======================================
             
-            # {
-            #     "description": "Get list of Geo Gifs URLs by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/geo/gifs/urls/campaign/{Campaign_IDd}",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-            #     "url": f"http://67.225.255.186:8010/geo/gifs/urls/campaign/1205",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of latest Grids URLs by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/geo/grid/urls/latest/{Campaign_IDd}",
+                "method": "GET",
+                "params": None
+            },
             
-            # # # # # ======================================
-            
-            # {
-            #     "description": "Get list of all Geo Grids URLs",
-            #     "url": "http://67.225.255.186:8010/geo/grid/urls/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # # # # ======================================
-            
-            
-            # {
-            #     "description": "Get list of Geo Grids URLs by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/geo/grid/urls/{Campaign_IDd}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
-            #     "url": f"http://67.225.255.186:8010/geo/grid/urls/1496/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # # # # ======================================
-            
-            # {
-            #     "description": "Get list of latest Grids URLs by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/geo/grid/urls/latest/{Campaign_IDd}",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-            #     "url": f"http://67.225.255.186:8010/geo/grid/urls/latest/8573",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
+                "url": f"http://67.225.255.186:8010/geo/grid/urls/latest/8573",
+                "method": "GET",
+                "params": None
+            },
            
             
-            # # # # ======================================
+            # # # ======================================
             
-            # {
-            #     "description": "Deauthroize business by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/campaigns/business/deauthorization/{Campaign_IDdt}",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Deauthroize business which is already deauthroize by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/campaigns/business/deauthorization/{Campaign_IDdt}",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Deauthroize business by providing incorrect campaign ID",
-            #     "url": f"http://67.225.255.186:8010/campaigns/business/deauthorization/{Campaign_IDdr}",
-            #     "method": "GET",
-            #     "params": None
-            # }, 
+            {
+                "description": "Deauthroize business by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/campaigns/business/deauthorization/{Campaign_IDdt}",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Deauthroize business which is already deauthroize by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/campaigns/business/deauthorization/{Campaign_IDdt}",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Deauthroize business by providing incorrect campaign ID",
+                "url": f"http://67.225.255.186:8010/campaigns/business/deauthorization/{Campaign_IDdr}",
+                "method": "GET",
+                "params": None
+            }, 
             
+            
+            # ======================================
+            
+            {
+                "description": "Get Reporting PDF with correct Campaign ID",
+                "url": f"http://67.225.255.186:8010/reporting/pdf/{Campaign_IDd}",
+                "method": "GET",
+                "params":None
+            },
+            
+            {
+                "description": "Get Reporting PDF with Incorrect Campaign ID",
+                "url": f"http://67.225.255.186:8010/reporting/pdf/789456123",
+                "method": "GET",
+                "params":None
+            },
             
             # # ======================================
-            
-            # {
-            #     "description": "Get Reporting PDF with correct Campaign ID",
-            #     "url": f"http://67.225.255.186:8010/reporting/pdf/{Campaign_IDd}",
-            #     "method": "GET",
-            #     "params":None
-            # },
-            
-            # {
-            #     "description": "Get Reporting PDF with Incorrect Campaign ID",
-            #     "url": f"http://67.225.255.186:8010/reporting/pdf/789456123",
-            #     "method": "GET",
-            #     "params":None
-            # },
+            {
+                "description": "Create Quick Analysis Campaign with correct data",
+                "url": "http://67.225.255.186:8010/quick_analysis/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
+            # # ======================================
+            {
+                "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
+                "url": "http://67.225.255.186:8010/quick_analysis/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": 159753456978634159494945642368,
+                    "campaign_name": Campaign_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
+            # # ======================================
+            {
+                "description": "Create Quick Analysis Campaign with Inccorrect User ID",
+                "url": "http://67.225.255.186:8010/quick_analysis/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": 798456,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
             
             # # # ======================================
-            # {
-            #     "description": "Create Quick Analysis Campaign with correct data",
-            #     "url": "http://67.225.255.186:8010/quick_analysis/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": User_id,
-            #         "business_gmb_cid": business_gmb_CID,
-            #         "campaign_name": Campaign_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
-            # # # ======================================
-            # {
-            #     "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
-            #     "url": "http://67.225.255.186:8010/quick_analysis/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": User_id,
-            #         "business_gmb_cid": 159753456978634159494945642368,
-            #         "campaign_name": Campaign_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
-            # # # ======================================
-            # {
-            #     "description": "Create Quick Analysis Campaign with Inccorrect User ID",
-            #     "url": "http://67.225.255.186:8010/quick_analysis/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": 798456,
-            #         "business_gmb_cid": business_gmb_CID,
-            #         "campaign_name": Campaign_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
             
-            # # # # ======================================
+            {
+                "description": "Get list of Quick Analysis Campaign with correct campaign ID",
+                "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/{Quick_Camp_ID}/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get list of Quick Analysis Campaign with correct campaign ID",
-            #     "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/{Quick_Camp_ID}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
+                "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/741528/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
-            #     "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/741528/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of all Quick Analysis Campaigns",
+                "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/list/all/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get list of all Quick Analysis Campaigns",
-            #     "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Delete Quick Analysis Campaigns with campaign id",
+                "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
+                "method": "DELETE",
+                "params": None
+            },
             
-            # {
-            #     "description": "Delete Quick Analysis Campaigns with campaign id",
-            #     "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
-            #     "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/delete/978456185/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            {
+                "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
+                "url": f"http://67.225.255.186:8010/quick_analysis/campaigns/delete/978456185/",
+                "method": "DELETE",
+                "params": None
+            },
             
              
-            # # # ======================================
-            
-            # {
-            #     "description": "Add keyword in campaign by providing campaign id",
-            #     "url": "http://67.225.255.186:8010/keyword/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "campaign_id": Campaign_IDde,
-            #         "keyword": Keyword_new
-            #         }
-            # },
-            # {
-            #     "description": "Add keyword which is already added in campaign by providing campaign id",
-            #     "url": "http://67.225.255.186:8010/keyword/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "campaign_id": Campaign_IDde,
-            #         "keyword": Keyword_new
-            #         }
-            # },
-            # {
-            #     "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
-            #     "url": "http://67.225.255.186:8010/keyword/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "campaign_id": Campaign_IDdd,
-            #         "keyword": "Pathan12323"
-            #         }
-            # },
             # # ======================================
             
-            # {
-            #     "description": "Delete keyword from campaign by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-            #     "url": f"http://67.225.255.186:8010/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            {
+                "description": "Add keyword in campaign by providing campaign id",
+                "url": "http://67.225.255.186:8010/keyword/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "campaign_id": Campaign_IDde,
+                    "keyword": Keyword_new
+                    }
+            },
+            {
+                "description": "Add keyword which is already added in campaign by providing campaign id",
+                "url": "http://67.225.255.186:8010/keyword/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "campaign_id": Campaign_IDde,
+                    "keyword": Keyword_new
+                    }
+            },
+            {
+                "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
+                "url": "http://67.225.255.186:8010/keyword/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "campaign_id": Campaign_IDdd,
+                    "keyword": "Pathan12323"
+                    }
+            },
+            # ======================================
+            
+            {
+                "description": "Delete keyword from campaign by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+                "method": "DELETE",
+                "params": None
+            },
+            {
+                "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
+                "url": f"http://67.225.255.186:8010/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+                "method": "DELETE",
+                "params": None
+            },
             {
                 "description": "Try to delete last keyword of campaign by providing campaign ID",
                 "url": f"http://67.225.255.186:8010/keyword/delete/hello/{Campaign_IDdr}",
