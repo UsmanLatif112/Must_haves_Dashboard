@@ -21,6 +21,15 @@ class QuickAnalysisModel(UserMixin, db.Model):
     result = db.Column(db.String(500), unique=True, nullable=False)  # Plain text password
     user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)
 
+class ClientmoduleModel(UserMixin, db.Model):
+    __tablename__ = "client_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), unique=True, nullable=False)
+    use_case = db.Column(db.String(500), unique=True, nullable=False)
+    result = db.Column(db.String(500), unique=True, nullable=False)  # Plain text password
+    user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)
+
 class ApiResponse(db.Model):
     __tablename__ = "api_response"
 

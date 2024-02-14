@@ -7,14 +7,12 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
     Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMiIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ01pSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt5TENKbGVIQWlPakUzTURrMk16a3pOREI5LjczX3FwdldiR0VJOFg0S280UUV3cnMzTWdxamwyc3lmaHJDazdOWHZjNnciLCJleHAiOjIwMjI4MzkzNDB9.NjE9vtY1jaQfaUrzhI325fOJRzeO8tX5mR1knXxJ7ZA"
-    Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
     keywordname_Id = str(keywordname_id)
     # ======================================
     auth_token = Piroty_token
-    auth_tokenn = Piroty_tokenn
     # ======================================
     id = f'{Campaign_IDd}'
     
@@ -136,7 +134,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     response_codes_dict = {}
     
     # Function to hit the APIs and save results in a CSV file
-    def hit_apis_and_save_results(api_list, auth_token,auth_tokenn, csv_filename):
+    def hit_apis_and_save_results(api_list, auth_token, csv_filename):
         # with open(csv_filename, 'w', newline='') as csvfile:
         with open(csv_filename, "w", newline="", encoding="utf-8") as csvfile:
             # writer = csv.writer(csvfile)
@@ -230,7 +228,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(1)
+                    time.sleep(5)
 
                 except Exception as e:
                     print("==============================================")
@@ -238,103 +236,17 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     print(
                         f"Error occurred while processing API: {url}, Method: {method}, Error: {e}"
                     )
-                    
-            print("   ")
-            print("==============================================")
-            print("Result from role id 3 auth token")
-            print("==============================================")
-            print("   ")
-            writer.writerow([])
-            writer.writerow([])
-            
-            for api in api_list:
-                description = api.get("description", "No description provided")
-                url = api["url"]
-                method = api["method"]
-                params = api["params"]
 
-                headers = {
-                    "Authorization": f"Bearer {auth_tokenn}",
-                    "Content-Type": "application/json",
-                }
-
-                try:
-                    # Print the API description
-                    
-                    print("   ")
-                    print(f"API Description: {description}")
-
-                    # Make the API request
-                    start_time = time.time()
-
-                    response = requests.request(
-                        method, url, json=params, headers=headers
-                    )
-                    response_code = response.status_code
-                    response_time = time.time() - start_time
-
-                    response_message = custom_error_messages.get(response_code, "")
-                    response_data = (
-                        response.json()
-                        if response.headers.get("content-type") == "application/json"
-                        else response.text
-                    )
-
-                    # Determine the result based on response data
-                    if response_data == {
-                        "items": [],
-                        "total": 0,
-                        "page": 1,
-                        "size": 50,
-                    }:
-                        response_result = "Fail"
-                    else:
-                        response_result = "Pass"
-
-                    result_according_to_response_code = (
-                        "Pass" if response_code in [200, 201, 202] else "Fail"
-                    )
-                    # Write the results to the CSV file
-                    response_data = str(response_data).replace('"', ";")
-
-                    writer.writerow(
-                        [
-                            description,
-                            url,
-                            method,
-                            response_code,
-                            result_according_to_response_code,
-                            response_time,
-                            response_message,
-                            f'"{response_data}"',
-                            f'"{params}"',
-                            response_result,
-                        ]
-                    )
-
-                    # Print the results in the terminal
-                    print(
-                        f"API: {url}, Method: {method}, Response Code: {response_code}, Result (according to response code): {result_according_to_response_code}, "
-                        f"Response Time: {response_time:.2f}, Response Message: {response_message}, Response Data: {response_data},Payload Data: {params}, Response Data Result: {response_result}"
-                    )
-
-                    # Wait for 1 second before the next API hit
-                    time.sleep(1)
-                
-                except Exception as e:
-                    print("==============================================")
-                    print("   ")
-                    print(
-                        f"Error occurred while processing API: {url}, Method: {method}, Error: {e}"
-                    )
-
-            
-            
             print("==============================================")
             print("   ")
             print("API hits completed.")
 
+    # Call the function to hit the APIs and save the results
+    hit_apis_and_save_results(api_list, auth_token, "umbrella_API_result.csv")
 
+    # =====================================================================================
+    # For example, let's assume your script's function is `hit_apis_and_save_results`
+    auth_token = Piroty_token
     api_list = [
         #  ====//// == Agency API == ////=======
     
@@ -829,12 +741,11 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             },
             
             # ======================================
-        ]
-
+        ] # Your API list
 
     # Call the function to hit the APIs and save the results
     result_file = "umbrella_API_result.csv"
-    hit_apis_and_save_results(api_list, auth_token,auth_tokenn, result_file)
+    hit_apis_and_save_results(api_list, auth_token, result_file)
 
     # Read the CSV file and convert its content into a list of lists
     with open(result_file, "r", encoding="utf-8") as file:

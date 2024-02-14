@@ -33,3 +33,8 @@ class QuickAnalysispage:
     Cam_tab_button = "//a[@id='campaignbuttonfordisablenavbar'][contains(normalize-space(), 'Campaigns')]"
     delete_modal = '//*[@class="modal-content"][contains(normalize-space(), "Are you sure you want to delete this campaign")]'
     delete_modal_btn = '//*[@class="modal-footer"]//button[@onclick="Delete_confirm_the_Campaign()"][contains(normalize-space(), "Yes")]'
+    
+
+class Client:
+    client_btn = "//*[@class='campaign-listing-wrapper']"
+    Menu_btn = "//*[@class='app-header']//*[@class='header-content-right']//*[@class='header-element']"

@@ -4,7 +4,7 @@ from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import login_user, login_required, logout_user
 from app import app, login_manager
 from user_management import User
-from import_csv import import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db
+from import_csv import import_client_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db
 from models import ApiResponse, db
 from helpers import delete_file_if_exists
 from user_management import authenticate
@@ -106,6 +106,48 @@ def Quick_script():
         # Import the CSV file data into the database, now passing the user_id
         csv_file_path = "BSWA Quick Analysis Report.csv"
         import_quick_csv_to_db(db.session, csv_file_path, current_user.id)
+        
+        # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
+
+        # Return the results as JSON
+        return jsonify(result_content)
+    except Exception as e:
+        # Print the full traceback to help diagnose the issue
+        traceback.print_exc()
+        # Rollback the session in case of an error
+        db.session.rollback()
+        # Return a JSON response indicating an error
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
+    
+
+
+@app.route("/client_module")
+@login_required
+def client():
+    return render_template("client_module.html")
+
+@app.route("/client-module-script", methods=["POST"])
+@login_required
+def client_script():
+    try:
+        from client_module import init_the_testing
+
+        # Call a function that initializes testing and returns data
+        GMB_cid = request.form.get("C_id")
+        print(f'{GMB_cid}')
+        User_name = request.form.get("U_id")
+        print(f'{User_name}')
+        Pass_word = request.form.get("P_id")
+        print(f'{Pass_word}')
+        result_content = init_the_testing(GMB_cid, User_name, Pass_word)
+        
+        # Commit the API responses to the database
+        db.session.commit()
+        
+        # Import the CSV file data into the database, now passing the user_id
+        csv_file_path = "BSWA Client Module Report.csv"
+        import_client_csv_to_db(db.session, csv_file_path, current_user.id)
         
         # Delete the CSV file after import
         delete_file_if_exists(csv_file_path)
