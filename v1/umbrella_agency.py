@@ -245,6 +245,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             print("==============================================")
             print("   ")
             writer.writerow([])
+            writer.writerow(["Result with role id 3","","","","","","","","",""])
             writer.writerow([])
             
             for api in api_list:
@@ -349,9 +350,8 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                         "password": password
                     },
             },
-            
             {
-                "description": "Create User with same username",
+                "description": "Create User with correct data (Only managers for the Umbrella Agency are created by admin role considering swagger is shared with it exclusively)",
                 "url": "https://agency.brandsignals.io/users/create_user/",
                 "method": "POST",
                 "params":
@@ -362,473 +362,485 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     },
             },
             
-            {
-                "description": "Create User with same email",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name",
-                        "email": email,
-                        "password": password
-                    },
-            },
+            # {
+            #     "description": "Create User with same username",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": user_name,
+            #             "email": email,
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Create User with special charcter in Username",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name@@",
-                        "email": "apimusthavestest10987@gmail.com",
-                        "password": password
-                    },
-            },
+            # {
+            #     "description": "Create User with same email",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name",
+            #             "email": email,
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Create User with incorrect email format",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name120",
-                        "email": "api 10987@gmail.com",
-                        "password": password
-                    },
-            },
+            # {
+            #     "description": "Create User with special charcter in Username",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name@@",
+            #             "email": "apimusthavestest10987@gmail.com",
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Create User with incorect password",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name1201",
-                        "email": "api10987@gmail.com",
-                        "password": "Usman"
-                    },
-            },
+            # {
+            #     "description": "Create User with incorrect email format",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name120",
+            #             "email": "api 10987@gmail.com",
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Get all User list (Admin role gets the list of all users considering swagger is shared with it only.",
-                "url": f"https://agency.brandsignals.io/users/list/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Create User with incorect password",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name1201",
+            #             "email": "api10987@gmail.com",
+            #             "password": "Usman"
+            #         },
+            # },
             
-            {
-                "description": "Get SS0 link of user with correct data (Admin role generates SSO links for users. considering swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Usman SQA 2",
-                        "password": "Usman@112"
-                        }
-            },
+            # {
+            #     "description": "Get all User list (Admin role gets the list of all users considering swagger is shared with it only.",
+            #     "url": f"https://agency.brandsignals.io/users/list/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get SSO link of user with incorrect username",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Usman SQA 22222",
-                        "password": "Usman@112"
-                        }
-            },
+            # {
+            #     "description": "Get SS0 link of user with correct data (Admin role generates SSO links for users. considering swagger is shared with it only.)",
+            #     "url": f"https://agency.brandsignals.io/users/login_link/",
+            #     "method": "POST",
+            #     "params": 
+            #             {
+            #             "user_name": "Usman SQA 2",
+            #             "password": "Usman@112"
+            #             }
+            # },
             
-            {
-                "description": "Get SOS link of user with incorrect password",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
-                        {
-                        "user_name": "AUsman SQA 2",
-                        "password": "Usman@1"
-                        }
-            },
+            # {
+            #     "description": "Get SSO link of user with incorrect username",
+            #     "url": f"https://agency.brandsignals.io/users/login_link/",
+            #     "method": "POST",
+            #     "params": 
+            #             {
+            #             "user_name": "Usman SQA 22222",
+            #             "password": "Usman@112"
+            #             }
+            # },
             
-            # # # # =========================================
+            # {
+            #     "description": "Get SOS link of user with incorrect password",
+            #     "url": f"https://agency.brandsignals.io/users/login_link/",
+            #     "method": "POST",
+            #     "params": 
+            #             {
+            #             "user_name": "AUsman SQA 2",
+            #             "password": "Usman@1"
+            #             }
+            # },
             
-            {
-                "description": "Create campaign with correct data (Admin role is capable of creating campaigns with respect to manager considering swagger is shared with it only)",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
+            # # # # # =========================================
             
-            {
-                "description": "Create campaign with incorrect user id",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": 143789,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
+            # {
+            #     "description": "Create campaign with correct data (Admin role is capable of creating campaigns with respect to manager considering swagger is shared with it only)",
+            #     "url": "https://agency.brandsignals.io/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": User_id,
+            #         "business_gmb_cid": business_gmb_CID,
+            #         "campaign_name": Campaign_name,
+            #         "client_name": Client_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
             
-            {
-                "description": "Create campaign with incorrect GMB CID",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": "98649953187944340729864995318",
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
+            # {
+            #     "description": "Create campaign with incorrect user id",
+            #     "url": "https://agency.brandsignals.io/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": 143789,
+            #         "business_gmb_cid": business_gmb_CID,
+            #         "campaign_name": Campaign_name,
+            #         "client_name": Client_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
             
-            
-            # # # # # =============================================================
-            
-            {
-                "description": "Get campaign by providing campaign ID (Admin role retrieves campaign information by ID considering swagger is shared with it only)",
-                "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get campaign by providing incorrect campaign ID",
-                "url": "https://agency.brandsignals.io/campaigns/177/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Create campaign with incorrect GMB CID",
+            #     "url": "https://agency.brandsignals.io/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": User_id,
+            #         "business_gmb_cid": "98649953187944340729864995318",
+            #         "campaign_name": Campaign_name,
+            #         "client_name": Client_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
             
             
             # # # # # # =============================================================
             
-            {
-                "description": "Get list of all campaigns ( Only Role id 2 will be able to get campaigns as Swagger is shared with only role id 2)",
-                "url": "https://agency.brandsignals.io/campaigns/list/all/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get campaign by providing campaign ID (Admin role retrieves campaign information by ID considering swagger is shared with it only)",
+            #     "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Get campaign by providing incorrect campaign ID",
+            #     "url": "https://agency.brandsignals.io/campaigns/177/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            
+            # # # # # # # =============================================================
+            
+            # {
+            #     "description": "Get list of all campaigns ( Only Role id 2 will be able to get campaigns as Swagger is shared with only role id 2)",
+            #     "url": "https://agency.brandsignals.io/campaigns/list/all/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # # # # =============================================================
+            
+            # {
+            #     "description": "Delete campaign by providing campaign ID (Admin role has the authority to delete campaigns by ID considering swagger is shared with it only)",
+            #     "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Delete campaign by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/delete/1289/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Delete campaign by providing already deleted campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
             
             # # # =============================================================
             
-            {
-                "description": "Delete campaign by providing campaign ID (Admin role has the authority to delete campaigns by ID considering swagger is shared with it only)",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-                "method": "DELETE",
-                "params": None
-            },
+            # {
+            #     "description": "Create Client (Admin role has the privilege to create clients under the umbrella agency considering swagger is shared with it only)",
+            #     "url": "https://agency.brandsignals.io/client/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "client_name": Client_Name_New
+            #             }
+            # },
+            # {
+            #     "description": "Create client with already created client name",
+            #     "url": "https://agency.brandsignals.io/client/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "client_name": Client_Name_New
+            #             }
+            # },
             
-            {
-                "description": "Delete campaign by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/1289/",
-                "method": "DELETE",
-                "params": None
-            },
+            # # # # # ======================================
             
-            {
-                "description": "Delete campaign by providing already deleted campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            # # =============================================================
-            
-            {
-                "description": "Create Client (Admin role has the privilege to create clients under the umbrella agency considering swagger is shared with it only)",
-                "url": "https://agency.brandsignals.io/client/create/",
-                "method": "POST",
-                "params":
-                    {
-                        "client_name": Client_Name_New
-                        }
-            },
-            {
-                "description": "Create client with already created client name",
-                "url": "https://agency.brandsignals.io/client/create/",
-                "method": "POST",
-                "params":
-                    {
-                        "client_name": Client_Name_New
-                        }
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get client by providing client ID ( Admin role can obtain client details by ID considering swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/client/{Client_id}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get client by providing incorrect client ID",
-                "url": f"https://agency.brandsignals.io/client/128/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # ======================================
-            
-            {
-                "description": "Get list of all clients ( Admin role can view all clients considering swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/client/clients/list/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of all Geo Gifs URLs",
-                "url": "https://agency.brandsignals.io/geo/gifs/urls/list/",
-                "method": "GET",
-                "params":
-                    {
-                    "Page": 1,
-                    "Size": 50
-                    }   
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of Geo Gifs URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/{Campaign_IDd}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/1205",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of all Geo Grids URLs",
-                "url": "https://agency.brandsignals.io/geo/grid/urls/list/all/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get client by providing client ID ( Admin role can obtain client details by ID considering swagger is shared with it only.)",
+            #     "url": f"https://agency.brandsignals.io/client/{Client_id}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Get client by providing incorrect client ID",
+            #     "url": f"https://agency.brandsignals.io/client/128/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
             # # # ======================================
             
+            # {
+            #     "description": "Get list of all clients ( Admin role can view all clients considering swagger is shared with it only.)",
+            #     "url": f"https://agency.brandsignals.io/client/clients/list/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get list of Geo Grids URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/{Campaign_IDd}/",
-                "method": "GET",
-                "params": None
-            },
+            # # # # # ======================================
             
-            {
-                "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/1496/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of all Geo Gifs URLs",
+            #     "url": "https://agency.brandsignals.io/geo/gifs/urls/list/",
+            #     "method": "GET",
+            #     "params":
+            #         {
+            #         "Page": 1,
+            #         "Size": 50
+            #         }   
+            # },
             
-            # # # ======================================
+            # # # # # ======================================
             
-            {
-                "description": "Get list of latest Grids URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/{Campaign_IDd}",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of Geo Gifs URLs by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/{Campaign_IDd}",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/1205",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/8573",
-                "method": "GET",
-                "params": None
-            },
+            # # # # # ======================================
+            
+            # {
+            #     "description": "Get list of all Geo Grids URLs",
+            #     "url": "https://agency.brandsignals.io/geo/grid/urls/list/all/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # # # # ======================================
+            
+            
+            # {
+            #     "description": "Get list of Geo Grids URLs by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/{Campaign_IDd}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/1496/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # # # # ======================================
+            
+            # {
+            #     "description": "Get list of latest Grids URLs by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/{Campaign_IDd}",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/8573",
+            #     "method": "GET",
+            #     "params": None
+            # },
            
             
-            # # # ======================================
+            # # # # ======================================
             
-            {
-                "description": "Deauthroize business by providing campaign ID ( Admins can deauthorize business by campaign ID as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Deauthroize business which is already deauthroize by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Deauthroize business by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdr}",
-                "method": "GET",
-                "params": None
-            }, 
+            # {
+            #     "description": "Deauthroize business by providing campaign ID ( Admins can deauthorize business by campaign ID as swagger is shared with them only.)",
+            #     "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Deauthroize business which is already deauthroize by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Deauthroize business by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdr}",
+            #     "method": "GET",
+            #     "params": None
+            # }, 
             
-            
-            # ======================================
-            
-            {
-                "description": "Get Reporting PDF with correct Campaign ID (Admins generate reporting PDFs for campaigns considering swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDd}",
-                "method": "GET",
-                "params":None
-            },
-            
-            {
-                "description": "Get Reporting PDF with Incorrect Campaign ID",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/789456123",
-                "method": "GET",
-                "params":None
-            },
             
             # # ======================================
-            {
-                "description": "Create Quick Analysis Campaign with correct data (Admin role can create Quick Analysis Campaigns as swagger is shared with it only.)",
-                "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            # # ======================================
-            {
-                "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
-                "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": 159753456978634159494945642368,
-                    "campaign_name": Campaign_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            # # ======================================
-            {
-                "description": "Create Quick Analysis Campaign with Inccorrect User ID",
-                "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": 798456,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
+            
+            # {
+            #     "description": "Get Reporting PDF with correct Campaign ID (Admins generate reporting PDFs for campaigns considering swagger is shared with them only.)",
+            #     "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDd}",
+            #     "method": "GET",
+            #     "params":None
+            # },
+            
+            # {
+            #     "description": "Get Reporting PDF with Incorrect Campaign ID",
+            #     "url": f"https://agency.brandsignals.io/reporting/pdf/789456123",
+            #     "method": "GET",
+            #     "params":None
+            # },
             
             # # # ======================================
+            # {
+            #     "description": "Create Quick Analysis Campaign with correct data (Admin role can create Quick Analysis Campaigns as swagger is shared with it only.)",
+            #     "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": User_id,
+            #         "business_gmb_cid": business_gmb_CID,
+            #         "campaign_name": Campaign_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
+            # # # ======================================
+            # {
+            #     "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
+            #     "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": User_id,
+            #         "business_gmb_cid": 159753456978634159494945642368,
+            #         "campaign_name": Campaign_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
+            # # # ======================================
+            # {
+            #     "description": "Create Quick Analysis Campaign with Inccorrect User ID",
+            #     "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": 798456,
+            #         "business_gmb_cid": business_gmb_CID,
+            #         "campaign_name": Campaign_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
             
-            {
-                "description": "Get list of Quick Analysis Campaign with correct campaign ID (Admins retrieve Quick Analysis Campaign details by ID as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
-                "method": "GET",
-                "params": None
-            },
+            # # # # ======================================
             
-            {
-                "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of Quick Analysis Campaign with correct campaign ID (Admins retrieve Quick Analysis Campaign details by ID as swagger is shared with them only.)",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get list of all Quick Analysis Campaigns  (Admin role can view all Quick Analysis Campaigns as swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Delete Quick Analysis Campaigns with campaign id (Admins are authorized to delete Quick Analysis Campaigns by ID as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
-                "method": "DELETE",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of all Quick Analysis Campaigns  (Admin role can view all Quick Analysis Campaigns as swagger is shared with it only.)",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/978456185/",
-                "method": "DELETE",
-                "params": None
-            },
+            # {
+            #     "description": "Delete Quick Analysis Campaigns with campaign id (Admins are authorized to delete Quick Analysis Campaigns by ID as swagger is shared with them only.)",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/978456185/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
             
              
+            # # # ======================================
+            
+            # {
+            #     "description": "Add keyword in campaign by providing campaign id (Admins add keywords to campaigns by ID as swagger is shared with them only.)",
+            #     "url": "https://agency.brandsignals.io/keyword/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "campaign_id": Campaign_IDde,
+            #         "keyword": Keyword_new
+            #         }
+            # },
+            # {
+            #     "description": "Add keyword which is already added in campaign by providing campaign id",
+            #     "url": "https://agency.brandsignals.io/keyword/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "campaign_id": Campaign_IDde,
+            #         "keyword": Keyword_new
+            #         }
+            # },
+            # {
+            #     "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
+            #     "url": "https://agency.brandsignals.io/keyword/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "campaign_id": Campaign_IDdd,
+            #         "keyword": "Pathan12323"
+            #         }
+            # },
             # # ======================================
             
-            {
-                "description": "Add keyword in campaign by providing campaign id (Admins add keywords to campaigns by ID as swagger is shared with them only.)",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDde,
-                    "keyword": Keyword_new
-                    }
-            },
-            {
-                "description": "Add keyword which is already added in campaign by providing campaign id",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDde,
-                    "keyword": Keyword_new
-                    }
-            },
-            {
-                "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDdd,
-                    "keyword": "Pathan12323"
-                    }
-            },
-            # ======================================
+            # {
+            #     "description": "Delete keyword from campaign by providing campaign ID (Admins have the authority to remove keywords from campaigns as swagger is shared with them only.)",
+            #     "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Try to delete last keyword of campaign by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/keyword/delete/hello/{Campaign_IDdr}",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
             
-            {
-                "description": "Delete keyword from campaign by providing campaign ID (Admins have the authority to remove keywords from campaigns as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-                "method": "DELETE",
-                "params": None
-            },
-            {
-                "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-                "method": "DELETE",
-                "params": None
-            },
-            {
-                "description": "Try to delete last keyword of campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/hello/{Campaign_IDdr}",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            # ======================================
+            # # ======================================
         ]
 
 

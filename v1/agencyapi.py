@@ -236,6 +236,20 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     print(
                         f"Error occurred while processing API: {url}, Method: {method}, Error: {e}"
                     )
+                    writer.writerow(
+                        [
+                            description,
+                            url,
+                            method,
+                            response_code,
+                            result_according_to_response_code,
+                            response_time,
+                            response_message,
+                            f'"Error occurred while processing API: Error: {e}"',
+                            f'"{params}"',
+                            response_result,
+                        ]
+                    )
 
             print("==============================================")
             print("   ")
