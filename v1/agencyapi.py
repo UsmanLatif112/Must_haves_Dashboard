@@ -44,7 +44,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 4)
 
-    Campaign_IDdt = "19754"
+    Campaign_IDdt = "19751"
     
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
@@ -82,7 +82,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
 
     User_id = "500"
     business_gmb_CID = f"{business_CID_Id}"
-    Campaign_name = f"-AI-TEST-API must haves {id}"
+    Campaign_name = f"API must haves 23{id}"
     Client_name = "-AI-TEST-APITEST0026"
     keywords_for_analysis = f"{keywordname_Id}"
     # ======================================
@@ -236,20 +236,6 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     print(
                         f"Error occurred while processing API: {url}, Method: {method}, Error: {e}"
                     )
-                    writer.writerow(
-                        [
-                            description,
-                            url,
-                            method,
-                            response_code,
-                            result_according_to_response_code,
-                            response_time,
-                            response_message,
-                            f'"Error occurred while processing API: Error: {e}"',
-                            f'"{params}"',
-                            response_result,
-                        ]
-                    )
 
             print("==============================================")
             print("   ")
@@ -376,7 +362,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                         }
             },
             
-            # # # # =========================================
+            # # # # # =========================================
             
             {
                 "description": "Create campaign with correct data",
@@ -421,7 +407,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             },
             
             
-            # # # # # =============================================================
+            # # # # # # =============================================================
             
             {
                 "description": "Get campaign by providing campaign ID",
@@ -585,7 +571,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             },
            
             
-            # # # ======================================
+            # # ======================================
             
             {
                 "description": "Deauthroize business by providing campaign ID",
