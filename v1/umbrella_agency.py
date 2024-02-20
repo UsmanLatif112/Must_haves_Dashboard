@@ -6,8 +6,11 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMiIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ01pSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt5TENKbGVIQWlPakUzTURrMk16a3pOREI5LjczX3FwdldiR0VJOFg0S280UUV3cnMzTWdxamwyc3lmaHJDazdOWHZjNnciLCJleHAiOjIwMjI4MzkzNDB9.NjE9vtY1jaQfaUrzhI325fOJRzeO8tX5mR1knXxJ7ZA"
-    Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
+    # Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMiIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ01pSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt5TENKbGVIQWlPakUzTVRBMU9EUTJOako5LlN1bERyblU1enRFc3VVZVkyc3J3WmpqZ0kzaWdEMGdkeDJodjBhaktQbUkiLCJleHAiOjIwMjM3ODQ2NjJ9.Mt5Q9gyeGn0P_lERp2DeGs8rA_BcbNAptW2km1NddW4"
+    # Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMyIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ015SXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt6TENKbGVIQWlPakUzTVRBMU9EUTNNVGg5LmxLUE1HOVpXYjZ4cnd4Y2U4TXl3MmhaY1ZYT3VtVWd6T1BWZGNtUlQzV00iLCJleHAiOjIwMjM3ODQ3MTl9.hhihJuC2TDfsRSfjNcgspOJSrU6HB3rzrDY5obx0Qt8"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTURnNU16TXpPVEY5Li1iNUNJeUN5VDFOQnJJYXdZMjBOSHk5dk8xSjZ1WTVRNDFYdGw4cGtrOGMiLCJleHAiOjIwMjIxMzMzOTV9.drbD-8npRQGJ28gf7NT7GNl1KdT-YSzxTzNUAhzsbx8"
+    Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgTWFuYWdlciAzIiwiVE9LRU4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKemRXSWlPaUpCVUVrZ1RXRnVZV2RsY2lBeklpd2ljMk52Y0dWeklqcGJYU3dpYVdRaU9qRTFOVFVzSW1WNGNDSTZNVGN4TURVNE5EVTFNMzAuWFNOc19GUy1yYzloendyMjZrOXF3NE1RNk9fTUR1OWZWcDBOcGpTdk9hWSIsImV4cCI6MjAyMzc4NDU1M30.wmCCBGsLDuhh_bLrRT5i6ThnVO1b0CqfTAkUcOXa6pQ"
+    
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
@@ -339,6 +342,17 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     api_list = [
        #  ====//// == Agency API == ////=======
     
+            # {
+            #     "description": "Create User with correct data",
+            #     "url": "http://67.225.255.186:8010/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": user_name,
+            #             "email": email,
+            #             "password": password
+            #         },
+            # },
             {
                 "description": "Create User with correct data",
                 "url": "https://agency.brandsignals.io/users/create_user/",
