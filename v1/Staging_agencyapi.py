@@ -183,6 +183,19 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     response_time = time.time() - start_time
 
                     response_message = custom_error_messages.get(response_code, "")
+                    if not response_code == 204:
+                        response_data = (
+                            response.json()
+                            if response.headers.get("content-type") == "application/json"
+                            else response.text
+                        )
+                    else:
+                        response_data = (
+                            'This API does not return a response body for status code %s.'
+                            % str(response_code)
+                            if response.headers.get("content-type") == "application/json"
+                            else response.text
+                        )
                     response_data = (
                         response.json()
                         if response.headers.get("content-type") == "application/json"

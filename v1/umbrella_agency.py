@@ -19,6 +19,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     auth_token = Piroty_token
     auth_tokenn = Piroty_tokenn
     # ======================================
+    # ======================================
     id = f'{Campaign_IDd}'
     
     idD = str(f'{Campaign_IDd}')
@@ -34,33 +35,33 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDd which is used for other apis in which we need campaign id to get data
     # (Dont Delete Cam1)
 
-    Campaign_IDd = "18335" 
+    Campaign_IDd = "19751" 
 
     # Campaign IDdd which is used to add 8th keyword in campaign already having 7 keywords
     # (Dont Delete Cam2)
 
-    Campaign_IDdd = "18544"
+    Campaign_IDdd = "19752"
 
     # Campaign IDdr which is used to delete last keyword of campaign
     # (Dont Delete Cam3)
 
-    Campaign_IDdr = "18390"
+    Campaign_IDdr = "19753"
 
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 4)
 
-    Campaign_IDdt = "18391"
+    Campaign_IDdt = "19751"
     
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "18338"
+    Campaign_IDde = "19751"
 
     # Client id is used to get client api
 
     Quick_Camp_ID = Quick_Camp_Id
     
-    Client_id = "2938"
+    Client_id = "1050"
 
     # Keyword which is used to create keyword add keyword or delete keyword
 
@@ -69,26 +70,26 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     
     # Client name which is used to create new client
 
-    Client_Name_New = f"-AI-TEST-apimust{id}"
+    Client_Name_New = f"-AI-TEST-apimustt{id}"
 
     # ================================================
 
-    user_idd = "2892",
+    user_idd = "500",
     business_CID = f"{business_CID_Id}"
-    cam_namee = f"-AI-TEST-QuickCam{id}"
+    cam_namee = f"-AI-TEST-QuickCamm{id}"
     keywords_for_analysiss = f"{keywordname_Id}"
                         
                         
-    user_name = f"-AI-TEST-Apimust{id}"
+    user_name = f"-AI-TEST-Apimustt{id}"
     email = f"Apimust12{id}@gmail.com"
     password =  "Usman@112"
     
     # data which is used to create new campaign
 
-    User_id = "2892"
+    User_id = "500"
     business_gmb_CID = f"{business_CID_Id}"
-    Campaign_name = f"-AI-TEST-API must haves {id}"
-    Client_name = "-AI-TEST-APITEST0026"
+    Campaign_name = f"API must havess{id}"
+    Client_name = "-AI-TEST-APITEST00266"
     keywords_for_analysis = f"{keywordname_Id}"
     # ======================================
     api_list = []
@@ -188,6 +189,19 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     response_time = time.time() - start_time
 
                     response_message = custom_error_messages.get(response_code, "")
+                    if not response_code == 204:
+                        response_data = (
+                            response.json()
+                            if response.headers.get("content-type") == "application/json"
+                            else response.text
+                        )
+                    else:
+                        response_data = (
+                            'This API does not return a response body for status code %s.'
+                            % str(response_code)
+                            if response.headers.get("content-type") == "application/json"
+                            else response.text
+                        )
                     response_data = (
                         response.json()
                         if response.headers.get("content-type") == "application/json"
@@ -233,7 +247,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(1)
+                    time.sleep(7)
 
                 except Exception as e:
                     print("==============================================")
@@ -278,6 +292,19 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     response_time = time.time() - start_time
 
                     response_message = custom_error_messages.get(response_code, "")
+                    if not response_code == 204:
+                        response_data = (
+                            response.json()
+                            if response.headers.get("content-type") == "application/json"
+                            else response.text
+                        )
+                    else:
+                        response_data = (
+                            'This API does not return a response body for status code %s.'
+                            % str(response_code)
+                            if response.headers.get("content-type") == "application/json"
+                            else response.text
+                        )
                     response_data = (
                         response.json()
                         if response.headers.get("content-type") == "application/json"
@@ -323,7 +350,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(1)
+                    time.sleep(7)
                 
                 except Exception as e:
                     print("==============================================")
@@ -678,13 +705,13 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             {
                 "description": "Deauthroize business by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
+                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDde}",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Deauthroize business which is already deauthroize by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
+                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDde}",
                 "method": "GET",
                 "params": None
             },
