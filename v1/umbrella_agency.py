@@ -6,19 +6,13 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    # Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMiIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ01pSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt5TENKbGVIQWlPakUzTVRBMU9EUTJOako5LlN1bERyblU1enRFc3VVZVkyc3J3WmpqZ0kzaWdEMGdkeDJodjBhaktQbUkiLCJleHAiOjIwMjM3ODQ2NjJ9.Mt5Q9gyeGn0P_lERp2DeGs8rA_BcbNAptW2km1NddW4"
-    # Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMyIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ015SXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt6TENKbGVIQWlPakUzTVRBMU9EUTNNVGg5LmxLUE1HOVpXYjZ4cnd4Y2U4TXl3MmhaY1ZYT3VtVWd6T1BWZGNtUlQzV00iLCJleHAiOjIwMjM3ODQ3MTl9.hhihJuC2TDfsRSfjNcgspOJSrU6HB3rzrDY5obx0Qt8"
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTVRFeU56UTBOak45LnBsM1JWMTJ1bGdNaExiTDhoeDFMeDZNZWh5QnVpLWJtYWkxT1BaWDZueFUiLCJleHAiOjIwMjQ0NzQ0NjN9.khSt4s7Iau2Rm46TemUDYhzDlA9axJVh8jbWKbwqxRM"
-    Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgTWFuYWdlciAzIiwiVE9LRU4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKemRXSWlPaUpCVUVrZ1RXRnVZV2RsY2lBeklpd2ljMk52Y0dWeklqcGJYU3dpYVdRaU9qRTFOVFVzSW1WNGNDSTZNVGN4TVRJM05EVXhOMzAuc21OZDBBYkxnUEFhS1llTGxSYU14MjFQZWRJMk12UFNMQkVidWhidlhXVSIsImV4cCI6MjAyNDQ3NDUxN30.uqTmqG8cmwPO0S5dKBLCx2TVnGfpwiQX7alY3WrvE2Q"
-    
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgTWFuYWdlciAzIiwiVE9LRU4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKemRXSWlPaUpCVUVrZ1RXRnVZV2RsY2lBeklpd2ljMk52Y0dWeklqcGJYU3dpYVdRaU9qRTFOVFVzSW1WNGNDSTZNVGN4TVRJM05EVXhOMzAuc21OZDBBYkxnUEFhS1llTGxSYU14MjFQZWRJMk12UFNMQkVidWhidlhXVSIsImV4cCI6MjAyNDQ3NDUxN30.uqTmqG8cmwPO0S5dKBLCx2TVnGfpwiQX7alY3WrvE2Q"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
     keywordname_Id = str(keywordname_id)
     # ======================================
     auth_token = Piroty_token
-    auth_tokenn = Piroty_tokenn
-    # ======================================
     # ======================================
     id = f'{Campaign_IDd}'
     
@@ -28,8 +22,6 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign ID which is deleted firs
     # ================================================
 
-
-    Campaign_IDdpdf = "15315"
     # Campaign ID which is deleted first in delete api and get single campaign data with campaign id.
 
     Campaign_ID = f"{id}"
@@ -57,7 +49,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "20861"
+    Campaign_IDde = "19763"
 
     # Client id is used to get client api
 
@@ -82,8 +74,8 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     keywords_for_analysiss = f"{keywordname_Id}"
                         
                         
-    user_name = f"-AI-TEST-Apimustte12{id}"
-    email = f"Apimustte12{id}@gmail.com"
+    user_name = f"-AI-TEST-Apimust{id}"
+    email = f"Apimust12{id}@gmail.com"
     password =  "Usman@112"
     
     # data which is used to create new campaign
@@ -93,9 +85,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     Campaign_name = f"API must haves 23{id}"
     Client_name = "-AI-TEST-APITEST0026"
     keywords_for_analysis = f"{keywordname_Id}"
-    
-    # ================================
-    
+    # ======================================
     api_list = []
     # ======================================
     # Add a dictionary to store custom error messages for specific response codes
@@ -144,7 +134,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     response_codes_dict = {}
     
     # Function to hit the APIs and save results in a CSV file
-    def hit_apis_and_save_results(api_list, auth_token,auth_tokenn, csv_filename):
+    def hit_apis_and_save_results(api_list, auth_token, csv_filename):
         # with open(csv_filename, 'w', newline='') as csvfile:
         with open(csv_filename, "w", newline="", encoding="utf-8") as csvfile:
             # writer = csv.writer(csvfile)
@@ -180,105 +170,6 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 try:
                     # Print the API description
                     print("==============================================")
-                    print("   ")
-                    print(f"API Description: {description}")
-
-                    # Make the API request
-                    start_time = time.time()
-
-                    response = requests.request(
-                        method, url, json=params, headers=headers
-                    )
-                    response_code = response.status_code
-                        
-                    response_time = time.time() - start_time
-
-                    response_message = custom_error_messages.get(response_code, "")
-                    
-                    if not response_code == 204:
-                        response_data = (
-                            response.json()
-                            if response.headers.get("content-type") == "application/json"
-                            else response.text
-                        )
-                    else:
-                        response_data = (
-                            'This API does not return a response body for status code %s.'
-                            % str(response_code)
-                            if response.headers.get("content-type") == "application/json"
-                            else response.text
-                        )
-                    # Determine the result based on response data
-                    if response_data == {
-                        "items": [],
-                        "total": 0,
-                        "page": 1,
-                        "size": 50,
-                    }:
-                        response_result = "Fail"
-                    else:
-                        response_result = "Pass"
-
-                    result_according_to_response_code = (
-                        "Pass" if response_code in [200, 201, 202] else "Fail"
-                    )
-                    # Write the results to the CSV file
-                    response_data = str(response_data).replace('"', ";")
-
-                    writer.writerow(
-                        [
-                            description,
-                            url,
-                            method,
-                            response_code,
-                            result_according_to_response_code,
-                            response_time,
-                            response_message,
-                            f'"{response_data}"',
-                            f'"{params}"',
-                            response_result,
-                        ]
-                    )
-
-                    # Print the results in the terminal
-                    print(
-                        f"API: {url}, Method: {method}, Response Code: {response_code}, Result (according to response code): {result_according_to_response_code}, "
-                        f"Response Time: {response_time:.2f}, Response Message: {response_message}, Response Data: {response_data},Payload Data: {params}, Response Data Result: {response_result}"
-                    )
-
-                    # Wait for 1 second before the next API hit
-                    time.sleep(5)
-
-                except Exception as e:
-                    print("==============================================")
-                    print("   ")
-                    print(
-                        f"Error occurred while processing API: {url}, Method: {method}, Error: {e}"
-                    )
-                    
-            print("   ")
-            print("==============================================")
-            print("Result from role id 3 auth token")
-            print("==============================================")
-            print("   ")
-            writer.writerow([])
-            writer.writerow(["Result with role id 3","","","","","","","","",""])
-            writer.writerow([])
-            
-            for api in api_list:
-                description = api.get("description", "No description provided")
-                url = api["url"]
-                method = api["method"]
-                params = api["params"]
-
-                headers = {
-                    "Authorization": f"Bearer {auth_tokenn}",
-                    "Content-Type": "application/json",
-                }
-
-                try:
-                    # Print the API description
-                    
                     print("   ")
                     print(f"API Description: {description}")
 
@@ -350,8 +241,8 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(1)
-                
+                    time.sleep(5)
+
                 except Exception as e:
                     print("==============================================")
                     print("   ")
@@ -359,349 +250,351 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                         f"Error occurred while processing API: {url}, Method: {method}, Error: {e}"
                     )
 
-            
-            
             print("==============================================")
             print("   ")
             print("API hits completed.")
 
+    # Call the function to hit the APIs and save the results
+    hit_apis_and_save_results(api_list, auth_token, "API_result.csv")
 
+    # =====================================================================================
+    # For example, let's assume your script's function is `hit_apis_and_save_results`
+    auth_token = Piroty_token
     api_list = [
-        # ====//// == Agency API == ////=======
+        #  ====//// == Agency API == ////=======
     
+            {
+                "description": "Create User with correct data (Only managers for the Umbrella Agency are created by admin role considering swagger is shared with it exclusively)",
+                "url": "https://agency.brandsignals.io/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": user_name,
+                        "email": email,
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with correct data",
-            #     "url": "https://agency.brandsignals.io/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": user_name,
-            #             "email": email,
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with same username",
+                "url": "https://agency.brandsignals.io/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": user_name,
+                        "email": email,
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with same username",
-            #     "url": "https://agency.brandsignals.io/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": user_name,
-            #             "email": email,
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with same email",
+                "url": "https://agency.brandsignals.io/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name",
+                        "email": email,
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with same email",
-            #     "url": "https://agency.brandsignals.io/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name",
-            #             "email": email,
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with special charcter in Username",
+                "url": "https://agency.brandsignals.io/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name@@",
+                        "email": "apimusthavestest10987@gmail.com",
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with special charcter in Username",
-            #     "url": "https://agency.brandsignals.io/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name@@",
-            #             "email": "apimusthavestest10987@gmail.com",
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with incorrect email format",
+                "url": "https://agency.brandsignals.io/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name120",
+                        "email": "api 10987@gmail.com",
+                        "password": password
+                    },
+            },
             
-            # {
-            #     "description": "Create User with incorrect email format",
-            #     "url": "https://agency.brandsignals.io/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name120",
-            #             "email": "api 10987@gmail.com",
-            #             "password": password
-            #         },
-            # },
+            {
+                "description": "Create User with incorrect password",
+                "url": "https://agency.brandsignals.io/users/create_user/",
+                "method": "POST",
+                "params":
+                    {
+                        "user_name": "-AI-TEST-user_name1201",
+                        "email": "api10987@gmail.com",
+                        "password": "Usman"
+                    },
+            },
             
-            # {
-            #     "description": "Create User with incorect password",
-            #     "url": "https://agency.brandsignals.io/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": "-AI-TEST-user_name1201",
-            #             "email": "api10987@gmail.com",
-            #             "password": "Usman"
-            #         },
-            # },
+            {
+                "description": "Get all User list (Admin role gets the list of all users considering swagger is shared with it only)",
+                "url": f"https://agency.brandsignals.io/users/list/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get all User list",
-            #     "url": f"https://agency.brandsignals.io/users/list/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get SS0 link of user with correct data (Admin role generates SSO links for users, considering swagger is shared with it only.)",
+                "url": f"https://agency.brandsignals.io/users/login_link/",
+                "method": "POST",
+                "params": 
+                        {
+                        "user_name": "Aimalraza_22",
+                        "password": "Aimal@11"
+                        }
+            },
             
-            # {
-            #     "description": "Get SS0 link of user with correct data",
-            #     "url": f"https://agency.brandsignals.io/users/login_link/",
-            #     "method": "POST",
-            #     "params": 
-            #             {
-            #             "user_name": "Aimalraza_22",
-            #             "password": "Aimal@11"
-            #             }
-            # },
+            {
+                "description": "Get SSO link of user with incorrect username",
+                "url": f"https://agency.brandsignals.io/users/login_link/",
+                "method": "POST",
+                "params": 
+                        {
+                        "user_name": "Aimalraza_",
+                        "password": "Aimal@11"
+                        }
+            },
             
-            # {
-            #     "description": "Get SSO link of user with incorrect username",
-            #     "url": f"https://agency.brandsignals.io/users/login_link/",
-            #     "method": "POST",
-            #     "params": 
-            #             {
-            #             "user_name": "Aimalraza_",
-            #             "password": "Aimal@11"
-            #             }
-            # },
+            {
+                "description": "Get SSO link of user with incorrect password",
+                "url": f"https://agency.brandsignals.io/users/login_link/",
+                "method": "POST",
+                "params": 
+                        {
+                        "user_name": "Aimalraza_22",
+                        "password": "Usman@1"
+                        }
+            },
             
-            # {
-            #     "description": "Get SOS link of user with incorrect password",
-            #     "url": f"https://agency.brandsignals.io/users/login_link/",
-            #     "method": "POST",
-            #     "params": 
-            #             {
-            #             "user_name": "Aimalraza_22",
-            #             "password": "Usman@1"
-            #             }
-            # },
+            # # # # # =========================================
             
-            # # # # # # =========================================
+            {
+                "description": "Create campaign with correct data(Admin role is capable of creating campaigns with respect to manager considering swagger is shared with it only)",
+                "url": "https://agency.brandsignals.io/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "client_name": Client_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
             
-            # {
-            #     "description": "Create campaign with correct data",
-            #     "url": "https://agency.brandsignals.io/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": User_id,
-            #         "business_gmb_cid": business_gmb_CID,
-            #         "campaign_name": Campaign_name,
-            #         "client_name": Client_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
+            {
+                "description": "Create campaign with incorrect user id",
+                "url": "https://agency.brandsignals.io/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": 143789,
+                    "business_gmb_cid": business_gmb_CID,
+                    "campaign_name": Campaign_name,
+                    "client_name": Client_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
             
-            # {
-            #     "description": "Create campaign with incorrect user id",
-            #     "url": "https://agency.brandsignals.io/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": 143789,
-            #         "business_gmb_cid": business_gmb_CID,
-            #         "campaign_name": Campaign_name,
-            #         "client_name": Client_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
-            
-            # {
-            #     "description": "Create campaign with incorrect GMB CID",
-            #     "url": "https://agency.brandsignals.io/campaigns/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "user_id": User_id,
-            #         "business_gmb_cid": "98649953187944340729864995318",
-            #         "campaign_name": Campaign_name,
-            #         "client_name": Client_name,
-            #         "keywords_for_analysis": keywords_for_analysis
-            #         }
-            # },
-            
-            
-            # # # # # # # =============================================================
-            
-            # {
-            #     "description": "Get campaign by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Get campaign by providing incorrect campaign ID",
-            #     "url": "https://agency.brandsignals.io/campaigns/177/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Create campaign with incorrect GMB CID",
+                "url": "https://agency.brandsignals.io/campaigns/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "user_id": User_id,
+                    "business_gmb_cid": "98649953187944340729864995318",
+                    "campaign_name": Campaign_name,
+                    "client_name": Client_name,
+                    "keywords_for_analysis": keywords_for_analysis
+                    }
+            },
             
             
-            # # # # # # # =============================================================
+            # # # # # # =============================================================
             
-            # {
-            #     "description": "Get list of all campaigns",
-            #     "url": "https://agency.brandsignals.io/campaigns/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get campaign by providing campaign ID (Admin role retrieves campaign information by ID considering swagger is shared with it only)",
+                "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Get campaign by providing incorrect campaign ID",
+                "url": "https://agency.brandsignals.io/campaigns/177/",
+                "method": "GET",
+                "params": None
+            },
             
-            # # # # =============================================================
             
-            # {
-            #     "description": "Delete campaign by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            # # # # # # =============================================================
             
-            # {
-            #     "description": "Delete campaign by providing incorrect campaign ID",
-            #     "url": f"https://agency.brandsignals.io/campaigns/delete/1289/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Delete campaign by providing already deleted campaign ID",
-            #     "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of all campaigns (Only Role id 2 will be able to get campaigns as Swagger is shared with only role id 2)",
+                "url": "https://agency.brandsignals.io/campaigns/list/all/",
+                "method": "GET",
+                "params": None
+            },
             
             # # # =============================================================
             
-            # {
-            #     "description": "Create Client",
-            #     "url": "https://agency.brandsignals.io/client/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "client_name": Client_Name_New
-            #             }
-            # },
-            # {
-            #     "description": "Create client with already created client name",
-            #     "url": "https://agency.brandsignals.io/client/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "client_name": Client_Name_New
-            #             }
-            # },
+            {
+                "description": "Delete campaign by providing campaign ID(Admin role has the authority to delete campaigns by ID considering swagger is shared with it only)",
+                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
+                "method": "DELETE",
+                "params": None
+            },
             
-            # # # # # ======================================
+            {
+                "description": "Delete campaign by providing incorrect campaign ID",
+                "url": f"https://agency.brandsignals.io/campaigns/delete/1289/",
+                "method": "DELETE",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get client by providing client ID",
-            #     "url": f"https://agency.brandsignals.io/client/{Client_id}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Get client by providing incorrect client ID",
-            #     "url": f"https://agency.brandsignals.io/client/128/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Delete campaign by providing already deleted campaign ID",
+                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
+                "method": "DELETE",
+                "params": None
+            },
             
-            # # # ======================================
+            # # =============================================================
             
-            # {
-            #     "description": "Get list of all clients",
-            #     "url": f"https://agency.brandsignals.io/client/clients/list/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # # # # # ======================================
-            
-            # {
-            #     "description": "Get list of all Geo Gifs URLs",
-            #     "url": "https://agency.brandsignals.io/geo/gifs/urls/list/",
-            #     "method": "GET",
-            #     "params":
-            #         {
-            #         "Page": 1,
-            #         "Size": 50
-            #         }   
-            # },
-            
-            # # # # # ======================================
-            
-            # {
-            #     "description": "Get list of Geo Gifs URLs by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/{Campaign_IDd}",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-            #     "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/1205",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # # # # # ======================================
-            
-            # {
-            #     "description": "Get list of all Geo Grids URLs",
-            #     "url": "https://agency.brandsignals.io/geo/grid/urls/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # # # # ======================================
-            
-            
-            # {
-            #     "description": "Get list of Geo Grids URLs by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/{Campaign_IDd}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
-            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/1496/",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # # # # ======================================
-            
-            # {
-            #     "description": "Get list of latest Grids URLs by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/{Campaign_IDd}",
-            #     "method": "GET",
-            #     "params": None
-            # },
-            
-            # {
-            #     "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/8573",
-            #     "method": "GET",
-            #     "params": None
-            # },
-           
+            {
+                "description": "Create Client (Admin role has the privilege to create clients under the umbrella agency considering swagger is shared with it only)",
+                "url": "https://agency.brandsignals.io/client/create/",
+                "method": "POST",
+                "params":
+                    {
+                        "client_name": Client_Name_New
+                        }
+            },
+            {
+                "description": "Create client with already created client name",
+                "url": "https://agency.brandsignals.io/client/create/",
+                "method": "POST",
+                "params":
+                    {
+                        "client_name": Client_Name_New
+                        }
+            },
             
             # # # # ======================================
             
             {
-                "description": "Deauthroize business by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDde}",
+                "description": "Get client by providing client ID ( Admin role can obtain client details by ID considering swagger is shared with it only.)",
+                "url": f"https://agency.brandsignals.io/client/{Client_id}/",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Get client by providing incorrect client ID",
+                "url": f"https://agency.brandsignals.io/client/128/",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # ======================================
+            
+            {
+                "description": "Get list of all clients (Admin role can view all clients considering swagger is shared with it only.)",
+                "url": f"https://agency.brandsignals.io/client/clients/list/",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # # # ======================================
+            
+            {
+                "description": "Get list of all Geo Gifs URLs",
+                "url": "https://agency.brandsignals.io/geo/gifs/urls/list/",
+                "method": "GET",
+                "params":
+                    {
+                    "Page": 1,
+                    "Size": 50
+                    }   
+            },
+            
+            # # # # ======================================
+            
+            {
+                "description": "Get list of Geo Gifs URLs by providing campaign ID",
+                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/{Campaign_IDd}",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
+                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/1205",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # # # ======================================
+            
+            {
+                "description": "Get list of all Geo Grids URLs",
+                "url": "https://agency.brandsignals.io/geo/grid/urls/list/all/",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # # ======================================
+            
+            
+            {
+                "description": "Get list of Geo Grids URLs by providing campaign ID",
+                "url": f"https://agency.brandsignals.io/geo/grid/urls/{Campaign_IDd}/",
+                "method": "GET",
+                "params": None
+            },
+            
+            {
+                "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
+                "url": f"https://agency.brandsignals.io/geo/grid/urls/1496/",
+                "method": "GET",
+                "params": None
+            },
+            
+            # # # ======================================
+            
+            {
+                "description": "Get list of latest Grids URLs by providing campaign ID",
+                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/{Campaign_IDd}",
+                "method": "GET",
+                "params": None
+            },
+            
+            {
+                "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
+                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/8573",
+                "method": "GET",
+                "params": None
+            },
+           
+            
+            # # ======================================
+            
+            {
+                "description": "Deauthroize business by providing campaign ID ( Admins can deauthorize business by campaign ID as swagger is shared with them only.)",
+                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Deauthroize business which is already deauthroize by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDde}",
+                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
                 "method": "GET",
                 "params": None
             },
@@ -716,8 +609,8 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # ======================================
             
             {
-                "description": "Get Reporting PDF with correct Campaign ID",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDdpdf}",
+                "description": "Get Reporting PDF with correct Campaign ID (Admins generate reporting PDFs for campaigns considering swagger is shared with them only.)",
+                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDd}",
                 "method": "GET",
                 "params":None
             },
@@ -729,9 +622,9 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "params":None
             },
             
-            # ======================================
+            # # ======================================
             {
-                "description": "Create Quick Analysis Campaign with correct data",
+                "description": "Create Quick Analysis Campaign with correct data (Admin role can create Quick Analysis Campaigns as swagger is shared with it only.)",
                 "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
                 "method": "POST",
                 "params":
@@ -771,102 +664,101 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             # # # ======================================
             
-            # {
-            #     "description": "Get list of Quick Analysis Campaign with correct campaign ID",
-            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of Quick Analysis Campaign with correct campaign ID (Admins retrieve Quick Analysis Campaign details by ID as swagger is shared with them only.)",
+                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
-            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
+                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Get list of all Quick Analysis Campaigns",
-            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
-            #     "method": "GET",
-            #     "params": None
-            # },
+            {
+                "description": "Get list of all Quick Analysis Campaigns (Admin role can view all Quick Analysis Campaigns as swagger is shared with it only.)",
+                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
+                "method": "GET",
+                "params": None
+            },
             
-            # {
-            #     "description": "Delete Quick Analysis Campaigns with campaign id",
-            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            {
+                "description": "Delete Quick Analysis Campaigns with campaign id (Admins are authorized to delete Quick Analysis Campaigns by ID as swagger is shared with them only.)",
+                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
+                "method": "DELETE",
+                "params": None
+            },
             
-            # {
-            #     "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
-            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/978456185/",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            {
+                "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
+                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/978456185/",
+                "method": "DELETE",
+                "params": None
+            },
             
              
-            # # # ======================================
-            
-            # {
-            #     "description": "Add keyword in campaign by providing campaign id",
-            #     "url": "https://agency.brandsignals.io/keyword/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "campaign_id": Campaign_IDde,
-            #         "keyword": Keyword_new
-            #         }
-            # },
-            # {
-            #     "description": "Add keyword which is already added in campaign by providing campaign id",
-            #     "url": "https://agency.brandsignals.io/keyword/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "campaign_id": Campaign_IDde,
-            #         "keyword": Keyword_new
-            #         }
-            # },
-            # {
-            #     "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
-            #     "url": "https://agency.brandsignals.io/keyword/create/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #         "campaign_id": Campaign_IDdd,
-            #         "keyword": "Pathan12323"
-            #         }
-            # },
             # # ======================================
             
-            # {
-            #     "description": "Delete keyword from campaign by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
-            # {
-            #     "description": "Try to delete last keyword of campaign by providing campaign ID",
-            #     "url": f"https://agency.brandsignals.io/keyword/delete/hello/{Campaign_IDdr}",
-            #     "method": "DELETE",
-            #     "params": None
-            # },
+            {
+                "description": "Add keyword in campaign by providing campaign id (Admins add keywords to campaigns by ID as swagger is shared with them only.)",
+                "url": "https://agency.brandsignals.io/keyword/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "campaign_id": Campaign_IDde,
+                    "keyword": Keyword_new
+                    }
+            },
+            {
+                "description": "Add keyword which is already added in campaign by providing campaign id",
+                "url": "https://agency.brandsignals.io/keyword/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "campaign_id": Campaign_IDde,
+                    "keyword": Keyword_new
+                    }
+            },
+            {
+                "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
+                "url": "https://agency.brandsignals.io/keyword/create/",
+                "method": "POST",
+                "params":
+                    {
+                    "campaign_id": Campaign_IDdd,
+                    "keyword": "Pathan12323"
+                    }
+            },
+            # ======================================
+            
+            {
+                "description": "Delete keyword from campaign by providing campaign ID (Admins have the authority to remove keywords from campaigns as swagger is shared with them only.)",
+                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+                "method": "DELETE",
+                "params": None
+            },
+            {
+                "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
+                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+                "method": "DELETE",
+                "params": None
+            },
+            {
+                "description": "Try to delete last keyword of campaign by providing campaign ID",
+                "url": f"https://agency.brandsignals.io/keyword/delete/hello/{Campaign_IDdr}",
+                "method": "DELETE",
+                "params": None
+            },
             
             # ======================================
-        ]
-
+        ] # Your API list
 
     # Call the function to hit the APIs and save the results
-    result_file = "umbrella_API_result.csv"
-    hit_apis_and_save_results(api_list, auth_token,auth_tokenn, result_file)
+    result_file = "API_result.csv"
+    hit_apis_and_save_results(api_list, auth_token, result_file)
 
     # Read the CSV file and convert its content into a list of lists
     with open(result_file, "r", encoding="utf-8") as file:
@@ -878,27 +770,3 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Return the data as JSON
 
     # return jsonify(result)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# {
-            #     "description": "Create User with correct data",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
-            #     "method": "POST",
-            #     "params":
-            #         {
-            #             "user_name": user_name,
-            #             "email": email,
-            #             "password": password
-            #         },
-            # },
