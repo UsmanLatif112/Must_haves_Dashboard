@@ -8,8 +8,8 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # campaign_idd = request.form.get("campaign_id")
     # Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMiIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ01pSXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt5TENKbGVIQWlPakUzTVRBMU9EUTJOako5LlN1bERyblU1enRFc3VVZVkyc3J3WmpqZ0kzaWdEMGdkeDJodjBhaktQbUkiLCJleHAiOjIwMjM3ODQ2NjJ9.Mt5Q9gyeGn0P_lERp2DeGs8rA_BcbNAptW2km1NddW4"
     # Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbiBTUUEgMyIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKVmMyMWhiaUJUVVVFZ015SXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lPRGt6TENKbGVIQWlPakUzTVRBMU9EUTNNVGg5LmxLUE1HOVpXYjZ4cnd4Y2U4TXl3MmhaY1ZYT3VtVWd6T1BWZGNtUlQzV00iLCJleHAiOjIwMjM3ODQ3MTl9.hhihJuC2TDfsRSfjNcgspOJSrU6HB3rzrDY5obx0Qt8"
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTURnNU16TXpPVEY5Li1iNUNJeUN5VDFOQnJJYXdZMjBOSHk5dk8xSjZ1WTVRNDFYdGw4cGtrOGMiLCJleHAiOjIwMjIxMzMzOTV9.drbD-8npRQGJ28gf7NT7GNl1KdT-YSzxTzNUAhzsbx8"
-    Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgTWFuYWdlciAzIiwiVE9LRU4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKemRXSWlPaUpCVUVrZ1RXRnVZV2RsY2lBeklpd2ljMk52Y0dWeklqcGJYU3dpYVdRaU9qRTFOVFVzSW1WNGNDSTZNVGN4TURVNE5EVTFNMzAuWFNOc19GUy1yYzloendyMjZrOXF3NE1RNk9fTUR1OWZWcDBOcGpTdk9hWSIsImV4cCI6MjAyMzc4NDU1M30.wmCCBGsLDuhh_bLrRT5i6ThnVO1b0CqfTAkUcOXa6pQ"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTVRFeU56UTBOak45LnBsM1JWMTJ1bGdNaExiTDhoeDFMeDZNZWh5QnVpLWJtYWkxT1BaWDZueFUiLCJleHAiOjIwMjQ0NzQ0NjN9.khSt4s7Iau2Rm46TemUDYhzDlA9axJVh8jbWKbwqxRM"
+    Piroty_tokenn = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgTWFuYWdlciAzIiwiVE9LRU4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKemRXSWlPaUpCVUVrZ1RXRnVZV2RsY2lBeklpd2ljMk52Y0dWeklqcGJYU3dpYVdRaU9qRTFOVFVzSW1WNGNDSTZNVGN4TVRJM05EVXhOMzAuc21OZDBBYkxnUEFhS1llTGxSYU14MjFQZWRJMk12UFNMQkVidWhidlhXVSIsImV4cCI6MjAyNDQ3NDUxN30.uqTmqG8cmwPO0S5dKBLCx2TVnGfpwiQX7alY3WrvE2Q"
     
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
@@ -28,6 +28,8 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign ID which is deleted firs
     # ================================================
 
+
+    Campaign_IDdpdf = "15315"
     # Campaign ID which is deleted first in delete api and get single campaign data with campaign id.
 
     Campaign_ID = f"{id}"
@@ -55,7 +57,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "19751"
+    Campaign_IDde = "20861"
 
     # Client id is used to get client api
 
@@ -70,28 +72,30 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     
     # Client name which is used to create new client
 
-    Client_Name_New = f"-AI-TEST-apimustt{id}"
+    Client_Name_New = f"-AI-TEST-apimust{id}"
 
     # ================================================
 
     user_idd = "500",
     business_CID = f"{business_CID_Id}"
-    cam_namee = f"-AI-TEST-QuickCamm{id}"
+    cam_namee = f"-AI-TEST-QuickCam{id}"
     keywords_for_analysiss = f"{keywordname_Id}"
                         
                         
-    user_name = f"-AI-TEST-Apimustt{id}"
-    email = f"Apimust12{id}@gmail.com"
+    user_name = f"-AI-TEST-Apimustte12{id}"
+    email = f"Apimustte12{id}@gmail.com"
     password =  "Usman@112"
     
     # data which is used to create new campaign
 
     User_id = "500"
     business_gmb_CID = f"{business_CID_Id}"
-    Campaign_name = f"API must havess{id}"
-    Client_name = "-AI-TEST-APITEST00266"
+    Campaign_name = f"API must haves 23{id}"
+    Client_name = "-AI-TEST-APITEST0026"
     keywords_for_analysis = f"{keywordname_Id}"
-    # ======================================
+    
+    # ================================
+    
     api_list = []
     # ======================================
     # Add a dictionary to store custom error messages for specific response codes
@@ -186,9 +190,11 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                         method, url, json=params, headers=headers
                     )
                     response_code = response.status_code
+                        
                     response_time = time.time() - start_time
 
                     response_message = custom_error_messages.get(response_code, "")
+                    
                     if not response_code == 204:
                         response_data = (
                             response.json()
@@ -202,12 +208,6 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                             if response.headers.get("content-type") == "application/json"
                             else response.text
                         )
-                    response_data = (
-                        response.json()
-                        if response.headers.get("content-type") == "application/json"
-                        else response.text
-                    )
-
                     # Determine the result based on response data
                     if response_data == {
                         "items": [],
@@ -247,7 +247,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(7)
+                    time.sleep(5)
 
                 except Exception as e:
                     print("==============================================")
@@ -350,7 +350,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(7)
+                    time.sleep(1)
                 
                 except Exception as e:
                     print("==============================================")
@@ -367,11 +367,12 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
 
 
     api_list = [
-       #  ====//// == Agency API == ////=======
+        # ====//// == Agency API == ////=======
     
+            
             # {
             #     "description": "Create User with correct data",
-            #     "url": "http://67.225.255.186:8010/users/create_user/",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
             #     "method": "POST",
             #     "params":
             #         {
@@ -380,328 +381,317 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             #             "password": password
             #         },
             # },
-            {
-                "description": "Create User with correct data",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": user_name,
-                        "email": email,
-                        "password": password
-                    },
-            },
             
-            {
-                "description": "Create User with same username",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": user_name,
-                        "email": email,
-                        "password": password
-                    },
-            },
+            # {
+            #     "description": "Create User with same username",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": user_name,
+            #             "email": email,
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Create User with same email",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name",
-                        "email": email,
-                        "password": password
-                    },
-            },
+            # {
+            #     "description": "Create User with same email",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name",
+            #             "email": email,
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Create User with special charcter in Username",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name@@",
-                        "email": "apimusthavestest10987@gmail.com",
-                        "password": password
-                    },
-            },
+            # {
+            #     "description": "Create User with special charcter in Username",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name@@",
+            #             "email": "apimusthavestest10987@gmail.com",
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Create User with incorrect email format",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name120",
-                        "email": "api 10987@gmail.com",
-                        "password": password
-                    },
-            },
+            # {
+            #     "description": "Create User with incorrect email format",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name120",
+            #             "email": "api 10987@gmail.com",
+            #             "password": password
+            #         },
+            # },
             
-            {
-                "description": "Create User with incorect password",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name1201",
-                        "email": "api10987@gmail.com",
-                        "password": "Usman"
-                    },
-            },
+            # {
+            #     "description": "Create User with incorect password",
+            #     "url": "https://agency.brandsignals.io/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": "-AI-TEST-user_name1201",
+            #             "email": "api10987@gmail.com",
+            #             "password": "Usman"
+            #         },
+            # },
             
-            {
-                "description": "Get all User list",
-                "url": f"https://agency.brandsignals.io/users/list/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get all User list",
+            #     "url": f"https://agency.brandsignals.io/users/list/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get SS0 link of user with correct data",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Aimalraza_22",
-                        "password": "Aimal@11"
-                        }
-            },
+            # {
+            #     "description": "Get SS0 link of user with correct data",
+            #     "url": f"https://agency.brandsignals.io/users/login_link/",
+            #     "method": "POST",
+            #     "params": 
+            #             {
+            #             "user_name": "Aimalraza_22",
+            #             "password": "Aimal@11"
+            #             }
+            # },
             
-            {
-                "description": "Get SSO link of user with incorrect username",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Aimalraza_",
-                        "password": "Aimal@11"
-                        }
-            },
+            # {
+            #     "description": "Get SSO link of user with incorrect username",
+            #     "url": f"https://agency.brandsignals.io/users/login_link/",
+            #     "method": "POST",
+            #     "params": 
+            #             {
+            #             "user_name": "Aimalraza_",
+            #             "password": "Aimal@11"
+            #             }
+            # },
             
-            {
-                "description": "Get SOS link of user with incorrect password",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
-                        {
-                        "user_name": "Aimalraza_22",
-                        "password": "Usman@1"
-                        }
-            },
+            # {
+            #     "description": "Get SOS link of user with incorrect password",
+            #     "url": f"https://agency.brandsignals.io/users/login_link/",
+            #     "method": "POST",
+            #     "params": 
+            #             {
+            #             "user_name": "Aimalraza_22",
+            #             "password": "Usman@1"
+            #             }
+            # },
             
-            # # # # # =========================================
+            # # # # # # =========================================
             
-            {
-                "description": "Create campaign with correct data",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
+            # {
+            #     "description": "Create campaign with correct data",
+            #     "url": "https://agency.brandsignals.io/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": User_id,
+            #         "business_gmb_cid": business_gmb_CID,
+            #         "campaign_name": Campaign_name,
+            #         "client_name": Client_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
             
-            {
-                "description": "Create campaign with incorrect user id",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": 143789,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
+            # {
+            #     "description": "Create campaign with incorrect user id",
+            #     "url": "https://agency.brandsignals.io/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": 143789,
+            #         "business_gmb_cid": business_gmb_CID,
+            #         "campaign_name": Campaign_name,
+            #         "client_name": Client_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
             
-            {
-                "description": "Create campaign with incorrect GMB CID",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": "98649953187944340729864995318",
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
+            # {
+            #     "description": "Create campaign with incorrect GMB CID",
+            #     "url": "https://agency.brandsignals.io/campaigns/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "user_id": User_id,
+            #         "business_gmb_cid": "98649953187944340729864995318",
+            #         "campaign_name": Campaign_name,
+            #         "client_name": Client_name,
+            #         "keywords_for_analysis": keywords_for_analysis
+            #         }
+            # },
             
             
-            # # # # # # =============================================================
+            # # # # # # # =============================================================
             
-            {
-                "description": "Get campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get campaign by providing incorrect campaign ID",
-                "url": "https://agency.brandsignals.io/campaigns/177/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get campaign by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Get campaign by providing incorrect campaign ID",
+            #     "url": "https://agency.brandsignals.io/campaigns/177/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
             
-            # # # # # # =============================================================
+            # # # # # # # =============================================================
             
-            {
-                "description": "Get list of all campaigns",
-                "url": "https://agency.brandsignals.io/campaigns/list/all/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of all campaigns",
+            #     "url": "https://agency.brandsignals.io/campaigns/list/all/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # # # # =============================================================
+            
+            # {
+            #     "description": "Delete campaign by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Delete campaign by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/delete/1289/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Delete campaign by providing already deleted campaign ID",
+            #     "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
             
             # # # =============================================================
             
-            {
-                "description": "Delete campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-                "method": "DELETE",
-                "params": None
-            },
+            # {
+            #     "description": "Create Client",
+            #     "url": "https://agency.brandsignals.io/client/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "client_name": Client_Name_New
+            #             }
+            # },
+            # {
+            #     "description": "Create client with already created client name",
+            #     "url": "https://agency.brandsignals.io/client/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "client_name": Client_Name_New
+            #             }
+            # },
             
-            {
-                "description": "Delete campaign by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/1289/",
-                "method": "DELETE",
-                "params": None
-            },
+            # # # # # ======================================
             
-            {
-                "description": "Delete campaign by providing already deleted campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            # # =============================================================
-            
-            {
-                "description": "Create Client",
-                "url": "https://agency.brandsignals.io/client/create/",
-                "method": "POST",
-                "params":
-                    {
-                        "client_name": Client_Name_New
-                        }
-            },
-            {
-                "description": "Create client with already created client name",
-                "url": "https://agency.brandsignals.io/client/create/",
-                "method": "POST",
-                "params":
-                    {
-                        "client_name": Client_Name_New
-                        }
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get client by providing client ID",
-                "url": f"https://agency.brandsignals.io/client/{Client_id}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get client by providing incorrect client ID",
-                "url": f"https://agency.brandsignals.io/client/128/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # ======================================
-            
-            {
-                "description": "Get list of all clients",
-                "url": f"https://agency.brandsignals.io/client/clients/list/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of all Geo Gifs URLs",
-                "url": "https://agency.brandsignals.io/geo/gifs/urls/list/",
-                "method": "GET",
-                "params":
-                    {
-                    "Page": 1,
-                    "Size": 50
-                    }   
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of Geo Gifs URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/{Campaign_IDd}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/1205",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of all Geo Grids URLs",
-                "url": "https://agency.brandsignals.io/geo/grid/urls/list/all/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get client by providing client ID",
+            #     "url": f"https://agency.brandsignals.io/client/{Client_id}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Get client by providing incorrect client ID",
+            #     "url": f"https://agency.brandsignals.io/client/128/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
             # # # ======================================
             
+            # {
+            #     "description": "Get list of all clients",
+            #     "url": f"https://agency.brandsignals.io/client/clients/list/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get list of Geo Grids URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/{Campaign_IDd}/",
-                "method": "GET",
-                "params": None
-            },
+            # # # # # ======================================
             
-            {
-                "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/1496/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of all Geo Gifs URLs",
+            #     "url": "https://agency.brandsignals.io/geo/gifs/urls/list/",
+            #     "method": "GET",
+            #     "params":
+            #         {
+            #         "Page": 1,
+            #         "Size": 50
+            #         }   
+            # },
             
-            # # # ======================================
+            # # # # # ======================================
             
-            {
-                "description": "Get list of latest Grids URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/{Campaign_IDd}",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of Geo Gifs URLs by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/{Campaign_IDd}",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/1205",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/8573",
-                "method": "GET",
-                "params": None
-            },
+            # # # # # ======================================
+            
+            # {
+            #     "description": "Get list of all Geo Grids URLs",
+            #     "url": "https://agency.brandsignals.io/geo/grid/urls/list/all/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # # # # ======================================
+            
+            
+            # {
+            #     "description": "Get list of Geo Grids URLs by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/{Campaign_IDd}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/1496/",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # # # # ======================================
+            
+            # {
+            #     "description": "Get list of latest Grids URLs by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/{Campaign_IDd}",
+            #     "method": "GET",
+            #     "params": None
+            # },
+            
+            # {
+            #     "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/8573",
+            #     "method": "GET",
+            #     "params": None
+            # },
            
             
-            # # ======================================
+            # # # # ======================================
             
             {
                 "description": "Deauthroize business by providing campaign ID",
@@ -727,7 +717,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             {
                 "description": "Get Reporting PDF with correct Campaign ID",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDd}",
+                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDdpdf}",
                 "method": "GET",
                 "params":None
             },
@@ -739,7 +729,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "params":None
             },
             
-            # # ======================================
+            # ======================================
             {
                 "description": "Create Quick Analysis Campaign with correct data",
                 "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
@@ -781,94 +771,94 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             # # # ======================================
             
-            {
-                "description": "Get list of Quick Analysis Campaign with correct campaign ID",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of Quick Analysis Campaign with correct campaign ID",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Get list of all Quick Analysis Campaigns",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
-                "method": "GET",
-                "params": None
-            },
+            # {
+            #     "description": "Get list of all Quick Analysis Campaigns",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
+            #     "method": "GET",
+            #     "params": None
+            # },
             
-            {
-                "description": "Delete Quick Analysis Campaigns with campaign id",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
-                "method": "DELETE",
-                "params": None
-            },
+            # {
+            #     "description": "Delete Quick Analysis Campaigns with campaign id",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
             
-            {
-                "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/978456185/",
-                "method": "DELETE",
-                "params": None
-            },
+            # {
+            #     "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
+            #     "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/978456185/",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
             
              
+            # # # ======================================
+            
+            # {
+            #     "description": "Add keyword in campaign by providing campaign id",
+            #     "url": "https://agency.brandsignals.io/keyword/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "campaign_id": Campaign_IDde,
+            #         "keyword": Keyword_new
+            #         }
+            # },
+            # {
+            #     "description": "Add keyword which is already added in campaign by providing campaign id",
+            #     "url": "https://agency.brandsignals.io/keyword/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "campaign_id": Campaign_IDde,
+            #         "keyword": Keyword_new
+            #         }
+            # },
+            # {
+            #     "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
+            #     "url": "https://agency.brandsignals.io/keyword/create/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #         "campaign_id": Campaign_IDdd,
+            #         "keyword": "Pathan12323"
+            #         }
+            # },
             # # ======================================
             
-            {
-                "description": "Add keyword in campaign by providing campaign id",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDde,
-                    "keyword": Keyword_new
-                    }
-            },
-            {
-                "description": "Add keyword which is already added in campaign by providing campaign id",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDde,
-                    "keyword": Keyword_new
-                    }
-            },
-            {
-                "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDdd,
-                    "keyword": "Pathan12323"
-                    }
-            },
-            # ======================================
-            
-            {
-                "description": "Delete keyword from campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-                "method": "DELETE",
-                "params": None
-            },
-            {
-                "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-                "method": "DELETE",
-                "params": None
-            },
-            {
-                "description": "Try to delete last keyword of campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/hello/{Campaign_IDdr}",
-                "method": "DELETE",
-                "params": None
-            },
+            # {
+            #     "description": "Delete keyword from campaign by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
+            # {
+            #     "description": "Try to delete last keyword of campaign by providing campaign ID",
+            #     "url": f"https://agency.brandsignals.io/keyword/delete/hello/{Campaign_IDdr}",
+            #     "method": "DELETE",
+            #     "params": None
+            # },
             
             # ======================================
         ]
@@ -888,3 +878,27 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Return the data as JSON
 
     # return jsonify(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+# {
+            #     "description": "Create User with correct data",
+            #     "url": "http://67.225.255.186:8010/users/create_user/",
+            #     "method": "POST",
+            #     "params":
+            #         {
+            #             "user_name": user_name,
+            #             "email": email,
+            #             "password": password
+            #         },
+            # },

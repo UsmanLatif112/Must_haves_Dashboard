@@ -1,0 +1,3 @@
+Test Case,Use Case / Scenario,Result
+Login,Login with correct username and password,Fail
+Quick Analysis Campaign test, Test quick analysis campaign create/edit/delete,Fail
