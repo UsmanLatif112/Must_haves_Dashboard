@@ -44,12 +44,14 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 4)
 
-    Campaign_IDdt = "19751"
+    Campaign_IDdt = "20861"
     
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "19763"
+    Campaign_IDde = "19751"
+    
+    Campaign_IDdee = "15315"
 
     # Client id is used to get client api
 
@@ -584,7 +586,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             },
            
             
-            # # ======================================
+        #     # # ======================================
             
             {
                 "description": "Deauthroize business by providing campaign ID",
@@ -610,7 +612,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             {
                 "description": "Get Reporting PDF with correct Campaign ID",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDd}",
+                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDdee}",
                 "method": "GET",
                 "params":None
             },
@@ -622,7 +624,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "params":None
             },
             
-            # # ======================================
+            # ======================================
             {
                 "description": "Create Quick Analysis Campaign with correct data",
                 "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",

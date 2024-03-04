@@ -44,12 +44,14 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 4)
 
-    Campaign_IDdt = "19751"
+    Campaign_IDdt = "20861"
     
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "19763"
+    Campaign_IDde = "19751"
+    
+    Campaign_IDdee = "15315"
 
     # Client id is used to get client api
 
@@ -241,7 +243,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
 
                     # Wait for 1 second before the next API hit
-                    time.sleep(5)
+                    time.sleep(1)
 
                 except Exception as e:
                     print("==============================================")
@@ -343,7 +345,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             },
             
             {
-                "description": "Get SS0 link of user with correct data (Admin role generates SSO links for users, considering swagger is shared with it only.)",
+                "description": "Get SS0 link of user with correct data (Admin role generates SSO links for users considering swagger is shared with it only.)",
                 "url": f"https://agency.brandsignals.io/users/login_link/",
                 "method": "POST",
                 "params": 
@@ -610,7 +612,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             {
                 "description": "Get Reporting PDF with correct Campaign ID (Admins generate reporting PDFs for campaigns considering swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDd}",
+                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDdee}",
                 "method": "GET",
                 "params":None
             },
