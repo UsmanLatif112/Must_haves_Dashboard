@@ -134,13 +134,13 @@ def client_script():
         from client_module import init_the_testing
 
         # Call a function that initializes testing and returns data
-        GMB_cid = request.form.get("C_id")
-        print(f'{GMB_cid}')
+        Client_name= request.form.get("C_name")
+        print(f'{Client_name}')
         User_name = request.form.get("U_id")
         print(f'{User_name}')
         Pass_word = request.form.get("P_id")
         print(f'{Pass_word}')
-        result_content = init_the_testing(GMB_cid, User_name, Pass_word)
+        result_content = init_the_testing(Client_name, User_name, Pass_word)
         
         # Commit the API responses to the database
         db.session.commit()

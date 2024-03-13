@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Quick analysis</title>
+  <title>Client Module</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -381,7 +381,7 @@
 </head>
 <body>
 <div id="header">
-  <h1 >Quick analysis Must Have</h1>
+  <h1 >Client Module Must Haves</h1>
     <div class="dropdown">
       <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
       <div class="dropdown-content">
@@ -455,14 +455,7 @@
 </div>
 
 
-<div class="image-container">
-  <h4>After Campaign Creation</h4>
-  <img src="{{url_for('static', filename='screenshot.png')}}" alt="Descriptive alt text">
-</div>
-<div class="image-containerr">
-  <h4>After Edit Campaign</h4>
-  <img src="{{url_for('static', filename='screenshott.png')}}" alt="Descriptive alt text">
-</div>
+
 <div class="loader">
   <p>Script is running, please wait...</p>
 </div>
@@ -623,7 +616,7 @@ function clearError(id) {
         url: "/client-module-script",
         type: "post",
         data: {
-          'C_id': campaignId,
+          'C_name': campaignId,
           'U_id': Username,
           'P_id': Password,
         },
