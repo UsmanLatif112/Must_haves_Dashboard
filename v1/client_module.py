@@ -63,6 +63,15 @@ def init_the_testing(Client_name, User_name, Pass_word):
         
         time.sleep(1.5)
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     except Exception as e:
         print(f"An exception occurred: {e}")

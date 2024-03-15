@@ -198,11 +198,11 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                             if response.headers.get("content-type") == "application/json"
                             else response.text
                         )
-                    response_data = (
-                        response.json()
-                        if response.headers.get("content-type") == "application/json"
-                        else response.text
-                    )
+                    # response_data = (
+                    #     response.json()
+                    #     if response.headers.get("content-type") == "application/json"
+                    #     else response.text
+                    # )
 
                     # Determine the result based on response data
                     if response_data == {
