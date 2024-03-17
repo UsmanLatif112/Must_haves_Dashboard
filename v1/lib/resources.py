@@ -36,5 +36,17 @@ class QuickAnalysispage:
     
 
 class Client:
-    client_btn = "//*[@class='campaign-listing-wrapper']"
-    Menu_btn = "//*[@class='app-header']//*[@class='header-content-right']//*[@class='header-element']"
+    Client_btn = "//*[@class='nav-link'][contains(normalize-space(), 'Clients')]"
+    Clinet_main_page = "//*[@class='campaign-listing-wrapper']//h2[contains(normalize-space(), 'Clients')]"
+    Create_Client_btn = "//*[@class='create-new-campaign-btn mobile-hide']//a[contains(normalize-space(), 'New Client')]"
+    Create_Clinet_Modal = "//*[@class='modal-header']//*[contains(normalize-space(), 'Add New Client')]"
+    Client_input_feild = "//*[@class='modal-body']//input[@id='client_name'][@placeholder = 'Client Name']"
+    Add_Client_btn = "//*[@class='modal-footer']/button[contains(normalize-space(), 'Add Client')]"
+    client_page_table = "//*[@class='client-table dataTable no-footer']//tr[2]"
+    Client_search = "//*[@class='campaign-listing-wrapper'][contains(normalize-space(), 'Clients')]//input[@id='searchText']"
+    Client_search_result = "//*[@class='client-table dataTable no-footer']//tr[contains(normalize-space(), 'Usman SQA new')]"
+    
+    
+    
+    
+    
