@@ -49,7 +49,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDdt which is used to deauthorize business.
     # (Business campaign Del 5)
     
-    Campaign_IDde = "19751"
+    Campaign_IDde = "20861"
     
     Campaign_IDdee = "15315"
 
