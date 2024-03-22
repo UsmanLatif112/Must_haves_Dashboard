@@ -61,6 +61,114 @@ def init_the_testing(Client_name, User_name, Pass_word):
             csvv.make_csv("BSWA Client Module Report.csv", 'Login,Login with correct username and password,Fail\n', new=False)
         
         
+        time.sleep(1)
+        driver.refresh()
+        time.sleep(1)
+        
+        
+        try:
+            Client_btnn = HomePage(driver)
+            Client_btnn.click_btn(Client.Client_btn)
+         
+            Clinet_mainn_page = HomePage(driver)
+            Clinet_mainn_page.wait(Client.Clinet_main_page)
+            
+            if Clinet_mainn_page:
+                print("successfull")
+                csvv.make_csv("BSWA Client Module Report.csv", 'Client Module,Click on client module, Pass\n', new=False)
+            else:
+                print("Unsuccessfull")
+                csvv.make_csv("BSWA Client Module Report.csv", 'Client Module,Click on client module, Fail\n', new=False)
+        
+        except: 
+            print("Unsuccessfull")
+            csvv.make_csv("BSWA Client Module Report.csv", 'Client Module,Click on client module, Fail\n', new=False)              
+        
+        try:
+            
+            Client_tablee = HomePage(driver)
+            Client_tablee.waittt(Client.client_page_table)
+            
+            if Client_tablee:
+                print("successfull")
+            else:
+                print("Unsuccessfull")
+        
+        except:
+            print("Unsuccessfull")
+            pass
+        
+        time.sleep(1)
+        Create_Cient_btnn = HomePage(driver)   
+        Create_Cient_btnn.click_btn(Client.Create_Client_btn)
+        
+        try:
+            
+            Create_Clinet_Modall = HomePage(driver)
+            Create_Clinet_Modall.wait(Client.Create_Clinet_Modal)
+            
+            if Client_tablee:
+                print("successfull")
+            else:
+                print("Unsuccessfull")
+        
+        except:
+            print("Unsuccessfull")
+            pass
+        
+        time.sleep(1)
+        Client_input_feildd = HomePage(driver)   
+        Client_input_feildd.click_btn(Client.Client_input_feild)
+        
+        time.sleep(1)
+        Client_input_feildd = HomePage(driver)
+        Client_input_feildd.enter_name_delay(Client.Client_input_feild, Client_name)
+        
+        time.sleep(1)
+        Add_Client_btnn = HomePage(driver)   
+        Add_Client_btnn.click_btn(Client.Add_Client_btn)
+        
+        time.sleep(1)
+        driver.refresh()
+        time.sleep(1)
+        
+        try:
+            
+            Client_tablee = HomePage(driver)
+            Client_tablee.waittt(Client.client_page_table)
+            
+            if Client_tablee:
+                print("successfull")
+            else:
+                print("Unsuccessfull")
+        
+        except:
+            print("Unsuccessfull")
+            pass
+        
+        time.sleep(1)
+        Client_searchh = HomePage(driver)   
+        Client_searchh.click_btn(Client.Client_search)
+        
+        time.sleep(1)
+        Client_searchh = HomePage(driver)
+        Client_searchh.enter_name_delay(Client.Client_search, Client_name)
+        
+        time.sleep(2)
+        try:
+            Clientt_nameee = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH,f"//*[@class='client-table dataTable no-footer']//tr[contains(normalize-space(), '{Client_name}')]",)))
+            
+            if Clientt_nameee:
+                print("successfull")
+                csvv.make_csv("BSWA Client Module Report.csv", f'Create Client,Client Create with Name ({Client_name}),Pass\n', new=False)
+            else:
+                print("Unsuccessfull")
+       
+                csvv.make_csv("BSWA Client Module Report.csv", 'Create Client,Client create failed,Fail\n', new=False)
+        except:
+            print("Unsuccessfull")
+            pass
+        
         time.sleep(1.5)
         
         
