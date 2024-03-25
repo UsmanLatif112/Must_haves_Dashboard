@@ -27,30 +27,31 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     Campaign_ID = f"{id}"
 
     # Campaign IDd which is used for other apis in which we need campaign id to get data
-    # (Dont Delete Cam1)
+    # (API must have for get data)
 
-    Campaign_IDd = "19751" 
+    Campaign_IDd = "21637" 
 
     # Campaign IDdd which is used to add 8th keyword in campaign already having 7 keywords
-    # (Dont Delete Cam2)
+    # (API must have for 8 key)
 
-    Campaign_IDdd = "19752"
+    Campaign_IDdd = "21641"
 
     # Campaign IDdr which is used to delete last keyword of campaign
-    # (Dont Delete Cam3)
+    # (API must have for last key)
 
-    Campaign_IDdr = "19753"
+    Campaign_IDdr = "21640"
 
     # Campaign IDdt which is used to deauthorize business.
-    # (Business campaign Del 4)
+    # (API must have Business Auth)
 
     Campaign_IDdt = "20861"
     
     # Campaign IDdt which is used to deauthorize business.
-    # (Business campaign Del 5)
+    # (API must have Business Auth)
     
-    Campaign_IDde = "19751"
+    Campaign_IDde = "20861"
     
+    # Campaign id to get pdf of live campaign
     Campaign_IDdee = "15315"
 
     # Client id is used to get client api
