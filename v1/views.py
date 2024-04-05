@@ -178,8 +178,10 @@ def run_script():
         print(f'{keywordname_id}')
         business_id = request.form.get("B_id")
         print(f'{business_id}')
+        Campaign_Status = request.form.get("C_St")
+        print(f'{Campaign_Status}')
         # Pass these IDs to the init_the_testing function
-        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id)
+        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id,Campaign_Status)
         
         # Commit the API responses to the database
         db.session.commit()

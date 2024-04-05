@@ -371,6 +371,14 @@
               <input type="text" class="form-control" id="keywordname" required>
               <div id="error-message" style="display: none; color: red;"></div>
             </div>
+
+            <div class="form-group">
+              <label for="campaignstatus">Campaign Status:</label>
+              <input type="text" class="form-control" id="campaignstatus" required>
+              
+            </div>
+
+            
             <button type="submit" class="btn btn-info" style="border-radius: 15px;">Run Script</button>
           </form>
         </div>
@@ -556,6 +564,7 @@ function clearError(id) {
       var quickAnalysisCampaignId = $("#quickAnalysisCampaignId").val();
       var businessCId = $("#businessGMB").val();
       var keywordname = $("#keywordname").val();
+      var campaignstatus = $("#campaignstatus").val();
 
       console.log (keywordname)
       // Start the loader
@@ -570,6 +579,7 @@ function clearError(id) {
           'Q_id': quickAnalysisCampaignId,
           'K_id': keywordname,
           'B_id': businessCId,
+          'C_St': campaignstatus,
         },
         success: function(response) {
           console.log("Response:", response);
