@@ -51,7 +51,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     
     Campaign_IDde = "22070"
     
-    Campaign_IDdey = "20861"
+    Campaign_IDdy = "20861"
     
     # Campaign id to get pdf of live campaign
     Campaign_IDdee = "15315"
@@ -708,7 +708,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             {
                 "description": "Start campaign by provide Campaign Id",
-                "url": f"https://agency.brandsignals.io/campaigns/live/{Campaign_IDdey}/",
+                "url": f"https://agency.brandsignals.io/campaigns/live/{Campaign_IDdy}/",
                 "method": "PATCH",
                 "params": None
             },
@@ -722,7 +722,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "method": "POST",
                 "params":
                     {
-                    "campaign_id": Campaign_IDdey,
+                    "campaign_id": Campaign_IDdy,
                     "keyword": Keyword_new
                     }
             },
@@ -732,7 +732,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "method": "POST",
                 "params":
                     {
-                    "campaign_id": Campaign_IDdey,
+                    "campaign_id": Campaign_IDdy,
                     "keyword": Keyword_new
                     }
             },
@@ -750,13 +750,13 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
             {
                 "description": "Delete keyword from campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDdy}",
                 "method": "DELETE",
                 "params": None
             },
             {
                 "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
+                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDdy}",
                 "method": "DELETE",
                 "params": None
             },
