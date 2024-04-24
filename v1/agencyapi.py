@@ -6,7 +6,7 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id, Campaign_Status):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTVRNMU1UWXlOelo5LjVYLUZ4bEp1aWlKTXJZdXc5RGVmTUxUbkc5N1VrRFFad0ZFLWpoZ1BpbzAiLCJleHAiOjIwMjY3MTYyNzZ9.EYnavYFMZ82Gg-DAi2PZmh5W62kSt7l2rcCHIeampJM"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTVRVNU5EUTNNVFY5LkJaTmp3QXMwT0FRQWVNRDR3aFVzUXFfSDVJaXowZlAzTkxQX0hzMWYwUjAiLCJleHAiOjIwMjkxNDQ3MTV9.XeFlgW0_BjYt40HRXn3dx4a0ekxov-aO0tZCbgabudc"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
@@ -444,18 +444,14 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
         #     },
             
             
-        #     # # # # # # =============================================================
+        #     # # # # # =============================================================
             
-            {
-                "description": "Get list of all campaigns by campaign status",
-                "url": f"https://agency.brandsignals.io/campaigns/list/by/{Campaign_StatuS}/",
-                "method": "GET",
-                "params":
-                        {
-                        "Page": 1,
-                        "Size": 50
-                        } 
-            },
+        #     {
+        #         "description": "Get list of all campaigns by campaign status",
+        #         "url": f"https://agency.brandsignals.io/campaigns/list/by/campaign_status/?campaign_status={Campaign_StatuS}&page=1&size=100",
+        #         "method": "GET",
+        #         "params": None
+        #     },
             
             
         #     # # # # # # =============================================================
@@ -608,24 +604,24 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             
         #     # # ======================================
             
-        #     {
-        #         "description": "Deauthroize business by providing campaign ID",
-        #         "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
-        #         "method": "GET",
-        #         "params": None
-        #     },
-        #     {
-        #         "description": "Deauthroize business which is already deauthroize by providing campaign ID",
-        #         "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
-        #         "method": "GET",
-        #         "params": None
-        #     },
-        #     {
-        #         "description": "Deauthroize business by providing incorrect campaign ID",
-        #         "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdr}",
-        #         "method": "GET",
-        #         "params": None
-        #     }, 
+            {
+                "description": "Deauthroize business by providing campaign ID",
+                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Deauthroize business which is already deauthroize by providing campaign ID",
+                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
+                "method": "GET",
+                "params": None
+            },
+            {
+                "description": "Deauthroize business by providing incorrect campaign ID",
+                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdr}",
+                "method": "GET",
+                "params": None
+            }, 
             
             
         # #     # ======================================
@@ -684,28 +680,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
         #             }
         #     },
             
-        #     # # # ======================================
             
-        #     {
-        #         "description": "Get list of Quick Analysis Campaign with correct campaign ID",
-        #         "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
-        #         "method": "GET",
-        #         "params": None
-        #     },
-            
-        #     {
-        #         "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
-        #         "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
-        #         "method": "GET",
-        #         "params": None
-        #     },
-            
-        #     {
-        #         "description": "Get list of all Quick Analysis Campaigns",
-        #         "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
-        #         "method": "GET",
-        #         "params": None
-        #     },
             
         #     {
         #         "description": "Delete Quick Analysis Campaigns with campaign id",
