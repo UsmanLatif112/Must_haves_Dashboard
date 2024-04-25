@@ -45,6 +45,12 @@ class Client:
     client_page_table = "//*[@class='client-table dataTable no-footer']//tr[2]"
     Client_search = "//*[@class='campaign-listing-wrapper'][contains(normalize-space(), 'Clients')]//input[@id='searchText']"
     Client_search_result = "//*[@class='client-table dataTable no-footer']//tr[contains(normalize-space(), 'Usman SQA new')]"
+    Client_edit_btn_drop = '//*[@class="campaign-listing-wrapper"]//table//tr[contains(normalize-space(), "Usman SQA new")]//div[@class="assign-compaign-btn"]'
+    Client_edit_btn = '//*[@class="campaign-listing-wrapper"]//table//tr[contains(normalize-space(), "Usman SQA new")]//div[@class="assign-campaign-box"]//a[contains(normalize-space(), "Edit Client")]'
+    Client_edit_modal = '//*[@class="modal-header"][contains(normalize-space(), "Edit Client")]'
+    Client_edit_modal_feild = '//*[@class="modal-content"][contains(normalize-space(), "Client Name")]//input[@id="client_name-edit-id"]'
+    Client_edit_modal_btn = '//*[@class="modal-dialog"][contains(normalize-space(), "Edit Client")]//button[contains(normalize-space(), "Submit")]'
+    
     
     
     
