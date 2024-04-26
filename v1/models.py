@@ -29,6 +29,19 @@ class ClientmoduleModel(UserMixin, db.Model):
     use_case = db.Column(db.String(500), nullable=False)
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    
+class team_usermoduleModel(UserMixin, db.Model):
+    __tablename__ = "user_team_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), nullable=False)
+    use_case = db.Column(db.String(500), nullable=False)
+    result = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    
+    
 
 class ApiResponse(db.Model):
     __tablename__ = "api_response"
