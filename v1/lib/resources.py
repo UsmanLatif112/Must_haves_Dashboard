@@ -50,6 +50,23 @@ class Client:
     Client_edit_modal = '//*[@class="modal-header"][contains(normalize-space(), "Edit Client")]'
     Client_edit_modal_feild = '//*[@class="modal-content"][contains(normalize-space(), "Client Name")]//input[@id="client_name-edit-id"]'
     Client_edit_modal_btn = '//*[@class="modal-dialog"][contains(normalize-space(), "Edit Client")]//button[contains(normalize-space(), "Submit")]'
+
+class User_Module:
+    User_btn = "//*[@class='nav-link'][contains(normalize-space(), 'Users')]"
+    User_main_page = "//*[@class='campaign-listing-wrapper']//h2[contains(normalize-space(), 'Users')]"
+    Create_User_btn = "//*[@class='create-new-campaign-btn mobile-hide']//a[contains(normalize-space(), 'New User')]"
+    Users_data_table = "(//*[@class='tab-content campaign-listing-content']//tr)[2]"
+    Users_Creation_modal = '//*[@class="modal-header agent-header"][contains(normalize-space(), "Add New User")]'
+    Users_name_input = '//*[@class="modal-body"]//*[@id="user_username"][@placeholder="User Name"]'
+    Users_role = '//*[@class="modal-body"]//*[@class="campiagn-input-field"][@name="role_id"]'
+    Users_email_input = '//*[@class="modal-body"]//*[@class="campiagn-input-field"][@placeholder="Enter Email"]'
+    Users_password_input = '//*[@class="modal-body"]//*[@class="campiagn-input-field"][@id="password"]'
+    Users_C_password_input = '//*[@class="modal-body"]//*[@class="campiagn-input-field"][@id="password1"]'
+    Users_Create_btn = '//*[@class="modal-footer"]//button[contains(normalize-space(), "Add User")]'
+    Users_Role_two = '//*[@class="modal-body"]//*[@class="campiagn-input-field"]//option[@value="2,admin"]'
+    Users_Role_three = '//*[@class="modal-body"]//*[@class="campiagn-input-field"]//option[@value="3,manager"]'
+    Users_Role_four = '//*[@class="modal-body"]//*[@class="campiagn-input-field"]//option[@value="4,user"]'
+    Users_Role_five = '//*[@class="modal-body"]//*[@class="campiagn-input-field"]//option[@value="5,reporting_user"]'
     
     
     

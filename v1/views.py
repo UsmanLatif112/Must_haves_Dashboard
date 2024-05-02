@@ -2,6 +2,7 @@ import traceback
 from flask_login import current_user
 from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import login_user, login_required, logout_user
+from models import team_usermoduleModel,QuickAnalysisModel
 from app import app, login_manager
 from user_management import User
 from import_csv import import_client_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db, import_user_team_csv_to_db
@@ -319,7 +320,7 @@ def Staging_agencyapi_script():
     
 @app.route("/user_&_team_module")
 @login_required
-def User():
+def user_team_module():
     return render_template("user & team_module.html")
 
 @app.route("/user_&_team_module_script", methods=["POST"])
@@ -329,13 +330,15 @@ def User_script():
         from user_team_module import init_the_testing
 
         # Call a function that initializes testing and returns data
-        team_user_name = request.form.get("C_id")
+        team_user_name = request.form.get("U_name")
         print(f'{team_user_name}')
         User_name = request.form.get("U_id")
         print(f'{User_name}')
         Pass_word = request.form.get("P_id")
         print(f'{Pass_word}')
-        result_content = init_the_testing(team_user_name, User_name, Pass_word)
+        USer_Role = request.form.get("UR_id")
+        print(f'{USer_Role}')
+        result_content = init_the_testing(USer_Role,team_user_name, User_name, Pass_word)
         
         # Commit the API responses to the database
         db.session.commit()
@@ -343,6 +346,8 @@ def User_script():
         # Import the CSV file data into the database, now passing the user_id
         csv_file_path = "BSWA user & team Module Report.csv"
         import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
+        
+        
         
         # Delete the CSV file after import
         delete_file_if_exists(csv_file_path)
@@ -356,3 +361,6 @@ def User_script():
         db.session.rollback()
         # Return a JSON response indicating an error
         return jsonify({"error": str(e), "message": "Failed to run the script"})
+
+
+

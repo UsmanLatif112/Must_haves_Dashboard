@@ -430,6 +430,11 @@
               <input type="text" class="form-control" id="campaignId" required>
               <div id="C_error-message" style="display: none; color: red;"></div>
             </div>
+            <div class="form-group">
+              <label for="UserId">User Role:</label>
+              <input type="text" class="form-control" id="UserId" required>
+              <div id="C_error-message" style="display: none; color: red;"></div>
+            </div>
             <button type="submit" class="btn btn-info" style="border-radius: 15px;">Run Script</button>
           </form>
         </div>
@@ -608,6 +613,7 @@ function clearError(id) {
       var campaignId = $("#campaignId").val();
       var Username = $("#Username").val();
       var Password = $("#Password").val();
+      var Userrole = $("#UserId").val();
       // Start the loader
       $('.loader').show();
 
@@ -616,9 +622,10 @@ function clearError(id) {
         url: "/user_&_team_module_script",
         type: "post",
         data: {
-          'C_name': campaignId,
+          'U_name': campaignId,
           'U_id': Username,
           'P_id': Password,
+          'UR_id': Userrole,
         },
         success: function(response) {
           console.log("Response:", response);
