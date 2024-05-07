@@ -67,6 +67,14 @@ class User_Module:
     Users_Role_three = '//*[@class="modal-body"]//*[@class="campiagn-input-field"]//option[@value="3,manager"]'
     Users_Role_four = '//*[@class="modal-body"]//*[@class="campiagn-input-field"]//option[@value="4,user"]'
     Users_Role_five = '//*[@class="modal-body"]//*[@class="campiagn-input-field"]//option[@value="5,reporting_user"]'
+    Users_diable_button = '//*[@class="modal-footer"]//button[@disabled="disabled"][contains(normalize-space(), "Add User")]'
+    Users_create_button = '//*[@class="modal-footer"]//button[contains(normalize-space(), "Add User")]'
+    Users_search = '//*[@class="campaign-listing-wrapper"]//*[@id="searchText"]'
+
+class Team_Module:
+    team_btn = '//*[@class="nav-link"][contains(normalize-space(), "Teams")]'
+    team_table = '(//*[@class="campaign-listing-wrapper"]//tbody/tr)[2]'
+    
     
     
     
