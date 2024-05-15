@@ -709,6 +709,12 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
         #     # # ======================================
             
             {
+                "description": "Get list of keywords suggestions for a business by providing CID",
+                "url": f"https://agency.brandsignals.io/keyword/suggestions/{business_gmb_CID}/",
+                "method": "GET",
+                "params":None
+            },
+            {
                 "description": "Add keyword in campaign by providing campaign id",
                 "url": "https://agency.brandsignals.io/keyword/create/",
                 "method": "POST",
@@ -759,7 +765,26 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 "params": None
             },
             
-            # ======================================
+            # # ======================================
+            {
+                "description": "Get Campaign Map Rank Score by providing Campaign id",
+                "url": f"https://agency.brandsignals.io/graphs/campaign-map-rank-score/{Campaign_IDdt}/",
+                "method": "GET",
+                "params":None
+            },
+            {
+                "description": "Get Keyword Map Rank Score by providing Campaign id and keyword name",
+                "url": f"https://agency.brandsignals.io/graphs/keyword-map-rank-score/{Campaign_IDdt}/Sqa house",
+                "method": "GET",
+                "params":None
+            },
+            {
+                "description": "Get Competitor Map Rank Score by providing Campaign id and keyword name",
+                "url": f"https://agency.brandsignals.io/graphs/competitor-map-rank-score/{Campaign_IDdt}/sqa house",
+                "method": "GET",
+                "params":None
+            },
+            #     # # ======================================
         ] # Your API list
 
     # Call the function to hit the APIs and save the results
