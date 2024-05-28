@@ -70,14 +70,160 @@ class User_Module:
     Users_diable_button = '//*[@class="modal-footer"]//button[@disabled="disabled"][contains(normalize-space(), "Add User")]'
     Users_create_button = '//*[@class="modal-footer"]//button[contains(normalize-space(), "Add User")]'
     Users_search = '//*[@class="campaign-listing-wrapper"]//*[@id="searchText"]'
+    Users_delete_modal = "//*[@class='modal-content']//*[@class='modal-footer']//button[contains(normalize-space(), 'Yes')]"
 
 class Team_Module:
     team_btn = '//*[@class="nav-link"][contains(normalize-space(), "Teams")]'
     team_table = '(//*[@class="campaign-listing-wrapper"]//tbody/tr)[2]'
+    Create_team_btn = '(//*[@class="campaign-listing-wrapper"]//tbody/tr)[2]'
+    Create_team_btn = '//*[@class="campaign-listing-wrapper"]//a[contains(normalize-space(), "Create Team")]'
+    Create_team_modal = '//*[@class="modal-content"][contains(normalize-space(), "Create Team")]'
+    Team_name_feild = '//*[@class="modal-content"]//input[@id="team_username"]'
+    Team_pr_manager_feild = '//*[@class="modal-content"]//select[@id="primary-manager"]'
+    Team_sc_manager_feild = '//*[@class="modal-content"]//select[@id="secondary-manager"]'
+    Team_desc_feild = '//*[@class="modal-content"]//*[@id="desc"]'
+    Team_create_btnn = '//*[@class="modal-content"]//button[contains(normalize-space(), "Create")]'
+    Team_search_feild = '//*[@class="campaign-listing-inner"]//input[@id="searchText"]'
+    Team_assign_modal = '//*[@class="modal-content"]//*[@class="modal-header"][contains(normalize-space(), "Assign User")]'
+    Team_assign_user_drp_modal = '//*[@class="modal-content"]//*[@class="modal-body"]//*[@id="assigner-User"]'
+    Team_assign_user_drp_modal_btn = '//*[@class="modal-content"]//*[@class="modal-footer"]//button[contains(normalize-space(), "Assign")]'
+    Team_detail_page = '//*[@class="campaign-listing-wrapper"][contains(normalize-space(), "Team Details")]'
+    Team_detail_page_assign_user = '//*[@class="campaign-listing-wrapper"][contains(normalize-space(), "Team Details")]//div[@class="create-new-campaign-btn mobile-hide"]/a[contains(normalize-space(), "Assign User")]'
+    Team_detail_page_srch = '//*[@class="campaign-listing-inner"]//input[@id="searchText"]'
     
     
     
     
-    
-    
-    
+
+
+
+
+# time.sleep(1)
+        # driver.refresh()
+        # time.sleep(2)
+        
+        
+        # try:
+        #     User_btnn = HomePage(driver)
+        #     User_btnn.click_btn(User_Module.User_btn)
+            
+        #     User_mainn_page = HomePage(driver)
+        #     User_mainn_page.wait(User_Module.User_main_page)
+            
+        #     if User_mainn_page:
+        #         print("successfull")
+        #     else:
+        #         print("Unsuccessfull")
+
+        # except: 
+        #     print("Unsuccessfull")              
+
+        # time.sleep(1)
+        # Users_data_tablee = HomePage(driver)
+        # Users_data_tablee.wait(User_Module.Users_data_table)
+        
+        # if Users_data_tablee:
+        #     time.sleep(1)
+        #     Create_User_btnn = HomePage(driver)   
+        #     Create_User_btnn.click_btn(User_Module.Create_User_btn)
+        # else:
+        #     pass
+        #     time.sleep(2)
+        #     driver.quit()    
+        # time.sleep(1)
+        # Users_Creation_modall = HomePage(driver)
+        # Users_Creation_modall.wait(User_Module.Users_Creation_modal)
+        
+        # try:
+        #     if Users_Creation_modall:
+        #         time.sleep(5)
+        #         Users_name_inputt = HomePage(driver)   
+        #         Users_name_inputt.click_btn(User_Module.Users_name_input)
+        #         time.sleep(0.5)
+        #         Users_name_inputtt = HomePage(driver)
+        #         Users_name_inputtt.enter_name_delay(User_Module.Users_name_input, f"{team_user_name}_3")
+        #         time.sleep(0.5)
+                
+        #         try:
+        #             Users_rolee = HomePage(driver)   
+        #             Users_rolee.click_btn(User_Module.Users_role)
+        #             time.sleep(2)
+        #             print(f"User_role_id:3")  # Print the value of User_role_id for debugging
+        #             time.sleep(0.5)
+        #             Users_Role_threee = HomePage(driver)   
+        #             Users_Role_threee.click_btn(User_Module.Users_Role_three)
+        #         except Exception as e:
+        #             print("Invalid User_role_id:")  # Print a message if the User_role_id is not expected
+        #             print("Error:", e)  # Print the error message if any exception occurs
+        #             print("No user role selected or invalid user role")
+                
+        #         time.sleep(0.5)
+        #         Users_email_inputt = HomePage(driver)   
+        #         Users_email_inputt.click_btn(User_Module.Users_email_input)
+                
+        #         time.sleep(0.5)
+        #         Users_email_inputtt = HomePage(driver)
+        #         Users_email_inputtt.enter_name_delay(User_Module.Users_email_input, f"{team_user_name}_3@gmail.com")
+                
+        #         time.sleep(0.5)
+        #         Users_password_inputtt = HomePage(driver)   
+        #         Users_password_inputtt.click_btn(User_Module.Users_password_input)
+                
+        #         time.sleep(0.5)
+        #         Users_password_inputt = HomePage(driver)
+        #         Users_password_inputt.enter_name_delay(User_Module.Users_password_input, "Bswa@12345")
+                
+        #         time.sleep(0.5)
+        #         Users_C_password_inputt = HomePage(driver)   
+        #         Users_C_password_inputt.click_btn(User_Module.Users_C_password_input)
+                
+        #         time.sleep(0.5)
+        #         Users_C_password_inputtt = HomePage(driver)
+        #         Users_C_password_inputtt.enter_name_delay(User_Module.Users_C_password_input, "Bswa@12345")
+                
+        #         time.sleep(0.5)
+        #         Users_C_password_inputt = HomePage(driver)   
+        #         Users_C_password_inputt.click_btn(User_Module.Users_C_password_input)
+                
+        #         try:
+        #             time.sleep(0.5)
+        #             Users_diable_buttonn = HomePage(driver)   
+        #             Users_diable_buttonn.click_btn(User_Module.Users_diable_button)
+        #         except:
+        #             time.sleep(0.5)
+        #             Users_create_buttonn = HomePage(driver)   
+        #             Users_create_buttonn.click_btn(User_Module.Users_create_button)
+                
+        #         time.sleep(1)
+        #         driver.refresh()
+        #         time.sleep(1)   
+                
+        #         time.sleep(1)
+        #         Users_data_tablee = HomePage(driver)
+        #         Users_data_tablee.wait(User_Module.Users_data_table)
+
+        #         time.sleep(1)
+        #         Users_searchh = HomePage(driver)
+        #         Users_searchh.wait(User_Module.Users_search)
+                
+        #         time.sleep(0.5)
+        #         Users_searchhh = HomePage(driver)   
+        #         Users_searchhh.click_btn(User_Module.Users_search)
+                
+        #         time.sleep(0.5)
+        #         Users_search_h = HomePage(driver)
+        #         Users_search_h.enter_name_delay(User_Module.Users_search, f"{team_user_name}_3")
+                
+        #         time.sleep(1)
+        #         Users_data_table_e = HomePage(driver)
+        #         Users_data_table_e.wait(User_Module.Users_data_table)
+                
+        #         if Users_data_table_e:
+        #             user_row = WebDriverWait(driver, 30).until(
+        #                         EC.presence_of_element_located((By.XPATH, f"(//*[@class='tab-content campaign-listing-content']//tr)[2][contains(normalize-space(), '{team_user_name}_3')]"))
+        #                     )
+        #             time.sleep(1)
+        #         else:
+        #             pass
+        # except Exception as e:
+        #     print(e)
