@@ -6,7 +6,7 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id, Campaign_Status):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTWpBeE56STVNemg5LnBQUE5UZkZLOVhjQXpnbE1TMFZ5ak9pUVViX0FmOTRGMTRCRDhDTTBKQ1UiLCJleHAiOjIwMzMzNzI5Mzd9.jqraYJjj4alW10bND-WWi3-KDmHZuGhNjrCxEJzLAE0"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTWpJek16Z3lNakI5LjY2SHFqa05mWVppYkR4RU9KdndBRE5iVHl6QjM1OG45eEpjeFFpREF0QzQiLCJleHAiOjIwMzU1MzgyMTh9.l-Nct5acPj3zzG9tsXydbf3MLXqNm754lB9QueiPwj8"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
