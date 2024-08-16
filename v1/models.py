@@ -1,8 +1,9 @@
 from app import db
 from flask_login import UserMixin
 
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, DateTime,Text
 
+from sqlalchemy.sql import func
 
 class User(UserMixin, db.Model):
     __tablename__ = "users"
@@ -11,6 +12,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     is_active = db.Column(db.Boolean)
     password = db.Column(db.String(255), nullable=False)  # Plain text password
+    
 
 class QuickAnalysisModel(UserMixin, db.Model):
     __tablename__ = "quick_analysis"
@@ -20,6 +22,7 @@ class QuickAnalysisModel(UserMixin, db.Model):
     use_case = db.Column(db.String(500), nullable=False)
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
 class ClientmoduleModel(UserMixin, db.Model):
     __tablename__ = "client_module"
@@ -29,6 +32,7 @@ class ClientmoduleModel(UserMixin, db.Model):
     use_case = db.Column(db.String(500), nullable=False)
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     
     
 class team_usermoduleModel(UserMixin, db.Model):
@@ -39,6 +43,7 @@ class team_usermoduleModel(UserMixin, db.Model):
     use_case = db.Column(db.String(500), nullable=False)
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     
     
     
@@ -59,6 +64,7 @@ class ApiResponse(db.Model):
     response_data = Column(db.Text)
     payload_data = db.Column(db.String(255), nullable=True)
     response_data_result = Column(String(256))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
 class umbrellaResponse(db.Model):
     __tablename__ = "umbrella_agency"
@@ -76,6 +82,7 @@ class umbrellaResponse(db.Model):
     response_data = Column(db.Text)
     payload_data = db.Column(db.String(255), nullable=True)
     response_data_result = Column(String(256))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
 class stagingapiaResponse(db.Model):
     __tablename__ = "Agency_API_Staging"
@@ -93,3 +100,4 @@ class stagingapiaResponse(db.Model):
     response_data = Column(db.Text)
     payload_data = db.Column(db.String(255), nullable=True)
     response_data_result = Column(String(256))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)

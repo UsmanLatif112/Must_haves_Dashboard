@@ -1,18 +1,21 @@
 import traceback
+from sqlalchemy import func
+from datetime import datetime
 from flask_login import current_user
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import render_template, request, jsonify, redirect, url_for,Blueprint
 from flask_login import login_user, login_required, logout_user
 from models import team_usermoduleModel,QuickAnalysisModel
-from app import app, login_manager
+from app import app, login_manager,db
 from user_management import User
 from import_csv import import_client_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db, import_user_team_csv_to_db
 from models import ApiResponse, db
 from helpers import delete_file_if_exists
 from user_management import authenticate
 from flask_login import login_required, current_user
-from flask import jsonify
+from flask import jsonify,current_app
 from models import ApiResponse, db
-
+from sqlalchemy import text
+main = Blueprint('main', __name__)
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -55,14 +58,24 @@ def dashboard():
 @app.route("/script")
 @login_required
 def script():
-    return render_template("script.html")
+    from models import ApiResponse
+    from datetime import datetime
+    current_date_ = datetime.today().date()
+    api_responses_list = ApiResponse.query.filter(func.date(ApiResponse.created_at) == current_date_).order_by(ApiResponse.created_at.desc()).all()[:54]
+    if not api_responses_list:
+        api_responses_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
+    return render_template("script.html",api_responses=api_responses_list)
 
 @app.route("/umbrella_script")
 @login_required
 def umbrella_script():
-    return render_template("umbrella_script.html")
-
-
+    from models import umbrellaResponse
+    from datetime import datetime
+    current_date_ = datetime.today().date()
+    umbrellaResponse_list = umbrellaResponse.query.filter(func.date(umbrellaResponse.created_at) == current_date_).order_by(umbrellaResponse.created_at.desc()).all()[:55]
+    if not umbrellaResponse_list:
+        umbrellaResponse_list = umbrellaResponse.query.order_by(umbrellaResponse.created_at.desc()).limit(55).all()[:55]
+    return render_template("umbrella_script.html",umbrellaResponses=umbrellaResponse_list)
 
 @app.route("/Agency_api")
 @login_required
@@ -72,12 +85,19 @@ def Agency_api():
 @app.route("/staging_agency_script")
 @login_required
 def staging_agency_script():
-    return render_template("staging_agency_script.html")
+    from models import stagingapiaResponse
+    from datetime import datetime
+    current_date_ = datetime.today().date()
+    stagingapiaResponses_list = stagingapiaResponse.query.filter(func.date(stagingapiaResponse.created_at) == current_date_).order_by(stagingapiaResponse.created_at.desc()).all()[:54]
+    if not stagingapiaResponses_list:
+        stagingapiaResponses_list = stagingapiaResponse.query.order_by(stagingapiaResponse.created_at.desc()).limit(54).all()[:54]
+    return render_template("staging_agency_script.html",stagingapiaResponses=stagingapiaResponses_list)
 
 
 @app.route("/BSWA-must-haves")
 @login_required
 def BSWA():
+    
     return render_template("BSWA.html")
 
 
@@ -126,7 +146,13 @@ def Quick_script():
 @app.route("/client_module")
 @login_required
 def client():
-    return render_template("client_module.html")
+    from models import ApiResponse
+    from datetime import datetime
+    current_date_ = datetime.today().date()
+    api_responses_list = ApiResponse.query.filter(func.date(ApiResponse.created_at) == current_date_).all()[:54]
+    if not api_responses_list:
+        api_responses_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
+    return render_template("script.html",api_responses=api_responses_list)
 
 @app.route("/client-module-script", methods=["POST"])
 @login_required

@@ -6,7 +6,7 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id, Campaign_Status):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTWpJek16Z3lNakI5LjY2SHFqa05mWVppYkR4RU9KdndBRE5iVHl6QjM1OG45eEpjeFFpREF0QzQiLCJleHAiOjIwMzU1MzgyMTh9.l-Nct5acPj3zzG9tsXydbf3MLXqNm754lB9QueiPwj8"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTWpRMU9EVTBPVE45Lm43dklpQ2VLY0N4d1A1aVJYX3o3REhUV1dhVVMweXRGRm01Z3gwOVJ5Nm8iLCJleHAiOjIwMzc3ODU0OTN9.1wX4kqsURtK7OUgt13GPJOe9vMlljxHmewI21yWMnEQ"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
@@ -768,19 +768,19 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
             # # ======================================
             {
                 "description": "Get Campaign Map Rank Score by providing Campaign id",
-                "url": f"https://agency.brandsignals.io/graphs/campaign-map-rank-score/{Campaign_IDdt}/",
+                "url": f"https://agency.brandsignals.io/graphs/campaign-map-rank-score/15363/",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Keyword Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://agency.brandsignals.io/graphs/keyword-map-rank-score/{Campaign_IDdt}/Sqa house",
+                "url": f"https://agency.brandsignals.io/graphs/keyword-map-rank-score/15363/hair salon",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Competitor Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://agency.brandsignals.io/graphs/competitor-map-rank-score/{Campaign_IDdt}/sqa house",
+                "url": f"https://agency.brandsignals.io/graphs/competitor-map-rank-score/15363/hair salon",
                 "method": "GET",
                 "params":None
             },
