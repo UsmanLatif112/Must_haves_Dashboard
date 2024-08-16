@@ -347,7 +347,13 @@ def Staging_agencyapi_script():
 @app.route("/user_&_team_module")
 @login_required
 def user_team_module():
-    return render_template("user & team_module.html")
+    from models import team_usermoduleModel
+    from datetime import datetime
+    current_date_ = datetime.today().date()
+    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
+    # if not team_usermoduleModel_list:
+    #     team_usermoduleModel_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
+    return render_template("user & team_module.html",team_usermoduleModel=team_usermoduleModels_list)
 
 @app.route("/user_&_team_module_script", methods=["POST"])
 @login_required

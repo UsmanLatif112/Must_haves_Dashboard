@@ -324,7 +324,7 @@
             <div class="form-group">
               <label for="campaignstatus">Campaign Status:</label>
               <input type="text" class="form-control" id="campaignstatus" required>
-              
+              <div id="S_error-message" style="display: none; color: red;"></div>
             </div>
 
             
@@ -384,29 +384,98 @@
 </div>
 
 <script>
-  // Form validation and keypress restrictions
-  const keywordInput = document.getElementById('keywordname');
-  const CInput = document.getElementById('campaignId');
-  const QInput = document.getElementById('quickAnalysisCampaignId');
-  const BInput = document.getElementById('businessGMB');
+ // Form validation and keypress restrictions
+const keywordInput = document.getElementById('keywordname');
+const CInput = document.getElementById('campaignId');
+const QInput = document.getElementById('quickAnalysisCampaignId');
+const BInput = document.getElementById('businessGMB');
+const SInput = document.getElementById('campaignstatus');
 
-  // Event listeners for input fields
-  function addKeyPressListener(input, regex, errorId, errorMessage) {
+// Function to show error messages
+function showError(message, errorId) {
+    const errorElement = document.getElementById(errorId);
+    errorElement.textContent = message;
+    errorElement.style.display = 'block'; // Ensure the error message is visible
+}
+
+// Function to clear error messages
+function clearError(errorId) {
+    const errorElement = document.getElementById(errorId);
+    errorElement.textContent = '';
+    errorElement.style.display = 'none'; // Hide the error message
+}
+
+// Function to restrict key presses based on a regex
+function addKeyPressListener(input, regex, errorId, errorMessage) {
     input.addEventListener('keypress', function(event) {
-      const keyPressed = String.fromCharCode(event.keyCode);
-      if (!regex.test(keyPressed)) {
-        showError(errorMessage, errorId);
-        event.preventDefault();
-      } else {
-        clearError(errorId);
-      }
+        const keyPressed = String.fromCharCode(event.keyCode || event.which);
+        
+        // Check if the key pressed is allowed by the regex
+        if (!regex.test(keyPressed)) {
+            showError(errorMessage, errorId);
+            event.preventDefault(); // Prevent the character from being entered
+        }
     });
-  }
+}
 
-  addKeyPressListener(keywordInput, /^[a-zA-Z0-9,]+$/, 'error-message', 'Special characters are not allowed.');
-  addKeyPressListener(CInput, /^[0-9]+$/, 'C_error-message', 'Please enter numeric value only.');
-  addKeyPressListener(QInput, /^[0-9]+$/, 'QC_error-message', 'Please enter numeric value only.');
-  addKeyPressListener(BInput, /^[0-9]+$/, 'B-error-message', 'Please enter numeric value only.');
+// Function to validate input on every input event
+function addInputListener(input, regex, errorId, errorMessage, minLength, maxLength = null) {
+    input.addEventListener('input', function() {
+        let value = input.value;
+        const length = value.length;
+
+        // Special handling for Business GMB to ensure exact length and numeric characters only
+        if (input === BInput) {
+            // Remove non-numeric characters
+            value = value.replace(/[^0-9]/g, '');
+            input.value = value;
+
+            if (value.length < 21) {
+                showError('Business GMB must be exactly 21 numeric characters.', errorId);
+            } else if (value.length > 21) {
+                value = value.substring(0, 21); // Truncate to 21 characters
+                input.value = value;
+                showError('Business GMB must be exactly 21 numeric characters.', errorId);
+            } else {
+                clearError(errorId);
+            }
+        } else {
+            // Validate minimum length
+            if (minLength && length < minLength) {
+                showError(`Input must be at least ${minLength} characters long.`, errorId);
+            }
+            // Validate maximum length
+            else if (maxLength && length > maxLength) {
+                value = value.substring(0, maxLength); // Truncate to max length
+                input.value = value;
+                showError(`Input exceeds maximum length of ${maxLength} characters.`, errorId);
+            }
+            // Validate against regex and update error message if necessary
+            else if (!regex.test(value)) {
+                showError(errorMessage, errorId);
+                input.value = value.replace(/[^0-9a-zA-Z-_]/g, ''); // Remove invalid characters
+            } else {
+                clearError(errorId);
+            }
+        }
+    });
+}
+
+// Applying the keypress listeners and input listeners to fields
+addKeyPressListener(keywordInput, /^[a-zA-Z0-9-_]*$/, 'error-message', 'Only alphanumeric characters, "-", and "_" are allowed.');
+addInputListener(keywordInput, /^[a-zA-Z0-9-_]{1,200}$/, 'error-message', 'Keyword Name must be alphanumeric, "-", and "_" only, with a max length of 200 characters.', 1, 200);
+
+addKeyPressListener(CInput, /^[0-9]*$/, 'C_error-message', 'Please enter numeric values only.');
+addInputListener(CInput, /^[0-9]*$/, 'C_error-message', 'Campaign ID must be numeric with a minimum of 6 characters.', 6);
+
+addKeyPressListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Please enter numeric values only.');
+addInputListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Quick Analysis Campaign ID must be numeric with a minimum of 6 characters.', 6);
+
+addKeyPressListener(BInput, /^[0-9]*$/, 'B-error-message', 'Please enter numeric values only.');
+addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be exactly 21 numeric characters.', 21, 21);
+
+addKeyPressListener(SInput, /^[a-zA-Z]*$/, 'S_error-message', 'Only alphabetic characters are allowed.');
+addInputListener(SInput, /^[a-zA-Z]{1,50}$/, 'S_error-message', 'Campaign Status must be alphabetic only, with a max length of 50 characters.', 1, 50);
 
   // Functions to display and clear error messages
   function showError(message, id) {
