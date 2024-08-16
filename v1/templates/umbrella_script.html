@@ -352,12 +352,12 @@
               <td title="API: {{ umbrellaResponse.api }}">{{ umbrellaResponse.api }}</td>
               <td style="text-align:center;"  title="Method: {{ umbrellaResponse.method }}">{{ umbrellaResponse.method }}</td>
               <td style="text-align:center;" title="Response Code: {{ umbrellaResponse.response_code }}">{{ umbrellaResponse.response_code }}</td>
-              <td {% if umbrellaResponse.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center;" {% endif%}  title="Result According to Response: {{ umbrellaResponse.result_according_to_response }}" class="result-cell">{{ umbrellaResponse.result_according_to_response }}</td>
+              <td {% if umbrellaResponse.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%}  title="Result According to Response: {{ umbrellaResponse.result_according_to_response }}" class="result-cell">{{ umbrellaResponse.result_according_to_response }}</td>
               <td title="Response Time: {{ umbrellaResponse.response_time }}">{{ umbrellaResponse.response_time }}</td>
               <td title="Response Message: {{ umbrellaResponse.response_message }}">{{ umbrellaResponse.response_message }}</td>
               <td title="Response Data: {{ umbrellaResponse.response_data }}">{{ umbrellaResponse.response_data }}</td>
               <td title="Payload Data: {{ umbrellaResponse.payload_data }}">{{ umbrellaResponse.payload_data }}</td>
-              <td {% if umbrellaResponse.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center;" {% endif%} title="Response Data Result: {{ umbrellaResponse.response_data_result }}" class="result-cell">{{ umbrellaResponse.response_data_result }}</td>
+              <td {% if umbrellaResponse.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Response Data Result: {{ umbrellaResponse.response_data_result }}" class="result-cell">{{ umbrellaResponse.response_data_result }}</td>
           </tr>
       {% else %}
           <tr  id="no-data-row">

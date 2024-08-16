@@ -362,12 +362,12 @@
               <td title="API: {{ api_response.api }}">{{ api_response.api }}</td>
               <td style="text-align:center;"  title="Method: {{ api_response.method }}">{{ api_response.method }}</td>
               <td style="text-align:center;" title="Response Code: {{ api_response.response_code }}">{{ api_response.response_code }}</td>
-              <td {% if api_response.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center;" {% endif%}  title="Result According to Response: {{ api_response.result_according_to_response }}" class="result-cell">{{ api_response.result_according_to_response }}</td>
+              <td {% if api_response.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%}  title="Result According to Response: {{ api_response.result_according_to_response }}" class="result-cell">{{ api_response.result_according_to_response }}</td>
               <td title="Response Time: {{ api_response.response_time }}">{{ api_response.response_time }}</td>
               <td title="Response Message: {{ api_response.response_message }}">{{ api_response.response_message }}</td>
               <td title="Response Data: {{ api_response.response_data }}">{{ api_response.response_data }}</td>
               <td title="Payload Data: {{ api_response.payload_data }}">{{ api_response.payload_data }}</td>
-              <td {% if api_response.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center;" {% endif%} title="Response Data Result: {{ api_response.response_data_result }}" class="result-cell">{{ api_response.response_data_result }}</td>
+              <td {% if api_response.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Response Data Result: {{ api_response.response_data_result }}" class="result-cell">{{ api_response.response_data_result }}</td>
           </tr>
           
       {% else %}
@@ -435,6 +435,7 @@
     var campaignstatus = $("#campaignstatus").val();
 
     // Start the loader
+    $('#uploadDataModal').modal('hide');
     $('.loader').show();
 
     // Perform AJAX request
@@ -457,7 +458,7 @@
 
         // Hide alert and close modal
         $('.alert').hide(); // Assuming your alert has a class 'alert'
-        $('#uploadDataModal').modal('hide'); // Close the modal with ID 'uploadDataModal'
+         // Close the modal with ID 'uploadDataModal'
         
         // Optional: Redirect to another page or update content
         window.location.href = "/script"; 

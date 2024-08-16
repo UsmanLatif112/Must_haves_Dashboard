@@ -352,12 +352,12 @@
               <td title="API: {{ stagingapiaResponse.api }}">{{ stagingapiaResponse.api }}</td>
               <td style="text-align:center;"  title="Method: {{ stagingapiaResponse.method }}">{{ stagingapiaResponse.method }}</td>
               <td style="text-align:center;" title="Response Code: {{ stagingapiaResponse.response_code }}">{{ stagingapiaResponse.response_code }}</td>
-              <td {% if stagingapiaResponse.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center;" {% endif%}  title="Result According to Response: {{ stagingapiaResponse.result_according_to_response }}" class="result-cell">{{ stagingapiaResponse.result_according_to_response }}</td>
+              <td {% if stagingapiaResponse.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%}  title="Result According to Response: {{ stagingapiaResponse.result_according_to_response }}" class="result-cell">{{ stagingapiaResponse.result_according_to_response }}</td>
               <td title="Response Time: {{ stagingapiaResponse.response_time }}">{{ stagingapiaResponse.response_time }}</td>
               <td title="Response Message: {{ stagingapiaResponse.response_message }}">{{ stagingapiaResponse.response_message }}</td>
               <td title="Response Data: {{ stagingapiaResponse.response_data }}">{{ stagingapiaResponse.response_data }}</td>
               <td title="Payload Data: {{ stagingapiaResponse.payload_data }}">{{ stagingapiaResponse.payload_data }}</td>
-              <td {% if stagingapiaResponse.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center;" {% endif%} title="Response Data Result: {{ stagingapiaResponse.response_data_result }}" class="result-cell">{{ stagingapiaResponse.response_data_result }}</td>
+              <td {% if stagingapiaResponse.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Response Data Result: {{ stagingapiaResponse.response_data_result }}" class="result-cell">{{ stagingapiaResponse.response_data_result }}</td>
           </tr>
           {% else %}
           <tr  id="no-data-row">
@@ -424,6 +424,7 @@
     var campaignstatus = $("#campaignstatus").val();
 
     // Start the loader
+    $('#uploadDataModal').modal('hide');
     $('.loader').show();
 
     // Perform AJAX request

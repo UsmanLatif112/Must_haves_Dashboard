@@ -62,8 +62,8 @@ def script():
     from datetime import datetime
     current_date_ = datetime.today().date()
     api_responses_list = ApiResponse.query.filter(func.date(ApiResponse.created_at) == current_date_).order_by(ApiResponse.created_at.desc()).all()[:54]
-    if not api_responses_list:
-        api_responses_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
+    # if not api_responses_list:
+    #     api_responses_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
     return render_template("script.html",api_responses=api_responses_list)
 
 @app.route("/umbrella_script")
