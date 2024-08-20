@@ -58,24 +58,47 @@ def dashboard():
 @app.route("/script")
 @login_required
 def script():
-    from models import ApiResponse
-    from datetime import datetime
     current_date_ = datetime.today().date()
-    api_responses_list = ApiResponse.query.filter(func.date(ApiResponse.created_at) == current_date_).order_by(ApiResponse.created_at.desc()).all()[:54]
+    
+    # Fetch the current user's ID
+    user_id = current_user.id
+    
+    # Retrieve data for the current date filtered by the logged-in user
+    api_responses_list = ApiResponse.query.filter(
+        func.date(ApiResponse.created_at) == current_date_,
+        ApiResponse.user_id == user_id
+    ).order_by(ApiResponse.created_at.desc()).all()[:54]
+    
+    # If no data for the current date, retrieve the most recent data for the logged-in user
     if not api_responses_list:
-        api_responses_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
-    return render_template("script.html",api_responses=api_responses_list)
+        api_responses_list = ApiResponse.query.filter_by(
+            user_id=user_id
+        ).order_by(ApiResponse.created_at.desc()).all()[:54]
+
+    return render_template("script.html", api_responses=api_responses_list)
 
 @app.route("/umbrella_script")
 @login_required
 def umbrella_script():
     from models import umbrellaResponse
-    from datetime import datetime
     current_date_ = datetime.today().date()
-    umbrellaResponse_list = umbrellaResponse.query.filter(func.date(umbrellaResponse.created_at) == current_date_).order_by(umbrellaResponse.created_at.desc()).all()[:55]
+    
+    # Fetch the current user's ID
+    user_id = current_user.id
+    
+    # Retrieve data for the current date filtered by the logged-in user
+    umbrellaResponse_list = umbrellaResponse.query.filter(
+        func.date(umbrellaResponse.created_at) == current_date_,
+        umbrellaResponse.user_id == user_id
+    ).order_by(umbrellaResponse.created_at.desc()).all()[:55]
+    
+    # If no data for the current date, retrieve the most recent data for the logged-in user
     if not umbrellaResponse_list:
-        umbrellaResponse_list = umbrellaResponse.query.order_by(umbrellaResponse.created_at.desc()).limit(55).all()[:55]
-    return render_template("umbrella_script.html",umbrellaResponses=umbrellaResponse_list)
+        umbrellaResponse_list = umbrellaResponse.query.filter_by(
+            user_id=user_id
+        ).order_by(umbrellaResponse.created_at.desc()).all()[:55]
+
+    return render_template("umbrella_script.html", umbrellaResponses=umbrellaResponse_list)
 
 @app.route("/Agency_api")
 @login_required
