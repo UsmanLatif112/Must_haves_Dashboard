@@ -52,14 +52,15 @@ def login():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    user_email = current_user.email  # Access the logged-in user's email directly
+    return render_template("dashboard.html", user_email=user_email)
 
 
 @app.route("/script")
 @login_required
 def script():
     current_date_ = datetime.today().date()
-    
+    user_email = current_user.email
     # Fetch the current user's ID
     user_id = current_user.id
     
@@ -75,14 +76,14 @@ def script():
             user_id=user_id
         ).order_by(ApiResponse.created_at.desc()).all()[:54]
 
-    return render_template("script.html", api_responses=api_responses_list)
+    return render_template("script.html", api_responses=api_responses_list, user_email=user_email)
 
 @app.route("/umbrella_script")
 @login_required
 def umbrella_script():
     from models import umbrellaResponse
     current_date_ = datetime.today().date()
-    
+    user_email = current_user.email
     # Fetch the current user's ID
     user_id = current_user.id
     
@@ -98,36 +99,39 @@ def umbrella_script():
             user_id=user_id
         ).order_by(umbrellaResponse.created_at.desc()).all()[:55]
 
-    return render_template("umbrella_script.html", umbrellaResponses=umbrellaResponse_list)
+    return render_template("umbrella_script.html", umbrellaResponses=umbrellaResponse_list, user_email=user_email)
 
 @app.route("/Agency_api")
 @login_required
 def Agency_api():
-    return render_template("Agency API dashboard.html")
+    user_email = current_user.email
+    return render_template("Agency API dashboard.html", user_email=user_email)
 
 @app.route("/staging_agency_script")
 @login_required
 def staging_agency_script():
+    user_email = current_user.email
     from models import stagingapiaResponse
     from datetime import datetime
     current_date_ = datetime.today().date()
     stagingapiaResponses_list = stagingapiaResponse.query.filter(func.date(stagingapiaResponse.created_at) == current_date_).order_by(stagingapiaResponse.created_at.desc()).all()[:54]
     if not stagingapiaResponses_list:
         stagingapiaResponses_list = stagingapiaResponse.query.order_by(stagingapiaResponse.created_at.desc()).limit(54).all()[:54]
-    return render_template("staging_agency_script.html",stagingapiaResponses=stagingapiaResponses_list)
+    return render_template("staging_agency_script.html",stagingapiaResponses=stagingapiaResponses_list, user_email=user_email)
 
 
 @app.route("/BSWA-must-haves")
 @login_required
 def BSWA():
-    
-    return render_template("BSWA.html")
+    user_email = current_user.email
+    return render_template("BSWA.html", user_email=user_email)
 
 
 @app.route("/Quick-analysis")
 @login_required
 def Quick():
-    return render_template("Quick_analysis.html")
+    user_email = current_user.email
+    return render_template("Quick_analysis.html", user_email=user_email)
 
 @app.route("/Quick-analysis-script", methods=["POST"])
 @login_required
@@ -171,11 +175,12 @@ def Quick_script():
 def client():
     from models import ApiResponse
     from datetime import datetime
+    user_email = current_user.email
     current_date_ = datetime.today().date()
     api_responses_list = ApiResponse.query.filter(func.date(ApiResponse.created_at) == current_date_).all()[:54]
     if not api_responses_list:
         api_responses_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
-    return render_template("script.html",api_responses=api_responses_list)
+    return render_template("script.html",api_responses=api_responses_list, user_email=user_email)
 
 @app.route("/client-module-script", methods=["POST"])
 @login_required
@@ -372,11 +377,12 @@ def Staging_agencyapi_script():
 def user_team_module():
     from models import team_usermoduleModel
     from datetime import datetime
+    user_email = current_user.email
     current_date_ = datetime.today().date()
     team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
     # if not team_usermoduleModel_list:
     #     team_usermoduleModel_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
-    return render_template("user & team_module.html",team_usermoduleModel=team_usermoduleModels_list)
+    return render_template("user & team_module.html",team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
 
 @app.route("/user_&_team_module_script", methods=["POST"])
 @login_required

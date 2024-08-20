@@ -26,14 +26,17 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100" >
-				<div class="login100-pic js-tilt" data-tilt">
+				
 					
-					<img src="{{url_for('static', filename='images/img-01.png')}}">
-				</div>
+				<img src="{{url_for('static', filename='images/logo.png')}}" width="50%">
+				
 
 				<form class="login100-form validate-form">
 					<span class="login100-form-title">
-						Login
+						MUST HAVES
+					</span>
+					<span class="login100-form-title1">
+						DASHBOARD
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -58,21 +61,6 @@
 						</button>
 					</div>
 
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							
-						</span>
-						<a class="txt2" href="#">
-							
-						</a>
-					</div>
-
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							
-							
-						</a>
-					</div>
 
 				
 				</form>
@@ -92,11 +80,7 @@
 	<script src="{{url_for('static', filename='vendor/select2/select2.min.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{url_for('static', filename='vendor/tilt/tilt.jquery.min.js')}}"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
+	
 <!--===============================================================================================-->
 	<script src="{{url_for('static', filename='js/main.js')}}"></script>
 
