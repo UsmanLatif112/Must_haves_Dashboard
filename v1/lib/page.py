@@ -1,6 +1,6 @@
 from imports import *
 from lib.resources import *
-
+import os,csv
 
 
 
@@ -152,8 +152,18 @@ class HomePage(BasePage):
     
             
             
-            
-            
+row_limit_file = "row_limit.txt"            
+# Function to read the row limit from the file
+def read_row_limit():
+    if os.path.exists(row_limit_file):
+        with open(row_limit_file, 'r') as file:
+            return int(file.read().strip())
+    return 8  # Default value
+
+# Function to write the row limit to the file
+def write_row_limit(value):
+    with open(row_limit_file, 'w') as file:
+        file.write(str(value))            
             
 # def make_csv(filename: str, data, new=True):
 #         """make a csv file with the given filename

@@ -173,7 +173,7 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign ({Notifications.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
-                    print("fail")
+                    print("Fail")
             except:
                 Notificationss = driver.find_element(By.XPATH, f"//*[@class='card text-white notification-unread-bg mb-3 nf-card  '][contains(normalize-space(), '1 minute ago')]/*[@class='card-body'][contains(normalize-space(), 'Your campaign {business} quick analysis completed.')]/h6")
                 time.sleep(2.5)
@@ -185,32 +185,43 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign ({Notificationss.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
-                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign with correct data,fail\n', new=False)
-                    print("fail")     
+                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign with correct data,Fail\n', new=False)
+                    print("Fail")     
         except:
             time.sleep(2.5)
-            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign with correct data,fail\n', new=False)
+            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Create quick analysis campaign,Create quick analysis campaign with correct data,Fail\n', new=False)
             pass
         
         
         time.sleep(1.5)
         driver.refresh()
-        
         time.sleep(2.5)
+        
         Quick_tab = HomePage(driver)
         Quick_tab.click_btn(QuickAnalysispage.Quick_tab)
         time.sleep(1.5)
-        Quick_tab_table = HomePage(driver)
-        Quick_tab_table.waittt(QuickAnalysispage.Quick_tab_table)
-    
-        
-        time.sleep(1.5)
-        
-        actionn = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{business}')]//td/div[@class='assign-campaign-box']").click()
-        time.sleep(1.5)
-        edit_camm = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{business}')]//td/div[@class='assign-campaign-box']//li[contains(normalize-space(), 'Edit Campaign')]/a").click()
-        
-        time.sleep(1.5)
+        while True:
+            try:
+                Quick_tab_table = HomePage(driver)
+                Quick_tab_table.waitte(QuickAnalysispage.Quick_tab_table)
+                if Quick_tab_table:
+                    print("loop breaked")
+                    break
+            except:
+                pass
+        try:
+            time.sleep(1.5)
+            formatted_textt = business.capitalize()
+            actionn = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{formatted_textt}")]//td/div[@class="assign-campaign-box"])[1]').click()
+            time.sleep(1.5)   
+            edit_camm = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{formatted_textt}")]//td/div[@class="assign-campaign-box"]//li[contains(normalize-space(), "Edit Campaign")]/a)[1]').click()
+            time.sleep(1.5)
+        except:
+            time.sleep(1.5)
+            actionn = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{business}")]//td/div[@class="assign-campaign-box"])[1]').click()
+            time.sleep(1.5)   
+            edit_camm = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{business}")]//td/div[@class="assign-campaign-box"]//li[contains(normalize-space(), "Edit Campaign")]/a)[1]').click()
+            time.sleep(1.5)
         Edit_Quick_tab = HomePage(driver)
         Edit_Quick_tab.waitte(QuickAnalysispage.Edit_Quick_tab)
         
@@ -219,10 +230,9 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
         else:
             csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Fail\n', new=False)
         time.sleep(3)
-        time.sleep(3)
         page_width = driver.execute_script("return document.body.scrollWidth")
         page_height = driver.execute_script("return document.body.scrollHeight")
-        driver.set_window_size(page_width, 700)
+        driver.set_window_size(page_width, 680)
         stitched_image = Image.new('RGB', (page_width, page_height))
         y_offset = 0
         while y_offset < page_height:
@@ -238,7 +248,7 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
         static_folder = os.path.join('v1', 'static')
         screenshot_path = os.path.join(static_folder, file_name)
         stitched_image.save(screenshot_path)
-        time.sleep(2.5)
+        time.sleep(3)
         driver.maximize_window()
         div_elementt = driver.find_element(By.XPATH, QuickAnalysispage.Edit_Quick_Cam)
         driver.execute_script("arguments[0].scrollIntoView(true);", div_elementt)
@@ -305,7 +315,7 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign ({Notifications.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
-                    print("fail")
+                    print("Fail")
             except:
                 Notificationss = driver.find_element(By.XPATH, f"//*[@class='card text-white notification-unread-bg mb-3 nf-card  '][contains(normalize-space(), '1 minute ago')]/*[@class='card-body'][contains(normalize-space(), 'Your campaign {campaign_nam} quick analysis completed.')]/h6")
                 time.sleep(2.5)
@@ -317,39 +327,49 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign ({Notificationss.text}),Pass\n', new=False)
                 else:
                     time.sleep(2.5)
-                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign with correct data,fail\n', new=False)
-                    print("fail")     
+                    csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign with correct data,Fail\n', new=False)
+                    print("Fail")     
         except:
             time.sleep(2.5)
-            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign with correct data,fail\n', new=False)
+            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Edit quick analysis campaign with correct data,Fail\n', new=False)
             pass
-        
         time.sleep(2.5)
         Quick_tabb = HomePage(driver)
         Quick_tabb.click_btn(QuickAnalysispage.Quick_tab)
         time.sleep(1.5)
-        Quick_tabb_table = HomePage(driver)
-        Quick_tabb_table.waitte(QuickAnalysispage.Quick_tab_table)
-        
-        time.sleep(3)
-        
-        actionn = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']").click()
-        time.sleep(1.5)
-        edit_camm = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']//li[contains(normalize-space(), 'Edit Campaign')]/a").click()
-        
-        time.sleep(1.5)
+        while True:
+            try:
+                Quick_tabb_table = HomePage(driver)
+                Quick_tabb_table.waitte(QuickAnalysispage.Quick_tab_table)
+                if Quick_tabb_table:
+                    print("loop breaked")
+                    break
+            except:
+                pass
+        try:
+            time.sleep(1.5)
+            formatted_textt = campaign_nam.capitalize()
+            actionn = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{formatted_textt}")]//td/div[@class="assign-campaign-box"])[1]').click()
+            time.sleep(1.5)   
+            edit_camm = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{formatted_textt}")]//td/div[@class="assign-campaign-box"]//li[contains(normalize-space(), "Edit Campaign")]/a)[1]').click()
+            time.sleep(1.5)
+        except:
+            time.sleep(1.5)
+            actionn = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{campaign_nam}")]//td/div[@class="assign-campaign-box"])[1]').click()
+            time.sleep(1.5)   
+            edit_camm = driver.find_element(By.XPATH, f'(//div[@id="campaign-tab-content06"]//tbody/tr[contains(normalize-space(), "{campaign_nam}")]//td/div[@class="assign-campaign-box"]//li[contains(normalize-space(), "Edit Campaign")]/a)[1]').click()
+            time.sleep(1.5)
         Edit_Quick_tab = HomePage(driver)
         Edit_Quick_tab.waitte(QuickAnalysispage.Edit_Quick_tab)
         
-        # if Edit_Quick_tab:
-        #     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Pass\n', new=False)
-        # else:
-        #     csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Fail\n', new=False)
-        # time.sleep(3)
+        if Edit_Quick_tab:
+            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Pass\n', new=False)
+        else:
+            csvv.make_csv("BSWA Quick Analysis Report.csv", f'Edit quick analysis campaign,Click on edit campaign button,Fail\n', new=False)
         time.sleep(3)
         page_width = driver.execute_script("return document.body.scrollWidth")
         page_height = driver.execute_script("return document.body.scrollHeight")
-        driver.set_window_size(page_width, 700)
+        driver.set_window_size(page_width, 680)
         stitched_image = Image.new('RGB', (page_width, page_height))
         y_offset = 0
         while y_offset < page_height:
@@ -386,17 +406,30 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
         time.sleep(2.5)
         Quick_tabb = HomePage(driver)
         Quick_tabb.click_btn(QuickAnalysispage.Quick_tab)
-        time.sleep(1.5)
-        Quick_tabb_table = HomePage(driver)
-        Quick_tabb_table.waitte(QuickAnalysispage.Quick_tab_table)
-        
         time.sleep(3)
+        while True:
+            try:
+                Quick_tabb_table = HomePage(driver)
+                Quick_tabb_table.waitte(QuickAnalysispage.Quick_tab_table)
+                if Quick_tabb_table:
+                    print("loop breaked")
+                    break
+            except:
+                pass
+        try:
+            time.sleep(1.5)
+            formatted_textt = campaign_nam.capitalize()
+            actionnn = driver.find_element(By.XPATH, f"(//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{formatted_textt}')]//td/div[@class='assign-campaign-box'])[1]").click()
+            time.sleep(1.5)
+            edit_camm = driver.find_element(By.XPATH, f"(//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{formatted_textt}')]//td/div[@class='assign-campaign-box']//li[contains(normalize-space(), 'Delete')]/a)[1]").click()
+            time.sleep(1.5)
+        except:
+            time.sleep(1.5)
+            actionnn = driver.find_element(By.XPATH, f"(//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box'])[1]").click()
+            time.sleep(1.5)
+            edit_camm = driver.find_element(By.XPATH, f"(//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']//li[contains(normalize-space(), 'Delete')]/a)[1]").click()
+            time.sleep(1.5)
         
-        actionnn = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']").click()
-        time.sleep(1.5)
-        
-        edit_camm = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']//li[contains(normalize-space(), 'Delete')]/a").click()
-        time.sleep(1.5)
         
         delete_modal = HomePage(driver)
         delete_modal.wait(QuickAnalysispage.delete_modal)

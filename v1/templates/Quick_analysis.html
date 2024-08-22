@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Quick analysis</title>
+  <title>Quick Analysis Campaign</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
 
 
   <style>
@@ -16,340 +20,284 @@
       margin: auto;
     }
     @media (min-width: 1200px){
-    .container {
-      max-width: 1463px;
-    }
-    .modal-body {
-      position: relative;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      padding: 2rem;
-    }
-    .my_buton{
-      element.style 
-      display: flex;
-      justify-content: space-between;
-      
-    }
-    .form-control {
-      display: block;
-      width: 100%;
-      height: calc(1.5em + 0.75rem + 2px);
-      padding: 0.375rem 0.75rem;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #495057;
-      background-color: #fff;
-      background-clip: padding-box;
-      border: 1px solid #ced4da;
-      border-radius: 22.25rem;
-      transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    }
-    }
-    .breadcrumb {
-      margin-top: 4px;
-      margin-left: 42px;
-      background-color: #fff !important;
-      padding: 0px
-      
-
-    }
-    .breadcrumb a {
-      font-size: 13px;
-      text-decoration: none;
-      color: #3366cc;
-    }
-    .loader {
-      position: fixed;
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      height: 100%;
-      background: rgba(122, 122, 122, 0.5);
-      z-index: 9999;
-      display: none;
-    }
-    .loader::before {
-      content: "";
-      box-sizing: border-box;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 50px;
-      height: 50px;
-      margin-top: -25px;
-      margin-left: -25px;
-      border-radius: 50%;
-      border: 3px solid #000;
-      border-top-color: #fff;
-      animation: spinner 0.6s linear infinite;
-    }
-    @keyframes spinner {
-      to {
-        transform: rotate(1turn);
+      .container {
+        max-width: 1463px;
       }
+      .modal-body {
+        position: relative;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 2rem;
+      }
+      .my_buton{
+        display: flex;
+        justify-content: space-between;
+      }
+      .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 22.25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      }
+      .pass {
+        background-color: #d4edda; /* Green for pass */
     }
-    .loader p {
-      position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-weight: bold;
-      color: #000;
-    }
-    #header {
-      background-color: #1d455b;
-      color: #ffffff;
-      text-align: left;
-      padding: 20px;
-      display: flex; /* Add this line to use flexbox */
-      justify-content: space-between;
-      align-items: center;
-      height: 75px;
-      border-radius: 100px;
-      margin: 10px  10px  -3px  10px;
-
+      #download-pdf-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        display: inline-block;
+        height: 39px;
+        /* padding-bottom: 5px; */
+        text-align: center;
+        line-height: 2px;
+        
+        margin-right: 12px;
+       
+      }
       
+      #download-pdf-button:hover {
+        background-color: #45a049;
+      }
+    .fail {
+        background-color: #f8d7da; /* Red for fail */
     }
-
-    #header h1 {
-    margin-left: 35px; /* Remove default margin for h1 */
-    flex-grow: 1; /* Allow the h1 to take up available space */
-    font-size: 2rem;
-    font-family: system-ui;
-    }
-    table {
-      border-collapse: separate;
-      border-spacing: 0;
-      margin: auto;
-      margin-top: 24px;
-      table-layout: fixed;
-      width: 1200px;
-      border-radius: 500px;
-      text-align: center;
-      height: 57px;
-    }
-    th {
-      background-color: #5ea5cc;
-      padding-bottom: 2px;  
-      padding-top: 2px;
-      border: 1px solid lightgrey;
-    }
-    .desc { width: 120px; }
-    .api { width: 300px; }
-    .dataRes { width: 90px; }
-
-    td {
-      height: 32px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      text-align: center;
-      border: 1px solid darkgrey;
-      
-    }
-    td:nth-child(2)
-    {
-    text-align: left;
-    margin-left: 20px
-    }   
-    tbody tr:nth-child(odd) {
-      background-color: #efefef;
-    }
-    tbody tr:first-child {
-      margin-top: 23px;
-    }
-    #results-body {
-      display: none;
-      height: 45px;
-    }
-
-    /* Responsive layout */
-    @media (max-width: 600px) {
-      #run-script-button {
-        width: 20%; 
-        font-size: 12px;
-        padding: 10px;
-        margin: 10px auto; 
+      }
+      .breadcrumb {
+        margin-top: 4px;
+        margin-left: 42px;
+        background-color: #fff !important;
+        padding: 0px;
+      }
+      .breadcrumb a {
+        font-size: 13px;
+        text-decoration: none;
+        color: #3366cc;
+      }
+      .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(128, 128, 128, 0.5);
+        z-index: 9999;
+        display: none;
+      }
+      .loader::before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        margin-top: -25px;
+        margin-left: -25px;
+        border-radius: 50%;
+        border: 3px solid #000;
+        border-top-color: #fff;
+        animation: spinner 0.6s linear infinite;
+      }
+      @keyframes spinner {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+      .loader p {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        color: #000;
+      }
+      #header {
+        background-color: #1d455b;
+        color: #ffffff;
+        text-align: left;
+        padding: 20px;
+        display: flex; /* Add this line to use flexbox */
+        justify-content: space-between;
+        align-items: center;
+        height: 75px;
+        border-radius: 100px;
+        margin: 10px 10px -3px 10px;
+      }
+      #header h1 {
+        margin-left: 35px; /* Remove default margin for h1 */
+        flex-grow: 1; /* Allow the h1 to take up available space */
+        font-size: 2rem;
+        font-family: system-ui;
       }
       table {
-        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: auto;
+        margin-top: 24px;
+        table-layout: fixed;
+        width: 1200px;
+        border-radius: 500px;
+        text-align: center;
       }
-      .desc, .api, .method, .code, .result, .time, .message, .data, .dataRes {
-        width: 100%;
-        overflow-x: auto; 
+      th {
+        background-color: #5ea5cc;
+        padding-bottom: 8px;  
+        padding-top: 8px;
+        border: 1px solid lightgrey;
       }
+      .desc { width: 160px; }
+      .api { width: 300px; }
+      .method { width: 70px; }
+      .code { width: 80px; }
+      .result { width: 130px; }
+      .time { width: 80px; }
+      .message { width: 80px; }
+      .data { width: 115px; }
+      .pay { width: 115px; }
+      .dataRes { width: 90px; }
+      td {
+        height: 38px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        border: 1px solid darkgrey;
+      }
+      tbody tr:nth-child(odd) {
+        background-color: #efefef;
+      }
+      tbody tr:first-child {
+        margin-top: 23px;
+      }
+      /* Responsive layout */
+      @media (max-width: 600px) {
+        #run-script-button {
+          width: 80%; 
+          font-size: 18px;
+          padding: 10px;
+          margin: 10px auto; 
+        }
+        table {
+          width: 100%;
+        }
+        .desc, .api, .method, .code, .result, .time, .message, .data, .pay, .dataRes {
+          width: 100%;
+          overflow-x: auto; 
+        }
+      }
+      #run-script-button {
+        height: 34px;
+        background-color: #ffffff;
+        font-style: normal;
+        text-align: center;
+        border-radius: 15px;
+        border: 1px solid #003366; /* Updated border color */
+        width: 103px;
+        color: #003366; /* Updated text color */
+        cursor: pointer; /* Change cursor to pointer */
+        transition: color 0.5s, background-color 0.5s; /* Smooth transition */
+      }
+      #run-script-button:hover {
+        color: #ffffff; /* Hover text color */
+        background-color: #357fa8; /* Hover background color */
+      }
+      #download-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        display: inline-block;
+        height: 39px;
+        text-align: center;
+        line-height: 2px;
+        margin-right: 18px;
+        display: none; /* Hide the button by default */
+      }
+      #download-button:hover {
+        background-color: #45a049;
+      }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        background-color: #ffffff;
+        min-width: 149px;
+        
+        z-index: 1;
+        border-radius: 10px;
+      }
+      .dropdown-content span {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        font-weight: 700;
+        display: block;
+        text-align: left;
     }
-    
-    .pass {
-      color: green;
-    }
-    .fail {
-      color: red;
-    }
-    #run-script-container {
-      margin-top: 50px;
-      
-      text-align: center;
-    }
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+        .dropdown-content a:hover {
+          background-color: #f3f3f3;
+          border-radius: 10px;
+        }
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+        thead {
+          padding-bottom: 20px; /* Adjust this value as needed */
+          border-bottom: 2px solid #ddd; /* Optional: adds a line between header and body */
+        }
 
-    #campaign-id-input {
-      width: 200px; /* Adjust the width as needed */
-      height: 22px;
-      margin-right: 941px;
-      margin-top: 7px;
-      border-radius: 15px;
-      text-indent: 12px;
-      border: 2px solid rgba(169, 169, 169, 0.7);
-    }
-
-    #run-script-button {
-      height: 34px;
-      background-color: #3366cc;
-      font-style: normal;
-      text-align: center;
-      border-radius: 5px;
-      border: #dfdfdf;
-      width: 103px;
-      color: #ffffff;
+        #results-table {
+          width: 80%;
+          border-collapse: collapse; /* Ensures borders between cells collapse into a single border */
+          table-layout: fixed; /* Ensures that columns have a fixed width */
+      }
+      #results-table thead th, #results-table tbody td {
+          padding: 8px; /* Adjust as needed for spacing */
+          text-align: left; /* Adjust text alignment as needed */
+      }
+      #results-table tbody::before {
+          content: "";
+          display: table;
+          height: 20px; /* Adjust this value for the desired space */
+          width: 80%;
+      }
       
+      #results-table thead {
+        display: table-header-group;
     }
-    /* Add new style for tooltip */
-    .tooltip {
-      display: none;
-      position: absolute;
-      background-color: #ff0000;
-      color: #ffffff;
-      padding: 5px;
-      border-radius: 10px;
-      margin-top: -30px;
-      margin-left: 270px;
-      width:210px;
-      text-align:center;
-    }
-
-    .tooltip.show {
-      display: block;
-    }
-    #run-script-button {
-      height: 34px;
-      background-color: #ffffff;
-      font-style: normal;
-      text-align: center;
-      border-radius: 15px;
-      border: 1px solid #003366; /* Updated border color */
-      width: 103px;
-      color: #003366; /* Updated text color */
-      
-      cursor: pointer; /* Change cursor to pointer */
-      transition: color 0.5s, background-color 0.5s; /* Smooth transition */
-    }
-
-    #run-script-button:hover {
-      color: #ffffff; /* Hover text color */
-      background-color: #357fa2; /* Hover background color */
-      
-    }
-    .custom-tooltip {
-      display: none;
-      position: absolute;
-      background-color: #ff0000;
-      color: #ffffff;
-      padding: 5px;
-      border-radius: 5px;
-      width: 210px;
-      text-align: center;
-    }
-
-    .custom-tooltip.show {
-      display: block;
-    }
-    #download-button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      display: inline-block;
-      height: 39px;
-      /* padding-bottom: 5px; */
-      text-align: center;
-      line-height: 2px;
-      
-      margin-right: 12px;
-      display: none; /* Hide the button by default */
-    }
-    
-    #download-button:hover {
-      background-color: #45a049;
-    }
-
-    #download-pdf-button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      display: inline-block;
-      height: 39px;
-      /* padding-bottom: 5px; */
-      text-align: center;
-      line-height: 2px;
-      
-      margin-right: 12px;
-      display: none; /* Hide the button by default */
-    }
-    
-    #download-pdf-button:hover {
-      background-color: #45a049;
-    }
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      background-color: #ffffff;
-      min-width: 149px;
-      
-      z-index: 1;
-      border-radius: 10px;
-  }
-  .dropdown-content span {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    font-weight: 700;
-    display: block;
-    text-align: left;
-}
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      text-align: left;
-    }
-    .dropdown-content a:hover {
-      background-color: #f3f3f3;
-      border-radius: 10px;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
     
     .image-container {
       width: 1200px; /* Same as the table width */
       margin: auto; /* Center the container */
       display: block; /* ensure the image-container is shown */
-      display: none;
+      
     }
     
     
@@ -363,10 +311,9 @@
       width: 100%; /* Ensures the heading extends the full container width */
     }
     .image-container {
-      width: 1200px; /* Same as the table width */
+      width: 1080px; /* Same as the table width */
       margin: auto; /* Center the container */
       display: block; /* ensure the image-container is shown */
-      display: none;
       margin-bottom: 50px;
     }
     
@@ -381,17 +328,17 @@
       width: 100%; /* Ensures the heading extends the full container width */
     }
     .image-containerr {
-      width: 1200px; /* Same as the table width */
+      width: 1080px; /* Same as the table width */
       margin: auto; /* Center the container */
       display: block; /* ensure the image-container is shown */
       margin-bottom: 50px;
-      display: none;
     }
-  </style>
+    </style>
+
 </head>
 <body>
 <div id="header">
-  <h1 >Quick analysis Must Have</h1>
+  <h1 >Quick Analysis Campaign</h1>
     <div class="dropdown">
       <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
       <div class="dropdown-content">
@@ -403,14 +350,15 @@
 
 
 <div class="breadcrumb">
-  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/BSWA-must-haves">BSWA Must haves</a>&nbsp;>&nbsp;<a href="">Quick analysis</a>
+  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/BSWA-must-haves">BSWA Must haves</a>&nbsp;>&nbsp;<a href="">Quick Analysis Campaign</a>
 </div>
 <div class="container">
 <div class="d-flex justify-content-end ">
 
 
-  <button id="download-button" style="display:none;">Download CSV</button>
+  <button id="download-button" style="display: block;">Download CSV</button>
   <button id="download-pdf-button" style="display:none;">Download PDF</button>
+  
   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#uploadDataModal" style="border-radius: 15px;height: -webkit-fill-available;">Run Script</button>
   
 
@@ -437,7 +385,7 @@
               <div id="P_error-message" style="display: none; color: red;"></div>
             </div>
             <div class="form-group">
-              <label for="campaignId">GMB CID:</label>
+              <label for="campaignId">Business GMB CID</label>
               <input type="text" class="form-control" id="campaignId" required>
               <div id="C_error-message" style="display: none; color: red;"></div>
             </div>
@@ -450,257 +398,282 @@
 </div>
 </div>
 
-<div id="results"style="margin-bottom: 50px; font-size: 12px;">
-  
+<div id="results" style="margin-bottom: 50px; font-size: 12px;">
   <table id="results-table">
-    <thead style="font-size: 15px; height: 57px;">
-      <tr style="font-size: 13px;">
+    <thead style="font-size: 13px;">
+      <tr>
         <th class="desc">Test Case</th>
         <th class="api">Use Case / Scenario</th>
         <th class="dataRes">Result</th>
       </tr>
     </thead>
     <tbody id="results-body">
+      <!-- Empty row for spacing -->
+      <!--<tr><td colspan="3" style="height: 20px; background: transparent;"></td></tr>-->
+      {% for QuickAnalysisModel in QuickAnalysisModels %}
+      <tr>
+        <td title="Test Case: {{ QuickAnalysisModel.test_case }}">{{ QuickAnalysisModel.test_case }}</td>
+        <td title="Use Case / Scenario: {{ QuickAnalysisModel.use_case }}">{{ QuickAnalysisModel.use_case }}</td>
+        <td {% if QuickAnalysisModel.result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ QuickAnalysisModel.result }}">{{ QuickAnalysisModel.result }}</td>
+      </tr>
+      {% else %}
+      <tr id="no-data-row">
+        <td colspan="3">No data available.</td>
+      </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
 
-
 <div class="image-container">
   <h4>After Campaign Creation</h4>
-  <img src="{{url_for('static', filename='screenshot.png')}}" alt="Descriptive alt text">
+  <img src="{{url_for('static', filename='screenshot.png')}}" alt="Descriptive alt text" style="
+    margin-top: 20px;">
 </div>
 <div class="image-containerr">
   <h4>After Edit Campaign</h4>
-  <img src="{{url_for('static', filename='screenshott.png')}}" alt="Descriptive alt text">
+  <img src="{{url_for('static', filename='screenshott.png')}}" alt="Descriptive alt text" style="
+  margin-top: 20px;">
 </div>
+
+
+
 <div class="loader">
   <p>Script is running, please wait...</p>
 </div>
 
 <script>
- // Get the input field
+  function downloadPDF() {
+    html2canvas(document.body).then(canvas => {
+      // Get the canvas data as image
+      var imgData = canvas.toDataURL('image/png');
 
- 
+      // Initialize jsPDF
+      var pdf = new jspdf.jsPDF({
+        orientation: 'portrait', 
+        unit: 'px', 
+        format: [canvas.width, canvas.height]
+      });
 
- 
-const QInput = document.getElementById('campaignId');
+      // Add the canvas image to the PDF
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      
+      // Set the filename
+      var timestamp = new Date().toISOString().replace(/[:.]/g, "_");
+      var filename = "Quick Analysis Report" + ".pdf";
 
-// Add event listener for key press
-QInput.addEventListener('keypress', function(event) {
-  // Check the entire value of the input field together with the new character
-  const proposedValue = QInput.value + String.fromCharCode(event.keyCode);
-
-  // Create a regular expression to match only numbers and with a maximum of 21 digits
-  const numberRegex = /^\d{1,21}$/;
-
-  // Check if the proposed value matches the regular expression
-  if (!numberRegex.test(proposedValue)) {
-    // Display the error message
-    showError('Incorrect GMB CID please enter correct CID.','C_error-message');
-    event.preventDefault(); // Prevent the key from being entered
-  } else {
-    // Clear the error message
-    clearError('C_error-message');
-  }
-});
-
-// Get the input field
-const UInput = document.getElementById('Username');
-
-// Add event listener for input changes
-UInput.addEventListener('input', function() {
-  // The current value of the input field
-  const currentValue = UInput.value;
-
-  // Create a regular expression to match alphanumeric characters, underscores, hyphens, and spaces
-  // and to limit the length to a maximum of 50 characters.
-  // This pattern ensures that double hyphens and double underscores are not allowed,
-  // but allows single and double spaces.
-  const usernameRegex = /^(?!.*[-_]{2})[a-zA-Z0-9 _-]{0,50}$/;
-
-  // Check if the current value matches the regular expression
-  if (!usernameRegex.test(currentValue)) {
-    // Display the error message
-    showError('Usernames must be 50 characters or less and may contain alphanumeric characters, spaces, underscores, and hyphens. No double hyphens or double underscores are allowed.','U_error-message');
-  } else {
-    // Clear the error message
-    clearError('U_error-message');
-  }
-});
-
-// Get the input field
-const PInput = document.getElementById('Password');
-
-// Add event listener for input changes
-PInput.addEventListener('input', function() {
-  // The current value of the input field
-  const currentValue = PInput.value;
-
-  // Create a regular expression to match the password criteria
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_-])[A-Za-z\d_-]{8,50}$/;
-
-  // Check if the current value matches the regular expression
-  if (!passwordRegex.test(currentValue)) {
-    // Display the error message
-    showError('Password must be 8-50 characters long and include at least one letter, one number, and one special character (underscore or hyphen).','P_error-message');
-  } else {
-    // Clear the error message
-    clearError('P_error-message');
-  }
-});
-
-function showError(message,id) {
-  const errorElement = document.getElementById(id);
-  errorElement.textContent = message;
-  errorElement.style.display = 'block';
-  setTimeout(function() {
-    errorElement.style.display = 'none';
-  }, 5000);
-}
-function clearError(id) {
-  const errorElement = document.getElementById(id);
-  errorElement.style.display = 'none';
-}
-
-  var responseData;
-
-  function goBack() {
-    window.location.href = "/dashboard";
-  }
-  $(document).ready(function() {
-    $("#download-button").click(function() {
-      downloadCSV();
+      // Save the PDF
+      pdf.save(filename);
     });
+  }
+
   $("#download-pdf-button").click(function() {
     downloadPDF(); // This function will be defined below
   });
-    function downloadCSV() {
-      var csvContent = "data:text/csv;charset=utf-2,";
 
-      csvContent += "Test Case,Use case / Scenario,Result\n";
-      responseData.forEach(function(item) {
-        csvContent += item.join(",") + "\n";
-      });
+  $("#download-pdf-button").show();
+// Form validation and keypress restrictions
+const keywordInput = document.getElementById('Username');
+const CInput = document.getElementById('Password');
+const QInput = document.getElementById('campaignId');
 
-      var encodedUri = encodeURI(csvContent);
+// Function to show error messages
+function showError(message, errorId) {
+    const errorElement = document.getElementById(errorId);
+    errorElement.textContent = message;
+}
 
-      var headerName = "Quick_Analysis_Must_Have";
-      var timestamp = new Date().toISOString().replace(/[:.]/g, "_");
-      var filename = headerName + "_Results.csv";
+// Function to clear error messages
+function clearError(errorId) {
+    const errorElement = document.getElementById(errorId);
+    errorElement.textContent = '';
+}
 
-      var link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link); // Clean up the DOM by removing the link after clicking it
-    }
-
-    function downloadPDF() {
-      html2canvas(document.body).then(canvas => {
-        // Get the canvas data as image
-        var imgData = canvas.toDataURL('image/png');
-  
-        // Initialize jsPDF
-        var pdf = new jspdf.jsPDF({
-          orientation: 'portrait', 
-          unit: 'px', 
-          format: [canvas.width, canvas.height]
-        });
-  
-        // Add the canvas image to the PDF
-        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+// Function to restrict key presses based on a regex
+function addKeyPressListener(input, regex, errorId, errorMessage) {
+    input.addEventListener('keypress', function(event) {
+        const keyPressed = String.fromCharCode(event.keyCode || event.which);
         
-        // Set the filename
-        var timestamp = new Date().toISOString().replace(/[:.]/g, "_");
-        var filename = "Quick Analysis Report" + ".pdf";
-  
-        // Save the PDF
-        pdf.save(filename);
-      });
-    }
-    // Handle form submission from modal
-    $("#campaignIdForm").submit(function(event) {
-      event.preventDefault();
-      var campaignId = $("#campaignId").val();
-      var Username = $("#Username").val();
-      var Password = $("#Password").val();
-      // Start the loader
-      $('.loader').show();
-
-      // Perform an AJAX request using the campaignId
-      $.ajax({
-        url: "/Quick-analysis-script",
-        type: "post",
-        data: {
-          'C_id': campaignId,
-          'U_id': Username,
-          'P_id': Password,
-        },
-        success: function(response) {
-          console.log("Response:", response);
-          responseData = response; // Store response data in the global variable
-
-          // Clear existing rows
-          $("#results-body").empty();
-          $('#results-body').append('<tr style="height: 23px;"></tr>');
-
-          // Iterate over the response and append to the table
-          $.each(response, function(i, item) {
-            var result_class = '';
-            var result_class_last = '';
-
-            if (item[2].trim().toLowerCase() == 'pass') {
-              result_class_last = 'pass';
-            } else if (item[2].trim().toLowerCase() == 'fail') {
-              result_class_last = 'fail';
-            }
-
-            // Append rows to the table
-            $('#results-body').append(
-              '<tr>' +
-              '<td class="desc ellipsis-tooltip" title="' + item[0] + '"><div class="custom-tooltip">' + item[0] + '</div>' + item[0] + '</td>' +
-              '<td class="api ellipsis-tooltip" title="' + item[1] + '"><div class="custom-tooltip">' + item[1] + '</div>' + item[1] + '</td>' +
-              '<td class="' + result_class_last + ' ellipsis-tooltip" title="' + item[2] + '"><div class="custom-tooltip">' + item[2] + '</div>' + item[2] + '</td>' +
-              '</tr>'
-            );
-         
-          });
-          // Show the download button and the results body
-          $("#download-button").show();
-          $("#download-pdf-button").show();
-          $('.image-container').show();
-          $('.image-containerr').show();
-          $("#results-body").show();
-          var delayInMilliseconds = 5000; // Adjust the delay as needed
-          setTimeout(function() {
-            // After the delay, update the image source attributes
-            var timestamp = new Date().getTime();
-            var screenshotPath = "/static/screenshot.png?" + timestamp;
-            var screenshottPath = "/static/screenshott.png?" + timestamp;
-            $(".image-container img").attr("src", screenshotPath);
-            $(".image-containerr img").attr("src", screenshottPath);
-            $('.image-container').show();
-            $('.image-containerr').show();
-          }, delayInMilliseconds);
-
-          // Hide the loader
-          $('.loader').hide();
-        },
-        error: function(error) {
-          // Handle error
-          console.error("Error:", error);
-          $('.loader').hide();
+        // Check if the key pressed is allowed by the regex
+        if (!regex.test(keyPressed)) {
+            showError(errorMessage, errorId);
+            event.preventDefault(); // Prevent the character from being entered
+        } else {
+            clearError(errorId);
         }
-      });
-
-      // Close the modal after submitting
-      $('#uploadDataModal').modal('hide');
     });
+}
 
+// Function to validate input on every input event
+function addInputListener(input, regex, errorId, errorMessage, maxLength) {
+    input.addEventListener('input', function() {
+        let value = input.value;
+
+        if (maxLength && value.length > maxLength) {
+            value = value.substring(0, maxLength); // Truncate the value
+            input.value = value;
+            showError(`Input exceeds maximum length of ${maxLength} characters.`, errorId);
+        } else if (!regex.test(value)) {
+            showError(errorMessage, errorId);
+            // Remove invalid characters (keep only allowed characters)
+            input.value = value.replace(/[^a-zA-Z0-9-_]/g, '');
+        } else {
+            clearError(errorId);
+        }
+    });
+}
+
+// Applying the keypress listeners and input listeners to fields
+addInputListener(keywordInput, /^[a-zA-Z0-9-_ ]{5,50}$/, 'U_error-message', 'Invalid input. Only alphanumeric characters, spaces, "-", and "_" are allowed.', 50);
+
+addInputListener(QInput, /^[a-zA-Z0-9-_]{5,50}$/, 'C_error-message', 'Invalid input. Only alphanumeric characters, "-", and "_" are allowed.', 50);
+
+// Applying input listener to password field (no keypress restrictions, but min length requirement)
+addInputListener(CInput, /^.{8,}$/, 'P_error-message', 'Please enter at least 8 characters.', null);
+
+  // Functions to display and clear error messages
+  function showError(message, id) {
+    const errorElement = document.getElementById(id);
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+    setTimeout(function() {
+      errorElement.style.display = 'none';
+    }, 3000);
+  }
+
+  function clearError(id) {
+    const errorElement = document.getElementById(id);
+    errorElement.style.display = 'none';
+  }
+
+  // AJAX request to run the script
+  $("#campaignIdForm").submit(function(event) {
+    event.preventDefault();
+
+    // Get form values
+    var campaignId = $("#campaignId").val();
+    var Username = $("#Username").val();
+    var Password = $("#Password").val();
+
+    // Start the loader
+    $('#uploadDataModal').modal('hide');
+    $('.loader').show();
+
+    // Perform AJAX request
+    $.ajax({
+      url: "/Quick-analysis-script",
+      type: "post",
+      data: {
+        'U_name': campaignId,
+        'U_id': Username,
+        'P_id': Password,
+      },
+      success: function(response) {
+        // Handle success
+        console.log('Script executed successfully:', response);
+
+        // Color code the table rows based on response data
+        colorCodeTableRows(response);
+
+        // Hide alert and close modal
+        $('.alert').hide(); // Assuming your alert has a class 'alert'
+         // Close the modal with ID 'uploadDataModal'
+        
+        // Optional: Redirect to another page or update content
+        window.location.href = "/Quick-analysis"; 
+        location.reload();// Uncomment if needed
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error('Error executing script:', error);
+        alert('Error executing script');
+      },
+      complete: function() {
+        // Hide the loader
+        $('.loader').hide();
+        location.reload();
+      }
+    });
   });
+
+  // Download table data as CSV
+  function downloadCSV() {
+    const table = document.getElementById('results-table');
+    let csvContent = "data:text/csv;charset=utf-8,";
+
+    for (let row of table.rows) {
+      let rowData = [];
+      for (let cell of row.cells) {
+        rowData.push(cell.textContent);
+      }
+      csvContent += rowData.join(",") + "\n";
+    }
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "Quick_Analysis_Campaign_module_must_haves_report.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // Add event listener to the Download CSV button
+  document.getElementById('download-button').addEventListener('click', downloadCSV);
+
+  // Function to navigate to the dashboard
+  function goBack() {
+    window.location.href = "/dashboard";
+  }
+
+  // Function to color code table rows based on response data
+  function colorCodeTableRows(response) {
+    // Assuming `response` is an array of data where each item is an array of values
+    const rows = document.querySelectorAll('#results-bodyy tr');
+
+    response.forEach(function(item, index) {
+      let result_class = '';
+      let result_class_last = '';
+
+      // Adjust the indexes based on your data format (index 4 and 9 as per example)
+      if (item[4] && item[4].trim().toLowerCase() === 'pass') {
+        result_class = 'pass';
+      } else if (item[4] && item[4].trim().toLowerCase() === 'fail') {
+        result_class = 'fail';
+      }
+
+      if (item[9] && item[9].trim().toLowerCase() === 'pass') {
+        result_class_last = 'pass';
+      } else if (item[9] && item[9].trim().toLowerCase() === 'fail') {
+        result_class_last = 'fail';
+      }
+
+      // Apply classes to table rows in the <tbody>
+      const row = rows[index];
+      if (row) {
+        row.classList.remove('pass', 'fail'); // Clear previous classes
+        if (result_class) {
+          row.classList.add(result_class);
+        }
+        if (result_class_last) {
+          row.classList.add(result_class_last);
+        }
+      }
+    });
+  }
+  // Check if the "No data available" row is present
+  const noDataRow = document.getElementById('no-data-row');
+  const downloadButton = document.getElementById('download-button');
+  
+  if (noDataRow) {
+      downloadButton.disabled = true;
+      downloadButton.style.cursor = 'not-allowed'; // Optional: change cursor to indicate the button is disabled
+  }
+  
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
