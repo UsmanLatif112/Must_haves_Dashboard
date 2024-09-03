@@ -56,7 +56,7 @@ class HomePage(BasePage):
             return element
         except Exception as e:
             print(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
-            raise e
+            return None
         
     def waitx(self, xpath, timeout=30):
         try:

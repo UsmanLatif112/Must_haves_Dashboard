@@ -1,5 +1,5 @@
 import csv
-from models import ApiResponse, QuickAnalysisModel, stagingapiaResponse, team_usermoduleModel, umbrellaResponse, ClientmoduleModel
+from models import ApiResponse, QuickAnalysisModel, stagingapiaResponse, team_usermoduleModel, umbrellaResponse, ClientmoduleModel, ce_traffic_Model
 
 def import_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a parameter
     with open(csv_file_path, mode="r", encoding="utf-8") as csvfile:
@@ -77,6 +77,27 @@ def import_user_team_csv_to_db(session, csv_file_path, user_id):  # Added user_i
         # Iterate over CSV rows and create ORM objects
         for row in csv_reader:
             response_entry = team_usermoduleModel(
+                user_id=user_id,  # Set the user_id for the ApiResponse
+                test_case=row["Test Case"],
+                use_case=row["Use Case / Scenario"],
+                result=row["Result"],
+            )
+
+            # Add each new object to the session
+            session.add(response_entry)
+
+        # Commit all at once
+        session.commit()
+        print("CSV data imported successfully")
+        
+        
+def import_ce_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a parameter
+    with open(csv_file_path, mode="r", encoding="utf-8") as csvfile:
+        csv_reader = csv.DictReader(csvfile)
+
+        # Iterate over CSV rows and create ORM objects
+        for row in csv_reader:
+            response_entry = ce_traffic_Model(
                 user_id=user_id,  # Set the user_id for the ApiResponse
                 test_case=row["Test Case"],
                 use_case=row["Use Case / Scenario"],

@@ -91,6 +91,26 @@ class Team_Module:
     Team_detail_page_assign_user = '//*[@class="campaign-listing-wrapper"][contains(normalize-space(), "Team Details")]//div[@class="create-new-campaign-btn mobile-hide"]/a[contains(normalize-space(), "Assign User")]'
     Team_detail_page_srch = '//*[@class="campaign-listing-inner"]//input[@id="searchText"]'
     
+
+class TrafficModuleLocator:
+    login_user = '//*[@id="id_login"]'
+    login_password = '//*[@id="id_password"]'
+    login_btn = '//*[@id = "loginButton"]'
+    main_content = '//div[@id="main-content"]'
+    
+    campaign_name = '//*[@id="id_campaign_name"]'
+    campaign_category = '//*[@id="id_campaign_category"]'
+    campaign_category_option = '//option[text()="{campaign_type}"]'
+    campaign_sub_category = '//*[@id="id_campaign_types"]'
+    campaign_sub_category_option = '//option[text()="{campaign_sub_type}"]'
+    campaign_country = '//*[@id="select2-id_country-container"]'
+    campaign_state = '//*[@id="id_state_iso_3"]'
+    campaign_city = '//*[@id="id_city"]'
+    campaign_average_session = '//*[@id="id_num_searches"]'
+    campaign_frequency = '//*[@id="id_frequency"]'
+    
+    
+    
     
     
     
