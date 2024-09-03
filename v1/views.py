@@ -510,6 +510,139 @@ def User_script():
         db.session.rollback()
         # Return a JSON response indicating an error
         return jsonify({"error": str(e), "message": "Failed to run the script"})
+    
+    
+
+# TRAFFIC MUST HAVE VIEWS
+
+@app.route("/Traffic-must-haves")
+@login_required
+def traffic_must_haves():
+    user_email = current_user.email
+    current_date_ = datetime.today().date()
+    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
+    return render_template("traffic.html", team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
 
 
 
+"""
+    CE TRAFFIC MUST HAVE
+"""
+@app.route("/CE-traffic-must-haves")
+@login_required
+def CE_traffic_must_haves():
+    user_email = current_user.email
+    current_date_ = datetime.today().date()
+    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
+    return render_template("CE_traffic.html", team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
+
+@app.route("/CE-traffic-must-haves-run-script", methods=["POST"])
+@login_required
+def CE_traffic_must_haves_run_script():
+    try:
+
+        result_content = None
+        db.session.commit()
+        csv_file_path = "CE_traffic_must_haves.csv"
+        import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
+
+        delete_file_if_exists(csv_file_path)
+        return jsonify(result_content)
+    
+    except Exception as e:
+        traceback.print_exc()
+        db.session.rollback()
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
+
+
+
+"""
+    Tiger TRAFFIC MUST HAVE
+"""
+@app.route("/Tiger-traffic-must-haves")
+@login_required
+def Tiger_traffic_must_haves():
+    user_email = current_user.email
+    current_date_ = datetime.today().date()
+    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
+    return render_template("Tiger_traffic.html", team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
+
+@app.route("/Tiger-traffic-must-haves-run-script", methods=["POST"])
+@login_required
+def Tiger_traffic_must_haves_run_script():
+    try:
+
+        result_content = None
+        db.session.commit()
+        csv_file_path = "Tiger_traffic_must_haves.csv"
+        import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
+
+        delete_file_if_exists(csv_file_path)
+        return jsonify(result_content)
+    
+    except Exception as e:
+        traceback.print_exc()
+        db.session.rollback()
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
+
+
+
+"""
+    Torrential TRAFFIC MUST HAVE
+"""
+@app.route("/Torrential-traffic-must-haves")
+@login_required
+def Torrential_traffic_must_haves():
+    user_email = current_user.email
+    current_date_ = datetime.today().date()
+    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
+    return render_template("Torrential_traffic.html", team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
+
+@app.route("/Torrential-traffic-must-haves-run-script", methods=["POST"])
+@login_required
+def Torrential_traffic_must_haves_run_script():
+    try:
+
+        result_content = None
+        db.session.commit()
+        csv_file_path = "Torrential_traffic_must_haves.csv"
+        import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
+
+        delete_file_if_exists(csv_file_path)
+        return jsonify(result_content)
+    
+    except Exception as e:
+        traceback.print_exc()
+        db.session.rollback()
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
+
+
+
+"""
+    BS TRAFFIC MUST HAVE
+"""
+@app.route("/BS-traffic-must-haves")
+@login_required
+def BS_traffic_must_haves():
+    user_email = current_user.email
+    current_date_ = datetime.today().date()
+    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
+    return render_template("BS_traffic.html", team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
+
+@app.route("/BS-traffic-must-haves-run-script", methods=["POST"])
+@login_required
+def BS_traffic_must_haves_run_script():
+    try:
+
+        result_content = None
+        db.session.commit()
+        csv_file_path = "BS_traffic_must_haves.csv"
+        import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
+
+        delete_file_if_exists(csv_file_path)
+        return jsonify(result_content)
+    
+    except Exception as e:
+        traceback.print_exc()
+        db.session.rollback()
+        return jsonify({"error": str(e), "message": "Failed to run the script"})

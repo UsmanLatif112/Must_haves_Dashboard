@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User & Team Module</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+  <style>
+    .container{
+      margin: auto;
+    }
+    @media (min-width: 1200px){
+      .container {
+        max-width: 1463px;
+      }
+      .modal-body {
+        position: relative;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 2rem;
+      }
+      .my_buton{
+        display: flex;
+        justify-content: space-between;
+      }
+      .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 22.25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      }
+      .pass {
+        background-color: #d4edda; /* Green for pass */
+    }
+    
+    .fail {
+        background-color: #f8d7da; /* Red for fail */
+    }
+      }
+      .breadcrumb {
+        margin-top: 4px;
+        margin-left: 42px;
+        background-color: #fff !important;
+        padding: 0px;
+      }
+      .breadcrumb a {
+        font-size: 13px;
+        text-decoration: none;
+        color: #3366cc;
+      }
+      .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(128, 128, 128, 0.5);
+        z-index: 9999;
+        display: none;
+      }
+      .loader::before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        margin-top: -25px;
+        margin-left: -25px;
+        border-radius: 50%;
+        border: 3px solid #000;
+        border-top-color: #fff;
+        animation: spinner 0.6s linear infinite;
+      }
+      @keyframes spinner {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+      .loader p {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        color: #000;
+      }
+      #header {
+        background-color: #1d455b;
+        color: #ffffff;
+        text-align: left;
+        padding: 20px;
+        display: flex; /* Add this line to use flexbox */
+        justify-content: space-between;
+        align-items: center;
+        height: 75px;
+        border-radius: 100px;
+        margin: 10px 10px -3px 10px;
+      }
+      #header h1 {
+        margin-left: 35px; /* Remove default margin for h1 */
+        flex-grow: 1; /* Allow the h1 to take up available space */
+        font-size: 2rem;
+        font-family: system-ui;
+      }
+      table {
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: auto;
+        margin-top: 24px;
+        table-layout: fixed;
+        width: 1200px;
+        border-radius: 500px;
+        text-align: center;
+      }
+      th {
+        background-color: #5ea5cc;
+        padding-bottom: 8px;  
+        padding-top: 8px;
+        border: 1px solid lightgrey;
+      }
+      .desc { width: 160px; }
+      .api { width: 300px; }
+      .method { width: 70px; }
+      .code { width: 80px; }
+      .result { width: 130px; }
+      .time { width: 80px; }
+      .message { width: 80px; }
+      .data { width: 115px; }
+      .pay { width: 115px; }
+      .dataRes { width: 90px; }
+      td {
+        height: 38px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        border: 1px solid darkgrey;
+      }
+      tbody tr:nth-child(odd) {
+        background-color: #efefef;
+      }
+      tbody tr:first-child {
+        margin-top: 23px;
+      }
+      /* Responsive layout */
+      @media (max-width: 600px) {
+        #run-script-button {
+          width: 80%; 
+          font-size: 18px;
+          padding: 10px;
+          margin: 10px auto; 
+        }
+        table {
+          width: 100%;
+        }
+        .desc, .api, .method, .code, .result, .time, .message, .data, .pay, .dataRes {
+          width: 100%;
+          overflow-x: auto; 
+        }
+      }
+      #run-script-button {
+        height: 34px;
+        background-color: #ffffff;
+        font-style: normal;
+        text-align: center;
+        border-radius: 15px;
+        border: 1px solid #003366; /* Updated border color */
+        width: 103px;
+        color: #003366; /* Updated text color */
+        cursor: pointer; /* Change cursor to pointer */
+        transition: color 0.5s, background-color 0.5s; /* Smooth transition */
+      }
+      #run-script-button:hover {
+        color: #ffffff; /* Hover text color */
+        background-color: #357fa8; /* Hover background color */
+      }
+      #download-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        display: inline-block;
+        height: 39px;
+        text-align: center;
+        line-height: 2px;
+        margin-right: 18px;
+        display: none; /* Hide the button by default */
+      }
+      #download-button:hover {
+        background-color: #45a049;
+      }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        background-color: #ffffff;
+        min-width: 149px;
+        
+        z-index: 1;
+        border-radius: 10px;
+    }
+    .dropdown-content span {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      font-weight: 700;
+      display: block;
+      text-align: left;
+  }
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+      }
+      .dropdown-content a:hover {
+        background-color: #f3f3f3;
+        border-radius: 10px;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      thead {
+        padding-bottom: 20px; /* Adjust this value as needed */
+        border-bottom: 2px solid #ddd; /* Optional: adds a line between header and body */
+      }
+
+      #results-table {
+        width: 80%;
+        border-collapse: collapse; /* Ensures borders between cells collapse into a single border */
+        table-layout: fixed; /* Ensures that columns have a fixed width */
+    }
+    #results-table thead th, #results-table tbody td {
+        padding: 8px; /* Adjust as needed for spacing */
+        text-align: left; /* Adjust text alignment as needed */
+    }
+    #results-table tbody::before {
+        content: "";
+        display: table;
+        height: 20px; /* Adjust this value for the desired space */
+        width: 80%;
+    }
+    
+    #results-table thead {
+      display: table-header-group;
+  }
+    </style>
+
+</head>
+<body>
+<div id="header">
+  <h1 >BS Traffic Modules</h1>
+    <div class="dropdown">
+      <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
+      <div class="dropdown-content">
+        <span>{{ user_email }}</span>
+          <a href="/" onclick="return confirm('Are you sure you want to logout?');">Logout</a>
+      </div>
+</div>
+</div>
+
+
+<div class="breadcrumb">
+  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/Traffic-must-haves">Traffic Must Haves</a>&nbsp;>&nbsp;<a href="">BS Traffic Modules</a>
+</div>
+<div class="container">
+<div class="d-flex justify-content-end ">
+
+
+  <button id="download-button" style="display: block;">Download CSV</button>
+  
+  <button type="button" class="btn btn-info" id="run-script-button" style="border-radius: 15px;height: -webkit-fill-available;">Run Script</button>
+  
+</div>
+</div>
+
+<div id="results" style="margin-bottom: 50px; font-size: 12px;">
+  <table id="results-table">
+    <thead style="font-size: 13px;">
+      <tr>
+        <th class="desc">Test Case</th>
+        <th class="api">Use Case / Scenario</th>
+        <th class="dataRes">Result</th>
+      </tr>
+    </thead>
+    <tbody id="results-body">
+      <!-- Empty row for spacing -->
+      <!--<tr><td colspan="3" style="height: 20px; background: transparent;"></td></tr>-->
+      {% for team_usermoduleMode in team_usermoduleModel %}
+      <tr>
+        <td title="Test Case: {{ team_usermoduleMode.test_case }}">{{ team_usermoduleMode.test_case }}</td>
+        <td title="Use Case / Scenario: {{ team_usermoduleMode.use_case }}">{{ team_usermoduleMode.use_case }}</td>
+        <td {% if team_usermoduleMode.result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ team_usermoduleMode.result }}">{{ team_usermoduleMode.result }}</td>
+      </tr>
+      {% else %}
+      <tr id="no-data-row">
+        <td colspan="3">No data available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div class="loader">
+  <p>Script is running, please wait...</p>
+</div>
+
+<script>
+// AJAX request to run the script
+document.getElementById('run-script-button').addEventListener('click', function() {
+  // Start the loader
+  $('.loader').show();
+
+  // Perform AJAX request
+  $.ajax({
+    url: "/BS-traffic-must-haves-run-script",
+    type: "get",
+    success: function(response) {
+      // Handle success
+      console.log('Script executed successfully:', response);
+
+      // Color code the table rows based on response data
+      colorCodeTableRows(response);
+
+      // Optional: Redirect to another page or update content
+      window.location.href = "/BS-traffic-must-haves"; 
+      location.reload();// Uncomment if needed
+    },
+    error: function(xhr, status, error) {
+      // Handle errors
+      console.error('Error executing script:', error);
+      alert('Error executing script');
+    },
+    complete: function() {
+      // Hide the loader
+      $('.loader').hide();
+      location.reload();
+    }
+  });
+});
+
+// Download table data as CSV
+function downloadCSV() {
+  const table = document.getElementById('results-table');
+  let csvContent = "data:text/csv;charset=utf-8,";
+
+  for (let row of table.rows) {
+    let rowData = [];
+    for (let cell of row.cells) {
+      rowData.push(cell.textContent);
+    }
+    csvContent += rowData.join(",") + "\n";
+  }
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "User_&_Team_module_must_haves_report.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// Add event listener to the Download CSV button
+document.getElementById('download-button').addEventListener('click', downloadCSV);
+
+// Function to navigate to the dashboard
+function goBack() {
+  window.location.href = "/dashboard";
+}
+
+// Function to color code table rows based on response data
+function colorCodeTableRows(response) {
+  // Assuming `response` is an array of data where each item is an array of values
+  const rows = document.querySelectorAll('#results-bodyy tr');
+
+  response.forEach(function(item, index) {
+    let result_class = '';
+    let result_class_last = '';
+
+    // Adjust the indexes based on your data format (index 4 and 9 as per example)
+    if (item[4] && item[4].trim().toLowerCase() === 'pass') {
+      result_class = 'pass';
+    } else if (item[4] && item[4].trim().toLowerCase() === 'fail') {
+      result_class = 'fail';
+    }
+
+    if (item[9] && item[9].trim().toLowerCase() === 'pass') {
+      result_class_last = 'pass';
+    } else if (item[9] && item[9].trim().toLowerCase() === 'fail') {
+      result_class_last = 'fail';
+    }
+
+    // Apply classes to table rows in the <tbody>
+    const row = rows[index];
+    if (row) {
+      row.classList.remove('pass', 'fail'); // Clear previous classes
+      if (result_class) {
+        row.classList.add(result_class);
+      }
+      if (result_class_last) {
+        row.classList.add(result_class_last);
+      }
+    }
+  });
+}
+
+// Check if the "No data available" row is present
+const noDataRow = document.getElementById('no-data-row');
+const downloadButton = document.getElementById('download-button');
+
+if (noDataRow) {
+    downloadButton.disabled = true;
+    downloadButton.style.cursor = 'not-allowed'; // Optional: change cursor to indicate the button is disabled
+}
+</script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Must Haves</title>
+    <title>Traffic Must Haves</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -28,6 +28,20 @@
             flex-grow: 1; /* Allow the h1 to take up available space */
             font-size: 2rem;
             font-family: system-ui;
+        }
+        
+        .breadcrumb {
+        margin-top: 4px;
+        margin-left: 42px;
+        background-color: #fff !important;
+        padding: 0px
+        
+
+        }
+        .breadcrumb a {
+        font-size: 13px;
+        text-decoration: none;
+        color: #3366cc;
         }
         #content {
             display: grid;
@@ -102,7 +116,7 @@
 </head>
 <body>
     <div id="header">
-        <h1>Must have Dashboard</h1>
+        <h1>BSWA Must have</h1>
         <div class="dropdown">
             <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
             <div class="dropdown-content">
@@ -111,12 +125,21 @@
               </div>
         </div>
     </div>
-    <div id="content">
-        <a href="/Agency_api"><button = style = "cursor: pointer;">Agency Api</button></a>
-        <a href="/BSWA-must-haves"><button>BSWA Must &nbsp;Haves</button></a>        
-        <!-- <a ><button style = "cursor: pointer;">BSWA Must &nbsp;Haves</button></a>-->     
-        <a href="#"><button style = "cursor: pointer;">Chatbot Must Haves</button></a>
-        <a href="/Traffic-must-haves"><button style = "cursor: pointer;">Traffic Must &nbsp; Haves</button></a>
+    <div class="breadcrumb">
+        <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/Traffic-must-haves">Traffic Must Have</a>
+      </div>
+      <div id="content">
+           <a href="/CE-traffic-must-haves"><button>CE</button></a> 
+           <a href="/Tiger-traffic-must-haves"><button>Tiger</button></a>
+           <a href="/Torrential-traffic-must-haves"><button>Torrential</button></a> 
+           <a href="/BS-traffic-must-haves"><button>BS</button></a>
     </div>
+
+<script>
+function goBack() {
+    // Navigate to the homepage
+    window.location.href = "/dashboard";
+  }
+</script>
 </body>
 </html>
