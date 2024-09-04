@@ -209,10 +209,15 @@ class TestCases:
             def fill_campaign_form(campaign):
                 self.base_page.wait(resources.TrafficModuleLocator.campaign_name).send_keys(campaign_name)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category)
+                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category_option.format(campaign_type=campaign["campaign_type"]))
+                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_sub_category)
+                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_sub_category_option.format(campaign_sub_type=campaign["campaign_sub_type"]))
+                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
+                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option)
 
                 if "image_base64_code" in campaign["fields"]:
