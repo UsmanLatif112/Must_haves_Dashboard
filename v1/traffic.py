@@ -412,11 +412,50 @@ class TestCases:
             self.driver.execute_script("arguments[0].click();", delete_modal_btn)
         except Exception as e:
             print(e)
+            
+            
+    def report_test_cases(self):
+        
+        try:
+            # Test Case 2: Select a project, a campaign, and filter records
+            table_rows = None
+            self.driver.get(data.ce_report_page)
+            time.sleep(2)
+            self.base_page.click_btn(resources.TrafficModuleLocator.report_project_filter)
+            time.sleep(0.5)
+            project_filter_options = self.base_page.wait_all(resources.TrafficModuleLocator.report_project_filter_option)
+            for index, option in enumerate(project_filter_options):
+                if index == 0:
+                    continue
+                option.click()
+                time.sleep(5)
+
+                self.base_page.click_btn(resources.TrafficModuleLocator.report_campaign_filter)
+                time.sleep(0.5)
+                campaign_filter_options = self.base_page.wait_all(resources.TrafficModuleLocator.report_campaign_filter_option)
+                for campaign_index, option in enumerate(campaign_filter_options):
+                    if campaign_index == 0:
+                        continue
+                    option.click()
+                    time.sleep(5)
+                
+                    table_rows = self.base_page.wait(resources.TrafficModuleLocator.report_result_row)
+                    if table_rows:
+                        self.base_page.make_csv("CE_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Pass\n', new=False)
+                        break
+                if table_rows:
+                    break
+                if index == 7:
+                    self.base_page.make_csv("CE_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Fail - No results found\n', new=False)
+                    break
+        except Exception as e:
+            self.base_page.make_csv("CE_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Fail\n', new=False)
         
     def full_dashboard_must_haves(self):
         self.login_test_cases()
         self.project_crud_test_cases()
         self.campaign_crud_test_cases()
+        self.report_test_cases()
         print("Full CE Dashboard Must Haves Test Cases Completed")
 
 

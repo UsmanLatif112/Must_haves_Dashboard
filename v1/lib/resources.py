@@ -163,6 +163,14 @@ class TrafficModuleLocator:
     project_deleted_list_check = '//a[@href="/projects/{project_id}/"]'
     
     
+    report_project_filter = '//select[@id="selectProject"]'
+    report_project_filter_option = '//select[@id="selectProject"]//option'
+    report_campaign_filter = '//select[@id="campaignSelect"]'
+    report_campaign_filter_option = '//select[@id="campaignSelect"]//option'
+    filter_all = '//select[@id="campaignSelectstatus"]'
+    filter_all_option = '//select[@id="campaignSelectstatus"]//option'
+    filter_all_success_option = '//select[@id="campaignSelectstatus"]//option[text()="Success"]'
+    report_result_row = '//tr[@class="odd"]'
     
     
     
