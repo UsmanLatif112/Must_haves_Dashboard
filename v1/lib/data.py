@@ -10,6 +10,7 @@ Key_countte = "new keyword"
 
 ce_traffic_url = "https://caseengine.live"
 ce_project_listing_page = "https://caseengine.live/projects/"
+ce_campaing_listing_page = "https://caseengine.live/projects/{project_id}"
 ce_login_username = "cesuperuser@gmail.com"
 ce_login_password = "ce_super_user1122@"
 

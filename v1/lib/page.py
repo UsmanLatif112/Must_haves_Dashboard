@@ -36,7 +36,8 @@ class BasePage:
 class HomePage(BasePage):
     
     def click_btn(self, xpath: str):
-        self.driver.find_element(By.XPATH, xpath).click()
+        element = self.wait(xpath)
+        element.click()
         
     def enter_Name(self, xpath: str, clientname: str):
         self.driver.find_element(By.XPATH, xpath).send_keys(clientname)
