@@ -80,6 +80,7 @@ class TestCases:
         
             # Test Case 1: Create Project
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_btn)
+            time.sleep(2)
             self.base_page.wait(resources.TrafficModuleLocator.project_create_name_input).send_keys(project_name)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_modal_btn)
             project_created = self.base_page.wait(resources.TrafficModuleLocator.project_view_check), "Project creation failed"
