@@ -173,6 +173,12 @@ class TrafficModuleLocator:
     report_result_row = '//tr[@class="odd"]'
     
     
+    campaign_error_page_row = '//div[./div[./a[contains(@href, "/campaign/detail/")]]]'
+    campaign_link = '//a[contains(@href, "/campaign/detail/")]'
+    campaing_error_filter = '//select'
+    campaing_error_filter_option = '//option[text()="Today"]'
+    
+    
     
 
 

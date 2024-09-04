@@ -1,7 +1,9 @@
 # Imports
+import json
 import random
 from lib.driver import *
 from lib import data, page, resources
+
 
 
 # Sample Data
@@ -450,12 +452,64 @@ class TestCases:
                     break
         except Exception as e:
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Fail\n', new=False)
+            
+    def campaign_error_and_graph_stats(self):
+        try:
+            self.driver.get('https://caseengine.live/campaign/errors/')
+            time.sleep(5)
+            self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
+            time.sleep(0.5)
+            self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_option)
+            time.sleep(5)
+            error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
+            data_list = error_page_row.split('\n')
+            data_dict = {
+                "campaing_id": data_list[0],
+                "total_failed": data_list[1],
+                "google_recaptcha": data_list[2],
+                "wildcard_not_found": data_list[3],
+                "product_wildcard_not_found": data_list[4],
+                "page_not_loaded": data_list[5],
+                "other_errors": data_list[6]
+            }
+            print(data_dict)
+            
+            self.base_page.click_btn(resources.TrafficModuleLocator.campaign_link)
+            time.sleep(5)
+            raw_data = self.driver.page_source
+            page_src = raw_data.split('rawData = ')
+            for part in page_src:
+                if part.startswith("JSON"):
+                    data_string = part
+                    data = data_string.split(";")[0]
+
+            json_string = data.split("JSON.parse('")[1].split("')")[0]
+            json_data = json.loads(json_string)[-1]
+            print(json_data)
+            
+            google_recaptcha_check = int(data_dict["google_recaptcha"]) == int(json_data["google_recaptcha"])
+            wildcard_not_found_check = int(data_dict["wildcard_not_found"]) == int(json_data["wildcard_not_found"])
+            product_wildcard_not_found_check = int(data_dict["product_wildcard_not_found"]) == int(json_data["product_wildcard_not_found"])
+            total_failed_check = int(data_dict["total_failed"]) == int(json_data["failed"])
+            
+            if google_recaptcha_check and wildcard_not_found_check and product_wildcard_not_found_check and total_failed_check:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Pass\n', new=False)
+            else:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Fail\n', new=False)
+            
+            time.sleep(2)
+        except Exception as e:
+            self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Fail\n', new=False)
+            print(e)
+            
+        
         
     def full_dashboard_must_haves(self):
         self.login_test_cases()
         self.project_crud_test_cases()
         self.campaign_crud_test_cases()
         self.report_test_cases()
+        self.campaign_error_and_graph_stats()
         print("Full CE Dashboard Must Haves Test Cases Completed")
 
 
