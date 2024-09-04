@@ -109,6 +109,19 @@ class TrafficModuleLocator:
     campaign_average_session = '//*[@id="id_num_searches"]'
     campaign_frequency = '//*[@id="id_frequency"]'
     
+    project_create_btn = '//button[@data-bs-target="#createProject"]'
+    project_create_name_input = '//form[@hx-target="#createProject"]//input[@id="id_project_name"]'
+    project_create_modal_btn = '//form[@hx-target="#createProject"]//button[@type="submit"]'
+    project_created_list_check = '//a[@href="/projects/{project_id}/"]'
+    project_view_check = '//div[@id="campaign_table"]'
+    project_edit_btn = '//a[contains(@data-bs-target, "#editProject-{project_id}")]'
+    project_edit_name_input = '//input[@value="{project_name}"]'
+    project_edit_modal_btn = '//form[@hx-post="/projects/edit/{project_id}/"]//button[@type="submit"]'
+    project_edit_check = '//div[contains(text(), "{edited_project_name}")]'
+    project_delete_btn = '//a[@hx-get="/projects/delete/{project_id}/"]'
+    project_delete_modal_btn = '//button[text()="Yes, delete it!"]'
+    project_delete_check = '//div[@id="campaign_table"]'
+    project_deleted_list_check = '//a[@href="/projects/{project_id}/"]'
     
     
     

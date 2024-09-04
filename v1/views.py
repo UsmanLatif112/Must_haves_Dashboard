@@ -544,7 +544,7 @@ def CE_traffic_must_haves_run_script():
     try:
 
         test_cases = TestCases()
-        result_content = test_cases.login_test_cases()
+        result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "CE_traffic_must_haves.csv"
         import_ce_traffic_csv_to_db(db.session, csv_file_path, current_user.id)
