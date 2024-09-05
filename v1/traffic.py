@@ -503,7 +503,7 @@ class CE_Traffic_TestCases:
             }
             print(data_dict)
             
-            filter_check = int(data_dict["campaing_id"]) != int(data_dict_24_days["campaing_id"])
+            filter_check = int(data_dict["total_failed"]) != int(data_dict_24_days["total_failed"])
             
             if filter_check:
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Pass\n', new=False)
@@ -1048,7 +1048,7 @@ class Tiger_Traffic_TestCases:
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_option)
-            time.sleep(120)
+            time.sleep(130)
             error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
@@ -1061,8 +1061,7 @@ class Tiger_Traffic_TestCases:
                 "other_errors": data_list[6]
             }
             print(data_dict)
-            
-            filter_check = int(data_dict["campaing_id"]) != int(data_dict_24_days["campaing_id"])
+            filter_check = int(data_dict["total_failed"]) != int(data_dict_24_days["total_failed"])
             
             if filter_check:
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Pass\n', new=False)

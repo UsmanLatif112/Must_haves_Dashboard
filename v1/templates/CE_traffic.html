@@ -353,7 +353,7 @@ document.getElementById('run-script-button').addEventListener('click', function(
 
       // Optional: Redirect to another page or update content
       window.location.href = "/CE-traffic-must-haves"; 
-      location.reload();// Uncomment if needed
+      // location.reload(); // Uncomment if needed
     },
     error: function(xhr, status, error) {
       // Handle errors
@@ -363,7 +363,7 @@ document.getElementById('run-script-button').addEventListener('click', function(
     complete: function() {
       // Hide the loader
       $('.loader').hide();
-      location.reload();
+      // location.reload(); // Remove this line to avoid multiple reloads
     }
   });
 });

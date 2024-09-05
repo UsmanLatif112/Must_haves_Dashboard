@@ -28,6 +28,8 @@ ce_login_password = os.getenv("CE_LOGIN_PASSWORD", "cepassword")
 tiger_login_username = os.getenv("TIGER_LOGIN_USERNAME", "tigeruser@gmail.com")
 tiger_login_password = os.getenv("TIGER_LOGIN_PASSWORD", "tigerpassword@")
 
+secret_key = os.getenv("SECRET_KEY", "0332033603250309")
+sql_alchemy_database_url = os.getenv("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://root:Aleena_Khan0786@localhost:3306/agency_apidb")
 
 
 
