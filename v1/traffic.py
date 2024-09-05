@@ -471,12 +471,25 @@ class CE_Traffic_TestCases:
             
     def campaign_error_and_graph_stats(self):
         try:
-            self.driver.get('https://caseengine.live/campaign/errors/')
+            self.driver.get(data.ce_campaign_error_page)
             time.sleep(5)
+            error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
+            data_list_24_days = error_page_row.split('\n')
+            data_dict_24_days = {
+                "campaing_id": data_list_24_days[0],
+                "total_failed": data_list_24_days[1],
+                "google_recaptcha": data_list_24_days[2],
+                "wildcard_not_found": data_list_24_days[3],
+                "product_wildcard_not_found": data_list_24_days[4],
+                "page_not_loaded": data_list_24_days[5],
+                "other_errors": data_list_24_days[6]
+            }
+            print(data_dict_24_days)
+            
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_option)
-            time.sleep(5)
+            time.sleep(10)
             error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
@@ -489,6 +502,13 @@ class CE_Traffic_TestCases:
                 "other_errors": data_list[6]
             }
             print(data_dict)
+            
+            filter_check = int(data_dict["campaing_id"]) != int(data_dict_24_days["campaing_id"])
+            
+            if filter_check:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Pass\n', new=False)
+            else:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Fail\n', new=False)
             
             self.base_page.click_btn(resources.TrafficModuleLocator.campaign_link)
             time.sleep(5)
@@ -509,13 +529,13 @@ class CE_Traffic_TestCases:
             total_failed_check = int(data_dict["total_failed"]) == int(json_data["failed"])
             
             if google_recaptcha_check and wildcard_not_found_check and product_wildcard_not_found_check and total_failed_check:
-                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Pass\n', new=False)
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Pass\n', new=False)
             else:
-                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Fail\n', new=False)
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             
             time.sleep(2)
         except Exception as e:
-            self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Fail\n', new=False)
+            self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             print(e)
             
         
@@ -1028,7 +1048,7 @@ class Tiger_Traffic_TestCases:
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_option)
-            time.sleep(40)
+            time.sleep(120)
             error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
@@ -1042,12 +1062,12 @@ class Tiger_Traffic_TestCases:
             }
             print(data_dict)
             
-            google_recaptcha_check = int(data_dict["campaing_id"]) == int(data_dict_24_days["campaing_id"])
+            filter_check = int(data_dict["campaing_id"]) != int(data_dict_24_days["campaing_id"])
             
-            if google_recaptcha_check:
-                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Data Filtering, Pass\n', new=False)
+            if filter_check:
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Pass\n', new=False)
             else:
-                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Data Filtering, Fail\n', new=False)
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Fail\n', new=False)
             
             self.base_page.click_btn(resources.TrafficModuleLocator.campaign_link)
             time.sleep(5)
@@ -1068,13 +1088,13 @@ class Tiger_Traffic_TestCases:
             total_failed_check = int(data_dict["total_failed"]) == int(json_data["failed"])
             
             if google_recaptcha_check and wildcard_not_found_check and product_wildcard_not_found_check and total_failed_check:
-                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Pass\n', new=False)
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Pass\n', new=False)
             else:
-                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Fail\n', new=False)
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             
             time.sleep(2)
         except Exception as e:
-            self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Error and Graph Stats, Fail\n', new=False)
+            self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             print(e)
             
         
