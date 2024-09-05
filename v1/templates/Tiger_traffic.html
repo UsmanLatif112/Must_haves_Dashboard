@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>User & Team Module</title>
+  <title>Tiger Traffic Module</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -312,11 +312,11 @@
     <tbody id="results-body">
       <!-- Empty row for spacing -->
       <!--<tr><td colspan="3" style="height: 20px; background: transparent;"></td></tr>-->
-      {% for team_usermoduleMode in team_usermoduleModel %}
+      {% for module in tiger_traffic_Model %}
       <tr>
-        <td title="Test Case: {{ team_usermoduleMode.test_case }}">{{ team_usermoduleMode.test_case }}</td>
-        <td title="Use Case / Scenario: {{ team_usermoduleMode.use_case }}">{{ team_usermoduleMode.use_case }}</td>
-        <td {% if team_usermoduleMode.result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ team_usermoduleMode.result }}">{{ team_usermoduleMode.result }}</td>
+        <td title="Test Case: {{ module.test_case }}">{{ module.test_case }}</td>
+        <td title="Use Case / Scenario: {{ module.use_case }}">{{ module.use_case }}</td>
+        <td {% if module.result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ module.result }}">{{ module.result }}</td>
       </tr>
       {% else %}
       <tr id="no-data-row">
@@ -343,7 +343,7 @@ document.getElementById('run-script-button').addEventListener('click', function(
   // Perform AJAX request
   $.ajax({
     url: "/Tiger-traffic-must-haves-run-script",
-    type: "get",
+    type: "POST",
     success: function(response) {
       // Handle success
       console.log('Script executed successfully:', response);
@@ -384,7 +384,7 @@ function downloadCSV() {
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
   link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "User_&_Team_module_must_haves_report.csv");
+  link.setAttribute("download", "Tiger_Traffic_Modules_report.csv");
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

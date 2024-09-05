@@ -130,7 +130,11 @@ class TrafficModuleLocator:
     campaign_wildcard_strign_textarea = '//textarea[@name="wildcard_string"]'
     campaign_direct_url_textarea = '//textarea[@name="direct_url"]'
     campaign_keyword_modifiers_textarea = '//textarea[@name="keyword_modifiers"]'
-    
+    campaign_gmb_cid = '//input[@id="id_gmb_cid"]'
+    campaign_radius = '//input[@id="id_radius"]'
+    campaign_gmb_website_percentage = '//input[@id="id_gmb_website_percentage"]'
+    campaign_geo_latitude = '//input[@id="id_geo_latitude"]'
+    campaign_geo_longitude = '//input[@id="id_geo_longitude"]'
     
     campaign_create_submit_btn = '//button[@id="campaign-form-submit"]'
     campaign_create_btn = '//a[text() = "Create Campaign"]'

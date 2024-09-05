@@ -1,3 +1,4 @@
+import os
 from imports import *
 
 USER_Name = "Usman SQA 2"
@@ -12,9 +13,20 @@ ce_traffic_url = "https://caseengine.live"
 ce_project_listing_page = "https://caseengine.live/projects/"
 ce_campaing_listing_page = "https://caseengine.live/projects/{project_id}"
 ce_report_page = "https://caseengine.live/report/"
-ce_login_username = "cesuperuser@gmail.com"
-ce_login_password = "ce_super_user1122@"
+ce_campaign_error_page = "https://caseengine.live/campaign/errors/"
 
+tiger_traffic_url = "http://164.92.68.49:3000/"
+tiger_project_listing_page = "http://164.92.68.49:3000/projects/"
+tiger_campaing_listing_page = "http://164.92.68.49:3000/projects/{project_id}"
+tiger_report_page = "http://164.92.68.49:3000/report/"
+tiger_campaign_error_page = "http://164.92.68.49:3000/campaign/errors/"
+
+
+ce_login_username = os.getenv("CE_LOGIN_USERNAME", "ceuser@gmail.com")
+ce_login_password = os.getenv("CE_LOGIN_PASSWORD", "cepassword")
+
+tiger_login_username = os.getenv("TIGER_LOGIN_USERNAME", "tigeruser@gmail.com")
+tiger_login_password = os.getenv("TIGER_LOGIN_PASSWORD", "tigerpassword@")
 
 
 
