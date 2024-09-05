@@ -534,8 +534,10 @@ def traffic_must_haves():
 @login_required
 def CE_traffic_must_haves():
     user_email = current_user.email
+    user_id = current_user.id
     current_date_ = datetime.today().date()
-    ce_traffic_Models_list = ce_traffic_Model.query.filter(func.date(ce_traffic_Model.created_at) == current_date_).order_by(ce_traffic_Model.created_at.desc()).all()[:54]
+    ce_traffic_Models_list = ce_traffic_Model.query.filter(func.date(ce_traffic_Model.created_at) == current_date_, ce_traffic_Model.user_id == user_id).order_by(ce_traffic_Model.created_at.desc()).all()[:54]
+
     return render_template("CE_traffic.html", ce_traffic_Model=ce_traffic_Models_list, user_email=user_email)
 
 @app.route("/CE-traffic-must-haves-run-script", methods=["POST"])
@@ -566,8 +568,9 @@ def CE_traffic_must_haves_run_script():
 @login_required
 def Tiger_traffic_must_haves():
     user_email = current_user.email
+    user_id = current_user.id
     current_date_ = datetime.today().date()
-    tiger_traffic_Models_list = tiger_traffic_Model.query.filter(func.date(tiger_traffic_Model.created_at) == current_date_).order_by(tiger_traffic_Model.created_at.desc()).all()[:54]
+    tiger_traffic_Models_list = tiger_traffic_Model.query.filter(func.date(tiger_traffic_Model.created_at) == current_date_, tiger_traffic_Model.user_id == user_id).order_by(tiger_traffic_Model.created_at.desc()).all()[:54]
     return render_template("Tiger_traffic.html", tiger_traffic_Model=tiger_traffic_Models_list, user_email=user_email)
 
 @app.route("/Tiger-traffic-must-haves-run-script", methods=["POST"])
