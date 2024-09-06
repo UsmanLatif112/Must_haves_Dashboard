@@ -65,6 +65,17 @@ class tiger_traffic_Model(UserMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     
+class torrential_traffic_Model(UserMixin, db.Model):
+    __tablename__ = "torrential_traffic_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), nullable=False)
+    use_case = db.Column(db.String(500), nullable=False)
+    result = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    
+    
     
     
 
