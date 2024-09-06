@@ -1194,7 +1194,7 @@ class Torrential_Traffic_TestCases:
             project_edit_input.send_keys(edited_project_name)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_edit_modal_btn)
-            time.sleep(3)
+            time.sleep(6)
             project_edited = self.base_page.wait(resources.OldTrafficModuleLocator.project_edit_check.format(edited_project_name=edited_project_name)), "Project edit failed"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Edit Project, {"Pass" if project_edited[0] else f"Fail - {project_edited[1]}"}\n', new=False)
         except Exception as e:
@@ -1208,7 +1208,7 @@ class Torrential_Traffic_TestCases:
             time.sleep(2)
             delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
             self.driver.execute_script("arguments[0].click();", delete_modal_btn)
-            time.sleep(3)
+            time.sleep(6)
             project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
         except Exception as e:
@@ -1296,7 +1296,7 @@ class Torrential_Traffic_TestCases:
                 time.sleep(0.5)
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_sub_category_option.format(campaign_sub_type=campaign["campaign_sub_type"].lower()))
                 time.sleep(0.5)
-                country_field = self.driver.wait(resources.OldTrafficModuleLocator.campaign_country)
+                country_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_country)
                 self.driver.execute_script("arguments[0].innerHTML = arguments[1];", country_field, resources.OldTrafficModuleLocator.country_inner_html)
 
                 if "keyword_modifiers" in campaign["fields"]:
