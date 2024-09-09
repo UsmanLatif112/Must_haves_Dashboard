@@ -47,7 +47,7 @@ bs_login_username = os.getenv("BS_LOGIN_USERNAME", "bsuser@gmail.com")
 bs_login_password = os.getenv("BS_LOGIN_PASSWORD", "bspassword@")
 
 secret_key = os.getenv("SECRET_KEY", "0332033603250309")
-sql_alchemy_database_url = os.getenv("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://root:Aleena_Khan0786@localhost:3306/agency_apidb")
+sql_alchemy_database_url = os.getenv("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://root:Aleena_Khan786@localhost:3306/agency_apidb")
 
 
 
