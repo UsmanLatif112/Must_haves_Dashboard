@@ -199,6 +199,7 @@ class OldTrafficModuleLocator:
     project_edit_name_input = '//input[@id="projectName"]'
     project_edit_modal_btn = '//button[@id="saveRecord" and contains(text(), "Save changes")]'
     project_edit_check = '//td/a[contains(text(),"{edited_project_name}")]'
+    project_edit_check_2 = '//ul[@class="breadcrumb"]//a[text()="{edited_project_name}"]'
     project_delete_btn = '//a[@data-target="#deleteModalCenter" and @data="{project_id}"]'
     project_delete_modal_btn = '//button[@id="deleteRecord"]'
     project_deleted_list_check = '//td/a[contains(text(),"{edited_project_name}")]'
