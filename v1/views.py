@@ -6,10 +6,10 @@ from datetime import datetime
 from flask_login import current_user
 from flask import render_template, request, jsonify, redirect, url_for,Blueprint
 from flask_login import login_user, login_required, logout_user
-from models import team_usermoduleModel,QuickAnalysisModel, ce_traffic_Model, tiger_traffic_Model
+from models import team_usermoduleModel,QuickAnalysisModel, ce_traffic_Model, tiger_traffic_Model, torrential_traffic_Model, bs_traffic_Model
 from app import app, login_manager,db
 from user_management import User
-from import_csv import import_client_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db, import_user_team_csv_to_db, import_ce_traffic_csv_to_db, import_tiger_traffic_csv_to_db
+from import_csv import import_client_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db, import_user_team_csv_to_db, import_ce_traffic_csv_to_db, import_tiger_traffic_csv_to_db, import_torrential_traffic_csv_to_db, import_bs_traffic_csv_to_db
 from models import ApiResponse, db
 from helpers import delete_file_if_exists
 from user_management import authenticate
@@ -601,19 +601,21 @@ def Tiger_traffic_must_haves_run_script():
 @login_required
 def Torrential_traffic_must_haves():
     user_email = current_user.email
+    user_id = current_user.id
     current_date_ = datetime.today().date()
-    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
-    return render_template("Torrential_traffic.html", team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
+    torrential_traffic_Models_list = torrential_traffic_Model.query.filter(func.date(torrential_traffic_Model.created_at) == current_date_, torrential_traffic_Model.user_id == user_id).order_by(torrential_traffic_Model.created_at.desc()).all()[:54]
+    return render_template("Torrential_traffic.html", torrential_traffic_Model=torrential_traffic_Models_list, user_email=user_email)
 
 @app.route("/Torrential-traffic-must-haves-run-script", methods=["POST"])
 @login_required
 def Torrential_traffic_must_haves_run_script():
     try:
 
-        result_content = None
+        test_cases = Torrential_Traffic_TestCases()
+        result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "Torrential_traffic_must_haves.csv"
-        import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
+        import_torrential_traffic_csv_to_db(db.session, csv_file_path, current_user.id)
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)
@@ -633,18 +635,19 @@ def Torrential_traffic_must_haves_run_script():
 def BS_traffic_must_haves():
     user_email = current_user.email
     current_date_ = datetime.today().date()
-    team_usermoduleModels_list = team_usermoduleModel.query.filter(func.date(team_usermoduleModel.created_at) == current_date_).order_by(team_usermoduleModel.created_at.desc()).all()[:54]
-    return render_template("BS_traffic.html", team_usermoduleModel=team_usermoduleModels_list, user_email=user_email)
+    bs_traffic_Models_list = bs_traffic_Model.query.filter(func.date(bs_traffic_Model.created_at) == current_date_).order_by(bs_traffic_Model.created_at.desc()).all()[:54]
+    return render_template("BS_traffic.html", bs_traffic_Model=bs_traffic_Models_list, user_email=user_email)
 
 @app.route("/BS-traffic-must-haves-run-script", methods=["POST"])
 @login_required
 def BS_traffic_must_haves_run_script():
     try:
 
-        result_content = None
+        test_cases = BS_Traffic_TestCases()
+        result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "BS_traffic_must_haves.csv"
-        import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
+        import_bs_traffic_csv_to_db(db.session, csv_file_path, current_user.id)
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)
