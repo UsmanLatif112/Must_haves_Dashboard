@@ -43,8 +43,8 @@ tiger_login_password = os.getenv("TIGER_LOGIN_PASSWORD", "tiger_super_user1122@"
 torrential_login_username = os.getenv("TORRENTIAL_LOGIN_USERNAME", "torrential_admin_user")
 torrential_login_password = os.getenv("TORRENTIAL_LOGIN_PASSWORD", "8@J#5!2InMP5uehj")
 
-bs_login_username = os.getenv("BS_LOGIN_USERNAME", "bsuser@gmail.com")
-bs_login_password = os.getenv("BS_LOGIN_PASSWORD", "bspassword@")
+bs_login_username = os.getenv("BS_LOGIN_USERNAME", "production_qa_traffic")
+bs_login_password = os.getenv("BS_LOGIN_PASSWORD", "productionqa1122@")
 
 secret_key = os.getenv("SECRET_KEY", "0332033603250309")
 sql_alchemy_database_url = os.getenv("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://root:Aleena_Khan786@localhost:3306/agency_apidb")
