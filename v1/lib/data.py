@@ -34,11 +34,11 @@ bs_report_page = "http://69.167.137.49:8089/dashboard/reports/"
 bs_campaign_error_page = "http://69.167.137.49:8089/dashboard/campaign-errors/"
 
 
-ce_login_username = os.getenv("CE_LOGIN_USERNAME", "ceuser@gmail.com")
-ce_login_password = os.getenv("CE_LOGIN_PASSWORD", "cepassword")
+ce_login_username = os.getenv("CE_LOGIN_USERNAME", "cesuperuser@gmail.com")
+ce_login_password = os.getenv("CE_LOGIN_PASSWORD", "ce_super_user1122@")
 
-tiger_login_username = os.getenv("TIGER_LOGIN_USERNAME", "tigeruser@gmail.com")
-tiger_login_password = os.getenv("TIGER_LOGIN_PASSWORD", "tigerpassword@")
+tiger_login_username = os.getenv("TIGER_LOGIN_USERNAME", "tiger_super_user@gmail.com")
+tiger_login_password = os.getenv("TIGER_LOGIN_PASSWORD", "tiger_super_user1122@")
 
 torrential_login_username = os.getenv("TORRENTIAL_LOGIN_USERNAME", "torrential_admin_user")
 torrential_login_password = os.getenv("TORRENTIAL_LOGIN_PASSWORD", "8@J#5!2InMP5uehj")

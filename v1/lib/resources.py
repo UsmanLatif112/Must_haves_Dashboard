@@ -104,17 +104,18 @@ class TrafficModuleLocator:
     campaign_sub_category = '//*[@id="id_campaign_types"]'
     campaign_sub_category_option = '//select[@id="id_campaign_types"]//option[text()="{campaign_sub_type}"]'
     campaign_country = '//*[@id="select2-id_country-container"]'
-    campaign_country_option = '//li[text() = "UNITED STATES"]'
+    campaign_country_option = '//li[text() = "{country}"]'
     campaign_state = '//*[@id="id_state_iso_3"]'
     campaign_city = '//*[@id="id_city"]'
     campaign_mobile_proxy_percentage = '//*[(@id="id_mobile_proxy_percentage")]'
     campaign_average_session = '//*[@id="id_num_searches"]'
     campaign_frequency = '//*[@id="id_frequency"]'
+    campaign_frequency_option = '//*[@id="id_frequency"]//option[text()="Monthly"]'
     
     campaign_image_base64 = '//div[@style=""]//textarea[@id="id_extra_attr_base64"]'
     campaign_image_url = '//div[@style=""]//*[(@id = "id_extra_attr_url")]'
     campaign_is_spread_session = '//div[@style=""]//*[(@id="id_is_spread_session")]'
-    campaign_brand_name = '//div[@style=""]//*[(@id = "id_brand_name")]'
+    campaign_brand_name = '//*[(@id = "id_brand_name")]'
     campaign_select_wildcard_type_option = '//div[@style=""]//div[@id="home_page_div"]'
     campaign_is_product = '//div[@style=""]//input[@name="is_product"]'
     
@@ -174,13 +175,16 @@ class TrafficModuleLocator:
     filter_all = '//select[@id="campaignSelectstatus"]'
     filter_all_option = '//select[@id="campaignSelectstatus"]//option'
     filter_all_success_option = '//select[@id="campaignSelectstatus"]//option[text()="Success"]'
+    filter_all_failed_option = '//select[@id="campaignSelectstatus"]//option[text()="Failed"]'
     report_result_row = '//tr[@class="odd"]'
     
     
     campaign_error_page_row = '//div[./div[./a[contains(@href, "/campaign/detail/")]]]'
     campaign_link = '//a[contains(@href, "/campaign/detail/")]'
     campaing_error_filter = '//select'
-    campaing_error_filter_option = '//option[text()="Today"]'
+    campaing_error_filter_today_option = '//option[text()="Today"]'
+    campaing_error_filter_7_day_option = '//option[text()="7 Days"]'
+    campaing_error_filter_30_day_option = '//option[text()="30 Days"]'
     
     
 class OldTrafficModuleLocator:
