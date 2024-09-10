@@ -3,354 +3,380 @@ import json
 import random
 from lib.driver import *
 from lib import data, page, resources
+from traffic_sample_data import *
 
 
 
-# Sample Data
-project_name = "-AI-TEST-PROJECT-SQA"
-edited_project_name = "-AI-TEST-PROJECT-SQA-EDITED"
-project_id = None
-
-campaign_name = "-AI-TEST-Campaign-SQA"
-campaign_name_edited = "-AI-TEST-Campaign-SQA-Edited"
-campaign_average_session = 10
-campaign_average_session_edited = 5
-campaign_image_base64 = "data:image/jpeg;base64,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"
-campaign_image_url = "http://image.url"
-campaign_gmb_cid = "1234567890"
-campaign_geo_latitude = "10"
-campaign_geo_longitude = "10"
-campaign_radius = "10"
-campaign_gmb_website_percentage = "100"
-campaign_keyword_modifiers = "keyword"
-campaign_direct_url = "http://direct.url"
-campaign_brand_name = "Brand"
-campaign_wildcard_string = "http://wildcard.url"
-campaign_tier1_url = "http://tier1.url"
-campaign_tier2_url = "http://tier2.url"
-campaign_destination_url = "http://destination.url"
-campaign_country = "UNITED STATES"
-
-campaign_brand_name_edited = "Brand_edited"
-campaign_keyword_modifiers_edited = "keyword_edited"
-campaign_direct_url_edited = "http://direct.url_edited"
-campaign_wildcard_string_edited = "http://wildcard.url_edited"
-campaign_tier1_url_edited = "http://tier1.url_edited"
-campaign_tier2_url_edited = "http://tier2.url_edited"
-campaign_destination_url_edited = "http://destination.url_edited"
-
-campaign_average_session_edited = "10"
-campaign_country_edited = "ALGERIA"
-campaign_image_base64_edited = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMcAAAD+CAMAAAC5ruGRAAABTVBMVEX///8AAAD43Xu0fxG2ghXhvVfctk/v0W3szWny1HG7iB3qymX02HXnxmHlw121gRO9jCDCkyfYsUnHmi/r6+tOTk7MoTfUq0O4uLiweADg4ODz8/P5+fnT09NUVFTb29uTk5PMzMynp6ednZ16eno9PT2KiooqKip0dHTBwcG0fgD99+EsLCxEREQgICCjo6MTExM2NjZiYmL55JcRDwhhYWH28OLw5dDNrHK+igr38ujFlRzn1a9sbGzl1Lb57szty1XEm0/ZvIP257zWvJDLpFHRrWS9jzjDmVDRs4DZwZrcuFbMo03s3sTVtXXVrUjOoS3jyY/dvGrt2KLr0YT54ImykTqcgDWHby9rWSZWSCBCNxkyKhQhHA5nXDOHeEOkk1K9qF2heyR2WxtCMxA5Mhx7bTs1JwmKZRQbFgpkSA2WbBJbQAiOZA6Tf1q1XcSEAAAO9klEQVR4nO1d618bxxWVzMNYGJBAAr3QA4GALSDAAczLjo1tGjuOqdu6cRoncZM0jp32///YXT3QSrvn3juzswP05/MV7bJn7/vOndlE4jM+4zNM4sGR2u8fqv6Dg33VK7SQuq/087Mv/6R2/6PDE7ULNPGocKDy8zsT99Tu//jwpdoFmrhfOFf49dnk7dtKAjk4PFR6T9p4UigoCH7C5aEkkKeZYzv28bwwMiM29bPpidt3VARycpjJlHUeSxkPCiOFr6Q/nph0edyVC+Qok87Maz2WMg4KIyNSUz+bbvO4KxbIY1ccT3WfTA37Lg/nkey3U10eUoEcHKYzmWfaj6aEI2fEFcgDyU/PxqbaPG5JBfI07fL4JsrTyVFOuTxGHIkxTk13edySCeSB4/I4fhLt+cQ493gUBP/tbOySh0gg5UzK5WEpnCcSf3baAuG9/HSfh0ggT1xxuDxEKmsA9wttHqypn41P93kIBLLvpNo87ITzROKrNg/e1MfGfDwEAnnW5WEnnLcDehvntKmfzQ7wYAXywEl1eCjWBdo46fJgTP3F+AAPViDpmQ6PY3NPSuNllwdt6iezQzwYgTxxRts80nNmnxbjoMtjxqEi74vxIR60QPadmS6Prw0/LsRRj8dIAVc8rjiGeZACeeaMdnlYSktcOD0eDq6oXgR5UAJxdbXH43EMTxyOVI/HjPMc/ORkYTzIgxDIudPjcYhuaR7nTo/HjAOc5OxsCA8skOfuHXs8bKUlvcTE4zHqhDdPTi5CeSCBHKVH+zzsdBk8dBKTNo9RJ/TfvlgI5YEE8s2hj4ettMTrNPR5zISZuiuOcB7hAnGrp1Sfh6205DIxafMYdUL0+dUC4BEukKcZH4+MrbSk3Wno8xhNB/7xyQXkESaQk2M/jzk73RIPBwM8nEAd+moB8ggRSPlizs/DUpfBw77j5zHqDFmmKw7MIyiQvwzysBfOE0cjfh6p0aGK6tU8wSMgkP2L+QEelroMHjqdhkseqUFTP7kgeQwL5PX8AI9DW10GD+eDPFIDncyFeZLHkEAeXiwM8rAXzhOJR84gj0NfbueKg+YxKJAXC0M8bHUZPDwrDPJI+YLXq3mGx4BA/jo7O8TDXjjvdRr6PNKHl17GEwfDwyeQ/fHxYR72wnkvoPt49NVhfp7l4RPI38YCPOyF815A9/NIZzp/OTkW8LgUyMOxIA+LNLqdhgEeHX9ZfjUn4HEpkDvTAR7Wugwe9oM80mlPsU+ORTy6AjmbCvKwmJb0Og1DPDxTn58T8egI5GhyMsjDYjh31ccJ4eEWcq44ZDzaArl3O8jj0F6XwUMqhEfm66P5jJCHJ5CHd8J42OsyeGh3GoZ5ZJ66NIQ8XIH8/W4YD5tpidc1C+ORkfO4de/sbigPe10GD+1OQyQenkzCeNhMS7qdhlh42ExLuksHcfAIFvux4kFcPFRGcAzgQMBjzMX01NTUxMREOJMQHilriwYd7FM8FtzS6M0/vn373T+/f/fuizZ+f/f9r9/98ONP71/fpXlY7DJ4OAr3uy6LuTffvv3liyTGux9+fP8a8rCalrgYDfDwxPGvn0kKfjI/uVzuBHhY7TJ4OB/mcZz6IOTQw6//fj85OczDbjjvdBoueaTToz//psShh7dvhnjY7DJ4uH/JwxXHh1+0SLTx+9s3Ph7DrcnY4XUa2jxSnz7qk+jgtw/pS3nYDeedTsOMS+NTBFH4hPLRfSltHnbDeSegz8z8R88qwvDHp5RnaZZpJF4WjLJoMxlJpSynJV5AN6NRA/g4arXL4KH4h3EWHv5rmcbSdiw0kslc1SKL6kpMLDw0ra0P1mJk4WJj0QqLYpzC6KBpgcZS7CxcbBZjZlFes0HDRT5WGsUdSzTi1a26NRYuKrH5rZZNGsnkakxG0rRLw0UsDvjUOo1kct08jT2tB9le3VnZrORWVja2tK437bbKFVUCleZSvVry2WqpuJivnao6vCWzPHIq/3tjOV+EzqZUryndzCiRXfn/zbX4jDW7rhBODaqWmMZKKyu957rYbxgzdqnDPVXzk9mWsIgx5H6FaXpNLIo+8puiWxsJiHkZi5Le3dclTDY0b+7HooRFM8I/yq/y969EplESxK9KRLkLFDdy9iuIf9EdY5b/LxH/Cf+qTg3orsQII8m8zt7eVLgtcva+GeHmZY7FisESgYtSy/q35rKHU6MlG6db9bhu3DDJwkWVju9bmm+txKQN5lsaWbo1pqlZyzQNbTETKNPWrpVoMYE8DhoJpuxc0bkjLeOYaDCBV8PL0/3P2GjQpee2ctAtk0YeZ9eyRJXwynkWmZC04nj+S2Spf61Y5JA+V8H/ZRfXl1qNxlK+jjsPAVAeRtH3UklCTkghvzyo6hu7jUUZGco2lTKhEnGjpMTWqjWg5afrksuJ0HWqwqNB0ODbF+UlKpxtL/OvtEzYuoKFUEUg6zFKfM1SYQNzNcID9EHo5wan4Q1RM2eXe6tYIxRiyAZ+AOZN1gVNgw645WWcToi9PuH3aLdXZlLLAezQrwRr1o6UBy6faJlWFZvpdP2C34kwKSKcLpmnyRp2fpD1JC6q12Q8sJVvUJfpTDmsUPLFpi6LpjjhpEKH3urhKuG3ytDdiNJUnKZRrRcVC5cSgYqxJ+GB1YoQh/5a7iqhWjAcS0IILMi2dLjzINJOaCGCpR3srbCzqkegQbkf+CwCj7WOrsWxg2sQccAvCFodzwNeikO53tK6DzABhkGdX0uFzg6mEdEnsnA/BxUAbCsTel0YA8maSwioWcjSWc8Lk4sausLIZBmKIkXw+y3O88JAgNSKqHgUAI0Ppe+cgSCFXEUXRDbyDpBAkGJxqQn6P8hjmxEHFgiqhZj+D9JHyN/Y3CVQ+DLITZhlNmjmQO5k708JqFpFYyg0D1REoFrS3DQviiHIQOhGBWKPzIOdqqg01heri/kmX/ICD1QHP6eLW1RDAalDc+qi2X9rdW56DIRoFGbJEruM2jaAPa1WucG8ianfkWIBQ69RPKDZAm0kZ8ECulikZ1VyoaiAZJpM3aGegN9TXbeQf1Q0uPuFzLBQ1AHuivK6oWpSN8eDDCCoiALkYc2VRPmYbjsiiFWq+YNMEWQBxPICUF8TSX4H2xQP5H9q4T8n3i7KR80JRKeFB8IHnoeFvZW6MR5UQEc8QNDBoQ2mo+YUi+KBqiiQ7eqsURBrK2qgVucUeeCkCZc5SsPt15iH6saFq+WBszhjuw8pHop2jrN2uKjKjjyKYdBfYR2BnTVT9TwtDxQHQW1AFOeq/Q+zPFBeAtSEWEqrhV8BCxyzPFDit6tGOwm78wZ351I8kPaCJJlS9tBE0Vw0p+0c1VHb4T8nnU+YbzAWBBkecEUGJJdkUAsGHUM9VPKROkCRDXSp6TXz2uCPs3STaDsbihJKyMhFdCR4ENCZGd9NX5ulzHlc1DgAP6enxFFEQPGZ262z2ai68i9n63z9BNZgkS+hZ5LRS0OLw5J1861VSZsEvV/kqektU7BzAKzKXJqBKi8kSHpOEXZyUDvVWBqOCnrkeZjxPvRvauD3VOtHBUhNYGeQmYpD7xealaGECckbJjLMaAaMCCh8qk+PhQEOmcDQySx01tF1sMIzkmug1WCckDGzZNDQoZ8TbVxlAJvnUNpw/bgHWD/DvMxAixDmSlCtQCXRB4xscKQjem0Euyu4oc8OmNTRlXhsFl4iBA5pOCdjJ8lwTYEvjVZ0E1OoWNL8tD5cKyMymkhntOACFft0wc41fDFREUdIT4gFZFywCLblYJdNpGbMBkYChKLX8VWSCV6sJEQM1SVCPRAhZMlmFpz6UWukZa24TrkdIgUVbTlAIzZJZveH+ujPNnk/YpRDticHF3n0tJDqOV85suVBtexkG4aJqRF6g+uiUmSvkfeihoKlO9EJA2PmG+Vz7ptM4k1pqXSrF2Fh3Pa9qtDcuZ3Ldepi8T50YtGI9dySk27YU3RKlIayOfslqCKPd911uv+50eK3PZC+rybmkSCMTLK9ttiATnNNskuLLpYVtthSTk9mZdmlwFlw25WmbKsZ3RVTObQI701KKuyiz9aXamt73jDYabO1XpVuxIStacV/74GUbMwH5NIuj9w0FwS1zr2tcfSYHEy9r3j6S526F7U5Kyq4UKp6qgx5SB+5gTESuO2UyidN0CPfmzGdKsuW+uoqTaevJs6eC4Ld3KpzwBo9y70Tg7HzaabO2+MWaYy7X/7cTL2jqjgpmz1WhlnP9cBuiwLghqVMHoZdZ1non0bH7SdI5owZiWT7uv5Zd/wqjRndyorKrwgGyXsQ9ggPAWRjQBFO7BMtN0U9Q7Eq66qqH37lB1lhdrET5VivrHQdKOJ5wqKl/oru50cEp+h0wa5AcZAtkfNn9oQgKz9kI5pWtSEcxsvlFXPHosrKoolTqqXrTVtNuXqV8kprJpF81SXk4t9pSLoZpXWFk9Q9aJ2cGAKVcz12lskzx8rVhvrqlbFzZRVPvdlaa9WLw2zK2cV8U2u9x2BCqnF8z/ZO5XS51mi1Wo1ac21vU3ud3ei3Wax84CcU0U8LH4CpUStVGG/OLMb1MTIa5j8vw5zzGw9iOefX1uej+ojpSFbb1h7bkaxVYxvnJIjza1jmtpayMJNVIdT1vj103Wi45m7nk1hx03BR1Z7vuVY0EqbmdgkIT3uMjHK8n7e08U3ILrIxmknNHg0XpWZMKZfhz5EJmLTM7WzsI96vWgKsG92G5iHG0/pJZPEYhgbi+g6kCIs1U3lXJcY1bRGKLXQWjwrsRD8Gqh8XDMK6o8Io5mu7K0gyq7m1Jdye3LLzaWcFeF+xXGoun+51T3/aXVuuLa1Xs14LGPIwt0pnBajKt5iKmABaPI3hI6+xIjwru2E6hQaMa1f9WMoIG7/ZuqpMRB9h4rgWsU8RIU73phm4h+B02tpV51NaGG6sbt1EYQSHepZvpDCGz3OINAdxlRgMgbWrfhxdDGhV1K/eXh38G4q3r6SVYAY+X8V9reg6o99J3buxKpXwpeu5a1f0qaD3ybTcTfW1XXR27a7czPDdRzty5G46i7aN33hZtANg5YbbhYeq3vTidUN19/+BhVs7XfUDfMZn6OF/DPevIbqzmQwAAAAASUVORK5CYII="
-campaign_image_url_edited = "https%3A%2F%2Fchatbotkings.com.au%2Fwp-content%2Fuploads%2F2023%2F03%2FLOGO-Chatbot-1-511x652.png"
-
-def add_tagify_data(base_page, campaign, driver):
-    
-    if "wildcard_string" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign)
-        new_inner_html = f'''
-            <tag title="{campaign_wildcard_string}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_wildcard_string}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_wildcard_string}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_wildcard_string)
-
-    if "tier1_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url)
-        new_inner_html = f'''
-            <tag title="{campaign_tier1_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier1_url}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_tier1_url}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier1_url)
-
-    if "tier2_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url)
-        new_inner_html = f'''
-            <tag title="{campaign_tier2_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier2_url}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_tier2_url}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier2_url)
-
-    if "destination_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url)
-        new_inner_html = f'''
-            <tag title="{campaign_destination_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_destination_url}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_destination_url}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_destination_url)
+class TrafficBase:
+    def add_tagify_data(self, base_page, campaign, driver):
         
-    if "keyword_modifiers" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers)
-        new_inner_html = f'''
-            <tag title="{campaign_keyword_modifiers}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_keyword_modifiers}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_keyword_modifiers}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_keyword_modifiers)
+        if "wildcard_string" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign)
+            new_inner_html = f'''
+                <tag title="{campaign_wildcard_string}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_wildcard_string}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_wildcard_string}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_wildcard_string)
 
-    if "direct_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url)
-        new_inner_html = f'''
-            <tag title="{campaign_direct_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_direct_url}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_direct_url}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_direct_url)
+        if "tier1_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url)
+            new_inner_html = f'''
+                <tag title="{campaign_tier1_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier1_url}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_tier1_url}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier1_url)
+
+        if "tier2_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url)
+            new_inner_html = f'''
+                <tag title="{campaign_tier2_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier2_url}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_tier2_url}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier2_url)
+
+        if "destination_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url)
+            new_inner_html = f'''
+                <tag title="{campaign_destination_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_destination_url}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_destination_url}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_destination_url)
+            
+        if "keyword_modifiers" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers)
+            new_inner_html = f'''
+                <tag title="{campaign_keyword_modifiers}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_keyword_modifiers}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_keyword_modifiers}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_keyword_modifiers)
+
+        if "direct_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url)
+            new_inner_html = f'''
+                <tag title="{campaign_direct_url}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_direct_url}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_direct_url}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_direct_url)
+            
+    def add_input_field_data(self, base_page, campaign, driver):
+
+        if "image_base64_code" in campaign["fields"]:
+            base_page.wait(resources.TrafficModuleLocator.campaign_image_base64).send_keys(campaign_image_base64)
+        if "image_url" in campaign["fields"]:
+            base_page.wait(resources.TrafficModuleLocator.campaign_image_url).send_keys(campaign_image_url)
+        if "is_spread_session" in campaign["fields"]:
+            base_page.click_btn(resources.TrafficModuleLocator.campaign_is_spread_session)
+        if "brand_name" in campaign["fields"]:
+            base_page.wait(resources.TrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
+        if "select_wildcard_type_option" in campaign["fields"]:
+            base_page.click_btn(resources.TrafficModuleLocator.campaign_select_wildcard_type_option)
+        if "is_product" in campaign["fields"]:
+            base_page.click_btn(resources.TrafficModuleLocator.campaign_is_product)
+        if "gmb_cid" in campaign["fields"]:
+            base_page.wait(resources.TrafficModuleLocator.campaign_gmb_cid).send_keys(campaign_gmb_cid)
+        if "geo_latitude" in campaign["fields"]:
+            base_page.wait(resources.TrafficModuleLocator.campaign_geo_latitude).send_keys(campaign_geo_latitude)
+        if "geo_longitude" in campaign["fields"]:
+            base_page.wait(resources.TrafficModuleLocator.campaign_geo_longitude).send_keys(campaign_geo_longitude)
+
+    def edit_tagify_data(self, base_page, campaign, driver):
         
-def add_input_field_data(base_page, campaign, driver):
+        if "wildcard_string" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign)
+            new_inner_html = f'''
+                <tag title="{campaign_wildcard_string_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_wildcard_string_edited}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_wildcard_string_edited}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_wildcard_string_edited)
+            time.sleep(2)
 
-    if "image_base64_code" in campaign["fields"]:
-        base_page.wait(resources.TrafficModuleLocator.campaign_image_base64).send_keys(campaign_image_base64)
-    if "image_url" in campaign["fields"]:
-        base_page.wait(resources.TrafficModuleLocator.campaign_image_url).send_keys(campaign_image_url)
-    if "is_spread_session" in campaign["fields"]:
-        base_page.click_btn(resources.TrafficModuleLocator.campaign_is_spread_session)
-    if "brand_name" in campaign["fields"]:
-        base_page.wait(resources.TrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
-    if "select_wildcard_type_option" in campaign["fields"]:
-        base_page.click_btn(resources.TrafficModuleLocator.campaign_select_wildcard_type_option)
-    if "is_product" in campaign["fields"]:
-        base_page.click_btn(resources.TrafficModuleLocator.campaign_is_product)
-    if "gmb_cid" in campaign["fields"]:
-        base_page.wait(resources.TrafficModuleLocator.campaign_gmb_cid).send_keys(campaign_gmb_cid)
-    if "geo_latitude" in campaign["fields"]:
-        base_page.wait(resources.TrafficModuleLocator.campaign_geo_latitude).send_keys(campaign_geo_latitude)
-    if "geo_longitude" in campaign["fields"]:
-        base_page.wait(resources.TrafficModuleLocator.campaign_geo_longitude).send_keys(campaign_geo_longitude)
+        if "tier1_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url)
+            new_inner_html = f'''
+                <tag title="{campaign_tier1_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier1_url_edited}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_tier1_url_edited}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier1_url_edited)
 
+        if "tier2_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url)
+            new_inner_html = f'''
+                <tag title="{campaign_tier2_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier2_url_edited}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_tier2_url_edited}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier2_url_edited)
 
-def edit_tagify_data(base_page, campaign, driver):
-    
-    if "wildcard_string" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign)
-        new_inner_html = f'''
-            <tag title="{campaign_wildcard_string_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_wildcard_string_edited}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_wildcard_string_edited}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_wildcard_string_edited)
+        if "destination_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url)
+            new_inner_html = f'''
+                <tag title="{campaign_destination_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_destination_url_edited}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_destination_url_edited}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_destination_url_edited)
+            
+        if "keyword_modifiers" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers)
+            new_inner_html = f'''
+                <tag title="{campaign_keyword_modifiers_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_keyword_modifiers_edited}">
+
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_keyword_modifiers_edited}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_keyword_modifiers_edited)
+
+        if "direct_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url)
+            new_inner_html = f'''
+                <tag title="{campaign_direct_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_direct_url_edited}">
+                    <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                    <div><span class="tagify__tag-text">{campaign_direct_url_edited}</span></div>
+                </tag>
+                <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
+                &ZeroWidthSpace;
+            </tags>
+            '''
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
+            # Update the hidden textarea value
+            hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url_textarea)
+            driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_direct_url_edited)
+            
+    def edit_input_field_data(self, base_page, campaign, driver):
+        
+        if "image_base64_code" in campaign["fields"]:
+            image_base64_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_base64)
+            image_base64_field.clear()
+            image_base64_field.send_keys(campaign_image_base64_edited)
+            
+        if "image_url" in campaign["fields"]:
+            image_url_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_url)
+            image_url_field.clear()
+            image_url_field.send_keys(campaign_image_url_edited)
+            
+        if "brand_name" in campaign["fields"]:
+            brand_name_field = base_page.wait(resources.TrafficModuleLocator.campaign_brand_name)
+            brand_name_field.clear()
+            brand_name_field.send_keys(campaign_brand_name_edited)
+            
+        base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
+        time.sleep(0.5)
+        base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country_edited))
+            
+        average_session_field = base_page.wait(resources.TrafficModuleLocator.campaign_average_session)
+        average_session_field.clear()
+        average_session_field.send_keys(campaign_average_session_edited)
+            
+        base_page.click_btn(resources.TrafficModuleLocator.campaign_frequency)
+        time.sleep(2)
+        base_page.click_btn(resources.TrafficModuleLocator.campaign_frequency_option)
+        
+        input_field = base_page.wait(resources.TrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
+        input_field.clear()
+        input_field.send_keys(campaign_name_edited)
+        
+    def old_traffic_edit_fields(self, base_page, campaign, driver):
+        if "keyword_modifiers" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers[-1]))
+            base_page.remove_text(wildcard_field, campaign_keyword_modifiers[-1])
+            base_page.send_key_with_action_chain(wildcard_field, campaign_keyword_modifiers_edited)
+            time.sleep(2)
+
+        if "direct_url" in campaign["fields"]:
+            direct_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url[-1]))
+            base_page.remove_text(direct_url_field, campaign_direct_url[-1])
+            base_page.send_key_with_action_chain(direct_url_field, campaign_direct_url_edited)
+        time.sleep(2)
+            
+        if "wildcard_string" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string[-1]))
+            base_page.remove_text(wildcard_field, campaign_wildcard_string[-1])
+            base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string_edited)
         time.sleep(2)
 
-    if "tier1_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url)
-        new_inner_html = f'''
-            <tag title="{campaign_tier1_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier1_url_edited}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_tier1_url_edited}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier1_url_edited)
+        if "tier1_url" in campaign["fields"]:
+            tier_1_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url[-1]))
+            base_page.remove_text(tier_1_url_field, campaign_tier1_url[-1])
+            base_page.send_key_with_action_chain(tier_1_url_field, campaign_tier1_url_edited)
+            time.sleep(2)
 
-    if "tier2_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url)
-        new_inner_html = f'''
-            <tag title="{campaign_tier2_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_tier2_url_edited}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_tier2_url_edited}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_tier2_url_edited)
+            
+        if "tier2_url" in campaign["fields"]:
+            tier_2_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url[-1]))
+            base_page.remove_text(tier_2_url_field, campaign_tier2_url[-1])
+            base_page.send_key_with_action_chain(tier_2_url_field, campaign_tier2_url_edited)
+            time.sleep(2)
 
-    if "destination_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url)
-        new_inner_html = f'''
-            <tag title="{campaign_destination_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_destination_url_edited}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_destination_url_edited}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_destination_url_edited)
+        if "destination_url" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url[-1]))
+            base_page.remove_text(wildcard_field, campaign_destination_url[-1])
+            base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url_edited)
+            time.sleep(2)
+            
+        if "brand_name" in campaign["fields"]:
+            brand_name_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name))
+            brand_name_field.clear()
+            brand_name_field.send_keys(campaign_brand_name_edited)
+            time.sleep(2)
+            
+        input_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
+        input_field.clear()
+        input_field.send_keys(campaign_name_edited)
+        time.sleep(2)
         
-    if "keyword_modifiers" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers)
-        new_inner_html = f'''
-            <tag title="{campaign_keyword_modifiers_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_keyword_modifiers_edited}">
+        average_session_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session_edit_field)
+        average_session_field.clear()
+        average_session_field.send_keys(campaign_average_session_edited)
+        time.sleep(2)
+        
+            
+        country_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_country_edit_field)
+        driver.execute_script("arguments[0].innerHTML = arguments[1];", country_field, resources.OldTrafficModuleLocator.country_inner_html_edited)
+        
+    def old_traffic_edit_fields_check(self, base_page, campaign, driver):
+        passed = True
+        
+        if "keyword_modifiers" in campaign["fields"]:
+            keyword_modifiers_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers_edited[-1]))
+            if not keyword_modifiers_field and passed:
+                passed = False
+        time.sleep(2)
 
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_keyword_modifiers_edited}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_keyword_modifiers_edited)
+        if "direct_url" in campaign["fields"]:
+            direct_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url_edited[-1]))
+            if not direct_url_field and passed:
+                passed = False
 
-    if "direct_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url)
-        new_inner_html = f'''
-            <tag title="{campaign_direct_url_edited}" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag " value="{campaign_direct_url_edited}">
-                <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                <div><span class="tagify__tag-text">{campaign_direct_url_edited}</span></div>
-            </tag>
-            <span contenteditable="" tabindex="0" data-placeholder="&ZeroWidthSpace;" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
-            &ZeroWidthSpace;
-        </tags>
-        '''
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, new_inner_html)
-        # Update the hidden textarea value
-        hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url_textarea)
-        driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_direct_url_edited)
-        
-def edit_input_field_data(base_page, campaign, driver):
-    
-    if "image_base64_code" in campaign["fields"]:
-        image_base64_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_base64)
-        image_base64_field.clear()
-        image_base64_field.send_keys(campaign_image_base64_edited)
-        
-    if "image_url" in campaign["fields"]:
-        image_url_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_url)
-        image_url_field.clear()
-        image_url_field.send_keys(campaign_image_url_edited)
-        
-    if "brand_name" in campaign["fields"]:
-        brand_name_field = base_page.wait(resources.TrafficModuleLocator.campaign_brand_name)
-        brand_name_field.clear()
-        brand_name_field.send_keys(campaign_brand_name_edited)
-        
-    base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
-    time.sleep(0.5)
-    base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country_edited))
-        
-    average_session_field = base_page.wait(resources.TrafficModuleLocator.campaign_average_session)
-    average_session_field.clear()
-    average_session_field.send_keys(campaign_average_session_edited)
-        
-    base_page.click_btn(resources.TrafficModuleLocator.campaign_frequency)
-    time.sleep(2)
-    base_page.click_btn(resources.TrafficModuleLocator.campaign_frequency_option)
-    
-    input_field = base_page.wait(resources.TrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
-    input_field.clear()
-    input_field.send_keys(campaign_name_edited)
-      
-def old_traffic_edit_fields(base_page, campaign, driver):
-    if "keyword_modifiers" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers))
-        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, resources.OldTrafficModuleLocator.keyword_inner_html_edited.format(keyword=campaign_keyword_modifiers_edited))
-    time.sleep(2)
+        if "wildcard_string" in campaign["fields"]:
+            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string_edited[-1]))
+            if not wildcard_field and passed:
+                passed = False
+        time.sleep(2)
 
-    if "direct_url" in campaign["fields"]:
-        direct_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url))
-        base_page.send_key_with_action_chain(direct_url_field, campaign_direct_url_edited)
-    time.sleep(2)
+        if "tier1_url" in campaign["fields"]:
+            tier_1_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url_edited[-1]))
+            if not tier_1_url_field and passed:
+                passed = False
+        time.sleep(2)
         
-    if "wildcard_string" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string))
-        base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string_edited)
-    time.sleep(2)
+        if "tier2_url" in campaign["fields"]:
+            tier_2_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url_edited[-1]))
+            if not tier_2_url_field and passed:
+                passed = False
+        time.sleep(2)
 
-    if "tier1_url" in campaign["fields"]:
-        tier_1_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url))
-        base_page.send_key_with_action_chain(tier_1_url_field, campaign_tier1_url_edited)
-    time.sleep(2)
+        if "destination_url" in campaign["fields"]:
+            destination_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url_edited[-1]))
+            if not destination_url_field and passed:
+                passed = False
+        time.sleep(2)
+        
+        if "brand_name" in campaign["fields"]:
+            brand_name_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name_edited))
+            if not brand_name_field and passed:
+                passed = False
+        time.sleep(2)
+        
+        campaign_edited = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited))
+        if not campaign_edited and passed:
+            passed = False
+            
+        average_session_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session_edit_field_check.format(average_session=campaign_average_session_edited))
+        if not average_session_field and passed:
+            passed = False
+            
+        # country_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_country_edit_field_check.format(country=campaign_country_edited))
+        # if not country_field and passed:
+        #     passed = False
+        
+        return passed
 
-        
-    if "tier2_url" in campaign["fields"]:
-        tier_2_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url))
-        base_page.send_key_with_action_chain(tier_2_url_field, campaign_tier2_url_edited)
-    time.sleep(2)
-
-    if "destination_url" in campaign["fields"]:
-        wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url))
-        base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url_edited)
-    time.sleep(2)
-        
-    if "brand_name" in campaign["fields"]:
-        brand_name_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name))
-        brand_name_field.clear()
-        brand_name_field.send_keys(campaign_brand_name_edited)
-    time.sleep(2)
-        
-    input_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
-    input_field.clear()
-    input_field.send_keys(campaign_name_edited)
-    time.sleep(2)
-    
-    average_session_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session_edit_field)
-    average_session_field.clear()
-    average_session_field.send_keys(campaign_average_session_edited)
-    time.sleep(2)
-    
-        
-    country_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_country_edit_field)
-    driver.execute_script("arguments[0].innerHTML = arguments[1];", country_field, resources.OldTrafficModuleLocator.country_inner_html_edited)
-    
-
-class CE_Traffic_TestCases:
+class CE_Traffic_TestCases(TrafficBase):
     def __init__(self):
         self.driver = initialize_and_navigate(data.ce_traffic_url)
         self.base_page = page.HomePage(self.driver)
@@ -530,8 +556,8 @@ class CE_Traffic_TestCases:
                 time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country))
                 
-                add_input_field_data(self.base_page, campaign, self.driver)
-                add_tagify_data(self.base_page, campaign, self.driver)
+                self.add_input_field_data(self.base_page, campaign, self.driver)
+                self.add_tagify_data(self.base_page, campaign, self.driver)
 
             try:
                 # Test Case 1: Create Campaign
@@ -560,8 +586,8 @@ class CE_Traffic_TestCases:
                 self.driver.get(data.ce_campaing_listing_page.format(project_id=project_id))
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
                 
-                edit_tagify_data(self.base_page, selected_campaign, self.driver)
-                edit_input_field_data(self.base_page, selected_campaign, self.driver)
+                self.edit_tagify_data(self.base_page, selected_campaign, self.driver)
+                self.edit_input_field_data(self.base_page, selected_campaign, self.driver)
 
                 save_btn = self.base_page.wait(resources.TrafficModuleLocator.campaign_edit_save_btn)
                 self.driver.execute_script("arguments[0].click();", save_btn)
@@ -777,9 +803,7 @@ class CE_Traffic_TestCases:
         self.campaign_error_and_graph_stats()
         print("Full CE Dashboard Must Haves Test Cases Completed")
         
-           
-        
-class Tiger_Traffic_TestCases:    
+class Tiger_Traffic_TestCases(TrafficBase):    
     def __init__(self):
         self.driver = initialize_and_navigate(data.tiger_traffic_url)
         self.base_page = page.HomePage(self.driver)
@@ -995,8 +1019,8 @@ class Tiger_Traffic_TestCases:
                 time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country))
                 
-                add_input_field_data(self.base_page, campaign, self.driver)
-                add_tagify_data(self.base_page, campaign, self.driver)
+                self.add_input_field_data(self.base_page, campaign, self.driver)
+                self.add_tagify_data(self.base_page, campaign, self.driver)
 
             try:
                 # Test Case 1: Create Campaign
@@ -1026,8 +1050,8 @@ class Tiger_Traffic_TestCases:
                 self.driver.get(data.tiger_campaing_listing_page.format(project_id=project_id))
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
                 
-                edit_tagify_data(self.base_page, selected_campaign, self.driver)
-                edit_input_field_data(self.base_page, selected_campaign, self.driver)
+                self.edit_tagify_data(self.base_page, selected_campaign, self.driver)
+                self.edit_input_field_data(self.base_page, selected_campaign, self.driver)
 
                 save_btn = self.base_page.wait(resources.TrafficModuleLocator.campaign_edit_save_btn)
                 self.driver.execute_script("arguments[0].click();", save_btn)
@@ -1238,45 +1262,45 @@ class Tiger_Traffic_TestCases:
         self.campaign_error_and_graph_stats()
         print("Full Tiger Dashboard Must Haves Test Cases Completed")
  
-class Torrential_Traffic_TestCases:
+class Torrential_Traffic_TestCases(TrafficBase):
     def __init__(self):
         self.driver = initialize_and_navigate(data.torrential_traffic_url)
         self.base_page = page.HomePage(self.driver)
         self.base_page.make_csv('Torrential_traffic_must_haves.csv', f'Test Case,Use Case / Scenario,Result\n', new=True)
     
     def login_test_cases(self):
-        try:
-            # Test Case 1: Invalid Login (Invalid Username and Password)
-            self.driver.get(data.torrential_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
-            self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
-            login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password),Fail\n', new=False)
+        # try:
+        #     # Test Case 1: Invalid Login (Invalid Username and Password)
+        #     self.driver.get(data.torrential_traffic_url)
+        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+        #     self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
+        #     login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
+        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
+        # except Exception as e:
+        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password),Fail\n', new=False)
 
-        try:
-            # Test Case 2: Valid Username, Invalid Password
-            self.driver.get(data.torrential_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
-            self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
-            login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid password"
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password),Fail\n', new=False)
+        # try:
+        #     # Test Case 2: Valid Username, Invalid Password
+        #     self.driver.get(data.torrential_traffic_url)
+        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
+        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+        #     self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
+        #     login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid password"
+        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
+        # except Exception as e:
+        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password),Fail\n', new=False)
         
-        try:
-            # Test Case 3: Invalid Username, Valid Password
-            self.driver.get(data.torrential_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
-            self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
-            login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid username"
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password),Fail\n', new=False)
+        # try:
+        #     # Test Case 3: Invalid Username, Valid Password
+        #     self.driver.get(data.torrential_traffic_url)
+        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
+        #     self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
+        #     login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid username"
+        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
+        # except Exception as e:
+        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password),Fail\n', new=False)
         
         try:
             # Test Case 4: Valid Login
@@ -1289,7 +1313,7 @@ class Torrential_Traffic_TestCases:
         except Exception as e:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password),Fail\n', new=False)
 
-    def project_crud_test_cases(self):
+    def crud_test_cases(self):
         try:
             self.driver.get(data.torrential_project_listing_page)
         
@@ -1345,7 +1369,6 @@ class Torrential_Traffic_TestCases:
 
 
         try:
-            # self.driver.get(data.torrential_project_listing_page)
 
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_create_btn)
         
@@ -1460,7 +1483,8 @@ class Torrential_Traffic_TestCases:
             try:
                 # Test Case 2: View Campaign
                 time.sleep(10)
-                self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
+                campaign_create_check_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
+                self.driver.execute_script("arguments[0].click();", campaign_create_check_btn)
                 campaign_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 print(f"Campaign ID: {campaign_id}")
@@ -1476,24 +1500,39 @@ class Torrential_Traffic_TestCases:
                 edit_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
                 self.driver.execute_script("arguments[0].click();", edit_btn)
                 time.sleep(2)
-                old_traffic_edit_fields(self.base_page, selected_campaign, self.driver)
+                self.old_traffic_edit_fields(self.base_page, selected_campaign, self.driver)
 
                 save_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_save_btn)
                 self.driver.execute_script("arguments[0].click();", save_btn)
                 time.sleep(6)
-                self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
-                time.sleep(3)
-                campaign_edited = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited)), "Campaign edit failed"
+                campaign_edited = self.old_traffic_edit_fields_check(self.base_page, selected_campaign, self.driver), "Campaign edit failed"
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Edit Campaign, {"Pass" if campaign_edited[0] else f"Fail - {campaign_edited[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Edit Campaign,Fail\n', new=False)
+                
+
+            try:
+                # Test Case 2: View Campaign
+                self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
+                time.sleep(10)
+                campaign_create_check_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
+                self.driver.execute_script("arguments[0].click();", campaign_create_check_btn)
+                campaign_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
+                campaign_id = self.driver.current_url.split("/")[-2]
+                print(f"Campaign ID: {campaign_id}")
+                self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, View Campaign after edit, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
+            except Exception as e:
+                    self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, View Campaign after edit,Fail\n', new=False)
         
             try:
                 # Test Case 4: Live Campaign
+                self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
-                self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
+                live_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
+                self.driver.execute_script("arguments[0].click();", live_btn)
                 time.sleep(3)
-                self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_live_modal_confirmation)
+                live_modal_confirmation_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_live_modal_confirmation)
+                self.driver.execute_script("arguments[0].click();", live_modal_confirmation_btn)
                 time.sleep(10)
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(10)
@@ -1505,9 +1544,11 @@ class Torrential_Traffic_TestCases:
             try:
                 # Test Case 5: Cancel Live Campaign
                 time.sleep(2)
-                self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_stop_btn.format(campaign_id=campaign_id))
+                stop_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_stop_btn.format(campaign_id=campaign_id))
+                self.driver.execute_script("arguments[0].click();", stop_btn)
                 time.sleep(3)
-                self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_stop_modal_confirmation)
+                stop_modal_confirmation_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_stop_modal_confirmation)
+                self.driver.execute_script("arguments[0].click();", stop_modal_confirmation_btn)
                 time.sleep(10)
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(10)
@@ -1534,6 +1575,7 @@ class Torrential_Traffic_TestCases:
                 
             try:
                 # Test Case 4: Delete Project
+                self.driver.get(data.torrential_project_listing_page)
                 time.sleep(2)
                 delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
                 self.driver.execute_script("arguments[0].click();", delete_btn)
@@ -1606,7 +1648,21 @@ class Torrential_Traffic_TestCases:
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
-            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_option)
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_month_option)
+            time.sleep(2)
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
+            time.sleep(10)
+            
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
+            time.sleep(0.5)
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_7_day_option)
+            time.sleep(2)
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
+            time.sleep(10)
+            
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
+            time.sleep(0.5)
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
             time.sleep(10)
@@ -1621,13 +1677,6 @@ class Torrential_Traffic_TestCases:
                 "page_not_loaded": data_list[5],
                 "other_errors": data_list[6]
             }
-            print(data_dict)
-            filter_check = int(data_dict["total_failed"]) != int(data_dict_24_days["total_failed"])
-            
-            if filter_check:
-                self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Pass\n', new=False)
-            else:
-                self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Fail\n', new=False)
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_link)
             time.sleep(5)
@@ -1666,13 +1715,12 @@ class Torrential_Traffic_TestCases:
         
     def full_dashboard_must_haves(self):
         self.login_test_cases()
-        self.project_crud_test_cases()
-        self.campaign_crud_test_cases()
+        self.crud_test_cases()
         self.report_test_cases()
         self.campaign_error_and_graph_stats()
         print("Torrential Dashboard Must Haves Test Cases Completed")
                 
-class BS_Traffic_TestCases:
+class BS_Traffic_TestCases(TrafficBase):
     
     def __init__(self):
         self.driver = initialize_and_navigate(data.bs_traffic_url)

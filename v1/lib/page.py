@@ -154,18 +154,24 @@ class HomePage(BasePage):
             pass
         
         
-    def send_key_with_action_chain(self, element, text_list):
+    def send_key_with_action_chain(self, element, text):
         
         actions = ActionChains(self.driver)
-        for text in text_list:
-            actions.click(element).send_keys(Keys.BACKSPACE).send_keys(text).send_keys(Keys.ENTER).perform()
+        actions.click(element).send_keys(text[-1]).send_keys(Keys.ENTER).perform()
+        
+    def remove_text(self, element, text):
+        
+        actions = ActionChains(self.driver)
+        for _ in range(len(text)):
+            actions.click(element).send_keys(Keys.BACKSPACE).perform()
+            actions = ActionChains(self.driver)
+            actions.click(element)
+            actions.key_down(Keys.CONTROL)
+            actions.send_keys('a')
+            actions.key_up(Keys.CONTROL)
+            actions.send_keys(Keys.BACKSPACE).perform()
+        
 
-
-    # # def click_random_elements(self, xpath: str, num_clicks=3):
-    # #     try:
-    # #         keywords = self.driver.find_elements(By.XPATH, xpath)
-    # #         total_elements = len(keywords)
-    
     
     
     

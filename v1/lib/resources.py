@@ -235,6 +235,7 @@ class OldTrafficModuleLocator:
     campaign_destination_url_edit_field = '//div[contains(@class, "add_scroll_input") and .//input[@value = "{destination_url}"]]'
     campaign_brand_name_edit_field = '//input[@value="{brand}"]'
     campaign_average_session_edit_field = '//input[@name="num_searches"]'
+    campaign_average_session_edit_field_check = '//div[./label="Average Session Per Day" and .//input[@value="{average_session}"]]'
     campaign_country_edit_field = '//div[@class="col-lg-4"]/div[./label[contains(text(), "country")]]'
     campaign_brand_name = '//input[@name="brand_name"]'
     
@@ -263,7 +264,7 @@ class OldTrafficModuleLocator:
     campaing_error_filter = '//select[@name="date"]'
     campaing_error_filter_1_day_option = '//option[text()="1 day"]'
     campaing_error_filter_7_day_option = '//option[text()="7 days"]'
-    campaing_error_filter_1_mondth_option = '//option[text()="1 Month"]'
+    campaing_error_filter_1_month_option = '//option[text()="1 Month"]'
     campaign_error_filter_btn = '//button[text() ="Filter By Date"]'
     campaign_link = '//a[contains(@href, "/dashboard/campaign-details")]'
     
