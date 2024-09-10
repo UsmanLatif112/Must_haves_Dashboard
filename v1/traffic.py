@@ -14,6 +14,7 @@ project_id = None
 campaign_name = "-AI-TEST-Campaign-SQA"
 campaign_name_edited = "-AI-TEST-Campaign-SQA-Edited"
 campaign_average_session = 10
+campaign_average_session_edited = 5
 campaign_image_base64 = "data:image/jpeg;base64,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"
 campaign_image_url = "http://image.url"
 campaign_gmb_cid = "1234567890"
@@ -180,6 +181,7 @@ def edit_tagify_data(base_page, campaign, driver):
         # Update the hidden textarea value
         hidden_textarea = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign_textarea)
         driver.execute_script("arguments[0].value = arguments[1];", hidden_textarea, campaign_wildcard_string_edited)
+        time.sleep(2)
 
     if "tier1_url" in campaign["fields"]:
         wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url)
@@ -295,6 +297,58 @@ def edit_input_field_data(base_page, campaign, driver):
     input_field.clear()
     input_field.send_keys(campaign_name_edited)
       
+def old_traffic_edit_fields(base_page, campaign, driver):
+    if "keyword_modifiers" in campaign["fields"]:
+        wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers))
+        driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, resources.OldTrafficModuleLocator.keyword_inner_html_edited.format(keyword=campaign_keyword_modifiers_edited))
+    time.sleep(2)
+
+    if "direct_url" in campaign["fields"]:
+        direct_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url))
+        base_page.send_key_with_action_chain(direct_url_field, campaign_direct_url_edited)
+    time.sleep(2)
+        
+    if "wildcard_string" in campaign["fields"]:
+        wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string))
+        base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string_edited)
+    time.sleep(2)
+
+    if "tier1_url" in campaign["fields"]:
+        tier_1_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url))
+        base_page.send_key_with_action_chain(tier_1_url_field, campaign_tier1_url_edited)
+    time.sleep(2)
+
+        
+    if "tier2_url" in campaign["fields"]:
+        tier_2_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url))
+        base_page.send_key_with_action_chain(tier_2_url_field, campaign_tier2_url_edited)
+    time.sleep(2)
+
+    if "destination_url" in campaign["fields"]:
+        wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url))
+        base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url_edited)
+    time.sleep(2)
+        
+    if "brand_name" in campaign["fields"]:
+        brand_name_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name))
+        brand_name_field.clear()
+        brand_name_field.send_keys(campaign_brand_name_edited)
+    time.sleep(2)
+        
+    input_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
+    input_field.clear()
+    input_field.send_keys(campaign_name_edited)
+    time.sleep(2)
+    
+    average_session_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session_edit_field)
+    average_session_field.clear()
+    average_session_field.send_keys(campaign_average_session_edited)
+    time.sleep(2)
+    
+        
+    country_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_country_edit_field)
+    driver.execute_script("arguments[0].innerHTML = arguments[1];", country_field, resources.OldTrafficModuleLocator.country_inner_html_edited)
+    
 
 class CE_Traffic_TestCases:
     def __init__(self):
@@ -1280,38 +1334,19 @@ class Torrential_Traffic_TestCases:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Edit Project,Fail\n', new=False)
         
         try:
-            # Test Case 4: Delete Project
+            # Test Case 2: View Project
             time.sleep(2)
-            delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
-            self.driver.execute_script("arguments[0].click();", delete_btn)
-            time.sleep(2)
-            delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
-            self.driver.execute_script("arguments[0].click();", delete_modal_btn)
-            time.sleep(6)
-            project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
-
-    def campaign_crud_test_cases(self):
-        try:
-            self.driver.get(data.torrential_project_listing_page)
-        
-            time.sleep(2)
-            self.base_page.click_btn(resources.OldTrafficModuleLocator.project_create_btn)
-            time.sleep(2)
-            self.base_page.wait(resources.OldTrafficModuleLocator.project_create_name_input).send_keys(project_name)
-            
-            time.sleep(2)
-            self.base_page.click_btn(resources.OldTrafficModuleLocator.project_create_modal_btn)
-            time.sleep(2)
-
-            self.base_page.click_btn(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name))
-            time.sleep(5)
-            print(f"Project Created- Getting project id {self.driver.current_url}")
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=edited_project_name))
+            project_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.project_view_check.format(project_name=edited_project_name)), "Project view failed"
             project_id = self.driver.current_url.split("/")[-2]
-            print(f"Project ID: {project_id}")
-            
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, View Project after edit, {"Pass" if project_viewed[0] else f"Fail - {project_viewed[1]}"}\n', new=False)
+        except Exception as e:
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, View Project after edit,Fail\n', new=False)
+
+
+        try:
+            # self.driver.get(data.torrential_project_listing_page)
+
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_create_btn)
         
 
@@ -1382,31 +1417,31 @@ class Torrential_Traffic_TestCases:
                 time.sleep(2)
                 if "keyword_modifiers" in campaign["fields"]:
                     wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers)
-                    self.driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, resources.OldTrafficModuleLocator.keyword_inner_html.format(keyword=campaign_keyword_modifiers))
+                    self.base_page.send_key_with_action_chain(wildcard_field, campaign_keyword_modifiers)
 
                 if "direct_url" in campaign["fields"]:
                     direct_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url)
-                    self.driver.execute_script("arguments[0].innerHTML = arguments[1];", direct_url_field, resources.OldTrafficModuleLocator.direct_url_inner_html.format(direct_url=campaign_direct_url))
-                    
-                if "brand_name" in campaign["fields"]:
-                    self.base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
+                    self.base_page.send_key_with_action_chain(direct_url_field, campaign_direct_url)
                     
                 if "wildcard_string" in campaign["fields"]:
                     wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign)
-                    self.driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, resources.OldTrafficModuleLocator.wildcard_url_inner_html.format(wildcard_url=campaign_wildcard_string))
+                    self.base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string)
 
                 if "tier1_url" in campaign["fields"]:
                     tier_1_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url)
-                    self.driver.execute_script("arguments[0].innerHTML = arguments[1];", tier_1_url_field, resources.OldTrafficModuleLocator.tier_1_url_inner_html.format(tier_url=campaign_tier1_url))
+                    self.base_page.send_key_with_action_chain(tier_1_url_field, campaign_tier1_url)
 
                     
                 if "tier2_url" in campaign["fields"]:
                     tier_2_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url)
-                    self.driver.execute_script("arguments[0].innerHTML = arguments[1];", tier_2_url_field, resources.OldTrafficModuleLocator.tier_2_url_inner_html.format(tier_2_url=campaign_tier2_url))
+                    self.base_page.send_key_with_action_chain(tier_2_url_field, campaign_tier2_url)
 
                 if "destination_url" in campaign["fields"]:
                     wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url)
-                    self.driver.execute_script("arguments[0].innerHTML = arguments[1];", wildcard_field, resources.OldTrafficModuleLocator.destination_inner_html.format(destination_url=campaign_destination_url))
+                    self.base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url)
+
+                if "brand_name" in campaign["fields"]:
+                    self.base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
                 
             try:
                 # Test Case 1: Create Campaign
@@ -1438,11 +1473,11 @@ class Torrential_Traffic_TestCases:
                 time.sleep(2)
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
-                self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
+                edit_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
+                self.driver.execute_script("arguments[0].click();", edit_btn)
                 time.sleep(2)
-                input_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
-                input_field.clear()
-                input_field.send_keys(campaign_name_edited)
+                old_traffic_edit_fields(self.base_page, selected_campaign, self.driver)
+
                 save_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_save_btn)
                 self.driver.execute_script("arguments[0].click();", save_btn)
                 time.sleep(6)
@@ -1496,20 +1531,24 @@ class Torrential_Traffic_TestCases:
                 
             except Exception as e:
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Delete Campaign,Fail\n', new=False)
+                
+            try:
+                # Test Case 4: Delete Project
+                time.sleep(2)
+                delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
+                self.driver.execute_script("arguments[0].click();", delete_btn)
+                time.sleep(2)
+                delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
+                self.driver.execute_script("arguments[0].click();", delete_modal_btn)
+                time.sleep(6)
+                project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
+                self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
+            except Exception as e:
+                self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
+                
         except Exception as e:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, CRUD Test Cases,Fail\n', new=False)
-            
-        try:
-            self.driver.get(data.torrential_project_listing_page)
-            time.sleep(2)
-            delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
-            self.driver.execute_script("arguments[0].click();", delete_btn)
-            time.sleep(2)
-            delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
-            self.driver.execute_script("arguments[0].click();", delete_modal_btn)
-        except Exception as e:
-            print(e)
-            
+
             
     def report_test_cases(self):
         
@@ -1632,11 +1671,9 @@ class Torrential_Traffic_TestCases:
         self.report_test_cases()
         self.campaign_error_and_graph_stats()
         print("Torrential Dashboard Must Haves Test Cases Completed")
-        
-        
-        
-        
+                
 class BS_Traffic_TestCases:
+    
     def __init__(self):
         self.driver = initialize_and_navigate(data.bs_traffic_url)
         self.base_page = page.HomePage(self.driver)

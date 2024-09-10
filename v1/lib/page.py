@@ -1,6 +1,8 @@
 from imports import *
 from lib.resources import *
 import os,csv
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 
 
@@ -150,6 +152,13 @@ class HomePage(BasePage):
             
         except:
             pass
+        
+        
+    def send_key_with_action_chain(self, element, text_list):
+        
+        actions = ActionChains(self.driver)
+        for text in text_list:
+            actions.click(element).send_keys(Keys.BACKSPACE).send_keys(text).send_keys(Keys.ENTER).perform()
 
 
     # # def click_random_elements(self, xpath: str, num_clicks=3):
