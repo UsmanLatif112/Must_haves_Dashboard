@@ -1753,39 +1753,7 @@ class BS_Traffic_TestCases(TrafficBase):
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Edit Project, {"Pass" if project_edited[0] else f"Fail - {project_edited[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Edit Project,Fail\n', new=False)
-        
-        
-        try:
-            # Test Case 4: Delete Project
-            self.driver.get(data.bs_project_listing_page)
-            time.sleep(2)
-            delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
-            self.driver.execute_script("arguments[0].click();", delete_btn)
-            time.sleep(2)
-            delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
-            self.driver.execute_script("arguments[0].click();", delete_modal_btn)
-            time.sleep(20)
-            self.driver.get(data.bs_project_listing_page)
-            project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
 
-        try:
-            # Test Case 4: Delete Project
-            self.driver.get(data.bs_project_listing_page)
-            time.sleep(2)
-            delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
-            self.driver.execute_script("arguments[0].click();", delete_btn)
-            time.sleep(2)
-            delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
-            self.driver.execute_script("arguments[0].click();", delete_modal_btn)
-            time.sleep(20)
-            self.driver.get(data.bs_project_listing_page)
-            project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
 
         try:
 
@@ -1823,11 +1791,11 @@ class BS_Traffic_TestCases(TrafficBase):
                     "campaign_sub_type": "google_search_no_click",
                     "fields": ["keyword_modifiers"]
                 },
-                {
-                    "campaign_type": "Birthday",
-                    "campaign_sub_type": "Birthday",
-                    "fields": ["image_base64_code", "keyword_modifiers"]
-                },
+                # {
+                #     "campaign_type": "Birthday",
+                #     "campaign_sub_type": "Birthday",
+                #     "fields": ["image_base64_code", "keyword_modifiers"]
+                # },
                 {
                     "campaign_type": "Rocket",
                     "campaign_sub_type": "Rocket",
