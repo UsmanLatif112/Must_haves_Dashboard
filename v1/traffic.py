@@ -1201,38 +1201,38 @@ class Torrential_Traffic_TestCases(TrafficBase):
         self.base_page.make_csv('Torrential_traffic_must_haves.csv', f'Test Case,Use Case / Scenario,Result\n', new=True)
     
     def login_test_cases(self):
-        # try:
-        #     # Test Case 1: Invalid Login (Invalid Username and Password)
-        #     self.driver.get(data.torrential_traffic_url)
-        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
-        #     self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
-        #     login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
-        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
-        # except Exception as e:
-        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password),Fail\n', new=False)
+        try:
+            # Test Case 1: Invalid Login (Invalid Username and Password)
+            self.driver.get(data.torrential_traffic_url)
+            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
+            login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
+        except Exception as e:
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password),Fail\n', new=False)
 
-        # try:
-        #     # Test Case 2: Valid Username, Invalid Password
-        #     self.driver.get(data.torrential_traffic_url)
-        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
-        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
-        #     self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
-        #     login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid password"
-        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
-        # except Exception as e:
-        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password),Fail\n', new=False)
+        try:
+            # Test Case 2: Valid Username, Invalid Password
+            self.driver.get(data.torrential_traffic_url)
+            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
+            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
+            login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid password"
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
+        except Exception as e:
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password),Fail\n', new=False)
         
-        # try:
-        #     # Test Case 3: Invalid Username, Valid Password
-        #     self.driver.get(data.torrential_traffic_url)
-        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-        #     self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
-        #     self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
-        #     login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid username"
-        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
-        # except Exception as e:
-        #     self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password),Fail\n', new=False)
+        try:
+            # Test Case 3: Invalid Username, Valid Password
+            self.driver.get(data.torrential_traffic_url)
+            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
+            self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
+            login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid username"
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
+        except Exception as e:
+            self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password),Fail\n', new=False)
         
         try:
             # Test Case 4: Valid Login
