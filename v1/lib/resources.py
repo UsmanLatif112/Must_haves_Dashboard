@@ -137,6 +137,27 @@ class TrafficModuleLocator:
     campaign_geo_latitude = '//input[@id="id_geo_latitude"]'
     campaign_geo_longitude = '//input[@id="id_geo_longitude"]'
     
+    tiered_1_url_xpath = '//tag[@value = "{tier_1_url}"]/x'
+    tiered_2_url_xpath = '//tag[@value = "{tier_2_url}"]/x'
+    destination_url_xpath = '//tag[@value = "{destination_url}"]/x'
+    wildcard_string_xpath = '//tag[@value = "{wildcard_string}"]/x'
+    direct_url_xpath = '//tag[@value = "{direct_url}"]/x'
+    keyword_modifiers_xpath = '//tag[@value = "{keyword_modifiers}"]/x'
+    
+    campaign_name_edit_check = '//input[@value = "{campaign_name}"]'
+    campaign_brand_name_edit_check = '//input[@value = "{campaign_brand_name}"]'
+    campaign_average_session_edit_check = '//input[@value = "{campaing_average_session}"]'
+    campaign_frequency_edit_check = '//input[@value = "Monthly" and @id="id_num_searches"]'
+    campaign_wildcard_edit_check = '//input[@value = "{campaign_wildcard}"] | //textarea[contains(text() , "{campaign_wildcard}")]'
+    campaign_direct_url_edit_check = '//input[@value = "{campaign_direct_url}"] | //textarea[contains(text() , "{campaign_direct_url}")]'
+    campaign_tier1_url_edit_check = '//input[@value = "{campaign_tier1_url}"] | //textarea[contains(text() , "{campaign_tier1_url}")]'
+    campaign_tier2_url_edit_check = '//input[@value = "{campaign_tier2_url}"] | //textarea[contains(text() , "{campaign_tier2_url}")]'
+    campaign_destination_url_edit_check = '//input[@value = "{campaign_destination_url}"] | //textarea[contains(text() , "{campaign_destination_url}")]'
+    campaign_keyword_modifiers_edit_check = '//input[@value = "{campaign_keyword_modifiers}"] | //textarea[contains(text() , "{campaign_keyword_modifiers}")]'
+    
+    campaign_image_base64_edit_check = '//img[@src="{campaign_image_base64}"]'
+    campaign_image_url_edit_check = '//input[@value = "{campaign_image_url}"]'
+    
     campaign_create_submit_btn = '//button[@id="campaign-form-submit"]'
     campaign_create_btn = '//a[text() = "Create Campaign"]'
     campaing_edit_btn = '//a[@href = "/campaign/edit/{campaign_id}/"]'
