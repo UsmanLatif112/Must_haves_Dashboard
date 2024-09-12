@@ -137,12 +137,12 @@ class TrafficBase:
         passed = True
         
         if "image_base64_code" in campaign["fields"]:
-            image_base64_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_base64_edit_check.format(campaign_image_base64=campaign_image_base64_edited[-1]))
+            image_base64_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_base64_edit_check.format(campaign_image_base64=campaign_image_base64_edited))
             if not image_base64_field and passed:
                 passed = False
                 
         if "image_url" in campaign["fields"]:
-            image_url_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_url_edit_check.format(campaign_image_url=campaign_image_url_edited[-1]))
+            image_url_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_url_edit_check.format(campaign_image_url=campaign_image_url_edited))
             if not image_url_field and passed:
                 passed = False
                 
@@ -634,7 +634,7 @@ class CE_Traffic_TestCases(TrafficBase):
                         time.sleep(5)
                         table_rows = self.base_page.wait(resources.TrafficModuleLocator.report_result_row)
                         if table_rows:
-                            self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Pass\n', new=False)
+                            self.base_page.make_csv("CE_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Pass\n', new=False)
                             break
                 if table_rows:
                     break
@@ -1136,7 +1136,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_today_option)
 
-            time.sleep(100)
+            time.sleep(130)
             error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
@@ -1180,11 +1180,97 @@ class Tiger_Traffic_TestCases(TrafficBase):
             else:
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             
-            time.sleep(2)
+            time.sleep(2)   
         except Exception as e:
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             print(e)
+        
+        try:
+            self.driver.get(data.tiger_campaign_error_page)
+            time.sleep(2)
+            self.base_page.click_btn('//button[@id="btnProjectErrors"]')
+            time.sleep(2)
+            error_page_row = self.base_page.wait('//div[./div[./a[contains(@href, "/project")]]]').text
             
+            data_list_24_days = error_page_row.split('\n')
+            data_dict_24_days = {
+                "campaing_id": data_list_24_days[0],
+                "total_failed": data_list_24_days[1],
+                "google_recaptcha": data_list_24_days[2],
+                "wildcard_not_found": data_list_24_days[3],
+                "product_wildcard_not_found": data_list_24_days[4],
+                "page_not_loaded": data_list_24_days[5],
+                "other_errors": data_list_24_days[6]
+            }
+            print(data_dict_24_days)
+            
+            day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
+            day_filter[1].click()
+            time.sleep(0.5)
+            day_7_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
+            day_7_filter[1].click()
+            time.sleep(100)
+            
+            day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
+            day_filter[1].click()
+            time.sleep(0.5)
+            day_30_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
+            day_30_filter[1].click()
+            time.sleep(100)
+            
+            day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
+            day_filter[1].click()
+            time.sleep(0.5)
+            day_today_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_today_option)
+            day_today_filter[1].click()
+            time.sleep(130)
+            
+            error_page_row = self.base_page.wait('//div[./div[./a[contains(@href, "/project")]]]').text
+            data_list = error_page_row.split('\n')
+            data_dict = {
+                "campaing_id": data_list[0],
+                "total_failed": data_list[1],
+                "google_recaptcha": data_list[2],
+                "wildcard_not_found": data_list[3],
+                "product_wildcard_not_found": data_list[4],
+                "page_not_loaded": data_list[5],
+                "other_errors": data_list[6]
+            }
+            print(data_dict)
+            filter_check = int(data_dict["total_failed"]) != int(data_dict_24_days["total_failed"])
+            
+            if filter_check:
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project error and graph stats, Data Filtering, Pass\n', new=False)
+            else:
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project error and graph stats, Data Filtering, Fail\n', new=False)
+                
+            time.sleep(5)
+            self.base_page.click_btn('//a[contains(@href, "/projects/") and @class="text-muted"]')
+            time.sleep(5)
+            raw_data = self.driver.page_source
+            page_src = raw_data.split('rawData = ')
+            for part in page_src:
+                if part.startswith("JSON"):
+                    data_string = part
+                    data_json = data_string.split(";")[0]
+
+            json_string = data_json.split("JSON.parse('")[1].split("')")[0]
+            json_data = json.loads(json_string)[-1]
+            print(json_data)
+            
+            google_recaptcha_check = int(data_dict["google_recaptcha"]) == int(json_data["google_recaptcha"])
+            wildcard_not_found_check = int(data_dict["wildcard_not_found"]) == int(json_data["wildcard_not_found"])
+            product_wildcard_not_found_check = int(data_dict["product_wildcard_not_found"]) == int(json_data["product_wildcard_not_found"])
+            total_failed_check = int(data_dict["total_failed"]) == int(json_data["failed"])
+            
+            if google_recaptcha_check and wildcard_not_found_check and product_wildcard_not_found_check and total_failed_check:
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project error and graph stats, Error and Graph Stats, Pass\n', new=False)
+            else:
+                self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project error and graph stats, Error and Graph Stats, Fail\n', new=False)
+            
+        except Exception as e:
+            self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project error and graph stats, Error and Graph Stats, Fail\n', new=False)
+            print(e)
         
         
     def full_dashboard_must_haves(self):

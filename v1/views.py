@@ -535,9 +535,14 @@ def traffic_must_haves():
 def CE_traffic_must_haves():
     user_email = current_user.email
     user_id = current_user.id
-    current_date_ = datetime.today().date()
-    ce_traffic_Models_list = ce_traffic_Model.query.filter(func.date(ce_traffic_Model.created_at) == current_date_, ce_traffic_Model.user_id == user_id).order_by(ce_traffic_Model.created_at.desc()).limit(18).all()
-
+    earliest_timestamp = db.session.query(ce_traffic_Model.created_at).filter(
+        ce_traffic_Model.user_id == user_id
+    ).order_by(ce_traffic_Model.created_at.asc()).limit(1).scalar()
+    
+    ce_traffic_Models_list = ce_traffic_Model.query.filter(
+        ce_traffic_Model.created_at == earliest_timestamp,
+        ce_traffic_Model.user_id == user_id
+    ).order_by(ce_traffic_Model.created_at.desc()).all()
     return render_template("CE_traffic.html", ce_traffic_Model=ce_traffic_Models_list, user_email=user_email)
 
 @app.route("/CE-traffic-must-haves-run-script", methods=["POST"])
@@ -569,8 +574,14 @@ def CE_traffic_must_haves_run_script():
 def Tiger_traffic_must_haves():
     user_email = current_user.email
     user_id = current_user.id
-    current_date_ = datetime.today().date()
-    tiger_traffic_Models_list = tiger_traffic_Model.query.filter(func.date(tiger_traffic_Model.created_at) == current_date_, tiger_traffic_Model.user_id == user_id).order_by(tiger_traffic_Model.created_at.desc()).limit(18).all()
+    earliest_timestamp = db.session.query(tiger_traffic_Model.created_at).filter(
+        tiger_traffic_Model.user_id == user_id
+    ).order_by(tiger_traffic_Model.created_at.desc()).limit(1).scalar()
+    
+    tiger_traffic_Models_list = tiger_traffic_Model.query.filter(
+        tiger_traffic_Model.created_at == earliest_timestamp,
+        tiger_traffic_Model.user_id == user_id
+    ).order_by(tiger_traffic_Model.created_at.desc()).all()
     return render_template("Tiger_traffic.html", tiger_traffic_Model=tiger_traffic_Models_list, user_email=user_email)
 
 @app.route("/Tiger-traffic-must-haves-run-script", methods=["POST"])
@@ -602,8 +613,14 @@ def Tiger_traffic_must_haves_run_script():
 def Torrential_traffic_must_haves():
     user_email = current_user.email
     user_id = current_user.id
-    current_date_ = datetime.today().date()
-    torrential_traffic_Models_list = torrential_traffic_Model.query.filter(func.date(torrential_traffic_Model.created_at) == current_date_, torrential_traffic_Model.user_id == user_id).order_by(torrential_traffic_Model.created_at.desc()).limit(17).all()
+    earliest_timestamp = db.session.query(torrential_traffic_Model.created_at).filter(
+        torrential_traffic_Model.user_id == user_id
+    ).order_by(torrential_traffic_Model.created_at.desc()).limit(1).scalar()
+    
+    torrential_traffic_Models_list = torrential_traffic_Model.query.filter(
+        torrential_traffic_Model.created_at == earliest_timestamp,
+        torrential_traffic_Model.user_id == user_id
+    ).order_by(torrential_traffic_Model.created_at.desc()).all()
     return render_template("Torrential_traffic.html", torrential_traffic_Model=torrential_traffic_Models_list, user_email=user_email)
 
 @app.route("/Torrential-traffic-must-haves-run-script", methods=["POST"])
@@ -634,8 +651,15 @@ def Torrential_traffic_must_haves_run_script():
 @login_required
 def BS_traffic_must_haves():
     user_email = current_user.email
-    current_date_ = datetime.today().date()
-    bs_traffic_Models_list = bs_traffic_Model.query.filter(func.date(bs_traffic_Model.created_at) == current_date_).order_by(bs_traffic_Model.created_at.desc()).limit(17).all()
+    user_id = current_user.id
+    earliest_timestamp = db.session.query(bs_traffic_Model.created_at).filter(
+        bs_traffic_Model.user_id == user_id
+    ).order_by(bs_traffic_Model.created_at.desc()).limit(1).scalar()
+    
+    bs_traffic_Models_list = bs_traffic_Model.query.filter(
+        bs_traffic_Model.created_at == earliest_timestamp,
+        bs_traffic_Model.user_id == user_id
+    ).order_by(bs_traffic_Model.created_at.desc()).all()
     return render_template("BS_traffic.html", bs_traffic_Model=bs_traffic_Models_list, user_email=user_email)
 
 @app.route("/BS-traffic-must-haves-run-script", methods=["POST"])
