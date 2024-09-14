@@ -410,6 +410,7 @@
     <tbody id="results-body">
       <!-- Empty row for spacing -->
       <!--<tr><td colspan="3" style="height: 20px; background: transparent;"></td></tr>-->
+      {% if QuickAnalysisModels %}
       {% for QuickAnalysisModel in QuickAnalysisModels %}
       <tr>
         <td title="Test Case: {{ QuickAnalysisModel.test_case }}">{{ QuickAnalysisModel.test_case }}</td>
@@ -421,20 +422,25 @@
         <td colspan="3">No data available.</td>
       </tr>
       {% endfor %}
+      {% else %}
+      <tr id="no-data-row">
+        <td colspan="3">No data available.</td>
+      </tr>
+      {% endif %}
     </tbody>
   </table>
 </div>
 
+{% if QuickAnalysisModels %}
 <div class="image-container">
   <h4>After Campaign Creation</h4>
-  <img src="{{url_for('static', filename='screenshot.png')}}" alt="Descriptive alt text" style="
-    margin-top: 20px;">
+  <img src="{{url_for('static', filename='screenshot.png')}}" alt="Descriptive alt text" style="margin-top: 20px;">
 </div>
 <div class="image-containerr">
   <h4>After Edit Campaign</h4>
-  <img src="{{url_for('static', filename='screenshott.png')}}" alt="Descriptive alt text" style="
-  margin-top: 20px;">
+  <img src="{{url_for('static', filename='screenshott.png')}}" alt="Descriptive alt text" style="margin-top: 20px;">
 </div>
+{% endif %}
 
 
 
