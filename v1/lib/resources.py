@@ -156,7 +156,7 @@ class TrafficModuleLocator:
     campaign_keyword_modifiers_edit_check = '//input[@value = "{campaign_keyword_modifiers}"] | //textarea[contains(text() , "{campaign_keyword_modifiers}")]'
     
     campaign_image_base64_edit_check = '//img[@src="{campaign_image_base64}"]'
-    campaign_image_url_edit_check = '//input[@value = "{campaign_image_url}"]'
+    campaign_image_url_edit_check = '//img[@src = "{campaign_image_url}"]'
     
     campaign_create_submit_btn = '//button[@id="campaign-form-submit"]'
     campaign_create_btn = '//a[text() = "Create Campaign"]'
@@ -277,6 +277,7 @@ class OldTrafficModuleLocator:
     stop_status = '//a[@title="Stopped"]'
     campaing_delete_btn = '//a[@onclick="deleteFun({campaign_id})"]'
     capmaign_delete_modal_btn = '//button[@onclick="confirmDelete()"]'
+    campaign_radius = '//input[@name="radius"]'
     
     report_project_filter = '//select[@id="selectProject"]'
     report_project_filter_option = '//select[@id="selectProject"]//option'

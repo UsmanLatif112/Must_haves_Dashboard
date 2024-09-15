@@ -608,6 +608,7 @@ class CE_Traffic_TestCases(TrafficBase):
     def campaign_error_and_graph_stats(self):
         try:
             self.driver.get(data.ce_campaign_error_page)
+            time.sleep(2)
             error_page_row = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list_24_days = error_page_row.split('\n')
             data_dict_24_days = {
@@ -620,21 +621,21 @@ class CE_Traffic_TestCases(TrafficBase):
                 "other_errors": data_list_24_days[6]
             }
             print(data_dict_24_days)
+
             
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
-            
-            
+            time.sleep(2)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
-            
+            time.sleep(2)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_today_option)
 
-            time.sleep(8)
+            time.sleep(20)
             error_page_row = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
@@ -647,7 +648,6 @@ class CE_Traffic_TestCases(TrafficBase):
                 "other_errors": data_list[6]
             }
             print(data_dict)
-            
             filter_check = int(data_dict["total_failed"]) != int(data_dict_24_days["total_failed"])
             
             if filter_check:
@@ -655,6 +655,7 @@ class CE_Traffic_TestCases(TrafficBase):
             else:
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Data Filtering, Fail\n', new=False)
             
+            time.sleep(5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaign_link)
             time.sleep(5)
             raw_data = self.driver.page_source
@@ -681,6 +682,91 @@ class CE_Traffic_TestCases(TrafficBase):
             time.sleep(2)
         except Exception as e:
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
+            print(e)
+        
+        try:
+            self.driver.get(data.ce_campaign_error_page)
+            time.sleep(2)
+            self.base_page.click_btn('//button[@id="btnProjectErrors"]')
+            time.sleep(2)
+            error_page_row = self.base_page.wait_for_element('//div[./div[./a[contains(@href, "/project")]]]').text
+            
+            data_list_24_days = error_page_row.split('\n')
+            data_dict_24_days = {
+                "campaing_id": data_list_24_days[0],
+                "total_failed": data_list_24_days[1],
+                "google_recaptcha": data_list_24_days[2],
+                "wildcard_not_found": data_list_24_days[3],
+                "product_wildcard_not_found": data_list_24_days[4],
+                "page_not_loaded": data_list_24_days[5],
+                "other_errors": data_list_24_days[6]
+            }
+            print(data_dict_24_days)
+            
+            day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
+            day_filter[1].click()
+            time.sleep(0.5)
+            day_7_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
+            day_7_filter[1].click()
+            
+            day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
+            day_filter[1].click()
+            time.sleep(0.5)
+            day_30_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
+            day_30_filter[1].click()
+            
+            day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
+            day_filter[1].click()
+            time.sleep(0.5)
+            day_today_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_today_option)
+            day_today_filter[1].click()
+            
+            time.sleep(20)
+            error_page_row = self.base_page.wait_for_element('//div[./div[./a[contains(@href, "/project")]]]').text
+            data_list = error_page_row.split('\n')
+            data_dict = {
+                "campaing_id": data_list[0],
+                "total_failed": data_list[1],
+                "google_recaptcha": data_list[2],
+                "wildcard_not_found": data_list[3],
+                "product_wildcard_not_found": data_list[4],
+                "page_not_loaded": data_list[5],
+                "other_errors": data_list[6]
+            }
+            print(data_dict)
+            filter_check = int(data_dict["total_failed"]) != int(data_dict_24_days["total_failed"])
+            
+            if filter_check:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project error and graph stats, Data Filtering, Pass\n', new=False)
+            else:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project error and graph stats, Data Filtering, Fail\n', new=False)
+                
+            time.sleep(5)
+            self.base_page.click_btn('//a[contains(@href, "/projects/") and @class="text-muted"]')
+            time.sleep(5)
+            raw_data = self.driver.page_source
+            page_src = raw_data.split('rawData = ')
+            for part in page_src:
+                if part.startswith("JSON"):
+                    data_string = part
+                    data_json = data_string.split(";")[0]
+
+            json_string = data_json.split("JSON.parse('")[1].split("')")[0]
+            json_data = json.loads(json_string)[-1]
+            print(json_data)
+            
+            google_recaptcha_check = int(data_dict["google_recaptcha"]) == int(json_data["google_recaptcha"])
+            wildcard_not_found_check = int(data_dict["wildcard_not_found"]) == int(json_data["wildcard_not_found"])
+            product_wildcard_not_found_check = int(data_dict["product_wildcard_not_found"]) == int(json_data["product_wildcard_not_found"])
+            total_failed_check = int(data_dict["total_failed"]) == int(json_data["failed"])
+            
+            if google_recaptcha_check and wildcard_not_found_check and product_wildcard_not_found_check and total_failed_check:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project error and graph stats, Error and Graph Stats, Pass\n', new=False)
+            else:
+                self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project error and graph stats, Error and Graph Stats, Fail\n', new=False)
+            
+        except Exception as e:
+            self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project error and graph stats, Error and Graph Stats, Fail\n', new=False)
             print(e)
             
     def full_dashboard_must_haves(self):
@@ -1093,7 +1179,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_today_option)
 
-            time.sleep(150)
+            time.sleep(100)
             error_page_row = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
@@ -1179,7 +1265,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
             day_today_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_today_option)
             day_today_filter[1].click()
             
-            time.sleep(150)
+            time.sleep(100)
             error_page_row = self.base_page.wait_for_element('//div[./div[./a[contains(@href, "/project")]]]').text
             data_list = error_page_row.split('\n')
             data_dict = {
@@ -1619,26 +1705,28 @@ class Torrential_Traffic_TestCases(TrafficBase):
             }
             print(data_dict_24_days)
             
+            print("24 days")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_month_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
             time.sleep(5)
-            
+            print("7 days")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_7_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
             time.sleep(5)
-            
+            print("1 day")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
-            time.sleep(10)
+            time.sleep(25)
+            print("collected data")
             error_page_row = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split(' ')
             data_dict = {
@@ -1651,11 +1739,15 @@ class Torrential_Traffic_TestCases(TrafficBase):
                 "other_errors": data_list[6]
             }
             
+            print(data_dict)
+            
+            print("graph stats")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_link)
             time.sleep(5)
             cleaned_data = []
             graph_data_list = []
             raw_data = self.driver.page_source
+            
             page_src = raw_data.split('var options')[1]
             data_splited = page_src.split('],')[0]
             fixed_string = data_splited.replace("'", '"')
@@ -1797,7 +1889,7 @@ class BS_Traffic_TestCases(TrafficBase):
 
 
         try:
-
+            self.driver.get(data.bs_campaing_listing_page.format(project_id=project_id))
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_create_btn)
         
 
@@ -1805,7 +1897,7 @@ class BS_Traffic_TestCases(TrafficBase):
                 {
                     "campaign_type": "Organic",
                     "campaign_sub_type": "organic_keyword",
-                    "fields": [ "brand_name", "keyword_modifiers", "wildcard_string"]
+                    "fields": [ "brand_name", "keyword_modifiers", "wildcard_string", "radius"]
                 },
                 {
                     "campaign_type": "Organic",
@@ -1901,13 +1993,17 @@ class BS_Traffic_TestCases(TrafficBase):
                 if "brand_name" in campaign["fields"]:
                     self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
                 
+                if "radius" in campaign["fields"]:
+                    radius_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_radius)
+                    radius_field.clear()
+                    radius_field.send_keys(campaign_radius)
+                
             try:
                 # Test Case 1: Create Campaign
                 time.sleep(2)
                 fill_campaign_form(selected_campaign)
                 time.sleep(5)
                 submit_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_create_submit_btn)
-                # self.driver.execute_script("arguments[0].click();", submit_btn)
                 time.sleep(8)
 
                 campaign_created = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
@@ -2009,8 +2105,13 @@ class BS_Traffic_TestCases(TrafficBase):
                 time.sleep(2)
                 delete_modal_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.project_delete_modal_btn)
                 time.sleep(6)
-                project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
-                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
+                project_deleted = self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
+                if project_deleted:
+                    self.base_page.click_btn(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=edited_project_name))
+                    project_deleted = self.base_page.wait(resources.OldTrafficModuleLocator.project_view_check.format(project_name=edited_project_name)), "Project view failed"
+                else:
+                    project_deleted = False, "Project deletion failed"
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if not project_deleted[0] else f"Fail - {project_deleted[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
                 
@@ -2076,19 +2177,25 @@ class BS_Traffic_TestCases(TrafficBase):
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_month_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
+            print("1 month")
+            time.sleep(40)
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_7_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
+            print("7 days")
+            time.sleep(40)
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
-            time.sleep(50)
+            print("1 day")
+            time.sleep(60)
+            print("collecting data")
             error_page_row = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split(' ')
             data_dict = {
@@ -2101,6 +2208,8 @@ class BS_Traffic_TestCases(TrafficBase):
                 "other_errors": data_list[6]
             }
             
+            print("going to graph")
+            print(data_dict)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_link)
             time.sleep(5)
             cleaned_data = []
@@ -2118,7 +2227,6 @@ class BS_Traffic_TestCases(TrafficBase):
                 values_splited = int(values.split(',')[-1].replace(' ', '').replace(']', '').replace('"', ''))
                 cleaned_data.append(values_splited)
             print(cleaned_data)
-                    
             google_recaptcha_check = int(data_dict["google_recaptcha"]) == int(cleaned_data[4])
             wildcard_not_found_check = int(data_dict["wildcard_not_found"]) == int(cleaned_data[2])
             product_wildcard_not_found_check = int(data_dict["product_wildcard_not_found"]) == int(cleaned_data[3])
