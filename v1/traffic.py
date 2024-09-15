@@ -6,130 +6,117 @@ from lib import data, page, resources
 from traffic_sample_data import *
 
 
-
 class TrafficBase:
     def add_tagify_data(self, base_page, campaign, driver):
         
         if "wildcard_string" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_wildcard_strign)
             base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string)
-            time.sleep(2)
             
         if "tier1_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_tier1_url)
             base_page.send_key_with_action_chain(wildcard_field, campaign_tier1_url)
-            time.sleep(2)
             
         if "tier2_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_tier2_url)
             base_page.send_key_with_action_chain(wildcard_field, campaign_tier2_url)
-            time.sleep(2)
 
         if "destination_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_destination_url)
             base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url)
-            time.sleep(2)
             
         if "keyword_modifiers" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_keyword_modifiers)
             base_page.send_key_with_action_chain(wildcard_field, campaign_keyword_modifiers)
-            time.sleep(2)
 
         if "direct_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_direct_url)
             base_page.send_key_with_action_chain(wildcard_field, campaign_direct_url)
-            time.sleep(2)
             
     def add_input_field_data(self, base_page, campaign, driver):
 
         if "image_base64_code" in campaign["fields"]:
-            base_page.wait(resources.TrafficModuleLocator.campaign_image_base64).send_keys(campaign_image_base64)
+            base_page.wait_for_element(resources.TrafficModuleLocator.campaign_image_base64).send_keys(campaign_image_base64)
         if "image_url" in campaign["fields"]:
-            base_page.wait(resources.TrafficModuleLocator.campaign_image_url).send_keys(campaign_image_url)
+            base_page.wait_for_element(resources.TrafficModuleLocator.campaign_image_url).send_keys(campaign_image_url)
         if "is_spread_session" in campaign["fields"]:
             base_page.click_btn(resources.TrafficModuleLocator.campaign_is_spread_session)
         if "brand_name" in campaign["fields"]:
-            base_page.wait(resources.TrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
+            base_page.wait_for_element(resources.TrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
         if "select_wildcard_type_option" in campaign["fields"]:
             base_page.click_btn(resources.TrafficModuleLocator.campaign_select_wildcard_type_option)
         if "is_product" in campaign["fields"]:
             base_page.click_btn(resources.TrafficModuleLocator.campaign_is_product)
         if "gmb_cid" in campaign["fields"]:
-            base_page.wait(resources.TrafficModuleLocator.campaign_gmb_cid).send_keys(campaign_gmb_cid)
+            base_page.wait_for_element(resources.TrafficModuleLocator.campaign_gmb_cid).send_keys(campaign_gmb_cid)
         if "geo_latitude" in campaign["fields"]:
-            base_page.wait(resources.TrafficModuleLocator.campaign_geo_latitude).send_keys(campaign_geo_latitude)
+            base_page.wait_for_element(resources.TrafficModuleLocator.campaign_geo_latitude).send_keys(campaign_geo_latitude)
         if "geo_longitude" in campaign["fields"]:
-            base_page.wait(resources.TrafficModuleLocator.campaign_geo_longitude).send_keys(campaign_geo_longitude)
+            base_page.wait_for_element(resources.TrafficModuleLocator.campaign_geo_longitude).send_keys(campaign_geo_longitude)
 
     def edit_tagify_data(self, base_page, campaign, driver):
         
         if "wildcard_string" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_strign)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_wildcard_strign)
             base_page.click_btn(resources.TrafficModuleLocator.wildcard_string_xpath.format(wildcard_string=campaign_wildcard_string[-1]))
             base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string_edited)
-            time.sleep(2)
 
         if "tier1_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_tier1_url)
             base_page.click_btn(resources.TrafficModuleLocator.tiered_1_url_xpath.format(tier_1_url=campaign_tier1_url[-1]))
             base_page.send_key_with_action_chain(wildcard_field, campaign_tier1_url_edited)
-            time.sleep(2)
 
         if "tier2_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_tier2_url)
             base_page.click_btn(resources.TrafficModuleLocator.tiered_2_url_xpath.format(tier_2_url=campaign_tier2_url[-1]))
             base_page.send_key_with_action_chain(wildcard_field, campaign_tier2_url_edited)
-            time.sleep(2)
 
 
         if "destination_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_destination_url)
             base_page.click_btn(resources.TrafficModuleLocator.destination_url_xpath.format(destination_url=campaign_destination_url[-1]))
             base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url_edited)
-            time.sleep(2)
             
         if "keyword_modifiers" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_keyword_modifiers)
             base_page.click_btn(resources.TrafficModuleLocator.keyword_modifiers_xpath.format(keyword_modifiers=campaign_keyword_modifiers[-1]))
             base_page.send_key_with_action_chain(wildcard_field, campaign_keyword_modifiers_edited)
-            time.sleep(2)
 
         if "direct_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url)
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_direct_url)
             base_page.click_btn(resources.TrafficModuleLocator.direct_url_xpath.format(direct_url=campaign_direct_url[-1]))
             base_page.send_key_with_action_chain(wildcard_field, campaign_direct_url_edited)
-            time.sleep(2)
             
     def edit_input_field_data(self, base_page, campaign, driver):
         
         if "image_base64_code" in campaign["fields"]:
-            image_base64_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_base64)
+            image_base64_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_image_base64)
             image_base64_field.clear()
             image_base64_field.send_keys(campaign_image_base64_edited)
             
         if "image_url" in campaign["fields"]:
-            image_url_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_url)
+            image_url_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_image_url)
             image_url_field.clear()
             image_url_field.send_keys(campaign_image_url_edited)
             
         if "brand_name" in campaign["fields"]:
-            brand_name_field = base_page.wait(resources.TrafficModuleLocator.campaign_brand_name)
+            brand_name_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_brand_name)
             brand_name_field.clear()
             brand_name_field.send_keys(campaign_brand_name_edited)
             
         base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
-        time.sleep(0.5)
+        base_page.wait_for_element(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country_edited))
         base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country_edited))
             
-        average_session_field = base_page.wait(resources.TrafficModuleLocator.campaign_average_session)
+        average_session_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_average_session)
         average_session_field.clear()
         average_session_field.send_keys(campaign_average_session_edited)
             
         base_page.click_btn(resources.TrafficModuleLocator.campaign_frequency)
-        time.sleep(2)
+        base_page.wait_for_element(resources.TrafficModuleLocator.campaign_frequency_option)
         base_page.click_btn(resources.TrafficModuleLocator.campaign_frequency_option)
         
-        input_field = base_page.wait(resources.TrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
+        input_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
         input_field.clear()
         input_field.send_keys(campaign_name_edited)
         
@@ -137,59 +124,59 @@ class TrafficBase:
         passed = True
         
         if "image_base64_code" in campaign["fields"]:
-            image_base64_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_base64_edit_check.format(campaign_image_base64=campaign_image_base64_edited))
+            image_base64_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_image_base64_edit_check.format(campaign_image_base64=campaign_image_base64_edited))
             if not image_base64_field and passed:
                 passed = False
                 
         if "image_url" in campaign["fields"]:
-            image_url_field = base_page.wait(resources.TrafficModuleLocator.campaign_image_url_edit_check.format(campaign_image_url=campaign_image_url_edited))
+            image_url_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_image_url_edit_check.format(campaign_image_url=campaign_image_url_edited))
             if not image_url_field and passed:
                 passed = False
                 
         if "wildcard_string" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_wildcard_edit_check.format(campaign_wildcard=campaign_wildcard_string_edited[-1]))
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_wildcard_edit_check.format(campaign_wildcard=campaign_wildcard_string_edited[-1]))
             if not wildcard_field and passed:
                 passed = False
                 
         if "tier1_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier1_url_edit_check.format(campaign_tier1_url=campaign_tier1_url_edited[-1]))
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_tier1_url_edit_check.format(campaign_tier1_url=campaign_tier1_url_edited[-1]))
             if not wildcard_field and passed:
                 passed = False
                 
         if "tier2_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_tier2_url_edit_check.format(campaign_tier2_url=campaign_tier2_url_edited[-1]))
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_tier2_url_edit_check.format(campaign_tier2_url=campaign_tier2_url_edited[-1]))
             if not wildcard_field and passed:
                 passed = False
                 
         if "destination_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_destination_url_edit_check.format(campaign_destination_url=campaign_destination_url_edited[-1]))
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_destination_url_edit_check.format(campaign_destination_url=campaign_destination_url_edited[-1]))
             if not wildcard_field and passed:
                 passed = False
                 
         if "keyword_modifiers" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_keyword_modifiers_edit_check.format(campaign_keyword_modifiers=campaign_keyword_modifiers_edited[-1]))
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_keyword_modifiers_edit_check.format(campaign_keyword_modifiers=campaign_keyword_modifiers_edited[-1]))
             if not wildcard_field and passed:
                 passed = False
                 
         if "direct_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.TrafficModuleLocator.campaign_direct_url_edit_check.format(campaign_direct_url=campaign_direct_url_edited[-1]))
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_direct_url_edit_check.format(campaign_direct_url=campaign_direct_url_edited[-1]))
             if not wildcard_field and passed:
                 passed = False
                 
         if "brand_name" in campaign["fields"]:
-            brand_name_field = base_page.wait(resources.TrafficModuleLocator.campaign_brand_name_edit_check.format(campaign_brand_name=campaign_brand_name_edited))
+            brand_name_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_brand_name_edit_check.format(campaign_brand_name=campaign_brand_name_edited))
             if not brand_name_field and passed:
                 passed = False
                 
-        campaign_edited = self.base_page.wait(resources.TrafficModuleLocator.campaign_name_edit_check.format(campaign_name=campaign_name_edited))
+        campaign_edited = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_name_edit_check.format(campaign_name=campaign_name_edited))
         if not campaign_edited and passed:
             passed = False
             
-        average_session_field = base_page.wait(resources.TrafficModuleLocator.campaign_average_session_edit_check.format(campaing_average_session=campaign_average_session_edited))
+        average_session_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_average_session_edit_check.format(campaing_average_session=campaign_average_session_edited))
         if not average_session_field and passed:
             passed = False
             
-        # frequency_field = base_page.wait(resources.TrafficModuleLocator.campaign_frequency_edit_check.format(frequency="Monthly"))
+        # frequency_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_frequency_edit_check.format(frequency="Monthly"))
         # if not frequency_field and passed:
         #     passed = False
             
@@ -197,115 +184,100 @@ class TrafficBase:
             
     def old_traffic_edit_fields(self, base_page, campaign, driver):
         if "keyword_modifiers" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers[-1]))
+            wildcard_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers[-1]))
             base_page.remove_text(wildcard_field, campaign_keyword_modifiers[-1])
             base_page.send_key_with_action_chain(wildcard_field, campaign_keyword_modifiers_edited)
-            time.sleep(2)
 
         if "direct_url" in campaign["fields"]:
-            direct_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url[-1]))
+            direct_url_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url[-1]))
             base_page.remove_text(direct_url_field, campaign_direct_url[-1])
             base_page.send_key_with_action_chain(direct_url_field, campaign_direct_url_edited)
-        time.sleep(2)
             
         if "wildcard_string" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string[-1]))
+            wildcard_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string[-1]))
             base_page.remove_text(wildcard_field, campaign_wildcard_string[-1])
             base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string_edited)
-        time.sleep(2)
 
         if "tier1_url" in campaign["fields"]:
-            tier_1_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url[-1]))
+            tier_1_url_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url[-1]))
             base_page.remove_text(tier_1_url_field, campaign_tier1_url[-1])
             base_page.send_key_with_action_chain(tier_1_url_field, campaign_tier1_url_edited)
-            time.sleep(2)
 
             
         if "tier2_url" in campaign["fields"]:
-            tier_2_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url[-1]))
+            tier_2_url_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url[-1]))
             base_page.remove_text(tier_2_url_field, campaign_tier2_url[-1])
             base_page.send_key_with_action_chain(tier_2_url_field, campaign_tier2_url_edited)
-            time.sleep(2)
 
         if "destination_url" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url[-1]))
+            wildcard_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url[-1]))
             base_page.remove_text(wildcard_field, campaign_destination_url[-1])
             base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url_edited)
-            time.sleep(2)
             
         if "brand_name" in campaign["fields"]:
-            brand_name_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name))
+            brand_name_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name))
             brand_name_field.clear()
             brand_name_field.send_keys(campaign_brand_name_edited)
-            time.sleep(2)
             
-        input_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
+        input_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_edit_name_input.format(campaign_name=campaign_name))
         input_field.clear()
         input_field.send_keys(campaign_name_edited)
-        time.sleep(2)
         
-        average_session_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session_edit_field)
+        average_session_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_average_session_edit_field)
         average_session_field.clear()
         average_session_field.send_keys(campaign_average_session_edited)
-        time.sleep(2)
         
             
-        country_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_country_edit_field)
+        country_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_country_edit_field)
         driver.execute_script("arguments[0].innerHTML = arguments[1];", country_field, resources.OldTrafficModuleLocator.country_inner_html_edited)
         
     def old_traffic_edit_fields_check(self, base_page, campaign, driver):
         passed = True
         
         if "keyword_modifiers" in campaign["fields"]:
-            keyword_modifiers_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers_edited[-1]))
+            keyword_modifiers_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_keyword_modifiers_edit_field.format(keyword=campaign_keyword_modifiers_edited[-1]))
             if not keyword_modifiers_field and passed:
                 passed = False
-        time.sleep(2)
 
         if "direct_url" in campaign["fields"]:
-            direct_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url_edited[-1]))
+            direct_url_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_direct_url_edit_field.format(direct_url=campaign_direct_url_edited[-1]))
             if not direct_url_field and passed:
                 passed = False
 
         if "wildcard_string" in campaign["fields"]:
-            wildcard_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string_edited[-1]))
+            wildcard_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_wildcard_strign_edit_field.format(wildcard=campaign_wildcard_string_edited[-1]))
             if not wildcard_field and passed:
                 passed = False
-        time.sleep(2)
 
         if "tier1_url" in campaign["fields"]:
-            tier_1_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url_edited[-1]))
+            tier_1_url_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier1_url_edit_field.format(tier_url=campaign_tier1_url_edited[-1]))
             if not tier_1_url_field and passed:
                 passed = False
-        time.sleep(2)
         
         if "tier2_url" in campaign["fields"]:
-            tier_2_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url_edited[-1]))
+            tier_2_url_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier2_url_edit_field.format(tier_url=campaign_tier2_url_edited[-1]))
             if not tier_2_url_field and passed:
                 passed = False
-        time.sleep(2)
 
         if "destination_url" in campaign["fields"]:
-            destination_url_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url_edited[-1]))
+            destination_url_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_destination_url_edit_field.format(destination_url=campaign_destination_url_edited[-1]))
             if not destination_url_field and passed:
                 passed = False
-        time.sleep(2)
         
         if "brand_name" in campaign["fields"]:
-            brand_name_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name_edited))
+            brand_name_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_brand_name_edit_field.format(brand=campaign_brand_name_edited))
             if not brand_name_field and passed:
                 passed = False
-        time.sleep(2)
         
-        campaign_edited = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited))
+        campaign_edited = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited))
         if not campaign_edited and passed:
             passed = False
             
-        average_session_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session_edit_field_check.format(average_session=campaign_average_session_edited))
+        average_session_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_average_session_edit_field_check.format(average_session=campaign_average_session_edited))
         if not average_session_field and passed:
             passed = False
             
-        # country_field = base_page.wait(resources.OldTrafficModuleLocator.campaign_country_edit_field_check.format(country=campaign_country_edited))
+        # country_field = base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_country_edit_field_check.format(country=campaign_country_edited))
         # if not country_field and passed:
         #     passed = False
         
@@ -321,8 +293,8 @@ class CE_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 1: Invalid Login (Invalid Username and Password)
             self.driver.get(data.ce_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -332,8 +304,8 @@ class CE_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 2: Valid Username, Invalid Password
             self.driver.get(data.ce_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys(data.ce_login_username)
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys(data.ce_login_username)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login succeeded with invalid password"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -343,8 +315,8 @@ class CE_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 3: Invalid Username, Valid Password
             self.driver.get(data.ce_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys(data.ce_login_password)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys(data.ce_login_password)
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login succeeded with invalid username"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -354,8 +326,8 @@ class CE_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 4: Valid Login
             self.driver.get(data.ce_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys(data.ce_login_username)
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys(data.ce_login_password)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys(data.ce_login_username)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys(data.ce_login_password)
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login failed with valid credentials"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password), {"Pass" if login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -368,38 +340,34 @@ class CE_Traffic_TestCases(TrafficBase):
         
             # Test Case 1: Create Project
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_btn)
-            time.sleep(2)
-            self.base_page.wait(resources.TrafficModuleLocator.project_create_name_input).send_keys(project_name)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.project_create_name_input).send_keys(project_name)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_modal_btn)
-            project_created = self.base_page.wait(resources.TrafficModuleLocator.project_view_check), "Project creation failed"
+            project_created = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_view_check), "Project creation failed"
             project_id = self.driver.current_url.split("/")[-2]
             self.driver.get(data.ce_project_listing_page)
-            project_found_in_listing = self.base_page.wait(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id)), "Project creation failed"
+            project_found_in_listing = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id)), "Project creation failed"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, Create Project, {"Pass" if project_created[0] and project_found_in_listing[0] else f"Fail - {project_created[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, Create Project,Fail\n', new=False)  
         
         try:
             # Test Case 2: Edit Project
-            time.sleep(2)
             self.driver.get(data.ce_project_listing_page)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_btn.format(project_id=project_id))
-            project_edit_input = self.base_page.wait(resources.TrafficModuleLocator.project_edit_name_input.format(project_name=project_name))
+            project_edit_input = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_edit_name_input.format(project_name=project_name))
             project_edit_input.clear()
             project_edit_input.send_keys(edited_project_name)
-            time.sleep(2)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_modal_btn.format(project_id=project_id))
-            project_edited = self.base_page.wait(resources.TrafficModuleLocator.project_edit_check.format(edited_project_name=edited_project_name)), "Project edit failed"
+            project_edited = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_edit_check.format(edited_project_name=edited_project_name)), "Project edit failed"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, Edit Project, {"Pass" if project_edited[0] else f"Fail - {project_edited[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, Edit Project,Fail\n', new=False)
         
         try:
             # Test Case 3: View Project
-            time.sleep(2)
             self.driver.get(data.ce_project_listing_page)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id))
-            project_viewed = self.base_page.wait(resources.TrafficModuleLocator.project_view_check), "Project view failed"
+            project_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_view_check), "Project view failed"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, View Project, {"Pass" if project_viewed[0] else f"Fail - {project_viewed[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, View Project,Fail\n', new=False)
@@ -478,17 +446,12 @@ class CE_Traffic_TestCases(TrafficBase):
             selected_campaign = random.choice(campaign_types)
 
             def fill_campaign_form(campaign):
-                self.base_page.wait(resources.TrafficModuleLocator.campaign_name).send_keys(campaign_name)
+                self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_name).send_keys(campaign_name)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category)
-                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category_option.format(campaign_type=campaign["campaign_type"]))
-                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_sub_category)
-                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_sub_category_option.format(campaign_sub_type=campaign["campaign_sub_type"]))
-                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
-                time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country))
                 
                 self.add_input_field_data(self.base_page, campaign, self.driver)
@@ -496,11 +459,9 @@ class CE_Traffic_TestCases(TrafficBase):
 
             try:
                 # Test Case 1: Create Campaign
-                time.sleep(2)
                 fill_campaign_form(selected_campaign)
-                time.sleep(5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_submit_btn)
-                campaign_created = self.base_page.wait(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
+                campaign_created = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Create Campaign, {"Pass" if campaign_created[0] else f"Fail - {campaign_created[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Create Campaign,Fail\n', new=False)
@@ -509,7 +470,7 @@ class CE_Traffic_TestCases(TrafficBase):
                 # Test Case 2: View Campaign
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
-                campaign_viewed = self.base_page.wait(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
+                campaign_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, View Campaign, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
             except Exception as e:
@@ -524,10 +485,10 @@ class CE_Traffic_TestCases(TrafficBase):
                 self.edit_tagify_data(self.base_page, selected_campaign, self.driver)
                 self.edit_input_field_data(self.base_page, selected_campaign, self.driver)
 
-                save_btn = self.base_page.wait(resources.TrafficModuleLocator.campaign_edit_save_btn)
+                save_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_edit_save_btn)
                 self.driver.execute_script("arguments[0].click();", save_btn)
                 time.sleep(3)
-                cancel_btn = self.base_page.wait(resources.TrafficModuleLocator.campaign_cancel_btn)
+                cancel_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_cancel_btn)
                 self.driver.execute_script("arguments[0].click();", cancel_btn)
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
@@ -541,7 +502,7 @@ class CE_Traffic_TestCases(TrafficBase):
                 self.driver.get(data.ce_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
-                campaign_viewed = self.base_page.wait(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
+                campaign_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, View Campaign after edit, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
             except Exception as e:
@@ -552,7 +513,7 @@ class CE_Traffic_TestCases(TrafficBase):
                 self.driver.get(data.ce_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
-                campaign_live = self.base_page.wait(resources.TrafficModuleLocator.live_status), "Campaign live failed"
+                campaign_live = self.base_page.wait_for_element(resources.TrafficModuleLocator.live_status), "Campaign live failed"
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Live Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Live Campaign,Fail\n', new=False)
@@ -561,7 +522,7 @@ class CE_Traffic_TestCases(TrafficBase):
                 # Test Case 5: Cancel Live Campaign
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
-                campaign_live = self.base_page.wait(resources.TrafficModuleLocator.cancel_status), "Campaign live failed"
+                campaign_live = self.base_page.wait_for_element(resources.TrafficModuleLocator.cancel_status), "Campaign live failed"
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Cancel Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Cancel Campaign,Fail\n', new=False)
@@ -569,10 +530,10 @@ class CE_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 4: Delete Campaign
                 time.sleep(2)
-                delete_btn = self.base_page.wait(resources.TrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
+                delete_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
                 self.driver.execute_script("arguments[0].click();", delete_btn)
                 time.sleep(2)
-                delete_modal_btn = self.base_page.wait(resources.TrafficModuleLocator.capmaign_delete_modal_btn)
+                delete_modal_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_delete_modal_btn)
                 self.driver.execute_script("arguments[0].click();", delete_modal_btn)
                 campaign_deleted = not self.base_page.wait(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign deletion failed"
                 self.base_page.make_csv("CE_traffic_must_haves.csv", f'Campaign, Delete Campaign, {"Pass" if campaign_deleted else f"Fail - {campaign_deleted[1]}"}\n', new=False)
@@ -586,10 +547,10 @@ class CE_Traffic_TestCases(TrafficBase):
             # Test Case 4: Delete Project
             self.driver.get(data.ce_project_listing_page)
             time.sleep(2)
-            delete_btn = self.base_page.wait(resources.TrafficModuleLocator.project_delete_btn.format(project_id=project_id))
+            delete_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_delete_btn.format(project_id=project_id))
             self.driver.execute_script("arguments[0].click();", delete_btn)
             time.sleep(2)
-            delete_modal_btn = self.base_page.wait(resources.TrafficModuleLocator.project_delete_modal_btn)
+            delete_modal_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_delete_modal_btn)
             self.driver.execute_script("arguments[0].click();", delete_modal_btn)
             project_deleted = not self.base_page.wait(resources.TrafficModuleLocator.project_deleted_list_check.format(project_id=project_id)), "Project deletion failed"
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
@@ -622,7 +583,7 @@ class CE_Traffic_TestCases(TrafficBase):
                     option.click()
                     time.sleep(5)
                 
-                    table_rows = self.base_page.wait(resources.TrafficModuleLocator.report_result_row)
+                    table_rows = self.base_page.wait_for_element(resources.TrafficModuleLocator.report_result_row)
                     if table_rows:
                         self.base_page.click_btn(resources.TrafficModuleLocator.filter_all)
                         time.sleep(5)
@@ -632,7 +593,7 @@ class CE_Traffic_TestCases(TrafficBase):
                         time.sleep(5)
                         self.base_page.click_btn(resources.TrafficModuleLocator.filter_all_success_option)
                         time.sleep(5)
-                        table_rows = self.base_page.wait(resources.TrafficModuleLocator.report_result_row)
+                        table_rows = self.base_page.wait_for_element(resources.TrafficModuleLocator.report_result_row)
                         if table_rows:
                             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Pass\n', new=False)
                             break
@@ -647,8 +608,7 @@ class CE_Traffic_TestCases(TrafficBase):
     def campaign_error_and_graph_stats(self):
         try:
             self.driver.get(data.ce_campaign_error_page)
-            time.sleep(5)
-            error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
+            error_page_row = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list_24_days = error_page_row.split('\n')
             data_dict_24_days = {
                 "campaing_id": data_list_24_days[0],
@@ -664,19 +624,18 @@ class CE_Traffic_TestCases(TrafficBase):
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
-            time.sleep(30)
+            
             
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
-            time.sleep(30)
             
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_today_option)
 
-            time.sleep(30)
-            error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
+            time.sleep(8)
+            error_page_row = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
                 "campaing_id": data_list[0],
@@ -742,8 +701,8 @@ class Tiger_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 1: Invalid Login (Invalid Username and Password)
             self.driver.get(data.tiger_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -753,8 +712,8 @@ class Tiger_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 2: Valid Username, Invalid Password
             self.driver.get(data.tiger_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys(data.tiger_login_username)
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys(data.tiger_login_username)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login succeeded with invalid password"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -764,8 +723,8 @@ class Tiger_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 3: Invalid Username, Valid Password
             self.driver.get(data.tiger_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys(data.tiger_login_password)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys(data.tiger_login_password)
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login succeeded with invalid username"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -775,8 +734,8 @@ class Tiger_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 4: Valid Login
             self.driver.get(data.tiger_traffic_url)
-            self.base_page.wait(resources.TrafficModuleLocator.login_user).send_keys(data.tiger_login_username)
-            self.base_page.wait(resources.TrafficModuleLocator.login_password).send_keys(data.tiger_login_password)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys(data.tiger_login_username)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys(data.tiger_login_password)
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login failed with valid credentials"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password), {"Pass" if login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -790,12 +749,12 @@ class Tiger_Traffic_TestCases(TrafficBase):
             # Test Case 1: Create Project
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_btn)
             time.sleep(2)
-            self.base_page.wait(resources.TrafficModuleLocator.project_create_name_input).send_keys(project_name)
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.project_create_name_input).send_keys(project_name)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_modal_btn)
-            project_created = self.base_page.wait(resources.TrafficModuleLocator.project_view_check), "Project creation failed"
+            project_created = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_view_check), "Project creation failed"
             project_id = self.driver.current_url.split("/")[-2]
             self.driver.get(data.tiger_project_listing_page)
-            project_found_in_listing = self.base_page.wait(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id)), "Project creation failed"
+            project_found_in_listing = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id)), "Project creation failed"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, Create Project, {"Pass" if project_created[0] and project_found_in_listing[0] else f"Fail - {project_created[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, Create Project,Fail\n', new=False)  
@@ -805,12 +764,12 @@ class Tiger_Traffic_TestCases(TrafficBase):
             time.sleep(2)
             self.driver.get(data.tiger_project_listing_page)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_btn.format(project_id=project_id))
-            project_edit_input = self.base_page.wait(resources.TrafficModuleLocator.project_edit_name_input.format(project_name=project_name))
+            project_edit_input = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_edit_name_input.format(project_name=project_name))
             project_edit_input.clear()
             project_edit_input.send_keys(edited_project_name)
             time.sleep(2)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_modal_btn.format(project_id=project_id))
-            project_edited = self.base_page.wait(resources.TrafficModuleLocator.project_edit_check.format(edited_project_name=edited_project_name)), "Project edit failed"
+            project_edited = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_edit_check.format(edited_project_name=edited_project_name)), "Project edit failed"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, Edit Project, {"Pass" if project_edited[0] else f"Fail - {project_edited[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, Edit Project,Fail\n', new=False)
@@ -820,7 +779,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
             time.sleep(2)
             self.driver.get(data.tiger_project_listing_page)
             self.base_page.click_btn(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id))
-            project_viewed = self.base_page.wait(resources.TrafficModuleLocator.project_view_check), "Project view failed"
+            project_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_view_check), "Project view failed"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, View Project, {"Pass" if project_viewed[0] else f"Fail - {project_viewed[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, View Project,Fail\n', new=False)
@@ -934,7 +893,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
             selected_campaign = random.choice(campaign_types)
 
             def fill_campaign_form(campaign):
-                self.base_page.wait(resources.TrafficModuleLocator.campaign_name).send_keys(campaign_name)
+                self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_name).send_keys(campaign_name)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category)
                 time.sleep(0.5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category_option.format(campaign_type=campaign["campaign_type"]))
@@ -956,7 +915,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                 fill_campaign_form(selected_campaign)
                 time.sleep(5)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_submit_btn)
-                campaign_created = self.base_page.wait(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
+                campaign_created = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Create Campaign, {"Pass" if campaign_created[0] else f"Fail - {campaign_created[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Create Campaign,Fail\n', new=False)
@@ -965,7 +924,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                 # Test Case 2: View Campaign
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
-                campaign_viewed = self.base_page.wait(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
+                campaign_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, View Campaign, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
             except Exception as e:
@@ -981,10 +940,10 @@ class Tiger_Traffic_TestCases(TrafficBase):
                 self.edit_tagify_data(self.base_page, selected_campaign, self.driver)
                 self.edit_input_field_data(self.base_page, selected_campaign, self.driver)
 
-                save_btn = self.base_page.wait(resources.TrafficModuleLocator.campaign_edit_save_btn)
+                save_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_edit_save_btn)
                 self.driver.execute_script("arguments[0].click();", save_btn)
                 time.sleep(3)
-                cancel_btn = self.base_page.wait(resources.TrafficModuleLocator.campaign_cancel_btn)
+                cancel_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_cancel_btn)
                 self.driver.execute_script("arguments[0].click();", cancel_btn)
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
@@ -999,7 +958,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                 self.driver.get(data.tiger_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
-                campaign_viewed = self.base_page.wait(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
+                campaign_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 time.sleep(5)
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, View Campaign after edit, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
@@ -1012,7 +971,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                 self.driver.get(data.tiger_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
-                campaign_live = self.base_page.wait(resources.TrafficModuleLocator.live_status), "Campaign live failed"
+                campaign_live = self.base_page.wait_for_element(resources.TrafficModuleLocator.live_status), "Campaign live failed"
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Live Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Live Campaign,Fail\n', new=False)
@@ -1021,7 +980,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                 # Test Case 5: Cancel Live Campaign
                 time.sleep(2)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
-                campaign_live = self.base_page.wait(resources.TrafficModuleLocator.cancel_status), "Campaign live failed"
+                campaign_live = self.base_page.wait_for_element(resources.TrafficModuleLocator.cancel_status), "Campaign live failed"
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Cancel Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Cancel Campaign,Fail\n', new=False)
@@ -1029,10 +988,10 @@ class Tiger_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 4: Delete Campaign
                 time.sleep(2)
-                delete_btn = self.base_page.wait(resources.TrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
+                delete_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
                 self.driver.execute_script("arguments[0].click();", delete_btn)
                 time.sleep(2)
-                delete_modal_btn = self.base_page.wait(resources.TrafficModuleLocator.capmaign_delete_modal_btn)
+                delete_modal_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_delete_modal_btn)
                 self.driver.execute_script("arguments[0].click();", delete_modal_btn)
                 campaign_deleted = not self.base_page.wait(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign deletion failed"
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign, Delete Campaign, {"Pass" if campaign_deleted else f"Fail - {campaign_deleted[1]}"}\n', new=False)
@@ -1046,10 +1005,10 @@ class Tiger_Traffic_TestCases(TrafficBase):
             # Test Case 4: Delete Project
             self.driver.get(data.tiger_project_listing_page)
             time.sleep(2)
-            delete_btn = self.base_page.wait(resources.TrafficModuleLocator.project_delete_btn.format(project_id=project_id))
+            delete_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_delete_btn.format(project_id=project_id))
             self.driver.execute_script("arguments[0].click();", delete_btn)
             time.sleep(2)
-            delete_modal_btn = self.base_page.wait(resources.TrafficModuleLocator.project_delete_modal_btn)
+            delete_modal_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_delete_modal_btn)
             self.driver.execute_script("arguments[0].click();", delete_modal_btn)
             project_deleted = not self.base_page.wait(resources.TrafficModuleLocator.project_deleted_list_check.format(project_id=project_id)), "Project deletion failed"
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
@@ -1082,7 +1041,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                     option.click()
                     time.sleep(5)
                 
-                    table_rows = self.base_page.wait(resources.TrafficModuleLocator.report_result_row)
+                    table_rows = self.base_page.wait_for_element(resources.TrafficModuleLocator.report_result_row)
                     if table_rows:
                         self.base_page.click_btn(resources.TrafficModuleLocator.filter_all)
                         time.sleep(5)
@@ -1092,7 +1051,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                         time.sleep(5)
                         self.base_page.click_btn(resources.TrafficModuleLocator.filter_all_success_option)
                         time.sleep(5)
-                        table_rows = self.base_page.wait(resources.TrafficModuleLocator.report_result_row)
+                        table_rows = self.base_page.wait_for_element(resources.TrafficModuleLocator.report_result_row)
                         if table_rows:
                             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Pass\n', new=False)
                             break
@@ -1108,7 +1067,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
         try:
             self.driver.get(data.tiger_campaign_error_page)
             time.sleep(5)
-            error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
+            error_page_row = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list_24_days = error_page_row.split('\n')
             data_dict_24_days = {
                 "campaing_id": data_list_24_days[0],
@@ -1125,19 +1084,17 @@ class Tiger_Traffic_TestCases(TrafficBase):
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
-            time.sleep(100)
             
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
-            time.sleep(100)
             
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.TrafficModuleLocator.campaing_error_filter_today_option)
 
-            time.sleep(130)
-            error_page_row = self.base_page.wait(resources.TrafficModuleLocator.campaign_error_page_row).text
+            time.sleep(150)
+            error_page_row = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split('\n')
             data_dict = {
                 "campaing_id": data_list[0],
@@ -1180,7 +1137,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
             else:
                 self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             
-            time.sleep(2)   
+            time.sleep(2)
         except Exception as e:
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             print(e)
@@ -1190,7 +1147,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
             time.sleep(2)
             self.base_page.click_btn('//button[@id="btnProjectErrors"]')
             time.sleep(2)
-            error_page_row = self.base_page.wait('//div[./div[./a[contains(@href, "/project")]]]').text
+            error_page_row = self.base_page.wait_for_element('//div[./div[./a[contains(@href, "/project")]]]').text
             
             data_list_24_days = error_page_row.split('\n')
             data_dict_24_days = {
@@ -1209,23 +1166,21 @@ class Tiger_Traffic_TestCases(TrafficBase):
             time.sleep(0.5)
             day_7_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
             day_7_filter[1].click()
-            time.sleep(100)
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
             day_filter[1].click()
             time.sleep(0.5)
             day_30_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
             day_30_filter[1].click()
-            time.sleep(100)
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
             day_filter[1].click()
             time.sleep(0.5)
             day_today_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_today_option)
             day_today_filter[1].click()
-            time.sleep(130)
             
-            error_page_row = self.base_page.wait('//div[./div[./a[contains(@href, "/project")]]]').text
+            time.sleep(150)
+            error_page_row = self.base_page.wait_for_element('//div[./div[./a[contains(@href, "/project")]]]').text
             data_list = error_page_row.split('\n')
             data_dict = {
                 "campaing_id": data_list[0],
@@ -1290,8 +1245,8 @@ class Torrential_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 1: Invalid Login (Invalid Username and Password)
             self.driver.get(data.torrential_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -1301,8 +1256,8 @@ class Torrential_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 2: Valid Username, Invalid Password
             self.driver.get(data.torrential_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid password"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -1312,8 +1267,8 @@ class Torrential_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 3: Invalid Username, Valid Password
             self.driver.get(data.torrential_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid username"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -1323,10 +1278,10 @@ class Torrential_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 4: Valid Login
             self.driver.get(data.torrential_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys(data.torrential_login_username)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys(data.torrential_login_password)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
-            login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login failed with valid credentials"
+            login_result = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.main_content), "Login failed with valid credentials"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password), {"Pass" if login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password),Fail\n', new=False)
@@ -1338,9 +1293,9 @@ class Torrential_Traffic_TestCases(TrafficBase):
             # Test Case 1: Create Project
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_create_btn)
             time.sleep(3)
-            self.base_page.wait(resources.OldTrafficModuleLocator.project_create_name_input).send_keys(project_name)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_create_name_input).send_keys(project_name)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_create_modal_btn)
-            project_created = self.base_page.wait(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name)), "Project creation failed"
+            project_created = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name)), "Project creation failed"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Create Project, {"Pass" if project_created[0] else f"Fail - {project_created[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Create Project,Fail\n', new=False)
@@ -1349,7 +1304,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
             # Test Case 2: View Project
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name))
-            project_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.project_view_check.format(project_name=project_name)), "Project view failed"
+            project_viewed = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_view_check.format(project_name=project_name)), "Project view failed"
             project_id = self.driver.current_url.split("/")[-2]
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, View Project, {"Pass" if project_viewed[0] else f"Fail - {project_viewed[1]}"}\n', new=False)
         except Exception as e:
@@ -1362,7 +1317,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
             time.sleep(6)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_edit_btn.format(project_id=project_id))
             time.sleep(2)
-            project_edit_input = self.base_page.wait(resources.OldTrafficModuleLocator.project_edit_name_input)
+            project_edit_input = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_edit_name_input)
             time.sleep(2)
             project_edit_input.clear()
             time.sleep(2)
@@ -1370,7 +1325,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_edit_modal_btn)
             time.sleep(6)
-            project_edited = self.base_page.wait(resources.OldTrafficModuleLocator.project_edit_check.format(edited_project_name=edited_project_name)), "Project edit failed"
+            project_edited = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_edit_check.format(edited_project_name=edited_project_name)), "Project edit failed"
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Edit Project, {"Pass" if project_edited[0] else f"Fail - {project_edited[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, Edit Project,Fail\n', new=False)
@@ -1379,7 +1334,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
             # Test Case 2: View Project
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=edited_project_name))
-            project_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.project_view_check.format(project_name=edited_project_name)), "Project view failed"
+            project_viewed = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_view_check.format(project_name=edited_project_name)), "Project view failed"
             project_id = self.driver.current_url.split("/")[-2]
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Project, View Project after edit, {"Pass" if project_viewed[0] else f"Fail - {project_viewed[1]}"}\n', new=False)
         except Exception as e:
@@ -1442,7 +1397,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
             selected_campaign = random.choice(campaign_types)
 
             def fill_campaign_form(campaign):
-                self.base_page.wait(resources.OldTrafficModuleLocator.campaign_name).send_keys(campaign_name)
+                self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_name).send_keys(campaign_name)
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_category)
                 time.sleep(2)
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_category_option.format(campaign_type=campaign["campaign_type"].lower()))
@@ -1451,49 +1406,49 @@ class Torrential_Traffic_TestCases(TrafficBase):
                 time.sleep(2)
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_sub_category_option.format(campaign_sub_type=campaign["campaign_sub_type"].lower()))
                 time.sleep(2)
-                country_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_country)
+                country_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_country)
                 self.driver.execute_script("arguments[0].innerHTML = arguments[1];", country_field, resources.OldTrafficModuleLocator.country_inner_html)
                 time.sleep(2)
-                self.base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session).send_keys(campaign_average_session)
+                self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_average_session).send_keys(campaign_average_session)
                 time.sleep(2)
                 if "keyword_modifiers" in campaign["fields"]:
-                    wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers)
+                    wildcard_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_keyword_modifiers)
                     self.base_page.send_key_with_action_chain(wildcard_field, campaign_keyword_modifiers)
 
                 if "direct_url" in campaign["fields"]:
-                    direct_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url)
+                    direct_url_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_direct_url)
                     self.base_page.send_key_with_action_chain(direct_url_field, campaign_direct_url)
                     
                 if "wildcard_string" in campaign["fields"]:
-                    wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign)
+                    wildcard_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_wildcard_strign)
                     self.base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string)
 
                 if "tier1_url" in campaign["fields"]:
-                    tier_1_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url)
+                    tier_1_url_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier1_url)
                     self.base_page.send_key_with_action_chain(tier_1_url_field, campaign_tier1_url)
 
                     
                 if "tier2_url" in campaign["fields"]:
-                    tier_2_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url)
+                    tier_2_url_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier2_url)
                     self.base_page.send_key_with_action_chain(tier_2_url_field, campaign_tier2_url)
 
                 if "destination_url" in campaign["fields"]:
-                    wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url)
+                    wildcard_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_destination_url)
                     self.base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url)
 
                 if "brand_name" in campaign["fields"]:
-                    self.base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
+                    self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
                 
             try:
                 # Test Case 1: Create Campaign
                 time.sleep(2)
                 fill_campaign_form(selected_campaign)
                 time.sleep(5)
-                submit_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_submit_btn)
+                submit_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_create_submit_btn)
                 self.driver.execute_script("arguments[0].click();", submit_btn)
                 time.sleep(8)
 
-                campaign_created = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
+                campaign_created = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Create Campaign, {"Pass" if campaign_created[0] else f"Fail - {campaign_created[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Create Campaign,Fail\n', new=False)
@@ -1501,9 +1456,9 @@ class Torrential_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 2: View Campaign
                 time.sleep(10)
-                campaign_create_check_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
+                campaign_create_check_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
                 self.driver.execute_script("arguments[0].click();", campaign_create_check_btn)
-                campaign_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
+                campaign_viewed = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 print(f"Campaign ID: {campaign_id}")
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, View Campaign, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
@@ -1515,12 +1470,12 @@ class Torrential_Traffic_TestCases(TrafficBase):
                 time.sleep(2)
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
-                edit_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
+                edit_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
                 self.driver.execute_script("arguments[0].click();", edit_btn)
                 time.sleep(2)
                 self.old_traffic_edit_fields(self.base_page, selected_campaign, self.driver)
 
-                save_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_save_btn)
+                save_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_edit_save_btn)
                 self.driver.execute_script("arguments[0].click();", save_btn)
                 time.sleep(6)
                 campaign_edited = self.old_traffic_edit_fields_check(self.base_page, selected_campaign, self.driver), "Campaign edit failed"
@@ -1533,9 +1488,9 @@ class Torrential_Traffic_TestCases(TrafficBase):
                 # Test Case 2: View Campaign
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(10)
-                campaign_create_check_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
+                campaign_create_check_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
                 self.driver.execute_script("arguments[0].click();", campaign_create_check_btn)
-                campaign_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
+                campaign_viewed = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 print(f"Campaign ID: {campaign_id}")
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, View Campaign after edit, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
@@ -1546,15 +1501,15 @@ class Torrential_Traffic_TestCases(TrafficBase):
                 # Test Case 4: Live Campaign
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
-                live_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
+                live_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
                 self.driver.execute_script("arguments[0].click();", live_btn)
                 time.sleep(3)
-                live_modal_confirmation_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_live_modal_confirmation)
+                live_modal_confirmation_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaing_live_modal_confirmation)
                 self.driver.execute_script("arguments[0].click();", live_modal_confirmation_btn)
                 time.sleep(10)
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(10)
-                campaign_live = self.base_page.wait(resources.OldTrafficModuleLocator.live_status), "Campaign live failed"
+                campaign_live = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.live_status), "Campaign live failed"
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Live Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Live Campaign,Fail\n', new=False)
@@ -1562,15 +1517,15 @@ class Torrential_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 5: Cancel Live Campaign
                 time.sleep(2)
-                stop_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_stop_btn.format(campaign_id=campaign_id))
+                stop_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_stop_btn.format(campaign_id=campaign_id))
                 self.driver.execute_script("arguments[0].click();", stop_btn)
                 time.sleep(3)
-                stop_modal_confirmation_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_stop_modal_confirmation)
+                stop_modal_confirmation_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaing_stop_modal_confirmation)
                 self.driver.execute_script("arguments[0].click();", stop_modal_confirmation_btn)
                 time.sleep(10)
                 self.driver.get(data.torrential_campaing_listing_page.format(project_id=project_id))
                 time.sleep(10)
-                campaign_live = self.base_page.wait(resources.OldTrafficModuleLocator.stop_status), "Campaign live failed"
+                campaign_live = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.stop_status), "Campaign live failed"
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Cancel Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, Cancel Campaign,Fail\n', new=False)
@@ -1578,10 +1533,10 @@ class Torrential_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 4: Delete Campaign
                 time.sleep(2)
-                delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
+                delete_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
                 self.driver.execute_script("arguments[0].click();", delete_btn)
                 time.sleep(2)
-                delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.capmaign_delete_modal_btn)
+                delete_modal_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.capmaign_delete_modal_btn)
                 time.sleep(2)
                 self.driver.execute_script("arguments[0].click();", delete_modal_btn)
                 time.sleep(6)
@@ -1595,10 +1550,10 @@ class Torrential_Traffic_TestCases(TrafficBase):
                 # Test Case 4: Delete Project
                 self.driver.get(data.torrential_project_listing_page)
                 time.sleep(2)
-                delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
+                delete_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
                 self.driver.execute_script("arguments[0].click();", delete_btn)
                 time.sleep(2)
-                delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
+                delete_modal_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_delete_modal_btn)
                 self.driver.execute_script("arguments[0].click();", delete_modal_btn)
                 time.sleep(6)
                 project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
@@ -1635,7 +1590,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
                     option.click()
                     time.sleep(10)
                 
-                    table_rows = self.base_page.wait(resources.OldTrafficModuleLocator.report_result_row)
+                    table_rows = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.report_result_row)
                     if table_rows:
                         self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Pass\n', new=False)
                         break
@@ -1651,7 +1606,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
         try:
             self.driver.get(data.torrential_campaign_error_page)
             time.sleep(5)
-            error_page_row = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_error_page_row).text
+            error_page_row = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_error_page_row).text
             data_list_24_days = error_page_row.split(' ')
             data_dict_24_days = {
                 "campaing_id": data_list_24_days[0],
@@ -1669,14 +1624,14 @@ class Torrential_Traffic_TestCases(TrafficBase):
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_month_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
-            time.sleep(10)
+            time.sleep(5)
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_7_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
-            time.sleep(10)
+            time.sleep(5)
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
@@ -1684,7 +1639,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
             time.sleep(10)
-            error_page_row = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_error_page_row).text
+            error_page_row = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split(' ')
             data_dict = {
                 "campaing_id": data_list[0],
@@ -1750,8 +1705,8 @@ class BS_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 1: Invalid Login (Invalid Username and Password)
             self.driver.get(data.bs_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -1761,8 +1716,8 @@ class BS_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 2: Valid Username, Invalid Password
             self.driver.get(data.bs_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.bs_login_username)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys(data.bs_login_username)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys("invalid_pass")
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid password"
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -1772,8 +1727,8 @@ class BS_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 3: Invalid Username, Valid Password
             self.driver.get(data.bs_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.bs_login_password)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys("invalid_user")
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys(data.bs_login_password)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login succeeded with invalid username"
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -1783,8 +1738,8 @@ class BS_Traffic_TestCases(TrafficBase):
         try:
             # Test Case 4: Valid Login
             self.driver.get(data.bs_traffic_url)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_user).send_keys(data.bs_login_username)
-            self.base_page.wait(resources.OldTrafficModuleLocator.login_password).send_keys(data.bs_login_password)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_user).send_keys(data.bs_login_username)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.login_password).send_keys(data.bs_login_password)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.OldTrafficModuleLocator.main_content), "Login failed with valid credentials"
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password), {"Pass" if login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -1798,9 +1753,9 @@ class BS_Traffic_TestCases(TrafficBase):
             # Test Case 1: Create Project
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_create_btn)
             time.sleep(3)
-            self.base_page.wait(resources.OldTrafficModuleLocator.project_create_name_input).send_keys(project_name)
+            self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_create_name_input).send_keys(project_name)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_create_modal_btn)
-            project_created = self.base_page.wait(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name)), "Project creation failed"
+            project_created = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name)), "Project creation failed"
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Create Project, {"Pass" if project_created[0] else f"Fail - {project_created[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Create Project,Fail\n', new=False)
@@ -1809,7 +1764,7 @@ class BS_Traffic_TestCases(TrafficBase):
             # Test Case 2: View Project
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name))
-            project_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.project_view_check.format(project_name=project_name)), "Project view failed"
+            project_viewed = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_view_check.format(project_name=project_name)), "Project view failed"
             project_id = self.driver.current_url.split("/")[-2]
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, View Project, {"Pass" if project_viewed[0] else f"Fail - {project_viewed[1]}"}\n', new=False)
         except Exception as e:
@@ -1822,7 +1777,7 @@ class BS_Traffic_TestCases(TrafficBase):
             time.sleep(6)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.project_edit_btn.format(project_id=project_id))
             time.sleep(2)
-            project_edit_input = self.base_page.wait(resources.OldTrafficModuleLocator.project_edit_name_input)
+            project_edit_input = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_edit_name_input)
             time.sleep(2)
             project_edit_input.clear()
             time.sleep(2)
@@ -1835,7 +1790,7 @@ class BS_Traffic_TestCases(TrafficBase):
             if not project_edited[0]:
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.project_created_list_check.format(project_name=project_name))
                 time.sleep(10)
-                project_edited = self.base_page.wait(resources.OldTrafficModuleLocator.project_edit_check_2.format(edited_project_name=edited_project_name)), "Project edit failed"
+                project_edited = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.project_edit_check_2.format(edited_project_name=edited_project_name)), "Project edit failed"
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Edit Project, {"Pass" if project_edited[0] else f"Fail - {project_edited[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Edit Project,Fail\n', new=False)
@@ -1892,7 +1847,7 @@ class BS_Traffic_TestCases(TrafficBase):
             selected_campaign = random.choice(campaign_types)
 
             def fill_campaign_form(campaign):
-                self.base_page.wait(resources.OldTrafficModuleLocator.campaign_name).send_keys(campaign_name)
+                self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_name).send_keys(campaign_name)
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_category)
                 time.sleep(2)
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_category_option.format(campaign_type=campaign["campaign_type"].lower()))
@@ -1901,49 +1856,61 @@ class BS_Traffic_TestCases(TrafficBase):
                 time.sleep(2)
                 self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_sub_category_option.format(campaign_sub_type=campaign["campaign_sub_type"].lower()))
                 time.sleep(2)
-                country_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_country)
+                country_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_country)
                 self.driver.execute_script("arguments[0].innerHTML = arguments[1];", country_field, resources.OldTrafficModuleLocator.country_inner_html)
                 time.sleep(2)
-                self.base_page.wait(resources.OldTrafficModuleLocator.campaign_average_session).send_keys(campaign_average_session)
+                self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_average_session).send_keys(campaign_average_session)
                 time.sleep(2)
                 if "keyword_modifiers" in campaign["fields"]:
-                    wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_keyword_modifiers)
+                    wildcard_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_keyword_modifiers)
                     self.base_page.send_key_with_action_chain(wildcard_field, campaign_keyword_modifiers)
 
                 if "direct_url" in campaign["fields"]:
-                    direct_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_direct_url)
+                    direct_url_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_direct_url)
                     self.base_page.send_key_with_action_chain(direct_url_field, campaign_direct_url)
                     
                 if "wildcard_string" in campaign["fields"]:
-                    wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_wildcard_strign)
+                    wildcard_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_wildcard_strign)
                     self.base_page.send_key_with_action_chain(wildcard_field, campaign_wildcard_string)
 
                 if "tier1_url" in campaign["fields"]:
-                    tier_1_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_tier1_url)
+                    tier_1_url_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier1_url)
                     self.base_page.send_key_with_action_chain(tier_1_url_field, campaign_tier1_url)
 
                     
                 if "tier2_url" in campaign["fields"]:
-                    tier_2_url_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_tier2_url)
+                    tier_2_url_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_tier2_url)
                     self.base_page.send_key_with_action_chain(tier_2_url_field, campaign_tier2_url)
 
                 if "destination_url" in campaign["fields"]:
-                    wildcard_field = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_destination_url)
+                    wildcard_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_destination_url)
                     self.base_page.send_key_with_action_chain(wildcard_field, campaign_destination_url)
+                
+                if "gmb_cid" in campaign["fields"]:
+                    gmb_cid_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_gmb_cid)
+                    self.base_page.send_key_with_action_chain(gmb_cid_field, campaign_gmb_cid)
+
+                if "geo_latitude" in campaign["fields"]:
+                    geo_latitude_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_geo_latitude)
+                    self.base_page.send_key_with_action_chain(geo_latitude_field, campaign_geo_latitude)
+                
+                if "geo_longitude" in campaign["fields"]:
+                    geo_longitude_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_geo_longitude)
+                    self.base_page.send_key_with_action_chain(geo_longitude_field, campaign_geo_longitude)
 
                 if "brand_name" in campaign["fields"]:
-                    self.base_page.wait(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
+                    self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
                 
             try:
                 # Test Case 1: Create Campaign
                 time.sleep(2)
                 fill_campaign_form(selected_campaign)
                 time.sleep(5)
-                submit_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_submit_btn)
-                self.driver.execute_script("arguments[0].click();", submit_btn)
+                submit_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_create_submit_btn)
+                # self.driver.execute_script("arguments[0].click();", submit_btn)
                 time.sleep(8)
 
-                campaign_created = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
+                campaign_created = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign creation failed"
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Create Campaign, {"Pass" if campaign_created[0] else f"Fail - {campaign_created[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Create Campaign,Fail\n', new=False)
@@ -1951,9 +1918,9 @@ class BS_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 2: View Campaign
                 time.sleep(10)
-                campaign_create_check_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
-                self.driver.execute_script("arguments[0].click();", campaign_create_check_btn)
-                campaign_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
+                campaign_create_check_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name))
+                # self.driver.execute_script("arguments[0].click();", campaign_create_check_btn)
+                campaign_viewed = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 print(f"Campaign ID: {campaign_id}")
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, View Campaign, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
@@ -1965,14 +1932,14 @@ class BS_Traffic_TestCases(TrafficBase):
                 time.sleep(2)
                 self.driver.get(data.bs_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
-                edit_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
-                self.driver.execute_script("arguments[0].click();", edit_btn)
+                edit_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_edit_btn.format(campaign_id=campaign_id))
+                # self.driver.execute_script("arguments[0].click();", edit_btn)
                 time.sleep(2)
                 self.old_traffic_edit_fields(self.base_page, selected_campaign, self.driver)
 
-                save_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_edit_save_btn)
-                self.driver.execute_script("arguments[0].click();", save_btn)
-                time.sleep(70)
+                save_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_edit_save_btn)
+                # self.driver.execute_script("arguments[0].click();", save_btn)
+                time.sleep(10)
                 campaign_edited = self.old_traffic_edit_fields_check(self.base_page, selected_campaign, self.driver), "Campaign edit failed"
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Edit Campaign, {"Pass" if campaign_edited[0] else f"Fail - {campaign_edited[1]}"}\n', new=False)
             except Exception as e:
@@ -1982,10 +1949,10 @@ class BS_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 2: View Campaign
                 self.driver.get(data.bs_campaing_listing_page.format(project_id=project_id))
-                time.sleep(0)
-                campaign_create_check_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
+                time.sleep(2)
+                campaign_create_check_btn = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
                 self.driver.execute_script("arguments[0].click();", campaign_create_check_btn)
-                campaign_viewed = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
+                campaign_viewed = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
                 campaign_id = self.driver.current_url.split("/")[-2]
                 print(f"Campaign ID: {campaign_id}")
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, View Campaign after edit, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
@@ -1996,15 +1963,13 @@ class BS_Traffic_TestCases(TrafficBase):
                 # Test Case 4: Live Campaign
                 self.driver.get(data.bs_campaing_listing_page.format(project_id=project_id))
                 time.sleep(2)
-                live_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
-                self.driver.execute_script("arguments[0].click();", live_btn)
+                live_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_live_btn.format(campaign_id=campaign_id))
                 time.sleep(3)
-                live_modal_confirmation_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_live_modal_confirmation)
-                self.driver.execute_script("arguments[0].click();", live_modal_confirmation_btn)
-                time.sleep(10)
+                live_modal_confirmation_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_live_modal_confirmation)
+                time.sleep(5)
                 self.driver.get(data.bs_campaing_listing_page.format(project_id=project_id))
-                time.sleep(20)
-                campaign_live = self.base_page.wait(resources.OldTrafficModuleLocator.live_status), "Campaign live failed"
+                time.sleep(5)
+                campaign_live = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.live_status), "Campaign live failed"
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Live Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Live Campaign,Fail\n', new=False)
@@ -2012,15 +1977,12 @@ class BS_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 5: Cancel Live Campaign
                 time.sleep(2)
-                stop_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_stop_btn.format(campaign_id=campaign_id))
-                self.driver.execute_script("arguments[0].click();", stop_btn)
+                stop_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_stop_btn.format(campaign_id=campaign_id))
                 time.sleep(3)
-                stop_modal_confirmation_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_stop_modal_confirmation)
-                self.driver.execute_script("arguments[0].click();", stop_modal_confirmation_btn)
-                time.sleep(10)
+                stop_modal_confirmation_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_stop_modal_confirmation)
+                time.sleep(5)
                 self.driver.get(data.bs_campaing_listing_page.format(project_id=project_id))
-                time.sleep(20)
-                campaign_live = self.base_page.wait(resources.OldTrafficModuleLocator.stop_status), "Campaign live failed"
+                campaign_live = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.stop_status), "Campaign live failed"
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Cancel Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
             except Exception as e:
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Cancel Campaign,Fail\n', new=False)
@@ -2028,12 +1990,10 @@ class BS_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 4: Delete Campaign
                 time.sleep(2)
-                delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
-                self.driver.execute_script("arguments[0].click();", delete_btn)
+                delete_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_delete_btn.format(campaign_id=campaign_id))
                 time.sleep(2)
-                delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.capmaign_delete_modal_btn)
+                delete_modal_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.capmaign_delete_modal_btn)
                 time.sleep(2)
-                self.driver.execute_script("arguments[0].click();", delete_modal_btn)
                 time.sleep(6)
                 campaign_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name)), "Campaign deletion failed"
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Delete Campaign, {"Pass" if campaign_deleted else f"Fail - {campaign_deleted[1]}"}\n', new=False)
@@ -2045,11 +2005,9 @@ class BS_Traffic_TestCases(TrafficBase):
                 # Test Case 4: Delete Project
                 self.driver.get(data.bs_project_listing_page)
                 time.sleep(2)
-                delete_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
-                self.driver.execute_script("arguments[0].click();", delete_btn)
+                delete_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.project_delete_btn.format(project_id=project_id))
                 time.sleep(2)
-                delete_modal_btn = self.base_page.wait(resources.OldTrafficModuleLocator.project_delete_modal_btn)
-                self.driver.execute_script("arguments[0].click();", delete_modal_btn)
+                delete_modal_btn = self.base_page.click_btn(resources.OldTrafficModuleLocator.project_delete_modal_btn)
                 time.sleep(6)
                 project_deleted = not self.base_page.wait(resources.OldTrafficModuleLocator.project_deleted_list_check.format(edited_project_name=edited_project_name)), "Project deletion failed"
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
@@ -2083,9 +2041,8 @@ class BS_Traffic_TestCases(TrafficBase):
                     if campaign_index == 0:
                         continue
                     option.click()
-                    time.sleep(90)
                 
-                    table_rows = self.base_page.wait(resources.OldTrafficModuleLocator.report_result_row)
+                    table_rows = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.report_result_row)
                     if table_rows:
                         self.base_page.make_csv("BS_traffic_must_haves.csv", f'Report, Filter by Project and Campaign, Pass\n', new=False)
                         break
@@ -2101,7 +2058,7 @@ class BS_Traffic_TestCases(TrafficBase):
         try:
             self.driver.get(data.bs_campaign_error_page)
             time.sleep(5)
-            error_page_row = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_error_page_row).text
+            error_page_row = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_error_page_row).text
             data_list_24_days = error_page_row.split(' ')
             data_dict_24_days = {
                 "campaing_id": data_list_24_days[0],
@@ -2119,22 +2076,20 @@ class BS_Traffic_TestCases(TrafficBase):
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_month_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
-            time.sleep(40)
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_7_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
-            time.sleep(40)
             
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter)
             time.sleep(0.5)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaing_error_filter_1_day_option)
             time.sleep(2)
             self.base_page.click_btn(resources.OldTrafficModuleLocator.campaign_error_filter_btn)
-            time.sleep(40)
-            error_page_row = self.base_page.wait(resources.OldTrafficModuleLocator.campaign_error_page_row).text
+            time.sleep(50)
+            error_page_row = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_error_page_row).text
             data_list = error_page_row.split(' ')
             data_dict = {
                 "campaing_id": data_list[0],

@@ -259,6 +259,9 @@ class OldTrafficModuleLocator:
     campaign_average_session_edit_field_check = '//div[./label="Average Session Per Day" and .//input[@value="{average_session}"]]'
     campaign_country_edit_field = '//div[@class="col-lg-4"]/div[./label[contains(text(), "country")]]'
     campaign_brand_name = '//input[@name="brand_name"]'
+    campaign_gmb_cid = '//input[@name="gmb_cid"]'
+    campaign_geo_latitude = '//input[@name="geo_latitude"]'
+    campaign_geo_longitude = '//input[@name="geo_longitude"]'
     
     campaign_create_submit_btn = '//button[@id="submitButton"]'
     campaign_create_check = '//td//a[contains(text() , "{campaign_name}")]'

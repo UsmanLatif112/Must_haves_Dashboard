@@ -3,6 +3,10 @@ from lib.resources import *
 import os,csv
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+    
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 
 
@@ -36,10 +40,23 @@ class BasePage:
         self.driver = driver
 
 class HomePage(BasePage):
+
+    def wait_for_element(self, xpath, timeout=180):
+        locator = (By.XPATH, xpath)
+        try:
+            element = WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+            return element
+        except TimeoutException:
+            print(f"Element not found: {locator}")
+            return None
     
     def click_btn(self, xpath: str):
-        element = self.wait(xpath)
-        element.click()
+        element = self.wait_for_element(xpath)
+        time.sleep(1)
+        try:
+            element.click()
+        except:
+            self.driver.execute_script("arguments[0].click();", element)
         
     def enter_Name(self, xpath: str, clientname: str):
         self.driver.find_element(By.XPATH, xpath).send_keys(clientname)

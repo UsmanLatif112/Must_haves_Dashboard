@@ -537,7 +537,7 @@ def CE_traffic_must_haves():
     user_id = current_user.id
     earliest_timestamp = db.session.query(ce_traffic_Model.created_at).filter(
         ce_traffic_Model.user_id == user_id
-    ).order_by(ce_traffic_Model.created_at.asc()).limit(1).scalar()
+    ).order_by(ce_traffic_Model.created_at.desc()).limit(1).scalar()
     
     ce_traffic_Models_list = ce_traffic_Model.query.filter(
         ce_traffic_Model.created_at == earliest_timestamp,
