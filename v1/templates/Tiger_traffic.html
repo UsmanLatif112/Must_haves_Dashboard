@@ -333,116 +333,122 @@
 <div class="loader">
   <p>Script is running, please wait...</p>
 </div>
-
 <script>
-// AJAX request to run the script
-document.getElementById('run-script-button').addEventListener('click', function() {
-  // Start the loader
-  $('.loader').show();
-
-  // Perform AJAX request
-  $.ajax({
-    url: "/Tiger-traffic-must-haves-run-script",
-    type: "POST",
-    success: function(response) {
-      // Handle success
-      console.log('Script executed successfully:', response);
-
-      // Color code the table rows based on response data
-      colorCodeTableRows(response);
-
-      // Optional: Redirect to another page or update content
-      window.location.href = "/Tiger-traffic-must-haves"; 
-      location.reload();// Uncomment if needed
-    },
-    error: function(xhr, status, error) {
-      // Handle errors
-      console.error('Error executing script:', error);
-      alert('Error executing script');
-    },
-    complete: function() {
-      // Hide the loader
-      $('.loader').hide();
-      location.reload();
-    }
+  // AJAX request to run the script
+  document.getElementById('run-script-button').addEventListener('click', function() {
+    // Start the loader
+    $('.loader').show();
+  
+  
+    // Perform AJAX request
+    $.ajax({
+      url: "/Tiger-traffic-must-haves-run-script",
+      type: "post",
+      success: function(response) {
+        // Handle success
+        console.log('Script executed successfully:', response);
+  
+        // Color code the table rows based on response data
+        colorCodeTableRows(response);
+  
+        // Optional: Redirect to another page after a short delay
+        setTimeout(function() {
+          window.location.href = "/Tiger-traffic-must-haves"; 
+        }, 100); // 500ms delay before redirection
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error('Error executing script:', error);
+        alert('Error executing script');
+      },
+      complete: function() {
+        // Hide the loader
+        $('.loader').hide();
+        location.reload(); // Remove this line to avoid multiple reloads
+      }
+    });
   });
-});
-
-// Download table data as CSV
-function downloadCSV() {
-  const table = document.getElementById('results-table');
-  let csvContent = "data:text/csv;charset=utf-8,";
-
-  for (let row of table.rows) {
-    let rowData = [];
-    for (let cell of row.cells) {
-      rowData.push(cell.textContent);
+  
+  // Download table data as CSV
+  function downloadCSV() {
+    const table = document.getElementById('results-table');
+    let csvContent = "data:text/csv;charset=utf-8,";
+  
+    for (let row of table.rows) {
+      let rowData = [];
+      for (let cell of row.cells) {
+        rowData.push(cell.textContent);
+      }
+      csvContent += rowData.join(",") + "\n";
     }
-    csvContent += rowData.join(",") + "\n";
+  
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "Tiger_Traffic_Modules_report.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
-
-  const encodedUri = encodeURI(csvContent);
-  const link = document.createElement("a");
-  link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "Tiger_Traffic_Modules_report.csv");
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// Add event listener to the Download CSV button
-document.getElementById('download-button').addEventListener('click', downloadCSV);
-
-// Function to navigate to the dashboard
-function goBack() {
-  window.location.href = "/dashboard";
-}
-
-// Function to color code table rows based on response data
-function colorCodeTableRows(response) {
-  // Assuming `response` is an array of data where each item is an array of values
-  const rows = document.querySelectorAll('#results-bodyy tr');
-
-  response.forEach(function(item, index) {
-    let result_class = '';
-    let result_class_last = '';
-
-    // Adjust the indexes based on your data format (index 4 and 9 as per example)
-    if (item[4] && item[4].trim().toLowerCase() === 'pass') {
-      result_class = 'pass';
-    } else if (item[4] && item[4].trim().toLowerCase() === 'fail') {
-      result_class = 'fail';
+  
+  // Add event listener to the Download CSV button
+  document.getElementById('download-button').addEventListener('click', downloadCSV);
+  
+  // Function to navigate to the dashboard
+  function goBack() {
+    window.location.href = "/dashboard";
+  }
+  
+  // Function to color code table rows based on response data
+  function colorCodeTableRows(response) {
+    // Ensure response is an array
+    if (!Array.isArray(response)) {
+      console.error('Invalid response format:', response);
+      return;
     }
-
-    if (item[9] && item[9].trim().toLowerCase() === 'pass') {
-      result_class_last = 'pass';
-    } else if (item[9] && item[9].trim().toLowerCase() === 'fail') {
-      result_class_last = 'fail';
-    }
-
-    // Apply classes to table rows in the <tbody>
-    const row = rows[index];
-    if (row) {
-      row.classList.remove('pass', 'fail'); // Clear previous classes
-      if (result_class) {
-        row.classList.add(result_class);
+  
+    const rows = document.querySelectorAll('#results-bodyy tr');
+  
+    response.forEach(function(item, index) {
+      let result_class = '';
+      let result_class_last = '';
+  
+      // Adjust the indexes based on your data format (index 4 and 9 as per example)
+      if (item[4] && item[4].trim().toLowerCase() === 'pass') {
+        result_class = 'pass';
+      } else if (item[4] && item[4].trim().toLowerCase() === 'fail') {
+        result_class = 'fail';
       }
-      if (result_class_last) {
-        row.classList.add(result_class_last);
+  
+      if (item[9] && item[9].trim().toLowerCase() === 'pass') {
+        result_class_last = 'pass';
+      } else if (item[9] && item[9].trim().toLowerCase() === 'fail') {
+        result_class_last = 'fail';
       }
-    }
-  });
-}
-
-// Check if the "No data available" row is present
-const noDataRow = document.getElementById('no-data-row');
-const downloadButton = document.getElementById('download-button');
-
-if (noDataRow) {
-    downloadButton.disabled = true;
-    downloadButton.style.cursor = 'not-allowed'; // Optional: change cursor to indicate the button is disabled
-}
-</script>
+  
+      // Apply classes to table rows in the <tbody>
+      const row = rows[index];
+      if (row) {
+        row.classList.remove('pass', 'fail'); // Clear previous classes
+        if (result_class) {
+          row.classList.add(result_class);
+        }
+        if (result_class_last) {
+          row.classList.add(result_class_last);
+        }
+      }
+    });
+  }
+  
+  // Check if the "No data available" row is present
+  const noDataRow = document.getElementById('no-data-row');
+  const downloadButton = document.getElementById('download-button');
+  
+  if (noDataRow) {
+      downloadButton.disabled = true;
+      downloadButton.style.cursor = 'not-allowed'; // Optional: change cursor to indicate the button is disabled
+  }
+  </script>
 
 </body>
 </html>

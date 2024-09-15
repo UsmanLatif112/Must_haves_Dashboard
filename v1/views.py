@@ -6,7 +6,7 @@ from datetime import datetime
 from flask_login import current_user
 from flask import render_template, request, jsonify, redirect, url_for,Blueprint
 from flask_login import login_user, login_required, logout_user
-from models import team_usermoduleModel,QuickAnalysisModel, ce_traffic_Model, tiger_traffic_Model, torrential_traffic_Model, bs_traffic_Model
+from models import team_usermoduleModel,stagingapiaResponse, QuickAnalysisModel, ce_traffic_Model, tiger_traffic_Model, torrential_traffic_Model, bs_traffic_Model,umbrellaResponse
 from app import app, login_manager,db
 from user_management import User
 from import_csv import import_client_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db, import_user_team_csv_to_db, import_ce_traffic_csv_to_db, import_tiger_traffic_csv_to_db, import_torrential_traffic_csv_to_db, import_bs_traffic_csv_to_db
@@ -59,50 +59,7 @@ def dashboard():
     return render_template("dashboard.html", user_email=user_email)
 
 
-@app.route("/script")
-@login_required
-def script():
-    current_date_ = datetime.today().date()
-    user_email = current_user.email
-    # Fetch the current user's ID
-    user_id = current_user.id
-    
-    # Retrieve data for the current date filtered by the logged-in user
-    api_responses_list = ApiResponse.query.filter(
-        func.date(ApiResponse.created_at) == current_date_,
-        ApiResponse.user_id == user_id
-    ).order_by(ApiResponse.created_at.desc()).all()[:54]
-    
-    # If no data for the current date, retrieve the most recent data for the logged-in user
-    if not api_responses_list:
-        api_responses_list = ApiResponse.query.filter_by(
-            user_id=user_id
-        ).order_by(ApiResponse.created_at.desc()).all()[:54]
-
-    return render_template("script.html", api_responses=api_responses_list, user_email=user_email)
-
-@app.route("/umbrella_script")
-@login_required
-def umbrella_script():
-    from models import umbrellaResponse
-    current_date_ = datetime.today().date()
-    user_email = current_user.email
-    # Fetch the current user's ID
-    user_id = current_user.id
-    
-    # Retrieve data for the current date filtered by the logged-in user
-    umbrellaResponse_list = umbrellaResponse.query.filter(
-        func.date(umbrellaResponse.created_at) == current_date_,
-        umbrellaResponse.user_id == user_id
-    ).order_by(umbrellaResponse.created_at.desc()).all()[:55]
-    
-    # If no data for the current date, retrieve the most recent data for the logged-in user
-    if not umbrellaResponse_list:
-        umbrellaResponse_list = umbrellaResponse.query.filter_by(
-            user_id=user_id
-        ).order_by(umbrellaResponse.created_at.desc()).all()[:55]
-
-    return render_template("umbrella_script.html", umbrellaResponses=umbrellaResponse_list, user_email=user_email)
+"""========================Agency API Views=========================="""
 
 @app.route("/Agency_api")
 @login_required
@@ -110,50 +67,237 @@ def Agency_api():
     user_email = current_user.email
     return render_template("Agency API dashboard.html", user_email=user_email)
 
+
+@app.route("/script")
+@login_required
+def script():
+    current_date_ = datetime.today().date()
+    user_email = current_user.email
+    user_id = current_user.id
+
+    # If user ID is 100, display results for all users
+    if user_id == 100:
+        # Retrieve data for the current date for all users
+        api_responses_list = ApiResponse.query.filter(
+            func.date(ApiResponse.created_at) == current_date_
+        ).order_by(ApiResponse.created_at.desc()).all()[:54]
+        
+        # If no data for the current date, retrieve the most recent data for all users
+        if not api_responses_list:
+            api_responses_list = ApiResponse.query.order_by(
+                ApiResponse.created_at.desc()
+            ).all()[:54]
+    else:
+        # Retrieve data for the current date filtered by the logged-in user
+        api_responses_list = ApiResponse.query.filter(
+            func.date(ApiResponse.created_at) == current_date_,
+            ApiResponse.user_id == user_id
+        ).order_by(ApiResponse.created_at.desc()).all()[:54]
+        
+        # If no data for the current date, retrieve the most recent data for the logged-in user
+        if not api_responses_list:
+            api_responses_list = ApiResponse.query.filter_by(
+                user_id=user_id
+            ).order_by(ApiResponse.created_at.desc()).all()[:54]
+
+    return render_template("script.html", api_responses=api_responses_list, user_email=user_email)
+
+
+@app.route("/run_script", methods=["POST"])
+@login_required
+def run_script():
+    try:
+        from agencyapi import init_the_testing
+
+        # Call a function that initializes testing and returns data
+        campaign_id = request.form.get("C_id")
+        print(f'{campaign_id}')
+        quick_analysis_campaign_id = request.form.get("Q_id")
+        print(f'{quick_analysis_campaign_id}')
+        keywordname_id = request.form.get("K_id")
+        print(f'{keywordname_id}')
+        business_id = request.form.get("B_id")
+        print(f'{business_id}')
+        Campaign_Status = request.form.get("C_St")
+        print(f'{Campaign_Status}')
+        # Pass these IDs to the init_the_testing function
+        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id,Campaign_Status)
+        
+        # Commit the API responses to the database
+        db.session.commit()
+        
+        # Import the CSV file data into the database, now passing the user_id
+        csv_file_path = "API_result.csv"
+        import_csv_to_db(db.session, csv_file_path, current_user.id)
+        
+        # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
+
+        # Return the results as JSON
+        return jsonify(result_content)
+    except Exception as e:
+        # Print the full traceback to help diagnose the issue
+        traceback.print_exc()
+        # Rollback the session in case of an error
+        db.session.rollback()
+        # Return a JSON response indicating an error
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
+    
+    
+    
+@app.route("/umbrella_script")
+@login_required
+def umbrella_script(): 
+    current_date_ = datetime.today().date()
+    user_email = current_user.email
+    user_id = current_user.id
+
+    # If user ID is 100, display results for all users
+    if user_id == 100:
+        # Retrieve data for the current date for all users
+        umbrellaResponse_list = umbrellaResponse.query.filter(
+            func.date(umbrellaResponse.created_at) == current_date_
+        ).order_by(umbrellaResponse.created_at.desc()).all()[:54]
+        
+        # If no data for the current date, retrieve the most recent data for all users
+        if not umbrellaResponse_list:
+            umbrellaResponse_list = umbrellaResponse.query.order_by(
+                umbrellaResponse.created_at.desc()
+            ).all()[:54]
+    else:
+        # Retrieve data for the current date filtered by the logged-in user
+        umbrellaResponse_list = umbrellaResponse.query.filter(
+            func.date(umbrellaResponse.created_at) == current_date_,
+            umbrellaResponse.user_id == user_id
+        ).order_by(umbrellaResponse.created_at.desc()).all()[:54]
+        
+        # If no data for the current date, retrieve the most recent data for the logged-in user
+        if not umbrellaResponse_list:
+            umbrellaResponse_list = umbrellaResponse.query.filter_by(
+                user_id=user_id
+            ).order_by(umbrellaResponse.created_at.desc()).all()[:54]
+
+    return render_template("umbrella_script.html", umbrellaResponses=umbrellaResponse_list, user_email=user_email)
+    
+@app.route("/run_umbrella_script", methods=["POST"])
+@login_required
+def run_umbrella_script():
+    try:
+        from umbrella_agency import init_the_testing
+
+        # Call a function that initializes testing and returns data
+        campaign_id = request.form.get("C_id")
+        print(f'{campaign_id}')
+        quick_analysis_campaign_id = request.form.get("Q_id")
+        print(f'{quick_analysis_campaign_id}')
+        keywordname_id = request.form.get("K_id")
+        print(f'{keywordname_id}')
+        business_id = request.form.get("B_id")
+        print(f'{business_id}')
+        # Pass these IDs to the init_the_testing function
+        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id)
+        
+        # Commit the API responses to the database
+        db.session.commit()
+        
+        # Import the CSV file data into the database, now passing the user_id
+        csv_file_path = "umbrella_API_result.csv"
+        import_umbrella_csv_to_db(db.session, csv_file_path, current_user.id)
+        
+        # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
+
+        # Return the results as JSON
+        return jsonify(result_content)
+    except Exception as e:
+        # Print the full traceback to help diagnose the issue
+        traceback.print_exc()
+        # Rollback the session in case of an error
+        db.session.rollback()
+        # Return a JSON response indicating an error
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
+    
+
 @app.route("/staging_agency_script")
 @login_required
 def staging_agency_script():
-    user_email = current_user.email
-    from models import stagingapiaResponse
-    from datetime import datetime
     current_date_ = datetime.today().date()
-    stagingapiaResponses_list = stagingapiaResponse.query.filter(func.date(stagingapiaResponse.created_at) == current_date_).order_by(stagingapiaResponse.created_at.desc()).all()[:54]
-    if not stagingapiaResponses_list:
-        stagingapiaResponses_list = stagingapiaResponse.query.order_by(stagingapiaResponse.created_at.desc()).limit(54).all()[:54]
-    return render_template("staging_agency_script.html",stagingapiaResponses=stagingapiaResponses_list, user_email=user_email)
+    user_email = current_user.email
+    user_id = current_user.id
 
+    # If user ID is 100, display results for all users
+    if user_id == 100:
+        # Retrieve data for the current date for all users
+        stagingapiaResponse_list = stagingapiaResponse.query.filter(
+            func.date(stagingapiaResponse.created_at) == current_date_
+        ).order_by(stagingapiaResponse.created_at.desc()).all()[:54]
+        
+        # If no data for the current date, retrieve the most recent data for all users
+        if not stagingapiaResponse_list:
+            stagingapiaResponse_list = stagingapiaResponse.query.order_by(
+                stagingapiaResponse.created_at.desc()
+            ).all()[:54]
+    else:
+        # Retrieve data for the current date filtered by the logged-in user
+        stagingapiaResponse_list = stagingapiaResponse.query.filter(
+            func.date(stagingapiaResponse.created_at) == current_date_,
+            stagingapiaResponse.user_id == user_id
+        ).order_by(stagingapiaResponse.created_at.desc()).all()[:54]
+        
+        # If no data for the current date, retrieve the most recent data for the logged-in user
+        if not stagingapiaResponse_list:
+            stagingapiaResponse_list = stagingapiaResponse.query.filter_by(
+                user_id=user_id
+            ).order_by(stagingapiaResponse.created_at.desc()).all()[:54]
+
+    return render_template("staging_agency_script.html", stagingapiaResponses=stagingapiaResponse_list, user_email=user_email)
+
+@app.route("/Staging_agencyapi_script", methods=["POST"])
+@login_required
+def Staging_agencyapi_script():
+    try:
+        from Staging_agencyapi import init_the_testing
+
+        # Call a function that initializes testing and returns data
+        campaign_id = request.form.get("C_id")
+        print(f'{campaign_id}')
+        quick_analysis_campaign_id = request.form.get("Q_id")
+        print(f'{quick_analysis_campaign_id}')
+        keywordname_id = request.form.get("K_id")
+        print(f'{keywordname_id}')
+        business_id = request.form.get("B_id")
+        print(f'{business_id}')
+        # Pass these IDs to the init_the_testing function
+        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id)
+        
+        # Commit the API responses to the database
+        db.session.commit()
+        
+        # Import the CSV file data into the database, now passing the user_id
+        csv_file_path = "Staging_API_result.csv"
+        import_staging_csv_to_db(db.session, csv_file_path, current_user.id)
+        
+        # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
+
+        # Return the results as JSON
+        return jsonify(result_content)
+    except Exception as e:
+        # Print the full traceback to help diagnose the issue
+        traceback.print_exc()
+        # Rollback the session in case of an error
+        db.session.rollback()
+        # Return a JSON response indicating an error
+        return jsonify({"error": str(e), "message": "Failed to run the script"})    
+
+
+"""========================BSWA Views=========================="""
 
 @app.route("/BSWA-must-haves")
 @login_required
 def BSWA():
     user_email = current_user.email
     return render_template("BSWA.html", user_email=user_email)
-
-
-# @app.route("/Quick-analysis")
-# @login_required
-# def Quick():
-#     from models import stagingapiaResponse
-#     from datetime import datetime
-#     current_date_ = datetime.today().date()
-#     user_email = current_user.email
-#     # Fetch the current user's ID
-#     user_id = current_user.id
-    
-#     # Retrieve data for the current date filtered by the logged-in user
-#     QuickAnalysisModels_list = QuickAnalysisModel.query.filter(
-#         func.date(QuickAnalysisModel.created_at) == current_date_,
-#         QuickAnalysisModel.user_id == user_id
-#     ).order_by(QuickAnalysisModel.created_at.desc()).all()
-    
-#     # If no data for the current date, retrieve the most recent data for the logged-in user
-#     if not QuickAnalysisModels_list:
-#         QuickAnalysisModels_list = QuickAnalysisModel.query.filter_by(
-#             user_id=user_id
-#         ).order_by(QuickAnalysisModel.created_at.desc()).all()
-
-#     return render_template("Quick_analysis.html", QuickAnalysisModels=QuickAnalysisModels_list, user_email=user_email)
-
 
 @app.route("/Quick-analysis")
 @login_required
@@ -178,14 +322,13 @@ def Quick():
             reader = csv.reader(file)
             next(reader)
             for row_num, row in enumerate(reader, start=1):
-                
                 # Debugging: Print each row and the second column content
                 print(f"Row {row_num}: {row}")  # Print the entire row
                 if len(row) > 1:
                     print(f"Second column: {row[1]}")  # Print the second column value
                     if row[1].strip() == search_text:
                         row_limit = row_num
-                        write_row_limit(row_limit)# Use the row number as the limit
+                        write_row_limit(row_limit)  # Use the row number as the limit
                         print(f"Match found on row {row_num}. Setting row_limit to {row_limit}.")
                         break
     except Exception as e:
@@ -193,35 +336,22 @@ def Quick():
         print(f"Error reading CSV: {e}")
         write_row_limit("8")
 
-    
-    # Retrieve data for the current date filtered by the logged-in user
-    QuickAnalysisModels_list = QuickAnalysisModel.query.filter(
-        func.date(QuickAnalysisModel.created_at) == current_date_,
-        QuickAnalysisModel.user_id == user_id
-    ).order_by(QuickAnalysisModel.created_at.desc()).all()[:row_limit]
-    
-    # If no data for the current date, retrieve the most recent data for the logged-in user
+    # Retrieve data for the current date, conditionally filtering by user_id
+    query = QuickAnalysisModel.query.filter(func.date(QuickAnalysisModel.created_at) == current_date_)
+    if user_id != 100:
+        query = query.filter(QuickAnalysisModel.user_id == user_id)
+
+    QuickAnalysisModels_list = query.order_by(QuickAnalysisModel.created_at.desc()).all()[:row_limit]
+
+    # If no data for the current date, retrieve the most recent data
     if not QuickAnalysisModels_list:
-        QuickAnalysisModels_list = QuickAnalysisModel.query.filter_by(
-            user_id=user_id
-        ).order_by(QuickAnalysisModel.created_at.desc()).all()[:row_limit]
-        
-    # else:
-    #     # Retrieve data for the current date filtered by the logged-in user
-    #     QuickAnalysisModels_list = QuickAnalysisModel.query.filter(
-    #         func.date(QuickAnalysisModel.created_at) == current_date_,
-    #         QuickAnalysisModel.user_id == user_id
-    #     ).order_by(QuickAnalysisModel.created_at.desc()).all()[:8]
-        
-    #     # If no data for the current date, retrieve the most recent data for the logged-in user
-    #     if not QuickAnalysisModels_list:
-    #         QuickAnalysisModels_list = QuickAnalysisModel.query.filter_by(
-    #             user_id=user_id
-    #         ).order_by(QuickAnalysisModel.created_at.desc()).all()[:8]
-            
+        query = QuickAnalysisModel.query
+        if user_id != 100:
+            query = query.filter_by(user_id=user_id)
+        QuickAnalysisModels_list = query.order_by(QuickAnalysisModel.created_at.desc()).all()[:row_limit]
+
     delete_file_if_exists(csv_file_path)
     return render_template("Quick_analysis.html", QuickAnalysisModels=QuickAnalysisModels_list, user_email=user_email)
-
 
 @app.route("/Quick-analysis-script", methods=["POST"])
 @login_required
@@ -246,8 +376,6 @@ def Quick_script():
         import_quick_csv_to_db(db.session, csv_file_path, current_user.id)
         
         # Delete the CSV file after import
-        
-
         # Return the results as JSON
         return jsonify(result_content)
     except Exception as e:
@@ -306,162 +434,8 @@ def client_script():
         db.session.rollback()
         # Return a JSON response indicating an error
         return jsonify({"error": str(e), "message": "Failed to run the script"})
-
-
-@app.route("/run_script", methods=["POST"])
-@login_required
-def run_script():
-    try:
-        from agencyapi import init_the_testing
-
-        # Call a function that initializes testing and returns data
-        campaign_id = request.form.get("C_id")
-        print(f'{campaign_id}')
-        quick_analysis_campaign_id = request.form.get("Q_id")
-        print(f'{quick_analysis_campaign_id}')
-        keywordname_id = request.form.get("K_id")
-        print(f'{keywordname_id}')
-        business_id = request.form.get("B_id")
-        print(f'{business_id}')
-        Campaign_Status = request.form.get("C_St")
-        print(f'{Campaign_Status}')
-        # Pass these IDs to the init_the_testing function
-        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id,Campaign_Status)
-        
-        # Commit the API responses to the database
-        db.session.commit()
-        
-        # Import the CSV file data into the database, now passing the user_id
-        csv_file_path = "API_result.csv"
-        import_csv_to_db(db.session, csv_file_path, current_user.id)
-        
-        # Delete the CSV file after import
-        delete_file_if_exists(csv_file_path)
-
-        # Return the results as JSON
-        return jsonify(result_content)
-    except Exception as e:
-        # Print the full traceback to help diagnose the issue
-        traceback.print_exc()
-        # Rollback the session in case of an error
-        db.session.rollback()
-        # Return a JSON response indicating an error
-        return jsonify({"error": str(e), "message": "Failed to run the script"})
-
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("login"))  # replace 'login' with your login route
-
-
-@app.route("/export_data")
-@login_required  # Ensure only authenticated users can access this route
-def export_the_data_to_db():
-    try:
-        csv_file_path = "API_result.csv"
-        with db.session.begin():
-            # Pass the current user's ID to associate records with the user
-            import_csv_to_db(db.session, csv_file_path, current_user.id)
-
-        # Remove the CSV file
-        delete_file_if_exists(csv_file_path)
-        return jsonify({"message": "API report exported to database"})  # Fix typo in message
-
-    except Exception as e:
-        traceback.print_exc()
-        return jsonify({"message": "Unable to export the API report to database", "error": str(e)})
     
-    
-@app.route("/run_umbrella_script", methods=["POST"])
-@login_required
-def run_umbrella_script():
-    try:
-        from umbrella_agency import init_the_testing
-
-        # Call a function that initializes testing and returns data
-        campaign_id = request.form.get("C_id")
-        print(f'{campaign_id}')
-        quick_analysis_campaign_id = request.form.get("Q_id")
-        print(f'{quick_analysis_campaign_id}')
-        keywordname_id = request.form.get("K_id")
-        print(f'{keywordname_id}')
-        business_id = request.form.get("B_id")
-        print(f'{business_id}')
-        # Pass these IDs to the init_the_testing function
-        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id)
-        
-        # Commit the API responses to the database
-        db.session.commit()
-        
-        # Import the CSV file data into the database, now passing the user_id
-        csv_file_path = "umbrella_API_result.csv"
-        import_umbrella_csv_to_db(db.session, csv_file_path, current_user.id)
-        
-        # Delete the CSV file after import
-        delete_file_if_exists(csv_file_path)
-
-        # Return the results as JSON
-        return jsonify(result_content)
-    except Exception as e:
-        # Print the full traceback to help diagnose the issue
-        traceback.print_exc()
-        # Rollback the session in case of an error
-        db.session.rollback()
-        # Return a JSON response indicating an error
-        return jsonify({"error": str(e), "message": "Failed to run the script"})
-    
-    
-@app.route("/Staging_agencyapi_script", methods=["POST"])
-@login_required
-def Staging_agencyapi_script():
-    try:
-        from Staging_agencyapi import init_the_testing
-
-        # Call a function that initializes testing and returns data
-        campaign_id = request.form.get("C_id")
-        print(f'{campaign_id}')
-        quick_analysis_campaign_id = request.form.get("Q_id")
-        print(f'{quick_analysis_campaign_id}')
-        keywordname_id = request.form.get("K_id")
-        print(f'{keywordname_id}')
-        business_id = request.form.get("B_id")
-        print(f'{business_id}')
-        # Pass these IDs to the init_the_testing function
-        result_content = init_the_testing(campaign_id, quick_analysis_campaign_id,business_id,keywordname_id)
-        
-        # Commit the API responses to the database
-        db.session.commit()
-        
-        # Import the CSV file data into the database, now passing the user_id
-        csv_file_path = "Staging_API_result.csv"
-        import_staging_csv_to_db(db.session, csv_file_path, current_user.id)
-        
-        # Delete the CSV file after import
-        delete_file_if_exists(csv_file_path)
-
-        # Return the results as JSON
-        return jsonify(result_content)
-    except Exception as e:
-        # Print the full traceback to help diagnose the issue
-        traceback.print_exc()
-        # Rollback the session in case of an error
-        db.session.rollback()
-        # Return a JSON response indicating an error
-        return jsonify({"error": str(e), "message": "Failed to run the script"})
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
 @app.route("/user_&_team_module")
 @login_required
 def user_team_module():
@@ -498,8 +472,6 @@ def User_script():
         csv_file_path = "BSWA user & team Module Report.csv"
         import_user_team_csv_to_db(db.session, csv_file_path, current_user.id)
         
-        
-        
         # Delete the CSV file after import
         delete_file_if_exists(csv_file_path)
 
@@ -513,8 +485,8 @@ def User_script():
         # Return a JSON response indicating an error
         return jsonify({"error": str(e), "message": "Failed to run the script"})
     
-    
 
+"""========================Traffic Views=========================="""
 # TRAFFIC MUST HAVE VIEWS
 
 @app.route("/Traffic-must-haves")
@@ -535,14 +507,20 @@ def traffic_must_haves():
 def CE_traffic_must_haves():
     user_email = current_user.email
     user_id = current_user.id
-    earliest_timestamp = db.session.query(ce_traffic_Model.created_at).filter(
-        ce_traffic_Model.user_id == user_id
-    ).order_by(ce_traffic_Model.created_at.desc()).limit(1).scalar()
-    
-    ce_traffic_Models_list = ce_traffic_Model.query.filter(
-        ce_traffic_Model.created_at == earliest_timestamp,
-        ce_traffic_Model.user_id == user_id
-    ).order_by(ce_traffic_Model.created_at.desc()).all()
+
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(ce_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(ce_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(ce_traffic_Model.created_at.asc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    ce_traffic_Models_query = ce_traffic_Model.query.filter(ce_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        ce_traffic_Models_query = ce_traffic_Models_query.filter(ce_traffic_Model.user_id == user_id)
+
+    ce_traffic_Models_list = ce_traffic_Models_query.order_by(ce_traffic_Model.created_at.desc()).all()
+
     return render_template("CE_traffic.html", ce_traffic_Model=ce_traffic_Models_list, user_email=user_email)
 
 @app.route("/CE-traffic-must-haves-run-script", methods=["POST"])
@@ -574,16 +552,21 @@ def CE_traffic_must_haves_run_script():
 def Tiger_traffic_must_haves():
     user_email = current_user.email
     user_id = current_user.id
-    earliest_timestamp = db.session.query(tiger_traffic_Model.created_at).filter(
-        tiger_traffic_Model.user_id == user_id
-    ).order_by(tiger_traffic_Model.created_at.desc()).limit(1).scalar()
-    
-    tiger_traffic_Models_list = tiger_traffic_Model.query.filter(
-        tiger_traffic_Model.created_at == earliest_timestamp,
-        tiger_traffic_Model.user_id == user_id
-    ).order_by(tiger_traffic_Model.created_at.desc()).all()
-    return render_template("Tiger_traffic.html", tiger_traffic_Model=tiger_traffic_Models_list, user_email=user_email)
 
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(tiger_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(tiger_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(tiger_traffic_Model.created_at.desc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    tiger_traffic_Models_query = tiger_traffic_Model.query.filter(tiger_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        tiger_traffic_Models_query = tiger_traffic_Models_query.filter(tiger_traffic_Model.user_id == user_id)
+
+    tiger_traffic_Models_list = tiger_traffic_Models_query.order_by(tiger_traffic_Model.created_at.desc()).all()
+
+    return render_template("Tiger_traffic.html", tiger_traffic_Model=tiger_traffic_Models_list, user_email=user_email)
 @app.route("/Tiger-traffic-must-haves-run-script", methods=["POST"])
 @login_required
 def Tiger_traffic_must_haves_run_script():
@@ -613,14 +596,20 @@ def Tiger_traffic_must_haves_run_script():
 def Torrential_traffic_must_haves():
     user_email = current_user.email
     user_id = current_user.id
-    earliest_timestamp = db.session.query(torrential_traffic_Model.created_at).filter(
-        torrential_traffic_Model.user_id == user_id
-    ).order_by(torrential_traffic_Model.created_at.desc()).limit(1).scalar()
-    
-    torrential_traffic_Models_list = torrential_traffic_Model.query.filter(
-        torrential_traffic_Model.created_at == earliest_timestamp,
-        torrential_traffic_Model.user_id == user_id
-    ).order_by(torrential_traffic_Model.created_at.desc()).all()
+
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(torrential_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(torrential_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(torrential_traffic_Model.created_at.desc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    torrential_traffic_Models_query = torrential_traffic_Model.query.filter(torrential_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        torrential_traffic_Models_query = torrential_traffic_Models_query.filter(torrential_traffic_Model.user_id == user_id)
+
+    torrential_traffic_Models_list = torrential_traffic_Models_query.order_by(torrential_traffic_Model.created_at.desc()).all()
+
     return render_template("Torrential_traffic.html", torrential_traffic_Model=torrential_traffic_Models_list, user_email=user_email)
 
 @app.route("/Torrential-traffic-must-haves-run-script", methods=["POST"])
@@ -652,14 +641,20 @@ def Torrential_traffic_must_haves_run_script():
 def BS_traffic_must_haves():
     user_email = current_user.email
     user_id = current_user.id
-    earliest_timestamp = db.session.query(bs_traffic_Model.created_at).filter(
-        bs_traffic_Model.user_id == user_id
-    ).order_by(bs_traffic_Model.created_at.desc()).limit(1).scalar()
-    
-    bs_traffic_Models_list = bs_traffic_Model.query.filter(
-        bs_traffic_Model.created_at == earliest_timestamp,
-        bs_traffic_Model.user_id == user_id
-    ).order_by(bs_traffic_Model.created_at.desc()).all()
+
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(bs_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(bs_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(bs_traffic_Model.created_at.desc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    bs_traffic_Models_query = bs_traffic_Model.query.filter(bs_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        bs_traffic_Models_query = bs_traffic_Models_query.filter(bs_traffic_Model.user_id == user_id)
+
+    bs_traffic_Models_list = bs_traffic_Models_query.order_by(bs_traffic_Model.created_at.desc()).all()
+
     return render_template("BS_traffic.html", bs_traffic_Model=bs_traffic_Models_list, user_email=user_email)
 
 @app.route("/BS-traffic-must-haves-run-script", methods=["POST"])
@@ -680,3 +675,36 @@ def BS_traffic_must_haves_run_script():
         traceback.print_exc()
         db.session.rollback()
         return jsonify({"error": str(e), "message": "Failed to run the script"})
+    
+    
+    
+    
+    
+    
+
+
+""""=============================dashboard related=================================="""
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login"))  # replace 'login' with your login route
+
+
+@app.route("/export_data")
+@login_required  # Ensure only authenticated users can access this route
+def export_the_data_to_db():
+    try:
+        csv_file_path = "API_result.csv"
+        with db.session.begin():
+            # Pass the current user's ID to associate records with the user
+            import_csv_to_db(db.session, csv_file_path, current_user.id)
+
+        # Remove the CSV file
+        delete_file_if_exists(csv_file_path)
+        return jsonify({"message": "API report exported to database"})  # Fix typo in message
+
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"message": "Unable to export the API report to database", "error": str(e)})
