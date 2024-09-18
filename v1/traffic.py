@@ -882,7 +882,7 @@ class Tiger_Traffic_TestCases(TrafficBase):
                 {
                     "campaign_type": "Birthday Amazon",
                     "campaign_sub_type": "Birthday Amazon",
-                    "fields": ["image_base64_code", "image_url", "keyword_modifiers"]
+                    "fields": ["image_base64_code", "image_url", "keyword_modifiers", "gmb_cid"]
                 },
                 {
                     "campaign_type": "Bsr Booster",
