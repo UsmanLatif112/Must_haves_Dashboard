@@ -559,14 +559,17 @@ def init_the_testing(GMB_cid, User_name, Pass_word):
                         break
                 except:
                     pass
+            
             try:
+                time.sleep(2)
                 Campaignnn = driver.find_element(By.XPATH, f"//div[@id='campaign-tab-content06']//tbody/tr[contains(normalize-space(), '{campaign_nam}')]//td/div[@class='assign-campaign-box']")
                 if Campaignnn:
                     csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign, Quick Analysis Campaign not deleted,Fail\n', new=False)    
             except:
                 csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign,Quick Analysis Campaign ({campaign_nam}) Deleted Successfully,Pass\n', new=False)
                 pass        
-        except:
+        except Exception as e:
+            print(e)
             csvv.make_csv('BSWA Quick Analysis Report.csv', f'Delete Quick Analysis Campaign, Quick Analysis Campaign ({campaign_nam}) Deleted Successfully,Pass\n', new=False)
     
     except Exception as e:
