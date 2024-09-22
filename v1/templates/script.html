@@ -334,8 +334,15 @@
 
             <div class="form-group">
               <label for="campaignstatus">Campaign Status:</label>
-              <input type="text" class="form-control" id="campaignstatus" required>
-              <div id="S_error-message" style="display: none; color: red;"></div>
+              <select class="form-control" id="campaignstatus" required>
+                <option value="Select Campaign Status">Select Campaign Status</option>
+                <option value="Live">Live</option>
+                <option value="In Analysis">In Analysis</option>
+                <option value="Pending Approval">Pending Approval</option>
+                <option value="Analysis Completed">Analysis Completed</option>
+                <!--<option value="Paused">Paused</option> -->
+                <!--<option value="Resubmitted for Analysis">Resubmitted for Analysis</option> -->
+              </select>
             </div>
 
             

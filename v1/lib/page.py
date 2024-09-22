@@ -77,6 +77,24 @@ class HomePage(BasePage):
         except Exception as e:
             print(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
             return None
+    def wait5(self, xpath, timeout=500):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            print(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            return None
+    def wait5e(self, xpath, timeout=5000):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except Exception as e:
+            print(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+            return None
         
     def wait_all(self, xpath, timeout=10):
         try:

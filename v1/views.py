@@ -302,55 +302,35 @@ def BSWA():
 @app.route("/Quick-analysis")
 @login_required
 def Quick():
-    from lib.page import read_row_limit, write_row_limit
-    from models import stagingapiaResponse
     from datetime import datetime
-    import csv
-
     current_date_ = datetime.today().date()
     user_email = current_user.email
     user_id = current_user.id
 
-    # Initialize row limit to 8 by default
-    row_limit = read_row_limit()
-    csv_file_path = "BSWA Quick Analysis Report.csv"
-    search_text = "Test quick analysis campaign create/edit/delete"
-
-    try:
-        # Check if the search_text is in the second column of the CSV file
-        with open(csv_file_path, mode='r') as file:
-            reader = csv.reader(file)
-            next(reader)
-            for row_num, row in enumerate(reader, start=1):
-                # Debugging: Print each row and the second column content
-                print(f"Row {row_num}: {row}")  # Print the entire row
-                if len(row) > 1:
-                    print(f"Second column: {row[1]}")  # Print the second column value
-                    if row[1].strip() == search_text:
-                        row_limit = row_num
-                        write_row_limit(row_limit)  # Use the row number as the limit
-                        print(f"Match found on row {row_num}. Setting row_limit to {row_limit}.")
-                        break
-    except Exception as e:
-        # Log the error or handle it accordingly
-        print(f"Error reading CSV: {e}")
-        write_row_limit("8")
-
-    # Retrieve data for the current date, conditionally filtering by user_id
-    query = QuickAnalysisModel.query.filter(func.date(QuickAnalysisModel.created_at) == current_date_)
-    if user_id != 100:
-        query = query.filter(QuickAnalysisModel.user_id == user_id)
-
-    QuickAnalysisModels_list = query.order_by(QuickAnalysisModel.created_at.desc()).all()[:row_limit]
-
-    # If no data for the current date, retrieve the most recent data
-    if not QuickAnalysisModels_list:
-        query = QuickAnalysisModel.query
-        if user_id != 100:
-            query = query.filter_by(user_id=user_id)
-        QuickAnalysisModels_list = query.order_by(QuickAnalysisModel.created_at.desc()).all()[:row_limit]
-
-    delete_file_if_exists(csv_file_path)
+    # If user ID is 100, display results for all users
+    if user_id == 100:
+        # Retrieve data for the current date for all users
+        QuickAnalysisModels_list = QuickAnalysisModel.query.filter(
+            func.date(QuickAnalysisModel.created_at) == current_date_
+        ).order_by(QuickAnalysisModel.created_at.desc()).all()[:8]
+        
+        # If no data for the current date, retrieve the most recent data for all users
+        if not QuickAnalysisModels_list:
+            QuickAnalysisModels_list = QuickAnalysisModel.query.order_by(
+                QuickAnalysisModel.created_at.desc()
+            ).all()[:8]
+    else:
+        # Retrieve data for the current date filtered by the logged-in user
+        QuickAnalysisModels_list = QuickAnalysisModel.query.filter(
+            func.date(QuickAnalysisModel.created_at) == current_date_,
+            QuickAnalysisModel.user_id == user_id
+        ).order_by(QuickAnalysisModel.created_at.desc()).all()[:8]
+        
+        # If no data for the current date, retrieve the most recent data for the logged-in user
+        if not QuickAnalysisModels_list:
+            QuickAnalysisModels_list = QuickAnalysisModel.query.filter_by(
+                user_id=user_id
+            ).order_by(QuickAnalysisModel.created_at.desc()).all()[:8]
     return render_template("Quick_analysis.html", QuickAnalysisModels=QuickAnalysisModels_list, user_email=user_email)
 
 @app.route("/Quick-analysis-script", methods=["POST"])
@@ -376,6 +356,7 @@ def Quick_script():
         import_quick_csv_to_db(db.session, csv_file_path, current_user.id)
         
         # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
         # Return the results as JSON
         return jsonify(result_content)
     except Exception as e:
@@ -391,14 +372,37 @@ def Quick_script():
 @app.route("/client_module")
 @login_required
 def client():
-    from models import ApiResponse
+    from models import ClientmoduleModel
     from datetime import datetime
-    user_email = current_user.email
     current_date_ = datetime.today().date()
-    api_responses_list = ApiResponse.query.filter(func.date(ApiResponse.created_at) == current_date_).all()[:54]
-    if not api_responses_list:
-        api_responses_list = ApiResponse.query.order_by(ApiResponse.created_at.desc()).limit(54).all()[:54]
-    return render_template("script.html",api_responses=api_responses_list, user_email=user_email)
+    user_email = current_user.email
+    user_id = current_user.id
+
+    # If user ID is 100, display results for all users
+    if user_id == 100:
+        # Retrieve data for the current date for all users
+        ClientmoduleModel_list = ClientmoduleModel.query.filter(
+            func.date(ClientmoduleModel.created_at) == current_date_
+        ).order_by(ClientmoduleModel.created_at.desc()).all()[:6]
+        
+        # If no data for the current date, retrieve the most recent data for all users
+        if not ClientmoduleModel_list:
+            ClientmoduleModel_list = ClientmoduleModel.query.order_by(
+                ClientmoduleModel.created_at.desc()
+            ).all()[:6]
+    else:
+        # Retrieve data for the current date filtered by the logged-in user
+        ClientmoduleModel_list = ClientmoduleModel.query.filter(
+            func.date(ClientmoduleModel.created_at) == current_date_,
+            ClientmoduleModel.user_id == user_id
+        ).order_by(ClientmoduleModel.created_at.desc()).all()[:6]
+        
+        # If no data for the current date, retrieve the most recent data for the logged-in user
+        if not ClientmoduleModel_list:
+            ClientmoduleModel_list = ClientmoduleModel.query.filter_by(
+                user_id=user_id
+            ).order_by(ClientmoduleModel.created_at.desc()).all()[:6]
+    return render_template("client_module.html",ClientmoduleModels=ClientmoduleModel_list, user_email=user_email)
 
 @app.route("/client-module-script", methods=["POST"])
 @login_required

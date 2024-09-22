@@ -33,6 +33,8 @@ class QuickAnalysispage:
     Cam_tab_button = "//a[@id='campaignbuttonfordisablenavbar'][contains(normalize-space(), 'Campaigns')]"
     delete_modal = '//*[@class="modal-content"][contains(normalize-space(), "Are you sure you want to delete this campaign")]'
     delete_modal_btn = '//*[@class="modal-footer"]//button[@onclick="Delete_confirm_the_Campaign()"][contains(normalize-space(), "Yes")]'
+    Quick_report_btn = "//button[contains(normalize-space(), 'Export to pdf')]"
+    Quick_reporting_btn = "(//button[contains(normalize-space(), 'Exporting...')])[1]"
     
 
 class Client:
@@ -50,6 +52,9 @@ class Client:
     Client_edit_modal = '//*[@class="modal-header"][contains(normalize-space(), "Edit Client")]'
     Client_edit_modal_feild = '//*[@class="modal-content"][contains(normalize-space(), "Client Name")]//input[@id="client_name-edit-id"]'
     Client_edit_modal_btn = '//*[@class="modal-dialog"][contains(normalize-space(), "Edit Client")]//button[contains(normalize-space(), "Submit")]'
+    Create_cam_pag = "//*[@id='campaign_form_id']"
+    Client_search_ca = '//*[@class="select-clint-box"][contains(normalize-space(), "Select Client Name *")]//*[@role="textbox"]'
+    Client_search_ca_in = '//*[@class="select2-container select2-container--default select2-container--open"]//input'
 
 class User_Module:
     User_btn = "//*[@class='nav-link'][contains(normalize-space(), 'Users')]"

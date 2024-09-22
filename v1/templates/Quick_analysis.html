@@ -434,11 +434,14 @@
 {% if QuickAnalysisModels %}
 <div class="image-container">
   <h4>After Campaign Creation</h4>
-  <img src="{{url_for('static', filename='screenshot.png')}}" alt="Descriptive alt text" style="margin-top: 20px;">
+  <!--<iframe src="{{ url_for('static', filename='edit-report.pdf') }}" width="100%" height="600px">
+    This browser does not support PDFs. Please download the PDF to view it: <a href="{{ url_for('static', filename='edit-report.pdf') }}">Download PDF</a>.
+  </iframe> -->
+  <img src="{{ url_for('static', filename='edit-report.png') }}" alt="Descriptive alt text" style="margin-top: 20px;">
 </div>
 <div class="image-containerr">
   <h4>After Edit Campaign</h4>
-  <img src="{{url_for('static', filename='screenshott.png')}}" alt="Descriptive alt text" style="margin-top: 20px;">
+  <img src="{{url_for('static', filename='edit-report.png')}}" alt="Descriptive alt text" style="margin-top: 20px;">
 </div>
 {% endif %}
 
