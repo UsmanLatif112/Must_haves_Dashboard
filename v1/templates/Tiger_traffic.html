@@ -316,7 +316,7 @@
       <tr>
         <td title="Test Case: {{ module.test_case }}">{{ module.test_case }}</td>
         <td title="Use Case / Scenario: {{ module.use_case }}">{{ module.use_case }}</td>
-        <td {% if module.result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ module.result }}">{{ module.result }}</td>
+        <td {% if "Fail" in module.result or "fail" in module.result%} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ module.result }}">{{ module.result }}</td>
       </tr>
       {% else %}
       <tr id="no-data-row">

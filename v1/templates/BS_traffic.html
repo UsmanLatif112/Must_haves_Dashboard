@@ -316,7 +316,7 @@
       <tr>
         <td title="Test Case: {{ bs_traffic_Model.test_case }}">{{ bs_traffic_Model.test_case }}</td>
         <td title="Use Case / Scenario: {{ bs_traffic_Model.use_case }}">{{ bs_traffic_Model.use_case }}</td>
-        <td {% if bs_traffic_Model.result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ bs_traffic_Model.result }}">{{ bs_traffic_Model.result }}</td>
+        <td {% if "Fail" in bs_traffic_Model.result or "fail" in bs_traffic_Model.result%} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ bs_traffic_Model.result }}">{{ bs_traffic_Model.result }}</td>
       </tr>
       {% else %}
       <tr id="no-data-row">

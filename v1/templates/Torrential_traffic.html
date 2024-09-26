@@ -316,7 +316,7 @@
       <tr>
         <td title="Test Case: {{ torrential_traffic_must_haves.test_case }}">{{ torrential_traffic_must_haves.test_case }}</td>
         <td title="Use Case / Scenario: {{ torrential_traffic_must_haves.use_case }}">{{ torrential_traffic_must_haves.use_case }}</td>
-        <td {% if torrential_traffic_must_haves.result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ torrential_traffic_must_haves.result }}">{{ torrential_traffic_must_haves.result }}</td>
+        <td {% if "Fail" in torrential_traffic_must_haves.result or "fail" in torrential_traffic_must_haves.result%} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ torrential_traffic_must_haves.result }}">{{ torrential_traffic_must_haves.result }}</td>
       </tr>
       {% else %}
       <tr id="no-data-row">
