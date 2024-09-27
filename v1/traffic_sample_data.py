@@ -16,6 +16,7 @@ campaign_gmb_website_percentage = "100"
 campaign_keyword_modifiers = ["keyword"]
 campaign_direct_url = ["http://direct.url"]
 campaign_brand_name = "Brand"
+campaign_brand_name_list = ["Brand"]
 campaign_wildcard_string = ["http://wildcard.url"]
 campaign_tier1_url = ["http://tier1.url"]
 campaign_tier2_url = ["http://tier2.url"]
@@ -24,6 +25,7 @@ campaign_country = "UNITED STATES"
 
 campaign_name_edited = "-AI-TEST-Campaign-SQA-Edited"
 campaign_brand_name_edited = "Brand_edited"
+campaign_brand_name_edited_list = ["Brand_edited"]
 campaign_keyword_modifiers_edited = ["keyword_edited"]
 campaign_direct_url_edited = ["http://direct.url_edited"]
 campaign_wildcard_string_edited = ["http://wildcard.url_edited"]

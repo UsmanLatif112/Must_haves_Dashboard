@@ -146,6 +146,7 @@
       .data { width: 115px; }
       .pay { width: 115px; }
       .dataRes { width: 90px; }
+      .campaign_type { width: 115px; }
       td {
         height: 38px;
         overflow: hidden;
@@ -307,6 +308,7 @@
         <th class="desc">Test Case</th>
         <th class="api">Use Case / Scenario</th>
         <th class="dataRes">Result</th>
+        <th class="campaign_type">Campaign Type</th>
       </tr>
     </thead>
     <tbody id="results-body">
@@ -317,10 +319,11 @@
         <td title="Test Case: {{ module.test_case }}">{{ module.test_case }}</td>
         <td title="Use Case / Scenario: {{ module.use_case }}">{{ module.use_case }}</td>
         <td {% if "Fail" in module.result or "fail" in module.result%} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ module.result }}">{{ module.result }}</td>
+        <td title="Campaign Type: {{ module.campaign_type }}">{{ module.campaign_type }}</td>
       </tr>
       {% else %}
       <tr id="no-data-row">
-        <td colspan="3">No data available.</td>
+        <td colspan="4">No data available.</td>
       </tr>
       {% endfor %}
     </tbody>

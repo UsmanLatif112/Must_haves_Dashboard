@@ -54,6 +54,7 @@ class ce_traffic_Model(UserMixin, db.Model):
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
     
 class tiger_traffic_Model(UserMixin, db.Model):
     __tablename__ = "tiger_traffic_module"
@@ -64,6 +65,7 @@ class tiger_traffic_Model(UserMixin, db.Model):
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
     
 class torrential_traffic_Model(UserMixin, db.Model):
     __tablename__ = "torrential_traffic_module"
@@ -74,6 +76,7 @@ class torrential_traffic_Model(UserMixin, db.Model):
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
     
 class bs_traffic_Model(UserMixin, db.Model):
     __tablename__ = "bs_traffic_module"
@@ -84,6 +87,7 @@ class bs_traffic_Model(UserMixin, db.Model):
     result = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
     
     
     

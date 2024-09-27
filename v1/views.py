@@ -17,6 +17,7 @@ from flask_login import login_required, current_user
 from flask import jsonify,current_app
 from models import ApiResponse, db
 from sqlalchemy import text
+import lib.data as constants
 
 main = Blueprint('main', __name__)
 
@@ -530,13 +531,35 @@ def CE_traffic_must_haves():
 @app.route("/CE-traffic-must-haves-run-script", methods=["POST"])
 @login_required
 def CE_traffic_must_haves_run_script():
-    try:
+    user_id = current_user.id
 
-        test_cases = CE_Traffic_TestCases()
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(ce_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(ce_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(ce_traffic_Model.created_at.desc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    ce_traffic_Models_query = ce_traffic_Model.query.filter(ce_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        ce_traffic_Models_query = ce_traffic_Models_query.filter(ce_traffic_Model.user_id == user_id)
+
+    ce_traffic_Model_latest = ce_traffic_Models_query.order_by(ce_traffic_Model.created_at.desc()).first()
+    try:
+        last_campaing_type = ce_traffic_Model_latest.campaign_type.split('-')[0].strip()
+    except Exception as e:
+        last_campaing_type = None
+    if not last_campaing_type:
+        last_campaing_type = 'Turing'
+    current_index = constants.CE.index(last_campaing_type)
+    next_index = (current_index + 1) % len(constants.CE)
+    ce_traffic_model_campaign_type = constants.CE[next_index]
+    try:
+        test_cases = CE_Traffic_TestCases(ce_traffic_model_campaign_type)
         result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "CE_traffic_must_haves.csv"
-        import_ce_traffic_csv_to_db(db.session, csv_file_path, current_user.id)
+        import_ce_traffic_csv_to_db(db.session, csv_file_path, current_user.id, f"{ce_traffic_model_campaign_type} - {result_content}")
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)
@@ -574,13 +597,36 @@ def Tiger_traffic_must_haves():
 @app.route("/Tiger-traffic-must-haves-run-script", methods=["POST"])
 @login_required
 def Tiger_traffic_must_haves_run_script():
+    user_id = current_user.id
+
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(tiger_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(tiger_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(tiger_traffic_Model.created_at.desc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    tiger_traffic_Models_query = tiger_traffic_Model.query.filter(tiger_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        tiger_traffic_Models_query = tiger_traffic_Models_query.filter(tiger_traffic_Model.user_id == user_id)
+
+    tiger_traffic_Model_latest = tiger_traffic_Models_query.order_by(tiger_traffic_Model.created_at.desc()).first()
+    try:
+        last_campaing_type = tiger_traffic_Model_latest.campaign_type.split('-')[0].strip()
+    except Exception as e:
+        last_campaing_type = None
+    if not last_campaing_type:
+        last_campaing_type = 'Birthday'
+    current_index = constants.Tiger.index(last_campaing_type)
+    next_index = (current_index + 1) % len(constants.Tiger)
+    tiger_traffic_model_campaign_type = constants.Tiger[next_index]
     try:
 
-        test_cases = Tiger_Traffic_TestCases()
+        test_cases = Tiger_Traffic_TestCases(tiger_traffic_model_campaign_type)
         result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "Tiger_traffic_must_haves.csv"
-        import_tiger_traffic_csv_to_db(db.session, csv_file_path, current_user.id)
+        import_tiger_traffic_csv_to_db(db.session, csv_file_path, current_user.id, f"{tiger_traffic_model_campaign_type} - {result_content}")
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)
@@ -619,13 +665,36 @@ def Torrential_traffic_must_haves():
 @app.route("/Torrential-traffic-must-haves-run-script", methods=["POST"])
 @login_required
 def Torrential_traffic_must_haves_run_script():
+    user_id = current_user.id
+
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(torrential_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(torrential_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(torrential_traffic_Model.created_at.desc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    torrential_traffic_Models_query = torrential_traffic_Model.query.filter(torrential_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        torrential_traffic_Models_query = torrential_traffic_Models_query.filter(torrential_traffic_Model.user_id == user_id)
+
+    torrential_traffic_Model_latest = torrential_traffic_Models_query.order_by(torrential_traffic_Model.created_at.desc()).first()
+    try:
+        last_campaing_type = torrential_traffic_Model_latest.campaign_type.split('-')[0].strip()
+    except Exception as e:
+        last_campaing_type = None
+    if not last_campaing_type:
+        last_campaing_type = 'google_search_no_click'
+    current_index = constants.Torrential.index(last_campaing_type)
+    next_index = (current_index + 1) % len(constants.Torrential)
+    torrential_traffic_model_campaign_type = constants.Torrential[next_index]
     try:
 
-        test_cases = Torrential_Traffic_TestCases()
+        test_cases = Torrential_Traffic_TestCases(torrential_traffic_model_campaign_type)
         result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "Torrential_traffic_must_haves.csv"
-        import_torrential_traffic_csv_to_db(db.session, csv_file_path, current_user.id)
+        import_torrential_traffic_csv_to_db(db.session, csv_file_path, current_user.id, torrential_traffic_model_campaign_type)
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)
@@ -664,13 +733,37 @@ def BS_traffic_must_haves():
 @app.route("/BS-traffic-must-haves-run-script", methods=["POST"])
 @login_required
 def BS_traffic_must_haves_run_script():
+    
+    user_id = current_user.id
+
+    # Get the earliest timestamp based on the user ID
+    earliest_timestamp_query = db.session.query(bs_traffic_Model.created_at)
+    if user_id != 100:
+        earliest_timestamp_query = earliest_timestamp_query.filter(bs_traffic_Model.user_id == user_id)
+    earliest_timestamp = earliest_timestamp_query.order_by(bs_traffic_Model.created_at.desc()).limit(1).scalar()
+
+    # Retrieve traffic models
+    bs_traffic_Models_query = bs_traffic_Model.query.filter(bs_traffic_Model.created_at == earliest_timestamp)
+    if user_id != 100:
+        bs_traffic_Models_query = bs_traffic_Models_query.filter(bs_traffic_Model.user_id == user_id)
+
+    bs_traffic_Model_latest = bs_traffic_Models_query.order_by(bs_traffic_Model.created_at.desc()).first()
+    try:
+        last_campaing_type = bs_traffic_Model_latest.campaign_type.split('-')[0].strip()
+    except Exception as e:
+        last_campaing_type = None
+    if not last_campaing_type:
+        last_campaing_type = 'google_search_no_click'
+    current_index = constants.BS.index(last_campaing_type)
+    next_index = (current_index + 1) % len(constants.BS)
+    bs_traffic_model_campaign_type = constants.BS[next_index]
     try:
 
-        test_cases = BS_Traffic_TestCases()
+        test_cases = BS_Traffic_TestCases(bs_traffic_model_campaign_type)
         result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "BS_traffic_must_haves.csv"
-        import_bs_traffic_csv_to_db(db.session, csv_file_path, current_user.id)
+        import_bs_traffic_csv_to_db(db.session, csv_file_path, current_user.id, bs_traffic_model_campaign_type)
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)

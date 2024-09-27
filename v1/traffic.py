@@ -32,6 +32,10 @@ class TrafficBase:
         if "direct_url" in campaign["fields"]:
             wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_direct_url)
             base_page.send_key_with_action_chain(wildcard_field, campaign_direct_url)
+
+        if "brand_name" in campaign["fields"]:
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_brand_name)
+            base_page.send_key_with_action_chain(wildcard_field, campaign_brand_name_list)
             
     def add_input_field_data(self, base_page, campaign, driver):
 
@@ -41,8 +45,6 @@ class TrafficBase:
             base_page.wait_for_element(resources.TrafficModuleLocator.campaign_image_url).send_keys(campaign_image_url)
         if "is_spread_session" in campaign["fields"]:
             base_page.click_btn(resources.TrafficModuleLocator.campaign_is_spread_session)
-        if "brand_name" in campaign["fields"]:
-            base_page.wait_for_element(resources.TrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
         if "select_wildcard_type_option" in campaign["fields"]:
             base_page.click_btn(resources.TrafficModuleLocator.campaign_select_wildcard_type_option)
         if "is_product" in campaign["fields"]:
@@ -87,6 +89,11 @@ class TrafficBase:
             base_page.click_btn(resources.TrafficModuleLocator.direct_url_xpath.format(direct_url=campaign_direct_url[-1]))
             base_page.send_key_with_action_chain(wildcard_field, campaign_direct_url_edited)
             
+        if "brand_name" in campaign["fields"]:
+            wildcard_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_brand_name)
+            base_page.click_btn(resources.TrafficModuleLocator.brand_name_xpath.format(brand_name=campaign_brand_name))
+            base_page.send_key_with_action_chain(wildcard_field, campaign_brand_name_edited_list)
+            
     def edit_input_field_data(self, base_page, campaign, driver):
         
         if "image_base64_code" in campaign["fields"]:
@@ -99,10 +106,6 @@ class TrafficBase:
             image_url_field.clear()
             image_url_field.send_keys(campaign_image_url_edited)
             
-        if "brand_name" in campaign["fields"]:
-            brand_name_field = base_page.wait_for_element(resources.TrafficModuleLocator.campaign_brand_name)
-            brand_name_field.clear()
-            brand_name_field.send_keys(campaign_brand_name_edited)
             
         base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
         base_page.wait_for_element(resources.TrafficModuleLocator.campaign_country_option.format(country=campaign_country_edited))
@@ -284,10 +287,12 @@ class TrafficBase:
         return passed
 
 class CE_Traffic_TestCases(TrafficBase):
-    def __init__(self):
+    def __init__(self, campaign_type):
         self.driver = initialize_and_navigate(data.ce_traffic_url)
         self.base_page = page.HomePage(self.driver)
         self.base_page.make_csv('CE_traffic_must_haves.csv', f'Test Case,Use Case / Scenario,Result\n', new=True)
+        self.campaign_type = campaign_type
+        self.campaign_selected = None
     
     def login_test_cases(self):
         try:
@@ -443,8 +448,13 @@ class CE_Traffic_TestCases(TrafficBase):
                 # },
             ]
 
-            selected_campaign = random.choice(campaign_types)
-
+            selected_campaign = [campaign for campaign in campaign_types if campaign["campaign_type"] == self.campaign_type]
+            if len(selected_campaign) > 0:
+                selected_campaign = random.choice(selected_campaign)
+            else:
+                selected_campaign = campaign_types[0]
+                
+            self.campaign_selected = selected_campaign['campaign_sub_type']
             def fill_campaign_form(campaign):
                 self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_name).send_keys(campaign_name)
                 self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category)
@@ -556,6 +566,7 @@ class CE_Traffic_TestCases(TrafficBase):
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("CE_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
+        return self.campaign_selected
             
             
     def report_test_cases(self):
@@ -704,19 +715,19 @@ class CE_Traffic_TestCases(TrafficBase):
             print(data_dict_24_days)
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
-            day_filter[1].click()
+            day_filter[2].click()
             time.sleep(0.5)
             day_7_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
             day_7_filter[1].click()
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
-            day_filter[1].click()
+            day_filter[2].click()
             time.sleep(0.5)
             day_30_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
             day_30_filter[1].click()
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
-            day_filter[1].click()
+            day_filter[2].click()
             time.sleep(0.5)
             day_today_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_today_option)
             day_today_filter[1].click()
@@ -771,16 +782,19 @@ class CE_Traffic_TestCases(TrafficBase):
             
     def full_dashboard_must_haves(self):
         self.login_test_cases()
-        self.crud_test_cases()
+        self.campaign_selected = self.crud_test_cases()
         self.report_test_cases()
         self.campaign_error_and_graph_stats()
         print("Full CE Dashboard Must Haves Test Cases Completed")
+        return self.campaign_selected
         
 class Tiger_Traffic_TestCases(TrafficBase):    
-    def __init__(self):
+    def __init__(self, campaign_type):
         self.driver = initialize_and_navigate(data.tiger_traffic_url)
         self.base_page = page.HomePage(self.driver)
         self.base_page.make_csv('Tiger_traffic_must_haves.csv', f'Test Case,Use Case / Scenario,Result\n', new=True)
+        self.campaign_type = campaign_type
+        self.campaign_selected = None
     
     
     def login_test_cases(self):
@@ -975,8 +989,13 @@ class Tiger_Traffic_TestCases(TrafficBase):
                     "fields": [ "keyword_modifiers", "tier1_url", "tier2_url", "brand_name"]
                 },
             ]
-
-            selected_campaign = random.choice(campaign_types)
+            selected_campaign = [campaign for campaign in campaign_types if campaign["campaign_type"] == self.campaign_type]
+            if len(selected_campaign) > 0:
+                selected_campaign = random.choice(selected_campaign)
+            else:
+                selected_campaign = campaign_types[0]
+                
+            self.campaign_selected = selected_campaign['campaign_sub_type']
 
             def fill_campaign_form(campaign):
                 self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_name).send_keys(campaign_name)
@@ -1100,6 +1119,8 @@ class Tiger_Traffic_TestCases(TrafficBase):
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, Delete Project, {"Pass" if project_deleted else f"Fail - {project_deleted[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("Tiger_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
+        return self.campaign_selected
+            
             
             
     def report_test_cases(self):
@@ -1248,19 +1269,19 @@ class Tiger_Traffic_TestCases(TrafficBase):
             print(data_dict_24_days)
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
-            day_filter[1].click()
+            day_filter[2].click()
             time.sleep(0.5)
             day_7_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_7_day_option)
             day_7_filter[1].click()
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
-            day_filter[1].click()
+            day_filter[2].click()
             time.sleep(0.5)
             day_30_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_30_day_option)
             day_30_filter[1].click()
             
             day_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter)
-            day_filter[1].click()
+            day_filter[2].click()
             time.sleep(0.5)
             day_today_filter = self.base_page.wait_all(resources.TrafficModuleLocator.campaing_error_filter_today_option)
             day_today_filter[1].click()
@@ -1316,16 +1337,19 @@ class Tiger_Traffic_TestCases(TrafficBase):
         
     def full_dashboard_must_haves(self):
         self.login_test_cases()
-        self.crud_test_cases()
+        self.campaign_selected = self.crud_test_cases()
         self.report_test_cases()
         self.campaign_error_and_graph_stats()
         print("Full Tiger Dashboard Must Haves Test Cases Completed")
+        return self.campaign_selected
  
 class Torrential_Traffic_TestCases(TrafficBase):
-    def __init__(self):
+    def __init__(self, campaign_type):
         self.driver = initialize_and_navigate(data.torrential_traffic_url)
         self.base_page = page.HomePage(self.driver)
         self.base_page.make_csv('Torrential_traffic_must_haves.csv', f'Test Case,Use Case / Scenario,Result\n', new=True)
+        self.campaign_type = campaign_type
+        self.campaign_selected = None
     
     def login_test_cases(self):
         try:
@@ -1479,8 +1503,14 @@ class Torrential_Traffic_TestCases(TrafficBase):
                     "fields": [ "keyword_modifiers", "tier1_url", "brand_name"]
                 },
             ]
-
-            selected_campaign = random.choice(campaign_types)
+          
+            selected_campaign = [campaign for campaign in campaign_types if campaign["campaign_type"] == self.campaign_type]
+            if len(selected_campaign) > 0:
+                selected_campaign = random.choice(selected_campaign)
+            else:
+                selected_campaign = campaign_types[0]
+                
+            self.campaign_selected = selected_campaign['campaign_sub_type']
 
             def fill_campaign_form(campaign):
                 self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_name).send_keys(campaign_name)
@@ -1649,6 +1679,7 @@ class Torrential_Traffic_TestCases(TrafficBase):
                 
         except Exception as e:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign, CRUD Test Cases,Fail\n', new=False)
+        return self.campaign_selected
 
             
     def report_test_cases(self):
@@ -1775,23 +1806,29 @@ class Torrential_Traffic_TestCases(TrafficBase):
         except Exception as e:
             self.base_page.make_csv("Torrential_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             print(e)
+        return self.campaign_selected
             
         
         
     def full_dashboard_must_haves(self):
         self.login_test_cases()
-        self.crud_test_cases()
+        self.campaign_selected = self.crud_test_cases()
         self.report_test_cases()
         self.campaign_error_and_graph_stats()
         print("Torrential Dashboard Must Haves Test Cases Completed")
+        return self.campaign_selected
+        
         
         
         
 class BS_Traffic_TestCases(TrafficBase):
-    def __init__(self):
+    def __init__(self, campaign_type):
         self.driver = initialize_and_navigate(data.torrential_traffic_url)
         self.base_page = page.HomePage(self.driver)
         self.base_page.make_csv('BS_traffic_must_haves.csv', f'Test Case,Use Case / Scenario,Result\n', new=True)
+        self.campaign_type = campaign_type
+        self.campaign_selected = None
+        
     
     def login_test_cases(self):
         try:
@@ -1935,8 +1972,14 @@ class BS_Traffic_TestCases(TrafficBase):
                     "fields": ["gmb_cid", "keyword_modifiers", "gmb_website_percentage", "geo_latitude", "geo_longitude", "radius"]
                 },
             ]
-
-            selected_campaign = random.choice(campaign_types)
+            
+            selected_campaign = [campaign for campaign in campaign_types if campaign["campaign_type"] == self.campaign_type]
+            if len(selected_campaign) > 0:
+                selected_campaign = random.choice(selected_campaign)
+            else:
+                selected_campaign = campaign_types[0]
+                
+            self.campaign_selected = selected_campaign['campaign_sub_type']
 
             def fill_campaign_form(campaign):
                 self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_name).send_keys(campaign_name)
@@ -2117,6 +2160,7 @@ class BS_Traffic_TestCases(TrafficBase):
                 
         except Exception as e:
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, CRUD Test Cases,Fail\n', new=False)
+        return self.campaign_selected
 
             
     def report_test_cases(self):
@@ -2241,12 +2285,15 @@ class BS_Traffic_TestCases(TrafficBase):
         except Exception as e:
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign error and graph stats, Error and Graph Stats, Fail\n', new=False)
             print(e)
+        return self.campaign_selected
+        
             
         
         
     def full_dashboard_must_haves(self):
         self.login_test_cases()
-        self.crud_test_cases()
+        self.campaign_selected = self.crud_test_cases()
         self.report_test_cases()
         self.campaign_error_and_graph_stats()
         print("BS Dashboard Must Haves Test Cases Completed")
+        return self.campaign_selected

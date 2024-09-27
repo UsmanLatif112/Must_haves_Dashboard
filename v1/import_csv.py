@@ -91,7 +91,7 @@ def import_user_team_csv_to_db(session, csv_file_path, user_id):  # Added user_i
         print("CSV data imported successfully")
         
         
-def import_ce_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a parameter
+def import_ce_traffic_csv_to_db(session, csv_file_path, user_id, campaign_type):  # Added user_id as a parameter
     with open(csv_file_path, mode="r", encoding="utf-8") as csvfile:
         csv_reader = csv.DictReader(csvfile)
 
@@ -102,6 +102,7 @@ def import_ce_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_
                 test_case=row["Test Case"],
                 use_case=row["Use Case / Scenario"],
                 result=row["Result"],
+                campaign_type=campaign_type
             )
 
             # Add each new object to the session
@@ -112,7 +113,7 @@ def import_ce_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_
         print("CSV data imported successfully")
         
         
-def import_tiger_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a parameter
+def import_tiger_traffic_csv_to_db(session, csv_file_path, user_id, campaign_type):  # Added user_id as a parameter
     with open(csv_file_path, mode="r", encoding="utf-8") as csvfile:
         csv_reader = csv.DictReader(csvfile)
 
@@ -123,6 +124,7 @@ def import_tiger_traffic_csv_to_db(session, csv_file_path, user_id):  # Added us
                 test_case=row["Test Case"],
                 use_case=row["Use Case / Scenario"],
                 result=row["Result"],
+                campaign_type=campaign_type
             )
 
             # Add each new object to the session
@@ -132,7 +134,7 @@ def import_tiger_traffic_csv_to_db(session, csv_file_path, user_id):  # Added us
         session.commit()
         print("CSV data imported successfully")
         
-def import_torrential_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a parameter
+def import_torrential_traffic_csv_to_db(session, csv_file_path, user_id, campaign_type):  # Added user_id as a parameter
     with open(csv_file_path, mode="r", encoding="utf-8") as csvfile:
         csv_reader = csv.DictReader(csvfile)
 
@@ -143,6 +145,7 @@ def import_torrential_traffic_csv_to_db(session, csv_file_path, user_id):  # Add
                 test_case=row["Test Case"],
                 use_case=row["Use Case / Scenario"],
                 result=row["Result"],
+                campaign_type=campaign_type
             )
 
             # Add each new object to the session
@@ -152,7 +155,7 @@ def import_torrential_traffic_csv_to_db(session, csv_file_path, user_id):  # Add
         session.commit()
         print("CSV data imported successfully")
         
-def import_bs_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a parameter
+def import_bs_traffic_csv_to_db(session, csv_file_path, user_id, campaign_type):  # Added user_id as a parameter
     with open(csv_file_path, mode="r", encoding="utf-8") as csvfile:
         csv_reader = csv.DictReader(csvfile)
 
@@ -163,6 +166,7 @@ def import_bs_traffic_csv_to_db(session, csv_file_path, user_id):  # Added user_
                 test_case=row["Test Case"],
                 use_case=row["Use Case / Scenario"],
                 result=row["Result"],
+                campaign_type=campaign_type
             )
 
             # Add each new object to the session

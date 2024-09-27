@@ -120,7 +120,6 @@ class TrafficModuleLocator:
     campaign_image_base64 = '//div[@style=""]//textarea[@id="id_extra_attr_base64"]'
     campaign_image_url = '//div[@style=""]//*[(@id = "id_extra_attr_url")]'
     campaign_is_spread_session = '//div[@style=""]//*[(@id="id_is_spread_session")]'
-    campaign_brand_name = '//*[(@id = "id_brand_name")]'
     campaign_select_wildcard_type_option = '//div[@style=""]//div[@id="home_page_div"]'
     campaign_is_product = '//div[@style=""]//input[@name="is_product"]'
     
@@ -130,6 +129,7 @@ class TrafficModuleLocator:
     campaign_tier1_url = '//div[@id="div_id_tier_1_urls" and @style=""]//tags'
     campaign_tier2_url = '//div[@id="div_id_tier_2_urls" and @style=""]//tags'
     campaign_destination_url = '//div[@id="div_id_destination_urls" and @style=""]//tags'
+    campaign_brand_name = '//div[@id="div_id_brand_name" and @style=""]//tags'
     campaign_tier1_url_textarea = '//textarea[@name="tier_1_urls"]'
     campaign_tier2_url_textarea = '//textarea[@name="tier_2_urls"]'
     campaign_destination_url_textarea = '//textarea[@name="destination_urls"]'
@@ -148,9 +148,10 @@ class TrafficModuleLocator:
     wildcard_string_xpath = '//tag[@value = "{wildcard_string}"]/x'
     direct_url_xpath = '//tag[@value = "{direct_url}"]/x'
     keyword_modifiers_xpath = '//tag[@value = "{keyword_modifiers}"]/x'
+    brand_name_xpath = '//tag[@value = "{brand_name}"]/x'
     
     campaign_name_edit_check = '//input[@value = "{campaign_name}"]'
-    campaign_brand_name_edit_check = '//input[@value = "{campaign_brand_name}"]'
+    campaign_brand_name_edit_check = '//input[@value = "{campaign_brand_name}"] | //textarea[contains(text() , "{campaign_brand_name}")]'
     campaign_average_session_edit_check = '//input[@value = "{campaing_average_session}"]'
     campaign_frequency_edit_check = '//input[@value = "Monthly" and @id="id_num_searches"]'
     campaign_wildcard_edit_check = '//input[@value = "{campaign_wildcard}"] | //textarea[contains(text() , "{campaign_wildcard}")]'

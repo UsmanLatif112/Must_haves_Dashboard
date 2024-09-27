@@ -50,6 +50,13 @@ secret_key = os.getenv("SECRET_KEY", "0332033603250309")
 sql_alchemy_database_url = os.getenv("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://root:Aleena_Khan786@localhost:3306/agency_apidb")
 
 
+CE = ["Turing","Google Search No Click","Multiple Session","Organic","Spreadsheet","Squidoosh","Tiered","Wordpress","Youtube","Local Squidoosh"]
+Tiger = ["Birthday","Birthday Amazon","Bsr Booster","Lookey","Pathfinder","Rocket","Shopify","Walmart","Squidoosh","Website Specific","Google Search No Click","Multiple Session","Organic","Spreadsheet","Tiered","Wordpress","Youtube"]
+Torrential = ["google_search_no_click","multiple_session","Organic","Spreadsheet","Squidoosh","Tiered","Youtube"]
+BS = ["Organic","Tiered","multiple_session","google_search_no_click","Rocket"]
+
+
+
 
 
 

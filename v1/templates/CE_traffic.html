@@ -146,6 +146,7 @@
       .data { width: 115px; }
       .pay { width: 115px; }
       .dataRes { width: 90px; }
+      .campaign_type { width: 115px; }
       td {
         height: 38px;
         overflow: hidden;
@@ -307,6 +308,7 @@
         <th class="desc">Test Case</th>
         <th class="api">Use Case / Scenario</th>
         <th class="dataRes">Result</th>
+        <th class="campaign_type">Campaign Type</th>
       </tr>
     </thead>
     <tbody id="results-body">
@@ -317,10 +319,11 @@
         <td title="Test Case: {{ ce_traffic_Mode.test_case }}">{{ ce_traffic_Mode.test_case }}</td>
         <td title="Use Case / Scenario: {{ ce_traffic_Mode.use_case }}">{{ ce_traffic_Mode.use_case }}</td>
         <td {% if "Fail" in ce_traffic_Mode.result or "fail" in ce_traffic_Mode.result%} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Result: {{ ce_traffic_Mode.result }}">{{ ce_traffic_Mode.result }}</td>
+        <td title="Campaign Type: {{ ce_traffic_Mode.campaign_type }}">{{ ce_traffic_Mode.campaign_type }}</td>
       </tr>
       {% else %}
       <tr id="no-data-row">
-        <td colspan="3">No data available.</td>
+        <td colspan="4">No data available.</td>
       </tr>
       {% endfor %}
     </tbody>
