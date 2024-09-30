@@ -694,7 +694,7 @@ def Torrential_traffic_must_haves_run_script():
         result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "Torrential_traffic_must_haves.csv"
-        import_torrential_traffic_csv_to_db(db.session, csv_file_path, current_user.id, torrential_traffic_model_campaign_type)
+        import_torrential_traffic_csv_to_db(db.session, csv_file_path, current_user.id, f"{torrential_traffic_model_campaign_type} - {result_content}")
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)
@@ -763,7 +763,7 @@ def BS_traffic_must_haves_run_script():
         result_content = test_cases.full_dashboard_must_haves()
         db.session.commit()
         csv_file_path = "BS_traffic_must_haves.csv"
-        import_bs_traffic_csv_to_db(db.session, csv_file_path, current_user.id, bs_traffic_model_campaign_type)
+        import_bs_traffic_csv_to_db(db.session, csv_file_path, current_user.id, f"{bs_traffic_model_campaign_type} - {result_content}")
 
         delete_file_if_exists(csv_file_path)
         return jsonify(result_content)

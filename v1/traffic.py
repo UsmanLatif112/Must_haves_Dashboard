@@ -2023,15 +2023,18 @@ class BS_Traffic_TestCases(TrafficBase):
                 
                 if "gmb_cid" in campaign["fields"]:
                     gmb_cid_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_gmb_cid)
-                    self.base_page.send_key_with_action_chain(gmb_cid_field, campaign_gmb_cid)
+                    gmb_cid_field.clear()
+                    gmb_cid_field.send_keys(campaign_gmb_cid)
 
                 if "geo_latitude" in campaign["fields"]:
                     geo_latitude_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_geo_latitude)
-                    self.base_page.send_key_with_action_chain(geo_latitude_field, campaign_geo_latitude)
+                    geo_latitude_field.clear()
+                    geo_latitude_field.send_keys(campaign_geo_latitude)
                 
                 if "geo_longitude" in campaign["fields"]:
                     geo_longitude_field = self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_geo_longitude)
-                    self.base_page.send_key_with_action_chain(geo_longitude_field, campaign_geo_longitude)
+                    geo_longitude_field.clear()
+                    geo_longitude_field.send_keys(campaign_geo_longitude)
 
                 if "brand_name" in campaign["fields"]:
                     self.base_page.wait_for_element(resources.OldTrafficModuleLocator.campaign_brand_name).send_keys(campaign_brand_name)
