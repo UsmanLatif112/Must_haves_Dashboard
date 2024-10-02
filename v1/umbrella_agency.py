@@ -6,14 +6,17 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHBfMyIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKTmRYcDZZVzFwYkhCZk15SXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lNREkxTENKbGVIQWlPakUzTWpnd05EVXpOamw5LnUwOFlDanl2Q0JXOFFfOU91bVdaMDRUaEUyNmt5eWcxdzR6ZUEzNEJna1kiLCJleHAiOjIwNDEyNDUzNjd9.5CuTNegQTuBrExZnW_G_A9OH4s-1Hx0ViqZyMlW62k4"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbi1MYXRpZi1TUUEtMDMiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSlZjMjFoYmkxTVlYUnBaaTFUVVVFdE1ETWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZNamc1Tnl3aVpYaHdJam94TnpNd01ESTVNakk0ZlEuMUh4NU9JZ2w1UURMMEllSE1yZF9yNGI2bWFuVzVyTVlsRFRHT05sTGs4TSIsImV4cCI6MjA0MzIyOTIyNH0.NCoy46casRSBBAMzBuh4RX2EmjAElybPhOAZtTLFyIw"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
     keywordname_Id = str(keywordname_id)
+    
     # ======================================
     auth_token = Piroty_token
     # ======================================
+
+    
     id = f'{Campaign_IDd}'
     
     idD = str(f'{Campaign_IDd}')
@@ -29,26 +32,24 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # Campaign IDd which is used for other apis in which we need campaign id to get data
     # (API must have for get data)
 
-    Campaign_IDd = "21637" 
+    Campaign_IDd = "22076" 
 
     # Campaign IDdd which is used to add 8th keyword in campaign already having 7 keywords
     # (API must have for 8 key)
 
-    Campaign_IDdd = "21641"
+    Campaign_IDdd = "22077"
 
     # Campaign IDdr which is used to delete last keyword of campaign
     # (API must have for last key)
 
-    Campaign_IDdr = "21640"
+    Campaign_IDdr = "22078"
 
     # Campaign IDdt which is used to deauthorize business.
     # (API must have Business Auth)
 
-    Campaign_IDdt = "20861"
+    Campaign_IDdt = "22079"
     
-    # Campaign IDdt which is used to deauthorize business.
-    # (API must have Business Auth)
-    
+    Campaign_IDdy = "20861"
     Campaign_IDde = "20861"
     
     # Campaign id to get pdf of live campaign
@@ -58,7 +59,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
 
     Quick_Camp_ID = Quick_Camp_Id
     
-    Client_id = "1050"
+    Client_id = "1018"
 
     # Keyword which is used to create keyword add keyword or delete keyword
 
@@ -71,19 +72,19 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
 
     # ================================================
 
-    user_idd = "500",
+    user_idd = "2891",
     business_CID = f"{business_CID_Id}"
     cam_namee = f"-AI-TEST-QuickCam{id}"
     keywords_for_analysiss = f"{keywordname_Id}"
                         
                         
-    user_name = f"-AI-TEST-Apimust{id}"
+    user_name = f"-AI-TEST-AApimust23{id}"
     email = f"Apimust12{id}@gmail.com"
     password =  "Usman@112"
     
     # data which is used to create new campaign
 
-    User_id = "500"
+    User_id = "2891"
     business_gmb_CID = f"{business_CID_Id}"
     Campaign_name = f"API must haves 23{id}"
     Client_name = "-AI-TEST-APITEST0026"

@@ -6,7 +6,7 @@ from flask import  request
 def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id, Campaign_Status):
     # Retrieve the campaign_id from the form data
     # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHAiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSk5kWHA2WVcxcGJIQWlMQ0p6WTI5d1pYTWlPbHRkTENKcFpDSTZOVEF3TENKbGVIQWlPakUzTWpnd05EVXpNRFo5Lnh2TFVRMmdIR25DZ2hwS08wT2M2WXhhYUlqRGd6Mm83LVFGdzI5Ymx1UGsiLCJleHAiOjIwNDEyNDUzMDR9.2FR2-AtLCUznHzmq79LGv1ZD3Id6qgxXZOfQh4LbciI"
+    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc21hbi1MYXRpZi1TUUEiLCJUT0tFTiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp6ZFdJaU9pSlZjMjFoYmkxTVlYUnBaaTFUVVVFaUxDSnpZMjl3WlhNaU9sdGRMQ0pwWkNJNk1qZzVNU3dpWlhod0lqb3hOek13TURJNE56YzRmUS5IWFBKeC10dmNoY0VzNG1DeWloQlZhOGFwV01wZzN3cExoXzh5X01TcDRjIiwiZXhwIjoyMDQzMjI4Nzc2fQ.RuOV8LtR_4iQTehlcaLblHRxOLJ_8PgLKKNNAPshSWI"
     Campaign_IDd = str(campaign_id)
     Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
@@ -51,9 +51,6 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
 
     Campaign_IDdt = "22079"
     
-    # Campaign IDdt which is used to deauthorize business.
-    # (API must have Business Auth)
-    
     Campaign_IDdy = "20861"
     
     # Campaign id to get pdf of live campaign
@@ -76,7 +73,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
 
     # ================================================
 
-    user_idd = "500",
+    user_idd = "2891",
     business_CID = f"{business_CID_Id}"
     cam_namee = f"-AI-TEST-QuickCam{id}"
     keywords_for_analysiss = f"{keywordname_Id}"
@@ -88,7 +85,7 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     
     # data which is used to create new campaign
 
-    User_id = "500"
+    User_id = "2891"
     business_gmb_CID = f"{business_CID_Id}"
     Campaign_name = f"API must haves 23{id}"
     Client_name = "-AI-TEST-APITEST0026"
