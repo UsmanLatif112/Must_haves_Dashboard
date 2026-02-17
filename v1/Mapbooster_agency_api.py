@@ -803,7 +803,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
         ] # Your API list
 
     # Call the function to hit the APIs and save the results
-    result_file = "Staging_API_result.csv"
+    result_file = "Mapbooster_API_result.csv"
     hit_apis_and_save_results(api_list, auth_token, result_file)
 
     # Read the CSV file and convert its content into a list of lists
