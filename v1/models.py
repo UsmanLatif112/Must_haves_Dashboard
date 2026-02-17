@@ -156,3 +156,22 @@ class stagingapiaResponse(db.Model):
     payload_data = Column(db.Text, nullable=True)
     response_data_result = Column(String(256))
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    
+
+class mapboosterapiaResponse(db.Model):
+    __tablename__ = "mapbooster_api_response"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to users table
+    user = db.relationship('User', backref=db.backref('mapbooster_api_response', lazy=True))
+    description = Column(String(256))
+    api = Column(String(512))
+    method = Column(String(128))
+    response_code = Column(Integer)
+    result_according_to_response = Column(String(256))
+    response_time = Column(Float)
+    response_message = Column(String(1024))
+    response_data = Column(db.Text)
+    payload_data = Column(db.Text, nullable=True)
+    response_data_result = Column(String(256))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)

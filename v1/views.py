@@ -6,10 +6,10 @@ from datetime import datetime
 from flask_login import current_user
 from flask import render_template, request, jsonify, redirect, url_for,Blueprint
 from flask_login import login_user, login_required, logout_user
-from models import team_usermoduleModel,stagingapiaResponse, QuickAnalysisModel, ce_traffic_Model, tiger_traffic_Model, torrential_traffic_Model, bs_traffic_Model, ldr_traffic_Model, umbrellaResponse
+from models import team_usermoduleModel,stagingapiaResponse,mapboosterapiaResponse, QuickAnalysisModel, ce_traffic_Model, tiger_traffic_Model, torrential_traffic_Model, bs_traffic_Model, ldr_traffic_Model, umbrellaResponse
 from app import app, login_manager,db
 from user_management import User
-from import_csv import import_client_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db, import_user_team_csv_to_db, import_ce_traffic_csv_to_db, import_tiger_traffic_csv_to_db, import_torrential_traffic_csv_to_db, import_bs_traffic_csv_to_db, import_ldr_traffic_csv_to_db
+from import_csv import import_client_csv_to_db,import_mapbooster_csv_to_db, import_csv_to_db, import_quick_csv_to_db, import_staging_csv_to_db, import_umbrella_csv_to_db, import_user_team_csv_to_db, import_ce_traffic_csv_to_db, import_tiger_traffic_csv_to_db, import_torrential_traffic_csv_to_db, import_bs_traffic_csv_to_db, import_ldr_traffic_csv_to_db
 from models import ApiResponse, db
 from helpers import delete_file_if_exists
 from user_management import authenticate
@@ -305,6 +305,80 @@ def Staging_agencyapi_script():
         # Return a JSON response indicating an error
         return jsonify({"error": str(e), "message": "Failed to run the script"})
     
+    
+    
+
+@app.route("/Mapbooster_agency_script")
+@login_required
+def mapbooster_agency_script():
+    current_date_ = datetime.today().date()
+    user_email = current_user.email
+    user_id = current_user.id
+
+    # If user ID is 100, display results for all users
+    if user_id == 100:
+        # Retrieve data for the current date for all users
+        mapboosterapiaResponse_list = mapboosterapiaResponse.query.filter(
+            func.date(mapboosterapiaResponse.created_at) == current_date_
+        ).order_by(mapboosterapiaResponse.created_at.desc()).all()[:59]
+        
+        # If no data for the current date, retrieve the most recent data for all users
+        if not mapboosterapiaResponse_list:
+            mapboosterapiaResponse_list = mapboosterapiaResponse.query.order_by(
+                mapboosterapiaResponse.created_at.desc()
+            ).all()[:59]
+    else:
+        # Retrieve data for the current date filtered by the logged-in user
+        mapboosterapiaResponse_list = mapboosterapiaResponse.query.filter(
+            func.date(mapboosterapiaResponse.created_at) == current_date_,
+            mapboosterapiaResponse.user_id == user_id
+        ).order_by(mapboosterapiaResponse.created_at.desc()).all()[:59]
+        
+        # If no data for the current date, retrieve the most recent data for the logged-in user
+        if not mapboosterapiaResponse_list:
+            mapboosterapiaResponse_list = mapboosterapiaResponse.query.filter_by(
+                user_id=user_id
+            ).order_by(mapboosterapiaResponse.created_at.desc()).all()[:59]
+
+    return render_template("Mapbooster_agency_script.html", mapboosterapiaResponses=mapboosterapiaResponse_list, user_email=user_email)
+
+@app.route("/Mapbooster_agencyapi_script", methods=["POST"])
+@login_required
+def mapbooster_agencyapi_script():
+    try:
+        from Mapbooster_agency_api import init_the_testing
+
+        # Call a function that initializes testing and returns data
+        campaign_id = request.form.get("C_id")
+        print(f'{campaign_id}')
+        keywordname_id = request.form.get("K_id")
+        print(f'{keywordname_id}')
+        business_id = request.form.get("B_id")
+        print(f'{business_id}')
+        Campaign_Status = request.form.get("C_St")
+        print(f'{Campaign_Status}')
+        # Pass these IDs to the init_the_testing function
+        result_content = init_the_testing(campaign_id,business_id,keywordname_id,Campaign_Status)
+        
+        # Commit the API responses to the database
+        db.session.commit()
+        
+        # Import the CSV file data into the database, now passing the user_id
+        csv_file_path = "Mapbooster_API_result.csv"
+        import_mapbooster_csv_to_db(db.session, csv_file_path, current_user.id)
+        
+        # Delete the CSV file after import
+        delete_file_if_exists(csv_file_path)
+
+        # Return the results as JSON
+        return jsonify(result_content)
+    except Exception as e:
+        # Print the full traceback to help diagnose the issue
+        traceback.print_exc()
+        # Rollback the session in case of an error
+        db.session.rollback()
+        # Return a JSON response indicating an error
+        return jsonify({"error": str(e), "message": "Failed to run the script"})
     
 
 
