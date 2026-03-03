@@ -367,18 +367,18 @@
           </tr>
       </thead>
       <tbody id="results-bodyy">
-          {% for stagingapiaResponse in stagingapiaResponses %}
+          {% for mapboosterapiaResponse in mapboosterapiaResponses %}
           <tr>
-              <td title="Description: {{ stagingapiaResponse.description }}">{{ stagingapiaResponse.description }}</td>
-              <td title="API: {{ stagingapiaResponse.api }}">{{ stagingapiaResponse.api }}</td>
-              <td style="text-align:center;"  title="Method: {{ stagingapiaResponse.method }}">{{ stagingapiaResponse.method }}</td>
-              <td style="text-align:center;" title="Response Code: {{ stagingapiaResponse.response_code }}">{{ stagingapiaResponse.response_code }}</td>
-              <td {% if stagingapiaResponse.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%}  title="Result According to Response: {{ stagingapiaResponse.result_according_to_response }}" class="result-cell">{{ stagingapiaResponse.result_according_to_response }}</td>
-              <td title="Response Time: {{ stagingapiaResponse.response_time }}">{{ stagingapiaResponse.response_time }}</td>
-              <td title="Response Message: {{ stagingapiaResponse.response_message }}">{{ stagingapiaResponse.response_message }}</td>
-              <td title="Response Data: {{ stagingapiaResponse.response_data }}">{{ stagingapiaResponse.response_data }}</td>
-              <td title="Payload Data: {{ stagingapiaResponse.payload_data }}">{{ stagingapiaResponse.payload_data }}</td>
-              <td {% if stagingapiaResponse.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Response Data Result: {{ stagingapiaResponse.response_data_result }}" class="result-cell">{{ stagingapiaResponse.response_data_result }}</td>
+              <td title="Description: {{ mapboosterapiaResponse.description }}">{{ mapboosterapiaResponse.description }}</td>
+              <td title="API: {{ mapboosterapiaResponse.api }}">{{ mapboosterapiaResponse.api }}</td>
+              <td style="text-align:center;"  title="Method: {{ mapboosterapiaResponse.method }}">{{ mapboosterapiaResponse.method }}</td>
+              <td style="text-align:center;" title="Response Code: {{ mapboosterapiaResponse.response_code }}">{{ mapboosterapiaResponse.response_code }}</td>
+              <td {% if mapboosterapiaResponse.result_according_to_response == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%}  title="Result According to Response: {{ mapboosterapiaResponse.result_according_to_response }}" class="result-cell">{{ mapboosterapiaResponse.result_according_to_response }}</td>
+              <td title="Response Time: {{ mapboosterapiaResponse.response_time }}">{{ mapboosterapiaResponse.response_time }}</td>
+              <td title="Response Message: {{ mapboosterapiaResponse.response_message }}">{{ mapboosterapiaResponse.response_message }}</td>
+              <td title="Response Data: {{ mapboosterapiaResponse.response_data }}">{{ mapboosterapiaResponse.response_data }}</td>
+              <td title="Payload Data: {{ mapboosterapiaResponse.payload_data }}">{{ mapboosterapiaResponse.payload_data }}</td>
+              <td {% if mapboosterapiaResponse.response_data_result == 'Fail' %} style="color:red; text-align: center;" {% else %} style="color:#4CAF50; text-align: center; font-weight:600" {% endif%} title="Response Data Result: {{ mapboosterapiaResponse.response_data_result }}" class="result-cell">{{ mapboosterapiaResponse.response_data_result }}</td>
           </tr>
           {% else %}
           <tr  id="no-data-row">

@@ -250,7 +250,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                     print(f"API: {url}, Response Code: {response_code}, Response Data: {response_data}")
                     print("===================================") 
                     print("        ")
-                    time.sleep(10)  
+                    time.sleep(20)
 
                 except Exception as e:
                     print(f"Error while processing API: {url}, Error: {e}")

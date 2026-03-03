@@ -1,0 +1,15 @@
+@echo off
+REM Go to your project directory
+cd /d C:\Users\Administrator\Desktop\Must_haves_Dashboard\v1
+
+REM Activate the virtual environment
+call env\Scripts\activate
+
+REM Go back to the project root (in case you need to)
+cd ..
+
+REM Run your Python app
+python app.py
+
+REM Pause to keep the window open if app.py exits
+pause
