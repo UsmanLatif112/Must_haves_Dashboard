@@ -22,7 +22,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
     # (API must have for last key)
     Campaign_IFrf = "46378" #use able
     # (API must have Business Auth)
-    Campaign_IHrt = "46379" #use able
+    Campaign_IHrt = "46587" #use able
     Client_id = "6165"
     Keyword_neww = f"{keywordname_Id}new"
     # Client name which is used to create new client
@@ -614,19 +614,19 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             # # ======================================
             {
                 "description": "Get Campaign Map Rank Score by providing Campaign id",
-                "url": f"https://maps-agency.locafy.com/graphs/campaign-map-rank-score/46379/",
+                "url": f"https://maps-agency.locafy.com/graphs/campaign-map-rank-score/46587/",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Keyword Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://maps-agency.locafy.com/graphs/keyword-map-rank-score/46379/software company",
+                "url": f"https://maps-agency.locafy.com/graphs/keyword-map-rank-score/46587/software company",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Competitor Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://maps-agency.locafy.com/graphs/competitor-map-rank-score/46379/software company",
+                "url": f"https://maps-agency.locafy.com/graphs/competitor-map-rank-score/46587/software company",
                 "method": "GET",
                 "params":None
             }, 
