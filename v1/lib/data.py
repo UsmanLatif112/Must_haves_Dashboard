@@ -66,8 +66,8 @@ tiger_login_password = os.getenv("TIGER_LOGIN_PASSWORD", "!fFK8JKr2!o&18WY")
 torrential_login_username = os.getenv("TORRENTIAL_LOGIN_USERNAME", "zulqarnain_qa_1")
 torrential_login_password = os.getenv("TORRENTIAL_LOGIN_PASSWORD", "TbdewMaZxBA*^51a")
 
-bs_login_username = os.getenv("BS_LOGIN_USERNAME", "ShakeelKhan@gmail.com")
-bs_login_password = os.getenv("BS_LOGIN_PASSWORD", "Shakeel#1133")
+bs_login_username = os.getenv("BS_LOGIN_USERNAME", "qa_test@gmail.com")
+bs_login_password = os.getenv("BS_LOGIN_PASSWORD", "EqH9gxVxo2Hi8$Tu")
 
 ldr_login_username = os.getenv("LDR_LOGIN_USERNAME", "lf_user_team@gmail.com")
 ldr_login_password = os.getenv("LDR_LOGIN_PASSWORD", "d2Di49gN9Ajyb4M")
