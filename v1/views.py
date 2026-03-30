@@ -18,6 +18,7 @@ from flask import jsonify,current_app
 from models import ApiResponse, db
 from sqlalchemy import text
 import lib.data as constants
+from utils.recorder_decorator import record_screen
 
 main = Blueprint('main', __name__)
 
@@ -786,7 +787,7 @@ def Torrential_traffic_must_haves_run_script():
         csv_file_path = "Torrential_traffic_must_haves.csv"
         import_torrential_traffic_csv_to_db(db.session, csv_file_path, current_user.id, f"{torrential_traffic_model_campaign_type} - {result_content}")
 
-        delete_file_if_exists(csv_file_path)
+        # delete_file_if_exists(csv_file_path)
         return jsonify(result_content)
     
     except Exception as e:
@@ -822,6 +823,7 @@ def BS_traffic_must_haves():
 
 @app.route("/BS-traffic-must-haves-run-script", methods=["POST"])
 @login_required
+@record_screen
 def BS_traffic_must_haves_run_script():
     
     user_id = current_user.id
@@ -848,16 +850,26 @@ def BS_traffic_must_haves_run_script():
     next_index = (current_index + 1) % len(constants.BS)
     bs_traffic_model_campaign_type = constants.BS[next_index]
     try:
-
+        # Run test cases and generate CSV
         test_cases = BS_Traffic_TestCases(bs_traffic_model_campaign_type)
-        result_content = test_cases.full_dashboard_must_haves()
-        db.session.commit()
-        csv_file_path = "BS_traffic_must_haves.csv"
-        import_bs_traffic_csv_to_db(db.session, csv_file_path, current_user.id, f"{bs_traffic_model_campaign_type} - {result_content}")
 
-        delete_file_if_exists(csv_file_path)
-        return jsonify(result_content)
-    
+        test_cases.full_dashboard_must_haves()
+
+        csv_file_path = "BS_traffic_must_haves.csv"
+
+        # Convert CSV to JSON
+        json_data = []
+        with open(csv_file_path, mode='r', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                json_data.append(row)
+
+        # Clean up CSV
+        # delete_file_if_exists(csv_file_path)
+
+        # Return JSON
+        return jsonify(json_data)
+
     except Exception as e:
         traceback.print_exc()
         db.session.rollback()

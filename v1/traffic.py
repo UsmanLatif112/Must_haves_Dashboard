@@ -811,16 +811,20 @@ class BS_Traffic_TestCases(TrafficBase):
     def __init__(self, campaign_type):
         self.driver = initialize_and_navigate(data.bs_traffic_url)
         self.base_page = page.HomePage(self.driver)
-        self.base_page.make_csv('BS_traffic_must_haves.csv', f'Test Case,Use Case / Scenario,Result\n', new=True)
+        self.base_page.make_csv('BS_traffic_must_haves.csv', 'Test Case,Use Case / Scenario,Result\n', new=True)        
         self.campaign_type = campaign_type
         self.campaign_selected = None
+        self.login_success = False  # reset every run
+
     
     def login_test_cases(self):
+        self.login_success = False  # reset every run
+
         try:
             # Test Case 1: Invalid Login (Invalid Username and Password)
             self.driver.get(data.bs_traffic_url)
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user_noman")
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass_noman")
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login succeeded with invalid credentials"
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), {"Pass" if not login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
@@ -856,6 +860,7 @@ class BS_Traffic_TestCases(TrafficBase):
             self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys(data.bs_login_password)
             self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
             login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content), "Login failed with valid credentials"
+
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password), {"Pass" if login_result[0] else f"Fail - {login_result[1]}"}\n', new=False)
         except Exception as e:
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Valid Login (valid Username and Password),Fail\n', new=False)
@@ -1311,12 +1316,28 @@ class BS_Traffic_TestCases(TrafficBase):
             print(e)
             
     def full_dashboard_must_haves(self):
-        self.login_test_cases()
-        self.campaign_selected = self.crud_test_cases()
-        self.report_test_cases()
-        self.campaign_error_and_graph_stats()
-        print("Full CE Dashboard Must Haves Test Cases Completed")
-        return self.campaign_selected
+            self.login_test_cases()
+
+            try:
+                if not getattr(self, "login_success", False):
+                    # ❌ Login failed → mark CRUD tests as Fail without running them
+                    self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, All CRUD tests skipped due to failed login, Fail\n', new=False)
+                    self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, All CRUD tests skipped due to failed login, Fail\n', new=False)
+                    self.base_page.make_csv("BS_traffic_must_haves.csv", f'Report, All Report tests skipped due to failed login, Fail\n', new=False)
+                    self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign error and graph stats, All tests skipped due to failed login, Fail\n', new=False)
+                    print("Login failed. Skipping all subsequent tests.")
+                    return self.campaign_selected
+                    # return None
+
+                self.campaign_selected = self.crud_test_cases()
+                self.report_test_cases()
+                self.campaign_error_and_graph_stats()
+                print("Full BS Traffic Dashboard Must Haves Test Cases Completed")
+                return self.campaign_selected
+            
+            finally:
+                print("Closing browser...")
+                self.driver.quit()
         
 class Tiger_Traffic_TestCases(TrafficBase):    
     def __init__(self, campaign_type):
