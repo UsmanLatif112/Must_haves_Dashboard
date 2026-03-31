@@ -1,5 +1,6 @@
 from imports import *
 from lib.data import *
+from v1.lib import driver
 
 
 class Login:
@@ -110,6 +111,7 @@ class TrafficModuleLocator:
     campaign_sub_category_option = '//select[@id="id_campaign_types"]//option[contains(text(), "{campaign_sub_type}")]'
     campaign_country = '//*[@id="select2-id_country-container"]'
     campaign_country_option = '//li[text() = "{country}"]'
+    campaign_country_input = '//input[@class="select2-search__field"]'
     campaign_state = '//*[@id="id_state_iso_3"]'
     campaign_city = '//*[@id="id_city"]'
     campaign_mobile_proxy_percentage = '//*[(@id="id_mobile_proxy_percentage")]'
@@ -214,6 +216,44 @@ class TrafficModuleLocator:
     campaing_error_filter_7_day_option = '//option[text()="7 Days"]'
     campaing_error_filter_30_day_option = '//option[text()="30 Days"]'
 
+    def select_select2_country_js(country_name):
+        """Select country from Select2 dropdown using JavaScript"""
+    
+        # JavaScript to handle Select2 dropdown
+        js_code = f"""
+            // Open the Select2 dropdown
+            var select2Container = document.querySelector('#select2-id_country-container');
+            if (select2Container) {{
+                select2Container.click();
+                
+                // Wait for search input to appear and set value
+                setTimeout(function() {{
+                    var searchField = document.querySelector('input.select2-search__field');
+                    if (searchField) {{
+                        searchField.value = '{country_name}';
+                        searchField.dispatchEvent(new Event('input', {{ bubbles: true }}));
+                        searchField.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                        
+                        // Wait for results and click the matching option
+                        setTimeout(function() {{
+                            var results = document.querySelectorAll('.select2-results__option');
+                            for (var i = 0; i < results.length; i++) {{
+                                if (results[i].textContent.trim() === '{country_name}') {{
+                                    results[i].click();
+                                    break;
+                                }}
+                            }}
+                        }}, 500);
+                    }}
+                }}, 300);
+                return true;
+            }}
+            return false;
+        """
+        
+        driver.execute_script(js_code)
+        time.sleep(2)  # Wait for selection to complete
+
 class LDRModuleLocator:
     login_user = '//*[@id="id_login"]'
     login_password = '//*[@id="id_password"]'
@@ -226,8 +266,9 @@ class LDRModuleLocator:
     campaign_sub_category = '//*[@id="id_campaign_types"]'
     campaign_sub_category_option = '//select[@id="id_campaign_types"]//option[contains(text(), "{campaign_sub_type}")]'
     campaign_country = '//*[@id="select2-id_country-container"]'
+    campaign_country_input = '//input[@class="select2-search__field"]'
     campaign_country_option = '//li[text() = "{country}"]'
-    campaign_state = '//*[@id="id_state_iso_3"]'
+    campaign_country = campaign_state = '//*[@id="id_state_iso_3"]'
     campaign_city = '//*[@id="id_city"]'
     campaign_mobile_proxy_percentage = '//*[(@id="id_mobile_proxy_percentage")]'
     campaign_average_session = '//*[@id="id_num_searches"]'

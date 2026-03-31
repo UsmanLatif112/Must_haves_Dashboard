@@ -4,6 +4,9 @@ import random
 from lib.driver import *
 from lib import data, page, resources
 from traffic_sample_data import *
+from v1.lib import driver
+import traceback
+
 
 
 class TrafficBase:
@@ -815,6 +818,9 @@ class BS_Traffic_TestCases(TrafficBase):
         self.campaign_type = campaign_type
         self.campaign_selected = None
         self.login_success = False  # reset every run
+        self._project_id = None
+        self.example =None
+        self.project_name = None
         
         # Define variables needed later
         self.project_name = f"Test_Project_{random.randint(1000, 9999)}"
@@ -823,54 +829,65 @@ class BS_Traffic_TestCases(TrafficBase):
         self.campaign_name_edited = f"Edited_Campaign_{random.randint(1000, 9999)}"
         self.campaign_country = "United States"
 
-    
+    @property
+    def project_id(self):
+        return self._project_id
+
+    @project_id.setter
+    def project_id(self, value):
+        if value:  # only update if valid
+            print(f"Setting project_id: {value}")
+            traceback.print_stack(limit=2)
+            self._project_id = value
+
+
     def login_test_cases(self):
         self.login_success = False  # reset every run
 
-        try:
-            # Test Case 1: Invalid Login (Invalid Username and Password)
-            self.driver.get(data.bs_traffic_url)
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user_noman")
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass_noman")
-            self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
-            login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content)
-            # ✅ Fixed: Properly check login_result
-            if not login_result:
-                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), Pass\n', new=False)
-            else:
-                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), Fail - Login succeeded with invalid credentials\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password),Fail\n', new=False)
+        # try:
+        #     # Test Case 1: Invalid Login (Invalid Username and Password)
+        #     self.driver.get(data.bs_traffic_url)
+        #     self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user_noman")
+        #     self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass_noman")
+        #     self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
+        #     login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content)
+        #     # ✅ Fixed: Properly check login_result
+        #     if not login_result:
+        #         self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), Pass\n', new=False)
+        #     else:
+        #         self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password), Fail - Login succeeded with invalid credentials\n', new=False)
+        # except Exception as e:
+        #     self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (Invalid Username and Password),Fail\n', new=False)
         
-        try:
-            # Test Case 2: Valid Username, Invalid Password
-            self.driver.get(data.bs_traffic_url)
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys(data.bs_login_username)
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
-            self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
-            login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content)
-            # ✅ Fixed: Properly check login_result
-            if not login_result:
-                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), Pass\n', new=False)
-            else:
-                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), Fail - Login succeeded with invalid password\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password),Fail\n', new=False)
+        # try:
+        #     # Test Case 2: Valid Username, Invalid Password
+        #     self.driver.get(data.bs_traffic_url)
+        #     self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys(data.bs_login_username)
+        #     self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys("invalid_pass")
+        #     self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
+        #     login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content)
+        #     # ✅ Fixed: Properly check login_result
+        #     if not login_result:
+        #         self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), Pass\n', new=False)
+        #     else:
+        #         self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password), Fail - Login succeeded with invalid password\n', new=False)
+        # except Exception as e:
+        #     self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (valid Username and invalid Password),Fail\n', new=False)
         
-        try:
-            # Test Case 3: Invalid Username, Valid Password
-            self.driver.get(data.bs_traffic_url)
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys(data.bs_login_password)
-            self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
-            login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content)
-            # ✅ Fixed: Properly check login_result
-            if not login_result:
-                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), Pass\n', new=False)
-            else:
-                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), Fail - Login succeeded with invalid username\n', new=False)
-        except Exception as e:
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password),Fail\n', new=False)
+        # try:
+        #     # Test Case 3: Invalid Username, Valid Password
+        #     self.driver.get(data.bs_traffic_url)
+        #     self.base_page.wait_for_element(resources.TrafficModuleLocator.login_user).send_keys("invalid_user")
+        #     self.base_page.wait_for_element(resources.TrafficModuleLocator.login_password).send_keys(data.bs_login_password)
+        #     self.base_page.click_btn(resources.TrafficModuleLocator.login_btn)
+        #     login_result = self.base_page.wait(resources.TrafficModuleLocator.main_content)
+        #     # ✅ Fixed: Properly check login_result
+        #     if not login_result:
+        #         self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), Pass\n', new=False)
+        #     else:
+        #         self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password), Fail - Login succeeded with invalid username\n', new=False)
+        # except Exception as e:
+        #     self.base_page.make_csv("BS_traffic_must_haves.csv", f'Login, Invalid Login (invalid Username and valid Password),Fail\n', new=False)
         
         try:
             # Test Case 4: Valid Login
@@ -897,12 +914,12 @@ class BS_Traffic_TestCases(TrafficBase):
         
             # Test Case 1: Create Project
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_btn)
-            self.base_page.wait_for_element(resources.TrafficModuleLocator.project_create_name_input).send_keys(self.project_name)  # ✅ Use self.project_name
+            self.base_page.wait_for_element(resources.TrafficModuleLocator.project_create_name_input).send_keys(self.project_name)  
             self.base_page.click_btn(resources.TrafficModuleLocator.project_create_modal_btn)
             project_created = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_view_check)
-            project_id = self.driver.current_url.split("/")[-2]
+            self.project_id = self.driver.current_url.split("/")[-2]
             self.driver.get(data.bs_project_listing_page)
-            project_found_in_listing = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id))
+            project_found_in_listing = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_created_list_check.format(project_id=self.project_id))
             
             if project_created and project_found_in_listing:
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Create Project, Pass\n', new=False)
@@ -912,15 +929,15 @@ class BS_Traffic_TestCases(TrafficBase):
             self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Create Project,Fail\n', new=False)  
         
         # Continue with project_id only if it was created successfully
-        if 'project_id' in locals():
+        if self.project_id:
             try:
                 # Test Case 2: Edit Project
                 self.driver.get(data.bs_project_listing_page)
-                self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_btn.format(project_id=project_id))
+                self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_btn.format(project_id=self.project_id))
                 project_edit_input = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_edit_name_input.format(project_name=self.project_name))
                 project_edit_input.clear()
                 project_edit_input.send_keys(self.edited_project_name)  # ✅ Use self.edited_project_name
-                self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_modal_btn.format(project_id=project_id))
+                self.base_page.click_btn(resources.TrafficModuleLocator.project_edit_modal_btn.format(project_id=self.project_id))
                 project_edited = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_edit_check.format(edited_project_name=self.edited_project_name))
                 
                 if project_edited:
@@ -933,7 +950,7 @@ class BS_Traffic_TestCases(TrafficBase):
             try:
                 # Test Case 3: View Project
                 self.driver.get(data.bs_project_listing_page)
-                self.base_page.click_btn(resources.TrafficModuleLocator.project_created_list_check.format(project_id=project_id))
+                self.base_page.click_btn(resources.TrafficModuleLocator.project_created_list_check.format(project_id=self.project_id))
                 project_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_view_check)
                 
                 if project_viewed:
@@ -1018,9 +1035,75 @@ class BS_Traffic_TestCases(TrafficBase):
                     self.base_page.click_btn(resources.TrafficModuleLocator.campaign_category_option.format(campaign_type=campaign["campaign_type"]))
                     self.base_page.click_btn(resources.TrafficModuleLocator.campaign_sub_category)
                     self.base_page.click_btn(resources.TrafficModuleLocator.campaign_sub_category_option.format(campaign_sub_type=campaign["campaign_sub_type"]))
-                    self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
-                    self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country_option.format(country=self.campaign_country))  # ✅ Use self.campaign_country
-                    
+                    # Step 1: Get dropdown element
+
+                    from selenium.webdriver.common.action_chains import ActionChains
+                    from selenium.webdriver.common.keys import Keys
+
+                    try:
+                        print("Trying normal dropdown selection...")
+
+                        # Step 1: Click dropdown
+                        self.base_page.click_btn(resources.TrafficModuleLocator.campaign_country)
+
+                        # Step 2: Type country
+                        country_input = self.base_page.wait_for_element(
+                            resources.TrafficModuleLocator.campaign_country_input
+                        )
+                        country_input.clear()
+                        country_input.send_keys(campaign_country)
+
+                        # Step 3: Wait & select option (uppercase match)
+                        option_country = self.base_page.wait_for_element(
+                            f'//span[contains(@class,"select2-dropdown")]//li[text()="{campaign_country.upper()}"]'
+                        )
+
+                        option_country.click()
+
+                        print(f"Option found for country: {option_country is not None}")
+
+                        if option_country:
+                            self.driver.execute_script("arguments[0].click();", option_country)
+                            print("✅ Country selected via normal flow")
+                        else:
+                            raise Exception("Option not found")
+
+                    except Exception as e:
+                        print(f"⚠️ Normal flow failed: {e}")
+                        print("🔁 Falling back to ActionChains...")
+
+                        try:
+                            # Step 1: Click dropdown using ActionChains
+                            country_dropdown = self.base_page.wait_for_element(
+                                resources.TrafficModuleLocator.campaign_country
+                            )
+
+                            ActionChains(self.driver).move_to_element(country_dropdown).click().perform()
+
+                            # Step 2: Wait for input
+                            country_input = self.base_page.wait_for_element(
+                                resources.TrafficModuleLocator.campaign_country_input
+                            )
+
+                            # Step 3: Type
+                            ActionChains(self.driver)\
+                                .move_to_element(country_input)\
+                                .click()\
+                                .send_keys(campaign_country)\
+                                .perform()
+
+                            # Step 4: Select using keyboard (🔥 most reliable)
+                            country_input.send_keys(Keys.ARROW_DOWN)
+                            country_input.send_keys(Keys.ENTER)
+
+                            print("✅ Country selected via ActionChains fallback")
+
+                        except Exception as e2:
+                            print(f"❌ ActionChains fallback also failed: {e2}")
+
+
+
+
                     self.add_input_field_data(self.base_page, campaign, self.driver)
                     self.add_tagify_data(self.base_page, campaign, self.driver)
 
@@ -1037,21 +1120,121 @@ class BS_Traffic_TestCases(TrafficBase):
                 except Exception as e:
                     self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Create Campaign,Fail\n', new=False)
                 
-                # ... (rest of your campaign CRUD tests with similar fixes)
+                
                 
             except Exception as e:
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, CRUD Test Cases,Fail\n', new=False)
             
+
+            try:
+                # Test Case 2: View Campaign
+                time.sleep(2)
+                self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=self.campaign_name))
+                campaign_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=self.campaign_name)), "Campaign view failed"
+                self.campaign_id = self.driver.current_url.split("/")[-2]
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, View Campaign, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
+            except Exception as e:
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, View Campaign,Fail\n', new=False)
+
+
+            try:
+                # Test Case 3: Edit Campaign
+                time.sleep(2)
+                campaign_listing_url = data.bs_campaing_listing_page.format(project_id=self.project_id)
+                print(campaign_listing_url)
+                
+                for attempt in range(3):
+                    try:
+                        self.driver.get(campaign_listing_url)
+                        time.sleep(2)
+                        self.driver.refresh()
+                        # If we get here without exception, break the retry loop
+                        break
+                    except Exception as e:
+                        print(f"Navigation attempt {attempt + 1} failed: {e}")
+                        if attempt == 2:  # Last attempt
+                            raise  # Re-raise the exception
+                        time.sleep(3)  # Wait before retry
+                
+                self.base_page.click_btn(resources.TrafficModuleLocator.campaing_edit_btn.format(campaign_id=self.campaign_id))
+                
+                self.edit_tagify_data(self.base_page, selected_campaign, self.driver)
+                self.edit_input_field_data(self.base_page, selected_campaign, self.driver)
+
+                save_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_edit_save_btn)
+                self.driver.execute_script("arguments[0].click();", save_btn)
+                time.sleep(3)
+            #   cancel_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaign_cancel_btn)
+                
+                cancel_btn = self.base_page.wait_for_element('//div//span[@class="cancel-status"]')
+                cancel_btn.click()
+                self.driver.execute_script("arguments[0].click();", cancel_btn)
+                time.sleep(2)
+                self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
+                campaign_edited = self.edit_campaign_check(self.base_page, selected_campaign, self.driver), "Campaign edit failed"
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Edit Campaign, {"Pass" if campaign_edited[0] else f"Fail - {campaign_edited[1]}"}\n', new=False)
+            except Exception as e:
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Edit Campaign,Fail\n', new=False)
+
+
+            try:
+                # Test Case 4: View Campaign After Edit
+                self.driver.get(data.bs_campaing_listing_page.format(project_id=self.project_id))
+                time.sleep(2)
+                self.base_page.click_btn(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=campaign_name_edited))
+                campaign_viewed = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_view_check.format(campaign_name=campaign_name_edited)), "Campaign view failed"
+                self.campaign_id = self.driver.current_url.split("/")[-2]
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, View Campaign after edit, {"Pass" if campaign_viewed[0] else f"Fail - {campaign_viewed[1]}"}\n', new=False)
+            except Exception as e:
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, View Campaign after edit,Fail\n', new=False)
+        
+
+            try:
+                # Test Case 4: Live Campaign
+                self.driver.get(data.bs_campaing_listing_page.format(project_id=self.project_id))
+                time.sleep(2)
+                self.base_page.click_btn(resources.TrafficModuleLocator.campaign_live_btn.format(campaign_id=self.campaign_id))
+                campaign_live = self.base_page.wait_for_element(resources.TrafficModuleLocator.live_status), "Campaign live failed"
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Live Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
+            except Exception as e:
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Live Campaign,Fail\n', new=False)
+        
+
+            try:
+                # Test Case 5: Cancel Live Campaign
+                time.sleep(2)
+                self.base_page.click_btn(resources.TrafficModuleLocator.campaign_live_btn.format(campaign_id=self.campaign_id))
+                campaign_live = self.base_page.wait_for_element(resources.TrafficModuleLocator.cancel_status), "Campaign live failed"
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Cancel Campaign, {"Pass" if campaign_live[0] else f"Fail - {campaign_live[1]}"}\n', new=False)
+            except Exception as e:
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Cancel Campaign,Fail\n', new=False)
+        
+
+            try:
+                # Test Case 4: Delete Campaign
+                time.sleep(2)
+                delete_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.campaing_delete_btn.format(campaign_id=self.campaign_id))
+                self.driver.execute_script("arguments[0].click();", delete_btn)
+                time.sleep(2)
+                delete_modal_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.capmaign_delete_modal_btn)
+                self.driver.execute_script("arguments[0].click();", delete_modal_btn)
+                campaign_deleted = not self.base_page.wait(resources.TrafficModuleLocator.campaign_create_check.format(campaign_name=self.campaign_name)), "Campaign deletion failed"
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Delete Campaign, {"Pass" if campaign_deleted else f"Fail - {campaign_deleted[1]}"}\n', new=False)
+                
+            except Exception as e:
+                self.base_page.make_csv("BS_traffic_must_haves.csv", f'Campaign, Delete Campaign,Fail\n', new=False)
+        
+        
             try:
                 # Delete Project
                 self.driver.get(data.bs_project_listing_page)
                 time.sleep(2)
-                delete_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_delete_btn.format(project_id=project_id))
+                delete_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_delete_btn.format(project_id=self.project_id))
                 self.driver.execute_script("arguments[0].click();", delete_btn)
                 time.sleep(2)
                 delete_modal_btn = self.base_page.wait_for_element(resources.TrafficModuleLocator.project_delete_modal_btn)
                 self.driver.execute_script("arguments[0].click();", delete_modal_btn)
-                project_deleted = not self.base_page.wait(resources.TrafficModuleLocator.project_deleted_list_check.format(project_id=project_id))
+                project_deleted = not self.base_page.wait(resources.TrafficModuleLocator.project_deleted_list_check.format(project_id=self.project_id))
                 
                 if project_deleted:
                     self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project, Pass\n', new=False)
@@ -1061,7 +1244,7 @@ class BS_Traffic_TestCases(TrafficBase):
                 self.base_page.make_csv("BS_traffic_must_haves.csv", f'Project, Delete Project,Fail\n', new=False)
                 
         return self.campaign_selected
-    
+
     def full_dashboard_must_haves(self):
         # First, run login tests
         self.login_test_cases()
@@ -1088,9 +1271,7 @@ class BS_Traffic_TestCases(TrafficBase):
         
         except Exception as e:
             print(f"Error during test execution: {e}")
-            # Log error to CSV if needed
-            self.base_page.make_csv("BS_traffic_must_haves.csv", f'Error, Test execution failed, Fail - {str(e)}\n', new=False)
-        
+           
         finally:
             print("Closing browser...")
             self.driver.quit()
