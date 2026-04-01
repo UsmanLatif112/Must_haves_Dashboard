@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 from models import ApiResponse, QuickAnalysisModel, stagingapiaResponse,mapboosterapiaResponse, team_usermoduleModel, umbrellaResponse, ClientmoduleModel, ce_traffic_Model, tiger_traffic_Model, torrential_traffic_Model, bs_traffic_Model, ldr_traffic_Model
 
 def import_csv_to_db(session, csv_file_path, user_id):  # Added user_id as a parameter
@@ -160,13 +161,15 @@ def import_bs_traffic_csv_to_db(session, csv_file_path, user_id, campaign_type):
         csv_reader = csv.DictReader(csvfile)
 
         # Iterate over CSV rows and create ORM objects
+        created_at = datetime.now()
         for row in csv_reader:
             response_entry = bs_traffic_Model(
                 user_id=user_id,  # Set the user_id for the ApiResponse
                 test_case=row["Test Case"],
                 use_case=row["Use Case / Scenario"],
                 result=row["Result"],
-                campaign_type=campaign_type
+                campaign_type=campaign_type,
+                created_at=created_at
             )
 
             # Add each new object to the session
