@@ -1,10 +1,3 @@
-
-
-
-
-import csv, json
-import time
-import requests
 from csv import reader
 from flask import Flask, render_template, redirect, url_for, request
 from flask_login import (
