@@ -1,5 +1,6 @@
 from app import db
 from flask_login import UserMixin
+from datetime import date
 
 from sqlalchemy import Column, Integer, String, Float, DateTime,Text
 
@@ -88,6 +89,19 @@ class bs_traffic_Model(UserMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     campaign_type = db.Column(db.String(500), nullable=False)
+
+    @classmethod
+    def to_dict(cls,instance):
+        instace = instance if instance else cls
+        return {
+            "id": instance.id,
+            "test_case": instance.test_case,
+            "use_case": instance.use_case,
+            "result": instance.result,
+            "user_id": instance.user_id,
+            "created_at": instance.created_at,
+            "campaign_type": instance.campaign_type
+        }
 
 class ldr_traffic_Model(UserMixin, db.Model):
     __tablename__ = "ldr_traffic_module"

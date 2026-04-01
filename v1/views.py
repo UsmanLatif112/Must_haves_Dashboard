@@ -796,7 +796,6 @@ def Torrential_traffic_must_haves_run_script():
         return jsonify({"error": str(e), "message": "Failed to run the script"})
 
 
-
 """
     BS TRAFFIC MUST HAVE
 """
@@ -820,6 +819,7 @@ def BS_traffic_must_haves():
     bs_traffic_Models_list = bs_traffic_Models_query.order_by(bs_traffic_Model.created_at.desc()).all()
 
     return render_template("BS_traffic.html", bs_traffic_Model=bs_traffic_Models_list, user_email=user_email)
+
 
 @app.route("/BS-traffic-must-haves-run-script", methods=["POST"])
 @login_required
@@ -850,26 +850,16 @@ def BS_traffic_must_haves_run_script():
     next_index = (current_index + 1) % len(constants.BS)
     bs_traffic_model_campaign_type = constants.BS[next_index]
     try:
-        # Run test cases and generate CSV
-        test_cases = BS_Traffic_TestCases(bs_traffic_model_campaign_type)
 
-        test_cases.full_dashboard_must_haves()
-
+        # test_cases = BS_Traffic_TestCases(bs_traffic_model_campaign_type)
+        # result_content = test_cases.full_dashboard_must_haves()
+        # db.session.commit()
         csv_file_path = "BS_traffic_must_haves.csv"
+        import_bs_traffic_csv_to_db(db.session, csv_file_path, current_user.id, f"{bs_traffic_model_campaign_type} ")
 
-        # Convert CSV to JSON
-        json_data = []
-        with open(csv_file_path, mode='r', newline='', encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                json_data.append(row)
-
-        # Clean up CSV
         # delete_file_if_exists(csv_file_path)
-
-        # Return JSON
-        return jsonify(json_data)
-
+        return jsonify({})
+    
     except Exception as e:
         traceback.print_exc()
         db.session.rollback()
