@@ -1,5 +1,6 @@
 from app import db
 from flask_login import UserMixin
+from datetime import date
 
 from sqlalchemy import Column, Integer, String, Float, DateTime,Text
 
@@ -45,6 +46,79 @@ class team_usermoduleModel(UserMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     
+class ce_traffic_Model(UserMixin, db.Model):
+    __tablename__ = "ce_traffic_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), nullable=False)
+    use_case = db.Column(db.String(500), nullable=False)
+    result = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
+    
+class tiger_traffic_Model(UserMixin, db.Model):
+    __tablename__ = "tiger_traffic_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), nullable=False)
+    use_case = db.Column(db.String(500), nullable=False)
+    result = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
+    
+class torrential_traffic_Model(UserMixin, db.Model):
+    __tablename__ = "torrential_traffic_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), nullable=False)
+    use_case = db.Column(db.String(500), nullable=False)
+    result = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
+    
+class bs_traffic_Model(UserMixin, db.Model):
+    __tablename__ = "bs_traffic_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), nullable=False)
+    use_case = db.Column(db.String(500), nullable=False)
+    result = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
+
+    @classmethod
+    def get_last_usecase_by_testcase(cls, testcase):
+        last_entry = cls.query.filter_by(test_case=testcase).order_by(cls.created_at.desc()).first()
+        return last_entry.use_case if last_entry else None
+
+    @classmethod
+    def to_dict(cls, instance):
+        # Fallback to class if no instance is provided
+        target = instance if instance else cls
+        return {
+            "id": target.id,
+            "test_case": target.test_case,
+            "use_case": target.use_case,
+            "result": target.result,
+            "user_id": target.user_id,
+            "created_at": target.created_at,
+            "campaign_type": target.campaign_type
+        }
+    
+class ldr_traffic_Model(UserMixin, db.Model):
+    __tablename__ = "ldr_traffic_module"
+
+    id = db.Column(db.Integer, primary_key=True)
+    test_case = db.Column(db.String(500), nullable=False)
+    use_case = db.Column(db.String(500), nullable=False)
+    result = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    campaign_type = db.Column(db.String(500), nullable=False)
     
     
 
@@ -84,6 +158,7 @@ class umbrellaResponse(db.Model):
     response_data_result = Column(String(256))
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
+    
 class stagingapiaResponse(db.Model):
     __tablename__ = "Agency_API_Staging"
 
@@ -98,6 +173,25 @@ class stagingapiaResponse(db.Model):
     response_time = Column(Float)
     response_message = Column(String(1024))
     response_data = Column(db.Text)
-    payload_data = db.Column(db.String(255), nullable=True)
+    payload_data = Column(db.Text, nullable=True)
+    response_data_result = Column(String(256))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    
+
+class mapboosterapiaResponse(db.Model):
+    __tablename__ = "mapbooster_api_response"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to users table
+    user = db.relationship('User', backref=db.backref('mapbooster_api_response', lazy=True))
+    description = Column(String(256))
+    api = Column(String(512))
+    method = Column(String(128))
+    response_code = Column(Integer)
+    result_according_to_response = Column(String(256))
+    response_time = Column(Float)
+    response_message = Column(String(1024))
+    response_data = Column(db.Text)
+    payload_data = Column(db.Text, nullable=True)
     response_data_result = Column(String(256))
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)

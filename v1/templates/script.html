@@ -311,14 +311,9 @@
           <form id="campaignIdForm">
             
             <div class="form-group">
-              <label for="campaignId">Campaign ID:</label>
+              <label for="campaignId">Any ID to make user unique:</label>
               <input type="text" class="form-control" id="campaignId" required>
               <div id="C_error-message" style="display: none; color: red;"></div>
-            </div>
-            <div class="form-group">
-              <label for="quickAnalysisCampaignId">Quick Analysis Campaign ID:</label>
-              <input type="text" class="form-control" id="quickAnalysisCampaignId" required>
-              <div id="QC_error-message" style="display: none; color: red;"></div>
             </div>
             
             <div class="form-group">
@@ -334,8 +329,15 @@
 
             <div class="form-group">
               <label for="campaignstatus">Campaign Status:</label>
-              <input type="text" class="form-control" id="campaignstatus" required>
-              <div id="S_error-message" style="display: none; color: red;"></div>
+              <select class="form-control" id="campaignstatus" required>
+                <option value="Select Campaign Status">Select Campaign Status</option>
+                <option value="Live">Live</option>
+                <option value="In Analysis">In Analysis</option>
+                <option value="Pending Approval">Pending Approval</option>
+                <option value="Analysis Completed">Analysis Completed</option>
+                <!--<option value="Paused">Paused</option> -->
+                <!--<option value="Resubmitted for Analysis">Resubmitted for Analysis</option> -->
+              </select>
             </div>
 
             
@@ -398,7 +400,6 @@
  // Form validation and keypress restrictions
 const keywordInput = document.getElementById('keywordname');
 const CInput = document.getElementById('campaignId');
-const QInput = document.getElementById('quickAnalysisCampaignId');
 const BInput = document.getElementById('businessGMB');
 const SInput = document.getElementById('campaignstatus');
 
@@ -477,10 +478,7 @@ addKeyPressListener(keywordInput, /^[a-zA-Z0-9-_]*$/, 'error-message', 'Only alp
 addInputListener(keywordInput, /^[a-zA-Z0-9-_]{1,200}$/, 'error-message', 'Keyword Name must be alphanumeric, "-", and "_" only, with a max length of 200 characters.', 1, 200);
 
 addKeyPressListener(CInput, /^[0-9]*$/, 'C_error-message', 'Please enter numeric values only.');
-addInputListener(CInput, /^[0-9]*$/, 'C_error-message', 'Campaign ID must be numeric with a minimum of 6 characters.', 6);
-
-addKeyPressListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Please enter numeric values only.');
-addInputListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Quick Analysis Campaign ID must be numeric with a minimum of 6 characters.', 6);
+addInputListener(CInput, /^[0-9]*$/, 'C_error-message', 'ID must be numeric with a minimum of 6 characters.', 6);
 
 addKeyPressListener(BInput, /^[0-9]*$/, 'B-error-message', 'Please enter numeric values only.');
 addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be exactly 21 numeric characters.', 21, 21);
@@ -509,7 +507,6 @@ addInputListener(SInput, /^[a-zA-Z]{1,50}$/, 'S_error-message', 'Campaign Status
 
     // Get form values
     var campaignId = $("#campaignId").val();
-    var quickAnalysisCampaignId = $("#quickAnalysisCampaignId").val();
     var businessCId = $("#businessGMB").val();
     var keywordname = $("#keywordname").val();
     var campaignstatus = $("#campaignstatus").val();
@@ -524,7 +521,6 @@ addInputListener(SInput, /^[a-zA-Z]{1,50}$/, 'S_error-message', 'Campaign Status
       type: "post",
       data: {
         'C_id': campaignId,
-        'Q_id': quickAnalysisCampaignId,
         'K_id': keywordname,
         'B_id': businessCId,
         'C_St': campaignstatus,

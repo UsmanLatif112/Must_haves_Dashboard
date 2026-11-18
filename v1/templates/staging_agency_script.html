@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Agency API</title>
+  <title>Agency API Staging</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- Additional styles and scripts here -->
-  <!-- Bootstrap CSS for modal -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- Bootstrap JS for modal -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
   <style>
     .container{
       margin: auto;
@@ -271,8 +272,10 @@
     </style>
 </head>
 <body>
+  
+
 <div id="header">
-  <h1 >Agency API Must Have</h1>
+  <h1 >Agency API Staging Must Have</h1>
     <div class="dropdown">
       <i class="fa fa-user" style="margin-right: 25px; font-size: 24px; color: #ffffff;"></i>
       <div class="dropdown-content">
@@ -284,7 +287,7 @@
 
 <!-- Breadcrumb navigation -->
 <div class="breadcrumb">
-  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/Agency_api">Agency API</a>&nbsp;>&nbsp;<a href="#">On Staging</a>
+  <a href="javascript:void(0);" onclick="goBack()">Homepage</a>&nbsp;>&nbsp;<a href="/Agency_api">Agency API </a>&nbsp;>&nbsp;<a href="#">Staging Agency API</a> 
 </div>
 <div class="container">
 <div class="d-flex justify-content-end ">
@@ -308,14 +311,9 @@
           <form id="campaignIdForm">
             
             <div class="form-group">
-              <label for="campaignId">Campaign ID:</label>
+              <label for="campaignId">Any ID to make user unique:</label>
               <input type="text" class="form-control" id="campaignId" required>
               <div id="C_error-message" style="display: none; color: red;"></div>
-            </div>
-            <div class="form-group">
-              <label for="quickAnalysisCampaignId">Quick Analysis Campaign ID:</label>
-              <input type="text" class="form-control" id="quickAnalysisCampaignId" required>
-              <div id="QC_error-message" style="display: none; color: red;"></div>
             </div>
             
             <div class="form-group">
@@ -328,6 +326,21 @@
               <input type="text" class="form-control" id="keywordname" required>
               <div id="error-message" style="display: none; color: red;"></div>
             </div>
+
+            <div class="form-group">
+              <label for="campaignstatus">Campaign Status:</label>
+              <select class="form-control" id="campaignstatus" required>
+                <option value="Select Campaign Status">Select Campaign Status</option>
+                <option value="Live">Live</option>
+                <option value="In Analysis">In Analysis</option>
+                <option value="Pending Approval">Pending Approval</option>
+                <option value="Analysis Completed">Analysis Completed</option>
+                <!--<option value="Paused">Paused</option> -->
+                <!--<option value="Resubmitted for Analysis">Resubmitted for Analysis</option> -->
+              </select>
+            </div>
+
+            
             <button type="submit" class="btn btn-info" style="border-radius: 15px;">Run Script</button>
           </form>
         </div>
@@ -339,9 +352,6 @@
 
 <div id="results" style="margin-bottom: 50px; font-size: 12px;">
   <table id="results-table">
-    <!-- Empty row for spacing -->
-
-          <!--<tr><td colspan="10" style="height: 20px; background: transparent;"></td></tr>-->
       <thead style="font-size: 13px;">
           <tr>
               <th class="desc">Description</th>
@@ -387,8 +397,8 @@
  // Form validation and keypress restrictions
 const keywordInput = document.getElementById('keywordname');
 const CInput = document.getElementById('campaignId');
-const QInput = document.getElementById('quickAnalysisCampaignId');
 const BInput = document.getElementById('businessGMB');
+const SInput = document.getElementById('campaignstatus');
 
 // Function to show error messages
 function showError(message, errorId) {
@@ -465,14 +475,13 @@ addKeyPressListener(keywordInput, /^[a-zA-Z0-9-_]*$/, 'error-message', 'Only alp
 addInputListener(keywordInput, /^[a-zA-Z0-9-_]{1,200}$/, 'error-message', 'Keyword Name must be alphanumeric, "-", and "_" only, with a max length of 200 characters.', 1, 200);
 
 addKeyPressListener(CInput, /^[0-9]*$/, 'C_error-message', 'Please enter numeric values only.');
-addInputListener(CInput, /^[0-9]*$/, 'C_error-message', 'Campaign ID must be numeric with a minimum of 6 characters.', 6);
-
-addKeyPressListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Please enter numeric values only.');
-addInputListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Quick Analysis Campaign ID must be numeric with a minimum of 6 characters.', 6);
+addInputListener(CInput, /^[0-9]*$/, 'C_error-message', 'ID must be numeric with a minimum of 6 characters.', 6);
 
 addKeyPressListener(BInput, /^[0-9]*$/, 'B-error-message', 'Please enter numeric values only.');
 addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be exactly 21 numeric characters.', 21, 21);
 
+addKeyPressListener(SInput, /^[a-zA-Z]*$/, 'S_error-message', 'Only alphabetic characters are allowed.');
+addInputListener(SInput, /^[a-zA-Z]{1,50}$/, 'S_error-message', 'Campaign Status must be alphabetic only, with a max length of 50 characters.', 1, 50);
 
   // Functions to display and clear error messages
   function showError(message, id) {
@@ -495,7 +504,6 @@ addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be
 
     // Get form values
     var campaignId = $("#campaignId").val();
-    var quickAnalysisCampaignId = $("#quickAnalysisCampaignId").val();
     var businessCId = $("#businessGMB").val();
     var keywordname = $("#keywordname").val();
     var campaignstatus = $("#campaignstatus").val();
@@ -510,9 +518,9 @@ addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be
       type: "post",
       data: {
         'C_id': campaignId,
-        'Q_id': quickAnalysisCampaignId,
         'K_id': keywordname,
         'B_id': businessCId,
+        'C_St': campaignstatus,
       },
       success: function(response) {
         // Handle success
@@ -523,7 +531,7 @@ addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be
 
         // Hide alert and close modal
         $('.alert').hide(); // Assuming your alert has a class 'alert'
-        $('#uploadDataModal').modal('hide'); // Close the modal with ID 'uploadDataModal'
+         // Close the modal with ID 'uploadDataModal'
         
         // Optional: Redirect to another page or update content
         window.location.href = "/staging_agency_script"; 
@@ -558,7 +566,7 @@ addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "Umbrella_Agency_API_must_haves_report.csv");
+    link.setAttribute("download", "Agency_API_must_haves_report_Staging.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -607,14 +615,14 @@ addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be
       }
     });
   }
-   // Check if the "No data available" row is present
-   const noDataRow = document.getElementById('no-data-row');
-   const downloadButton = document.getElementById('download-button');
-   
-   if (noDataRow) {
-       downloadButton.disabled = true;
-       downloadButton.style.cursor = 'not-allowed'; // Optional: change cursor to indicate the button is disabled
-   }
+  // Check if the "No data available" row is present
+  const noDataRow = document.getElementById('no-data-row');
+  const downloadButton = document.getElementById('download-button');
+  
+  if (noDataRow) {
+      downloadButton.disabled = true;
+      downloadButton.style.cursor = 'not-allowed'; // Optional: change cursor to indicate the button is disabled
+  }
 </script>
 
 </body>

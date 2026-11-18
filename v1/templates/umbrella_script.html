@@ -309,16 +309,10 @@
           <form id="campaignIdForm">
             
             <div class="form-group">
-              <label for="campaignId">Campaign ID:</label>
+              <label for="campaignId">Any ID to make user unique:</label>
               <input type="text" class="form-control" id="campaignId" required>
               <div id="C_error-message" style="display: none; color: red;"></div>
             </div>
-            <div class="form-group">
-              <label for="quickAnalysisCampaignId">Quick Analysis Campaign ID:</label>
-              <input type="text" class="form-control" id="quickAnalysisCampaignId" required>
-              <div id="QC_error-message" style="display: none; color: red;"></div>
-            </div>
-            
             <div class="form-group">
               <label for="businessGMB">Business GMB CID:</label>
               <input type="text" class="form-control" id="businessGMB" required>
@@ -388,7 +382,7 @@
   // Form validation and keypress restrictions
 const keywordInput = document.getElementById('keywordname');
 const CInput = document.getElementById('campaignId');
-const QInput = document.getElementById('quickAnalysisCampaignId');
+
 const BInput = document.getElementById('businessGMB');
 
 
@@ -467,10 +461,7 @@ addKeyPressListener(keywordInput, /^[a-zA-Z0-9-_]*$/, 'error-message', 'Only alp
 addInputListener(keywordInput, /^[a-zA-Z0-9-_]{1,200}$/, 'error-message', 'Keyword Name must be alphanumeric, "-", and "_" only, with a max length of 200 characters.', 1, 200);
 
 addKeyPressListener(CInput, /^[0-9]*$/, 'C_error-message', 'Please enter numeric values only.');
-addInputListener(CInput, /^[0-9]*$/, 'C_error-message', 'Campaign ID must be numeric with a minimum of 6 characters.', 6);
-
-addKeyPressListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Please enter numeric values only.');
-addInputListener(QInput, /^[0-9]*$/, 'QC_error-message', 'Quick Analysis Campaign ID must be numeric with a minimum of 6 characters.', 6);
+addInputListener(CInput, /^[0-9]*$/, 'C_error-message', 'ID must be numeric with a minimum of 6 characters.', 6);
 
 addKeyPressListener(BInput, /^[0-9]*$/, 'B-error-message', 'Please enter numeric values only.');
 addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be exactly 21 numeric characters.', 21, 21);
@@ -498,10 +489,8 @@ addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be
 
     // Get form values
     var campaignId = $("#campaignId").val();
-    var quickAnalysisCampaignId = $("#quickAnalysisCampaignId").val();
     var businessCId = $("#businessGMB").val();
     var keywordname = $("#keywordname").val();
-    var campaignstatus = $("#campaignstatus").val();
 
     // Start the loader
     $('#uploadDataModal').modal('hide');
@@ -513,7 +502,6 @@ addInputListener(BInput, /^[0-9]{21}$/, 'B-error-message', 'Business GMB must be
       type: "post",
       data: {
         'C_id': campaignId,
-        'Q_id': quickAnalysisCampaignId,
         'K_id': keywordname,
         'B_id': businessCId,
       },

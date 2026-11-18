@@ -1,7 +1,3 @@
-
-
-
-
 import csv, json
 import time
 import requests
@@ -34,7 +30,7 @@ from flask import  request
 
 from typing import List
 from datetime import date
-import time, csv, pyautogui, random
+import time, csv, random
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -49,6 +45,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+
 import random, time
 
 

@@ -1,93 +1,51 @@
 import requests
 import csv
 from csv import reader
-import time
+import time,tokenapi
 from flask import  request
-def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keywordname_id):
-    # Retrieve the campaign_id from the form data
-    # campaign_idd = request.form.get("campaign_id")
-    Piroty_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNdXp6YW1pbHBfMyIsIlRPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKTmRYcDZZVzFwYkhCZk15SXNJbk5qYjNCbGN5STZXMTBzSW1sa0lqb3lNREkxTENKbGVIQWlPakUzTWpRMU9EVTFOamQ5LmNiQ3BfekEtakhXdlowOHREX3BkMVhBUFFoQTdxaW1jQ1hHa2ExeGdGbnciLCJleHAiOjIwMzc3ODU1Njd9.0zlzO6p6TtRAax9bnAz1lEudAYbSfuLZGt87YG_PEQo"
+from datetime import date
+
+today = date.today().strftime("%Y-%m-%d")
+
+campaign_id_placeholder = None
+campaign_id_placeholderr = None
+campaign_id_placeholdertt = None
+campaign_id_placeholdedgrid = None
+def init_the_testing(campaign_id, business_id , keywordname_id):
+    Piroty_token = tokenapi.role_id3_manageruser
     Campaign_IDd = str(campaign_id)
-    Quick_Camp_Id = str(quick_analysis_campaign_id)
     business_CID_Id = str(business_id)
-    keywordname_Id = str(keywordname_id)
+    keywordname_Id = str(keywordname_id).lower()
+    Campaign_StatuSs = "Live"
     # ======================================
     auth_token = Piroty_token
     # ======================================
-    id = f'{Campaign_IDd}'
-    
-    idD = str(f'{Campaign_IDd}')
-    # ================================================
-    Quick_Camp_IDD = f'{Quick_Camp_Id}'
-    # Campaign ID which is deleted firs
-    # ================================================
-
-    # Campaign ID which is deleted first in delete api and get single campaign data with campaign id.
-
-    Campaign_ID = f"{id}"
-
-    # Campaign IDd which is used for other apis in which we need campaign id to get data
-    # (API must have for get data)
-
-    Campaign_IDd = "21637" 
-
-    # Campaign IDdd which is used to add 8th keyword in campaign already having 7 keywords
+    Campaign_StatuS = f'{Campaign_StatuSs}'
     # (API must have for 8 key)
-
-    Campaign_IDdd = "21641"
-
-    # Campaign IDdr which is used to delete last keyword of campaign
+    Campaign_ITd = "48366" #use able41665
     # (API must have for last key)
-
-    Campaign_IDdr = "21640"
-
-    # Campaign IDdt which is used to deauthorize business.
+    Campaign_IFrf = "48367" #use able
     # (API must have Business Auth)
-
-    Campaign_IDdt = "20861"
-    
-    # Campaign IDdt which is used to deauthorize business.
-    # (API must have Business Auth)
-    
-    Campaign_IDde = "20861"
-    
-    # Campaign id to get pdf of live campaign
-    Campaign_IDdee = "15315"
-
-    # Client id is used to get client api
-
-    Quick_Camp_ID = Quick_Camp_Id
-    
-    Client_id = "1050"
-
-    # Keyword which is used to create keyword add keyword or delete keyword
-
-    # Keyword_new = f"apimust{id}"
-    Keyword_new = f"{keywordname_Id}"
-    
+    Campaign_IHrt = "41706" #use able
+    Client_id = "4815"
+    Keyword_neww = f"{keywordname_Id}new"
     # Client name which is used to create new client
-
-    Client_Name_New = f"-AI-TEST-apimust{id}"
-
-    # ================================================
-
-    user_idd = "500",
-    business_CID = f"{business_CID_Id}"
-    cam_namee = f"-AI-TEST-QuickCam{id}"
-    keywords_for_analysiss = f"{keywordname_Id}"
-                        
-                        
-    user_name = f"-AI-TEST-Apimust{id}"
-    email = f"Apimust12{id}@gmail.com"
+    Client_Name_New = f"-AI-TEST-apimust{Campaign_IDd}"
+    # ================================================                    
+    user_name = f"-AI-TEST-AApimust23{Campaign_IDd}"
+    email = f"Apimust12{Campaign_IDd}@gmail.com"   
     password =  "Usman@112"
-    
     # data which is used to create new campaign
-
-    User_id = "500"
+    # data which is used to create new campaign
+    User_id = "4440"
     business_gmb_CID = f"{business_CID_Id}"
-    Campaign_name = f"API must haves 23{id}"
+    Campaign_name = f"-AI-TEST-API must haves 23{Campaign_IDd}25"
     Client_name = "-AI-TEST-APITEST0026"
     keywords_for_analysis = f"{keywordname_Id}"
+    
+    project_name = f"-AI-TEST-API must haves project{Campaign_IDd}"
+    Grid_Campaign_name = f"-AI-TEST-API must haves{Campaign_IDd}Grid"
+    Grid_Campaign_name_Edit = f"-AI-TEST-API must haves{Campaign_IDd}Grid_Edit"
     # ======================================
     api_list = []
     # ======================================
@@ -135,10 +93,15 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
     # ======================================
     # Initialize the response codes dictionary
     response_codes_dict = {}
+    response_storage = {} 
     
     # Function to hit the APIs and save results in a CSV file
+    # Function to hit the APIs and save results in a CSV file
     def hit_apis_and_save_results(api_list, auth_token, csv_filename):
-        # with open(csv_filename, 'w', newline='') as csvfile:
+        global campaign_id_placeholder 
+        global campaign_id_placeholderr
+        global campaign_id_placeholdertt
+        global campaign_id_placeholdedgrid
         with open(csv_filename, "w", newline="", encoding="utf-8") as csvfile:
             # writer = csv.writer(csvfile)
             writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
@@ -156,14 +119,15 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     "Response Data Result",
                 ]
             )
-            # writer.writerow(['\n'])
 
-            # Iterate over each API in the list
             for api in api_list:
                 description = api.get("description", "No description provided")
                 url = api["url"]
                 method = api["method"]
                 params = api["params"]
+                if params and ("campaign_id" in params):
+                    
+                    params['campaign_id'] = campaign_id_placeholder
 
                 headers = {
                     "Authorization": f"Bearer {auth_token}",
@@ -171,40 +135,83 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                 }
 
                 try:
-                    # Print the API description
-                    print("==============================================")
-                    print("   ")
-                    print(f"API Description: {description}")
-
-                    # Make the API request
+                    print(f"\nAPI Description: {description}\n")
                     start_time = time.time()
 
-                    response = requests.request(
-                        method, url, json=params, headers=headers
-                    )
+                    response = requests.request(method, url, json=params, headers=headers)
                     response_code = response.status_code
                     response_time = time.time() - start_time
-
                     response_message = custom_error_messages.get(response_code, "")
-                    if not response_code == 204:
-                        response_data = (
-                            response.json()
-                            if response.headers.get("content-type") == "application/json"
-                            else response.text
-                        )
-                    else:
-                        response_data = (
-                            'This API does not return a response body for status code %s.'
-                            % str(response_code)
-                            if response.headers.get("content-type") == "application/json"
-                            else response.text
-                        )
-                    # response_data = (
-                    #     response.json()
-                    #     if response.headers.get("content-type") == "application/json"
-                    #     else response.text
-                    # )
 
+                    # Handle different response types
+                    if response_code == 204:
+                        response_data = f"This API does not return a response body for status code {response_code}."
+                    else:
+                        response_data = response.json() if "application/json" in response.headers.get("content-type", "") else response.text
+
+                    # Store API response for future use
+                    response_storage[description] = response_data
+
+                    # Extract campaign ID dynamically
+                    if description == "Create campaign with correct data" and response_code == 201:
+                        created_campaign_id = response_data.get("campaign_id") 
+                        
+                        campaign_id_placeholder = created_campaign_id
+
+                        if created_campaign_id:
+                            print(f"Extracted campaign_id: {created_campaign_id}")
+                            for next_api in api_list:
+                                if "campaign_id_placeholder" in next_api["url"]:
+                                    next_api["url"] = next_api["url"].replace("campaign_id_placeholder", str(created_campaign_id))
+                   
+                   
+                   # Extract campaign ID dynamically
+                    if description == "Create Quick Analysis Campaign with correct data" and response_code == 201:
+                        created_campaignn_id = response_data.get("campaign_id") 
+                        
+                        campaign_id_placeholded = created_campaignn_id
+
+                        if created_campaignn_id:
+                            print(f"Extracted campaign_id: {created_campaignn_id}")
+                            for next_api in api_list:
+                                if "campaign_id_placeholded" in next_api["url"]:
+                                    next_api["url"] = next_api["url"].replace("campaign_id_placeholded", str(created_campaignn_id))
+
+                    response_result = "Pass" if response_code in [200, 201, 202] else "Fail"
+                    
+                    
+                    # Extract campaign ID dynamically
+                    if description == "Create New Grid tracking Campaign" and response_code == 201:
+                        created_campaignn_id = response_data.get("campaign_id") 
+                        
+                        campaign_id_placeholdedgrid = created_campaignn_id
+
+                        if created_campaignn_id:
+                            print(f"Extracted campaign_id: {created_campaignn_id}")
+                            for next_api in api_list:
+                                if "campaign_id_placeholdedgrid" in next_api["url"]:
+                                    next_api["url"] = next_api["url"].replace("campaign_id_placeholdedgrid", str(created_campaignn_id))
+
+                    response_result = "Pass" if response_code in [200, 201, 202] else "Fail"
+                    
+                    # Extract project ID dynamically from Create New Grid tracking project
+                    if description == "Create New Grid tracking project" and response_code == 201:
+                        created_project_id = response_data.get("id")
+                        campaign_id_placeholdertt = created_project_id
+
+                        if created_project_id:
+                            print(f"✅ Extracted project_id: {created_project_id}")
+                            
+                            # Update the next API params dynamically
+                            for next_api in api_list:
+                                if next_api["description"] in [
+                                    "Create New Grid tracking Campaign",
+                                    "Create New Grid tracking Campaign with incorrect user id",
+                                    "Create New Grid tracking Campaign with incorrect GMB CID"
+                                ]:
+                                    next_api["params"]["project_id"] = created_project_id
+                                    print(f"🔗 Injected project_id {created_project_id} into {next_api['description']} params")
+                                                        
                     # Determine the result based on response data
                     if response_data == {
                         "items": [],
@@ -221,570 +228,902 @@ def init_the_testing(campaign_id, quick_analysis_campaign_id, business_id , keyw
                     )
                     # Write the results to the CSV file
                     response_data = str(response_data).replace('"', ";")
-
+                    
+                    
                     writer.writerow(
-                        [
-                            description,
-                            url,
-                            method,
-                            response_code,
-                            result_according_to_response_code,
-                            response_time,
-                            response_message,
-                            f'"{response_data}"',
-                            f'"{params}"',
-                            response_result,
-                        ]
-                    )
-
+                            [
+                                description,
+                                url,
+                                method,
+                                response_code,
+                                result_according_to_response_code,
+                                response_time,
+                                response_message,
+                                f'"{response_data}"',
+                                f'"{params}"',
+                                response_result,
+                            ]
+                        )
                     # Print the results in the terminal
-                    print(
-                        f"API: {url}, Method: {method}, Response Code: {response_code}, Result (according to response code): {result_according_to_response_code}, "
-                        f"Response Time: {response_time:.2f}, Response Message: {response_message}, Response Data: {response_data},Payload Data: {params}, Response Data Result: {response_result}"
-                    )
-
-                    # Wait for 1 second before the next API hit
-                    time.sleep(1)
+                    # print(
+                    #     f"API: {url}, Method: {method}, Response Code: {response_code}, Result (according to response code): {result_according_to_response_code}, "
+                    #     f"Response Time: {response_time:.2f}, Response Message: {response_message}, Response Data: {response_data},Payload Data: {params}, Response Data Result: {response_result}"
+                    # )
+                    print("===================================")    
+                    print("         ")
+                    print(f"API: {url}, Response Code: {response_code}, Response Data: {response_data}")
+                    print("===================================") 
+                    print("        ")
+                    time.sleep(2)  
 
                 except Exception as e:
-                    print("==============================================")
-                    print("   ")
-                    print(
-                        f"Error occurred while processing API: {url}, Method: {method}, Error: {e}"
-                    )
-
-            print("==============================================")
-            print("   ")
-            print("API hits completed.")
-
-    # Call the function to hit the APIs and save the results
-    hit_apis_and_save_results(api_list, auth_token, "umbrella_API_result.csv")
-
-    # =====================================================================================
-    # For example, let's assume your script's function is `hit_apis_and_save_results`
-    auth_token = Piroty_token
+                    print(f"Error while processing API: {url}, Error: {e}")
+        print("===================================")    
+        print("         ")
+        print("API execution completed.")
+        print("         ")
+        print("===================================")    
+        return response_storage  
     api_list = [
-        #  ====//// == Agency API == ////=======
-    
-            {
-                "description": "Create User with correct data (Only managers for the Umbrella Agency are created by admin role considering swagger is shared with it exclusively)",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": user_name,
-                        "email": email,
-                        "password": password
-                    },
-            },
-            
-            {
-                "description": "Create User with same username",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": user_name,
-                        "email": email,
-                        "password": password
-                    },
-            },
-            
-            {
-                "description": "Create User with same email",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name",
-                        "email": email,
-                        "password": password
-                    },
-            },
-            
-            {
-                "description": "Create User with special charcter in Username",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name@@",
-                        "email": "apimusthavestest10987@gmail.com",
-                        "password": password
-                    },
-            },
-            
-            {
-                "description": "Create User with incorrect email format",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name120",
-                        "email": "api 10987@gmail.com",
-                        "password": password
-                    },
-            },
-            
-            {
-                "description": "Create User with incorrect password",
-                "url": "https://agency.brandsignals.io/users/create_user/",
-                "method": "POST",
-                "params":
-                    {
-                        "user_name": "-AI-TEST-user_name1201",
-                        "email": "api10987@gmail.com",
-                        "password": "Usman"
-                    },
-            },
-            
-            {
-                "description": "Get all User list (Admin role gets the list of all users considering swagger is shared with it only)",
-                "url": f"https://agency.brandsignals.io/users/list/",
-                "method": "GET",
-                "params": None
-            },
-            
-            {
-                "description": "Get SS0 link of user with correct data (Admin role generates SSO links for users considering swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
+            #  ====//// == Agency API == ////=======
+        
+                {
+                    "description": "Create User with correct data",
+                    "url": "https://agency.beyondlocal.ai/users/create_user/",
+                    "method": "POST",
+                    "params":
                         {
-                        "user_name": "Aimalraza_22",
-                        "password": "Aimal@11"
-                        }
-            },
-            
-            {
-                "description": "Get SSO link of user with incorrect username",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
+                            "user_name": user_name,
+                            "email": email,
+                            "password": password
+                        },
+                },
+                
+                {
+                    "description": "Create User with same username",
+                    "url": "https://agency.beyondlocal.ai/users/create_user/",
+                    "method": "POST",
+                    "params":
                         {
-                        "user_name": "Aimalraza_",
-                        "password": "Aimal@11"
-                        }
-            },
-            
-            {
-                "description": "Get SSO link of user with incorrect password",
-                "url": f"https://agency.brandsignals.io/users/login_link/",
-                "method": "POST",
-                "params": 
+                            "user_name": user_name,
+                            "email": email,
+                            "password": password
+                        },
+                },
+                
+                {
+                    "description": "Create User with same email",
+                    "url": "https://agency.beyondlocal.ai/users/create_user/",
+                    "method": "POST",
+                    "params":
                         {
-                        "user_name": "Aimalraza_22",
-                        "password": "Usman@1"
+                            "user_name": "-AI-TEST-user_name",
+                            "email": email,
+                            "password": password
+                        },
+                },
+                
+                {
+                    "description": "Create User with special charcter in Username",
+                    "url": "https://agency.beyondlocal.ai/users/create_user/",
+                    "method": "POST",
+                    "params":
+                        {
+                            "user_name": "-AI-TEST-user_name@@",
+                            "email": "apimusthavestest10987@gmail.com",
+                            "password": password
+                        },
+                },
+                
+                {
+                    "description": "Create User with incorrect email format",
+                    "url": "https://agency.beyondlocal.ai/users/create_user/",
+                    "method": "POST",
+                    "params":
+                        {
+                            "user_name": "-AI-TEST-user_name120",
+                            "email": "api 10987@gmail.com",
+                            "password": password
+                        },
+                },
+                
+                {
+                    "description": "Create User with incorect password",
+                    "url": "https://agency.beyondlocal.ai/users/create_user/",
+                    "method": "POST",
+                    "params":
+                        {
+                            "user_name": "-AI-TEST-user_name1201",
+                            "email": "api10987@gmail.com",
+                            "password": "Usman"
+                        },
+                },
+                
+                {
+                    "description": "Get all User list",
+                    "url": f"https://agency.beyondlocal.ai/users/list/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                {
+                    "description": "Get SS0 link of user with correct data",
+                    "url": f"https://agency.beyondlocal.ai/users/login_link/",
+                    "method": "POST",
+                    "params": 
+                            {
+                            "user_name": "aitest-agency-api-admin",
+                            "password": "lWaBC47yRkW4!ai4"
+                            }
+                },
+                
+                {
+                    "description": "Get SSO link of user with incorrect username",
+                    "url": f"https://agency.beyondlocal.ai/users/login_link/",
+                    "method": "POST",
+                    "params": 
+                            {
+                            "user_name": "Aimalraza_",
+                            "password": "Aimal@11"
+                            }
+                },
+                
+                {
+                    "description": "Get SOS link of user with incorrect password",
+                    "url": f"https://agency.beyondlocal.ai/users/login_link/",
+                    "method": "POST",
+                    "params": 
+                            {
+                            "user_name": "Aimalraza_22",
+                            "password": "Usman@1"
+                            }
+                },
+                
+                # # =============================================================
+                
+                {
+                    "description": "Create Client",
+                    "url": "https://agency.beyondlocal.ai/client/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                            "client_name": Client_Name_New
+                            }
+                },
+                {
+                    "description": "Create client with already created client name",
+                    "url": "https://agency.beyondlocal.ai/client/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                            "client_name": Client_Name_New
+                            }
+                },
+                
+                # # # # ======================================
+                
+                {
+                    "description": "Get client by providing client ID",
+                    "url": f"https://agency.beyondlocal.ai/client/{Client_id}/",
+                    "method": "GET",
+                    "params": None
+                },
+                {
+                    "description": "Get client by providing incorrect client ID",
+                    "url": f"https://agency.beyondlocal.ai/client/128/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                # # ======================================
+                
+                {
+                    "description": "Get list of all clients",
+                    "url": f"https://agency.beyondlocal.ai/client/clients/list/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                # # # # # =========================================
+                
+                {
+                    "description": "Create campaign with correct data",
+                    "url": "https://agency.beyondlocal.ai/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "campaign_type": "normal",
+                        "user_id": User_id,
+                        "business_gmb_cid": business_gmb_CID,
+                        "campaign_name": Campaign_name,
+                        "client_name": Client_name,
+                        "keywords_for_analysis": keywords_for_analysis,
+                        "grid_type": 7,
+                        "grid_distance": 1
                         }
-            },
-            
-            # # # # # =========================================
-            
-            {
-                "description": "Create campaign with correct data(Admin role is capable of creating campaigns with respect to manager considering swagger is shared with it only)",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            
-            {
-                "description": "Create campaign with incorrect user id",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": 143789,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            
-            {
-                "description": "Create campaign with incorrect GMB CID",
-                "url": "https://agency.brandsignals.io/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": "98649953187944340729864995318",
-                    "campaign_name": Campaign_name,
-                    "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            
-            
-            # # # # # # =============================================================
-            
-            {
-                "description": "Get campaign by providing campaign ID (Admin role retrieves campaign information by ID considering swagger is shared with it only)",
-                "url": f"https://agency.brandsignals.io/campaigns/{Campaign_IDd}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get campaign by providing incorrect campaign ID",
-                "url": "https://agency.brandsignals.io/campaigns/177/",
-                "method": "GET",
-                "params": None
-            },
-            
-            
-            # # # # # # =============================================================
-            
-            {
-                "description": "Get list of all campaigns (Only Role id 2 will be able to get campaigns as Swagger is shared with only role id 2)",
-                "url": "https://agency.brandsignals.io/campaigns/list/all/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # =============================================================
-            
-            {
-                "description": "Delete campaign by providing campaign ID(Admin role has the authority to delete campaigns by ID considering swagger is shared with it only)",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            {
-                "description": "Delete campaign by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/1289/",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            {
-                "description": "Delete campaign by providing already deleted campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/delete/{Campaign_ID}/",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            # # =============================================================
-            
-            {
-                "description": "Create Client (Admin role has the privilege to create clients under the umbrella agency considering swagger is shared with it only)",
-                "url": "https://agency.brandsignals.io/client/create/",
-                "method": "POST",
-                "params":
-                    {
-                        "client_name": Client_Name_New
+                },
+                {
+                    "description": "Create campaign with incorrect user id",
+                    "url": "https://agency.beyondlocal.ai/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "campaign_type": "normal",
+                        "user_id": 143789,
+                        "business_gmb_cid": business_gmb_CID,
+                        "campaign_name": Campaign_name,
+                        "client_name": Client_name,
+                        "keywords_for_analysis": keywords_for_analysis,
+                        "grid_type": 7,
+                        "grid_distance": 1
                         }
-            },
-            {
-                "description": "Create client with already created client name",
-                "url": "https://agency.brandsignals.io/client/create/",
-                "method": "POST",
-                "params":
-                    {
-                        "client_name": Client_Name_New
+                },
+                
+                {
+                    "description": "Create campaign with incorrect GMB CID",
+                    "url": "https://agency.beyondlocal.ai/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "campaign_type": "normal",
+                        "user_id": User_id,
+                        "business_gmb_cid": "98649953187944340729864995318",
+                        "campaign_name": Campaign_name,
+                        "client_name": Client_name,
+                        "keywords_for_analysis": keywords_for_analysis,
+                        "grid_type": 7,
+                        "grid_distance": 1
                         }
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get client by providing client ID ( Admin role can obtain client details by ID considering swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/client/{Client_id}/",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get client by providing incorrect client ID",
-                "url": f"https://agency.brandsignals.io/client/128/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # ======================================
-            
-            {
-                "description": "Get list of all clients (Admin role can view all clients considering swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/client/clients/list/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of all Geo Gifs URLs",
-                "url": "https://agency.brandsignals.io/geo/gifs/urls/list/",
-                "method": "GET",
-                "params":
-                    {
-                    "Page": 1,
-                    "Size": 50
-                    }   
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of Geo Gifs URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/{Campaign_IDd}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/gifs/urls/campaign/1205",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # # ======================================
-            
-            {
-                "description": "Get list of all Geo Grids URLs",
-                "url": "https://agency.brandsignals.io/geo/grid/urls/list/all/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # ======================================
-            
-            
-            {
-                "description": "Get list of Geo Grids URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/{Campaign_IDd}/",
-                "method": "GET",
-                "params": None
-            },
-            
-            {
-                "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/1496/",
-                "method": "GET",
-                "params": None
-            },
-            
-            # # # ======================================
-            
-            {
-                "description": "Get list of latest Grids URLs by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/{Campaign_IDd}",
-                "method": "GET",
-                "params": None
-            },
-            
-            {
-                "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/geo/grid/urls/latest/8573",
-                "method": "GET",
-                "params": None
-            },
-           
-            
-            # # ======================================
-            
-            {
-                "description": "Deauthroize business by providing campaign ID ( Admins can deauthorize business by campaign ID as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Deauthroize business which is already deauthroize by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdt}",
-                "method": "GET",
-                "params": None
-            },
-            {
-                "description": "Deauthroize business by providing incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/campaigns/business/deauthorization/{Campaign_IDdr}",
-                "method": "GET",
-                "params": None
-            }, 
-            
-            
-            # ======================================
-            
-            {
-                "description": "Get Reporting PDF with correct Campaign ID (Admins generate reporting PDFs for campaigns considering swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/{Campaign_IDdee}",
-                "method": "GET",
-                "params":None
-            },
-            
-            {
-                "description": "Get Reporting PDF with Incorrect Campaign ID",
-                "url": f"https://agency.brandsignals.io/reporting/pdf/789456123",
-                "method": "GET",
-                "params":None
-            },
-            
-            # # ======================================
-            {
-                "description": "Create Quick Analysis Campaign with correct data (Admin role can create Quick Analysis Campaigns as swagger is shared with it only.)",
-                "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            # # ======================================
-            {
-                "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
-                "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": User_id,
-                    "business_gmb_cid": 159753456978634159494945642368,
-                    "campaign_name": Campaign_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            # # ======================================
-            {
-                "description": "Create Quick Analysis Campaign with Inccorrect User ID",
-                "url": "https://agency.brandsignals.io/quick_analysis/campaigns/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "user_id": 798456,
-                    "business_gmb_cid": business_gmb_CID,
-                    "campaign_name": Campaign_name,
-                    "keywords_for_analysis": keywords_for_analysis
-                    }
-            },
-            
-            # # # ======================================
-            
-            {
-                "description": "Get list of Quick Analysis Campaign with correct campaign ID (Admins retrieve Quick Analysis Campaign details by ID as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/{Quick_Camp_ID}/",
-                "method": "GET",
-                "params": None
-            },
-            
-            {
-                "description": "Get list of Quick Analysis Campaign with Incorrect campaign ID",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/741528/",
-                "method": "GET",
-                "params": None
-            },
-            
-            {
-                "description": "Get list of all Quick Analysis Campaigns (Admin role can view all Quick Analysis Campaigns as swagger is shared with it only.)",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/list/all/",
-                "method": "GET",
-                "params": None
-            },
-            
-            {
-                "description": "Delete Quick Analysis Campaigns with campaign id (Admins are authorized to delete Quick Analysis Campaigns by ID as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/{Quick_Camp_Id}/",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            {
-                "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
-                "url": f"https://agency.brandsignals.io/quick_analysis/campaigns/delete/978456185/",
-                "method": "DELETE",
-                "params": None
-            },
-            
-             
-            # # ======================================
-            {
-                "description": "Get list of keywords suggestions for a business by providing CID",
-                "url": f"https://agency.brandsignals.io/keyword/suggestions/{business_gmb_CID}/",
-                "method": "GET",
-                "params":None
-            },
-            
-            {
-                "description": "Add keyword in campaign by providing campaign id (Admins add keywords to campaigns by ID as swagger is shared with them only.)",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDde,
-                    "keyword": Keyword_new
-                    }
-            },
-            {
-                "description": "Add keyword which is already added in campaign by providing campaign id",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDde,
-                    "keyword": Keyword_new
-                    }
-            },
-            {
-                "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
-                "url": "https://agency.brandsignals.io/keyword/create/",
-                "method": "POST",
-                "params":
-                    {
-                    "campaign_id": Campaign_IDdd,
-                    "keyword": "Pathan12323"
-                    }
-            },
-            # ======================================
-            
-            {
-                "description": "Delete keyword from campaign by providing campaign ID (Admins have the authority to remove keywords from campaigns as swagger is shared with them only.)",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-                "method": "DELETE",
-                "params": None
-            },
-            {
-                "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/{Keyword_new}/{Campaign_IDde}",
-                "method": "DELETE",
-                "params": None
-            },
-            {
-                "description": "Try to delete last keyword of campaign by providing campaign ID",
-                "url": f"https://agency.brandsignals.io/keyword/delete/hello/{Campaign_IDdr}",
-                "method": "DELETE",
-                "params": None
-            },
-            
-            # # ======================================
-            {
-                "description": "Get Campaign Map Rank Score by providing Campaign id",
-                "url": f"https://agency.brandsignals.io/graphs/campaign-map-rank-score/{Campaign_IDdt}/",
-                "method": "GET",
-                "params":None
-            },
-            {
-                "description": "Get Keyword Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://agency.brandsignals.io/graphs/keyword-map-rank-score/{Campaign_IDdt}/Sqa house",
-                "method": "GET",
-                "params":None
-            },
-            {
-                "description": "Get Competitor Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://agency.brandsignals.io/graphs/competitor-map-rank-score/{Campaign_IDdt}/sqa house",
-                "method": "GET",
-                "params":None
-            },
-            #     # # ======================================
-            
-            #### ======================================
-        ] # Your API list
+                },
+                #================================
+                # # ======================================
+                
+                {
+                    "description": "Deauthroize business by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/business/deauthorization/{Campaign_IHrt}",
+                    "method": "GET",
+                    "params": None
+                },
+                {
+                    "description": "Deauthroize business which is already deauthroize by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/business/deauthorization/{Campaign_IHrt}",
+                    "method": "GET",
+                    "params": None
+                },
+                {
+                    "description": "Deauthroize business by providing incorrect campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/business/deauthorization/{Campaign_IFrf}",
+                    "method": "GET",
+                    "params": None
+                }, 
+                # # # # # =============================================================
+                
+                {
+                    "description": "Get list of all campaigns by campaign status",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/list/by/campaign_status/?campaign_status={Campaign_StatuS}&page=1&size=100",
+                    "method": "GET",
+                    "params": None
+                },
+                # # # # # # =============================================================
+                
+                {
+                    "description": "Get list of all campaigns",
+                    "url": "https://agency.beyondlocal.ai/campaigns/list/all/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                {
+                    "description": "Get list of all Geo Gifs URLs",
+                    "url": "https://agency.beyondlocal.ai/geo/gifs/urls/list/",
+                    "method": "GET",
+                    "params":
+                        {
+                        "Page": 1,
+                        "Size": 50
+                        }   
+                },
+                # # # # ======================================
+                
+                {
+                    "description": "Get list of all Geo Grids URLs",
+                    "url": "https://agency.beyondlocal.ai/geo/grid/urls/list/all/",
+                    "method": "GET",
+                    "params": None
+                },
+                # # # # ======================================
+                
+                {
+                    "description": "Get campaign by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/campaign_id_placeholder/",
+                    "method": "GET",
+                    "params": None
+                },
+                {
+                    "description": "Get campaign by providing incorrect campaign ID",
+                    "url": "https://agency.beyondlocal.ai/campaigns/177/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                {
+                    "description": "Get list of Geo Gifs URLs by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/campaign_id_placeholder",
+                    "method": "GET",
+                    "params": None
+                },
+                {
+                    "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/1205",
+                    "method": "GET",
+                    "params": None
+                },
+                # # # ======================================
+                {
+                    "description": "Get list of Geo Grids URLs by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/campaign_id_placeholder/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                {
+                    "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/1496/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                # # # ======================================
+                
+                {
+                    "description": "Get list of latest Grids URLs by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/campaign_id_placeholder",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                {
+                    "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/8573",
+                    "method": "GET",
+                    "params": None
+                },
+                {
+                    "description": "Get list of keywords suggestions for a business by providing CID",
+                    "url": f"https://agency.beyondlocal.ai/keyword/suggestions/{business_gmb_CID}/",
+                    "method": "GET",
+                    "params":None
+                },
+                
+                
+                {
+                    "description": "Start campaign by provide Campaign Id",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/live/campaign_id_placeholder/",
+                    "method": "PATCH",
+                    "params": None
+                },
+                
+                # ======================================
+                
+                {
+                    "description": "Get Reporting PDF with correct Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/reporting/pdf/campaign_id_placeholder",
+                    "method": "GET",
+                    "params":None
+                },
+                
+                {
+                    "description": "Get Reporting PDF with Incorrect Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/reporting/pdf/789456123",
+                    "method": "GET",
+                    "params":None
+                },
+                # # ======================================
+                {
+                    "description": "Get Campaign Map Rank Score by providing Campaign id",
+                    "url": f"https://agency.beyondlocal.ai/graphs/campaign-map-rank-score/40779/",
+                    "method": "GET",
+                    "params":None
+                },
+                {
+                    "description": "Get Keyword Map Rank Score by providing Campaign id and keyword name",
+                    "url": f"https://agency.beyondlocal.ai/graphs/keyword-map-rank-score/40779/software company",
+                    "method": "GET",
+                    "params":None
+                },
+                {
+                    "description": "Get Competitor Map Rank Score by providing Campaign id and keyword name",
+                    "url": f"https://agency.beyondlocal.ai/graphs/competitor-map-rank-score/40779/software company",
+                    "method": "GET",
+                    "params":None
+                },
+                 # ==================================================
+                {
+                    "description": "Get GBP Optimization with correct Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/gbp-optimizations/campaign_id_placeholder",
+                    "method": "GET",
+                    "params":None
+                },
+                {
+                    "description": "Get GBP Optimization with incorrect Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/gbp-optimizations/12465896",
+                    "method": "GET",
+                    "params":None
+                },
+                #======================================
+                {
+                    "description": "Add keyword in campaign by providing campaign id",
+                    "url": "https://agency.beyondlocal.ai/keyword/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "campaign_id": campaign_id_placeholder,
+                        "keyword": Keyword_neww
+                        }
+                },
+                
+                {
+                    "description": "Add keyword which is already added in campaign by providing campaign id",
+                    "url": "https://agency.beyondlocal.ai/keyword/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "campaign_id": campaign_id_placeholder,
+                        "keyword": Keyword_neww
+                        }
+                },
+                {
+                    "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
+                    "url": "https://agency.beyondlocal.ai/keyword/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "campaign_id": Campaign_ITd,
+                        "keyword": Keyword_neww
+                        }
+                },
+                # ======================================
+                
+                {
+                    "description": "Delete keyword from campaign by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/keyword/delete/{Keyword_neww}/campaign_id_placeholder",
+                    "method": "DELETE",
+                    "params": None
+                },
+                {
+                    "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/keyword/delete/{Keyword_neww}/campaign_id_placeholder",
+                    "method": "DELETE",
+                    "params": None
+                },
+                {
+                    "description": "Try to delete last keyword of campaign by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/keyword/delete/hello1/{Campaign_IFrf}",
+                    "method": "DELETE",
+                    "params": None
+                },
+                # ================================================================
+                {
+                    "description": "Get current campaign lat/lng points by providing correct Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/get/latlng/points/campaign_id_placeholder/",
+                    "method": "GET",
+                    "params":None
+                },
+                {
+                    "description": "Get current campaign lat/lng points by providing incorrect Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/get/latlng/points/51585625/",
+                    "method": "GET",
+                    "params":None
+                },
+                
+                # ================================================================
+                {
+                    "description": "Get business stats for a campaign and date range by providing correct Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/business-stats/campaign/campaign_id_placeholder/?start_date=2026-06-01&end_date={today}",
+                    "method": "GET",
+                    "params":None
+                },
+                # ================================================================
+                {
+                    "description": "Get business stats for a campaign and date range by providing incorrect Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/business-stats/campaign/51585625/?start_date=2026-06-01&end_date={today}",
+                    "method": "GET",
+                    "params":None
+                },
+                
+                # # # =============================================================
+                
+                {
+                    "description": "Delete campaign by providing campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/delete/campaign_id_placeholder/",
+                    "method": "DELETE",
+                    "params": None
+                },
+                
+                {
+                    "description": "Delete campaign by providing incorrect campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/delete/1289/",
+                    "method": "DELETE",
+                    "params": None
+                },
+                
+                {
+                    "description": "Delete campaign by providing already deleted campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/campaigns/delete/campaign_id_placeholder/",
+                    "method": "DELETE",
+                    "params": None
+                },
+                
+                # ======================================
+                {
+                    "description": "Create Quick Analysis Campaign with correct data",
+                    "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "user_id": User_id,
+                        "business_gmb_cid": business_gmb_CID,
+                        "campaign_name": Campaign_name,
+                        "keywords_for_analysis": keywords_for_analysis
+                        }
+                },
+                # # ======================================
+                {
+                    "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
+                    "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "user_id": User_id,
+                        "business_gmb_cid": 159753456978634159494945642368,
+                        "campaign_name": Campaign_name,
+                        "keywords_for_analysis": keywords_for_analysis
+                        }
+                },
+                # # ======================================
+                {
+                    "description": "Create Quick Analysis Campaign with Inccorrect User ID",
+                    "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "user_id": 798456,
+                        "business_gmb_cid": business_gmb_CID,
+                        "campaign_name": Campaign_name,
+                        "keywords_for_analysis": keywords_for_analysis
+                        }
+                },
+                 # # ======================================
+                {
+                    "description": "Get Quick Analysis Campaign with Correct Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/quick_analysis/campaigns/campaign_id_placeholded/",
+                    "method": "GET",
+                    "params":None
+                },
+                
+                {
+                    "description": "Get Quick Analysis Campaign with Incorrect Campaign ID",
+                    "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/38685269/",
+                    "method": "GET",
+                    "params":None
+                },
+                # # ======================================
+                {
+                    "description": "Get Campaign Map Rank Score by providing Quick analysis campaign id",
+                    "url": f"https://agency.beyondlocal.ai/graphs/campaign-map-rank-score/campaign_id_placeholded/",
+                    "method": "GET",
+                    "params":None
+                },
+                {
+                    "description": "Get Keyword Map Rank Score by providing Quick analysis campaign id and keyword name",
+                    "url": f"https://agency.beyondlocal.ai/graphs/keyword-map-rank-score/campaign_id_placeholded/{keywords_for_analysis}",
+                    "method": "GET",
+                    "params":None
+                },
+                {
+                    "description": "Get Competitor Map Rank Score by providing Quick analysis campaign id and keyword name",
+                    "url": f"https://agency.beyondlocal.ai/graphs/competitor-map-rank-score/campaign_id_placeholded/{keywords_for_analysis}",
+                    "method": "GET",
+                    "params":None
+                }, 
+                # ========================================
+                
+                {
+                    "description": "Get list of Geo Gifs URLs by providing Quick analysis campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/campaign_id_placeholded",
+                    "method": "GET",
+                    "params": None
+                },
+                {
+                    "description": "Get list of Geo Gifs URLs by providing incorrect Quick analysis campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/1205",
+                    "method": "GET",
+                    "params": None
+                },
+                # # # ======================================
+                {
+                    "description": "Get list of Geo Grids URLs by providing Quick analysis campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/campaign_id_placeholded/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                {
+                    "description": "Get list of Geo Grids URLs by providing incorrect Quick analysis campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/1496/",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                # # # ======================================
+                
+                {
+                    "description": "Get list of latest Grids URLs by providing Quick analysis campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/campaign_id_placeholded",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                {
+                    "description": "Get list of latest Grids URLs by providing incorrect Quick analysis campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/8573",
+                    "method": "GET",
+                    "params": None
+                },
+                
+                # # ======================================
+                
+                {
+                    "description": "Delete Quick Analysis Campaigns with campaign id",
+                    "url": f"https://agency.beyondlocal.ai/quick_analysis/campaigns/delete/campaign_id_placeholded/",
+                    "method": "DELETE",
+                    "params": None
+                },
+                
+                {
+                    "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
+                    "url": f"https://agency.beyondlocal.ai/quick_analysis/campaigns/delete/978456185/",
+                    "method": "DELETE",
+                    "params": None
+                }, 
+                {
+                    "description": "Create New Grid tracking project",
+                    "url": "https://agency.beyondlocal.ai/project/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "project_name": project_name
+                        }
+                },
+                
+                # ================================
+                
+                {
+                    "description": "Create New Grid tracking Campaign",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "user_id": User_id,
+                        "business_gmb_cid": business_gmb_CID,
+                        "campaign_name": Grid_Campaign_name,
+                        "keywords_for_analysis": keywords_for_analysis,
+                        "grid_type": 7,
+                        "grid_distance": 1,
+                        "frequency": 1,
+                        "execution_time": "07:50:37.054Z",
+                        "project_id": campaign_id_placeholdertt,
+                        "is_grid_tracking": 1
+                        }
+                }, 
+                       
+                {
+                    "description": "Create New Grid tracking Campaign with incorrect user id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "user_id": "46136876345",
+                        "business_gmb_cid": business_gmb_CID,
+                        "campaign_name": Grid_Campaign_name,
+                        "keywords_for_analysis": keywords_for_analysis,
+                        "grid_type": 7,
+                        "grid_distance": 1,
+                        "frequency": 1,
+                        "execution_time": "07:50:37.054Z",
+                        "project_id": campaign_id_placeholdertt,
+                        "is_grid_tracking": 1
+                        }
+                },        
+                       
+                {
+                    "description": "Create New Grid tracking Campaign with incorrect GMB CID",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/create/",
+                    "method": "POST",
+                    "params":
+                        {
+                        "user_id": User_id,
+                        "business_gmb_cid": "74512474521457414745145521452",
+                        "campaign_name": Grid_Campaign_name,
+                        "keywords_for_analysis": keywords_for_analysis,
+                        "grid_type": 7,
+                        "grid_distance": 1,
+                        "frequency": 1,
+                        "execution_time": "07:50:37.054Z",
+                        "project_id": campaign_id_placeholdertt,
+                        "is_grid_tracking": 1
+                        }
+                },    
+                
+                # ==============================
+                
+                {
+                    "description": "Get Grid tracking Campaign latest gif urls by providing correct campaign id by device desktop",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/campaign_id_placeholdcd/latest-gif-urls/?device=desktop",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign latest gif urls by providing correct campaign id by device mobile",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/campaign_id_placeholdcd/latest-gif-urls/?device=mobile",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign latest gif urls by providing incorrect campaign id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/645790542/latest-gif-urls/?device=desktop",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign grid urls of all grid tracking campaigns by device desktop",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/list/all/?device=desktop&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign grid urls of all grid tracking campaigns by device mobile",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/list/all/?device=desktop&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                
+                {
+                    "description": "Get Grid tracking Campaign grid urls by providing correct campaign idy device deskop",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/campaign_id_placeholdcd?device=desktop&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign grid urls by providing correct campaign idy device mobile",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/campaign_id_placeholdcd?device=mobile&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign grid urls by providing incorrect campaign id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/543453453?device=desktop&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign latest grid urls by providing correct campaign id by device desktop",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/latest/campaign_id_placeholdcd/?device=desktop&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign latest grid urls by providing correct campaign id by device mobile",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/latest/campaign_id_placeholdcd/?device=mobile&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Get Grid tracking Campaign latest grid urls by providing incorrect campaign id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/grid/urls/latest/54634532378645/?device=desktop&page=1&size=50",
+                    "method": "GET",
+                    "params":
+                        None
+                        
+                },
+                # ==============================
+                
+                {
+                    "description": "Edit Grid tracking Campaign by providing correct campaign id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/update/campaign_id_placeholdcd/",
+                    "method": "PUT",
+                    "params":
+                        {
+                        "campaign_name": Grid_Campaign_name_Edit,
+                        "grid_distance": 1,
+                        "grid_type": 7,
+                        "frequency": 1,
+                        "execution_time": "07:50:37.054Z"
+                        }
+                        
+                },
+                
+                {
+                    "description": "Edit Grid tracking Campaign by providing incorrect campaign id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/update/649852542/",
+                    "method": "PUT",
+                    "params":
+                        {
+                        "campaign_name": Grid_Campaign_name_Edit,
+                        "grid_distance": 1,
+                        "grid_type": 7,
+                        "frequency": 1,
+                        "execution_time": "07:50:37.054Z"
+                        }
+                        
+                },
+                
+                # ==================================================
+                {
+                    "description": "Get GBP Optimization with correct Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/gbp-optimizations/campaign_id_placeholdcd/",
+                    "method": "GET",
+                    "params":None
+                },
+                {
+                    "description": "Get GBP Optimization with incorrect Campaign ID",
+                    "url": f"https://agency.beyondlocal.ai/gbp-optimizations/12465896",
+                    "method": "GET",
+                    "params":None
+                },
+                
+                 # ==============================
+                
+                {
+                    "description": "Delete Grid tracking Campaign by providing correct campaign id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/delete/campaign_id_placeholdcd/",
+                    "method": "DELETE",
+                    "params":
+                        None
+                        
+                },
+                
+                {
+                    "description": "Delete Grid tracking Campaign by providing incorrect campaign id",
+                    "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/delete/987654345678/",
+                    "method": "DELETE",
+                    "params":
+                        None
+                        
+                },
+            #     
+                #     # # ======================================
+            ] # Your API list
 
     # Call the function to hit the APIs and save the results
     result_file = "umbrella_API_result.csv"

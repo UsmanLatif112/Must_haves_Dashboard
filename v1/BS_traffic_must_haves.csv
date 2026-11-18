@@ -1,0 +1,18 @@
+Test Case,Use Case / Scenario,Result
+Login, Invalid Login (Invalid Username and Password), Pass
+Login, Invalid Login (valid Username and invalid Password), Pass
+Login, Invalid Login (invalid Username and valid Password), Pass
+Login, Valid Login (valid Username and Password), Pass
+Project, Create Project, Pass
+Project, Edit Project, Pass
+Project, View Project, Pass
+Campaign, Create Campaign, Pass
+Campaign, View Campaign, Pass
+Campaign, Edit Campaign, Pass
+Campaign, View Campaign after edit, Pass
+Campaign, Live Campaign, Pass
+Campaign, Cancel Campaign, Pass
+Campaign, Delete Campaign, Pass
+Project, Delete Project, Pass
+Reports Dashboard, Filter by Project and Campaign, Pass
+Session Error and Graph stats,Campaign Type Errors, Pass
