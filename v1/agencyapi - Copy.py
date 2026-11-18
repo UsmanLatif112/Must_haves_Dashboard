@@ -5,6 +5,8 @@ import time, tokenapi
 from flask import  request
 from datetime import date
 
+base_url = tokenapi.base_url
+
 today = date.today().strftime("%Y-%m-%d")
 
 campaign_id_placeholder = None
@@ -269,7 +271,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
     
             {
                 "description": "Create User with correct data",
-                "url": "https://agency.beyondlocal.ai/users/create_user/",
+                "url": f"{base_url}users/create_user/",
                 "method": "POST",
                 "params":
                     {
@@ -281,7 +283,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create User with same username",
-                "url": "https://agency.beyondlocal.ai/users/create_user/",
+                "url": f"{base_url}users/create_user/",
                 "method": "POST",
                 "params":
                     {
@@ -293,7 +295,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create User with same email",
-                "url": "https://agency.beyondlocal.ai/users/create_user/",
+                "url": f"{base_url}users/create_user/",
                 "method": "POST",
                 "params":
                     {
@@ -305,7 +307,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create User with special charcter in Username",
-                "url": "https://agency.beyondlocal.ai/users/create_user/",
+                "url": f"{base_url}users/create_user/",
                 "method": "POST",
                 "params":
                     {
@@ -317,7 +319,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create User with incorrect email format",
-                "url": "https://agency.beyondlocal.ai/users/create_user/",
+                "url": f"{base_url}users/create_user/",
                 "method": "POST",
                 "params":
                     {
@@ -329,7 +331,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create User with incorect password",
-                "url": "https://agency.beyondlocal.ai/users/create_user/",
+                "url": f"{base_url}users/create_user/",
                 "method": "POST",
                 "params":
                     {
@@ -341,14 +343,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get all User list",
-                "url": f"https://agency.beyondlocal.ai/users/list/",
+                "url": f"{base_url}users/list/",
                 "method": "GET",
                 "params": None
             },
             
             {
                 "description": "Get SS0 link of user with correct data",
-                "url": f"https://agency.beyondlocal.ai/users/login_link/",
+                "url": f"{base_url}users/login_link/",
                 "method": "POST",
                 "params": 
                         {
@@ -359,7 +361,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get SSO link of user with incorrect username",
-                "url": f"https://agency.beyondlocal.ai/users/login_link/",
+                "url": f"{base_url}users/login_link/",
                 "method": "POST",
                 "params": 
                         {
@@ -370,7 +372,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get SOS link of user with incorrect password",
-                "url": f"https://agency.beyondlocal.ai/users/login_link/",
+                "url": f"{base_url}users/login_link/",
                 "method": "POST",
                 "params": 
                         {
@@ -383,7 +385,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create Client",
-                "url": "https://agency.beyondlocal.ai/client/create/",
+                "url": f"{base_url}client/create/",
                 "method": "POST",
                 "params":
                     {
@@ -392,7 +394,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             },
             {
                 "description": "Create client with already created client name",
-                "url": "https://agency.beyondlocal.ai/client/create/",
+                "url": f"{base_url}client/create/",
                 "method": "POST",
                 "params":
                     {
@@ -404,13 +406,13 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get client by providing client ID",
-                "url": f"https://agency.beyondlocal.ai/client/{Client_id}/",
+                "url": f"{base_url}client/{Client_id}/",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Get client by providing incorrect client ID",
-                "url": f"https://agency.beyondlocal.ai/client/128/",
+                "url": f"{base_url}client/128/",
                 "method": "GET",
                 "params": None
             },
@@ -419,7 +421,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get list of all clients",
-                "url": f"https://agency.beyondlocal.ai/client/clients/list/",
+                "url": f"{base_url}client/clients/list/",
                 "method": "GET",
                 "params": None
             },
@@ -428,7 +430,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create campaign with correct data",
-                "url": "https://agency.beyondlocal.ai/campaigns/create/",
+                "url": f"{base_url}campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -441,7 +443,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             },
             {
                 "description": "Create campaign with incorrect user id",
-                "url": "https://agency.beyondlocal.ai/campaigns/create/",
+                "url": f"{base_url}campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -455,7 +457,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create campaign with incorrect GMB CID",
-                "url": "https://agency.beyondlocal.ai/campaigns/create/",
+                "url": f"{base_url}campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -471,19 +473,19 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Deauthroize business by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/business/deauthorization/{Campaign_IHrt}",
+                "url": f"{base_url}campaigns/business/deauthorization/{Campaign_IHrt}",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Deauthroize business which is already deauthroize by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/business/deauthorization/{Campaign_IHrt}",
+                "url": f"{base_url}campaigns/business/deauthorization/{Campaign_IHrt}",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Deauthroize business by providing incorrect campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/business/deauthorization/{Campaign_IFrf}",
+                "url": f"{base_url}campaigns/business/deauthorization/{Campaign_IFrf}",
                 "method": "GET",
                 "params": None
             }, 
@@ -491,7 +493,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get list of all campaigns by campaign status",
-                "url": f"https://agency.beyondlocal.ai/campaigns/list/by/campaign_status/?campaign_status={Campaign_StatuS}&page=1&size=100",
+                "url": f"{base_url}campaigns/list/by/campaign_status/?campaign_status={Campaign_StatuS}&page=1&size=100",
                 "method": "GET",
                 "params": None
             },
@@ -499,14 +501,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get list of all campaigns",
-                "url": "https://agency.beyondlocal.ai/campaigns/list/all/",
+                "url": f"{base_url}campaigns/list/all/",
                 "method": "GET",
                 "params": None
             },
             
             {
                 "description": "Get list of all Geo Gifs URLs",
-                "url": "https://agency.beyondlocal.ai/geo/gifs/urls/list/",
+                "url": f"{base_url}geo/gifs/urls/list/",
                 "method": "GET",
                 "params":
                     {
@@ -518,7 +520,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get list of all Geo Grids URLs",
-                "url": "https://agency.beyondlocal.ai/geo/grid/urls/list/all/",
+                "url": f"{base_url}geo/grid/urls/list/all/",
                 "method": "GET",
                 "params": None
             },
@@ -526,40 +528,40 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get campaign by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/campaign_id_placeholder/",
+                "url": f"{base_url}campaigns/campaign_id_placeholder/",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Get campaign by providing incorrect campaign ID",
-                "url": "https://agency.beyondlocal.ai/campaigns/177/",
+                "url": f"{base_url}campaigns/177/",
                 "method": "GET",
                 "params": None
             },
             
             {
                 "description": "Get list of Geo Gifs URLs by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/campaign_id_placeholder",
+                "url": f"{base_url}geo/gifs/urls/campaign/campaign_id_placeholder",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Get list of Geo Gifs URLs by providing incorrect campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/1205",
+                "url": f"{base_url}geo/gifs/urls/campaign/1205",
                 "method": "GET",
                 "params": None
             },
             # # # ======================================
             {
                 "description": "Get list of Geo Grids URLs by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/campaign_id_placeholder/",
+                "url": f"{base_url}geo/grid/urls/campaign_id_placeholder/",
                 "method": "GET",
                 "params": None
             },
             
             {
                 "description": "Get list of Geo Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/1496/",
+                "url": f"{base_url}geo/grid/urls/1496/",
                 "method": "GET",
                 "params": None
             },
@@ -568,20 +570,20 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get list of latest Grids URLs by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/campaign_id_placeholder",
+                "url": f"{base_url}geo/grid/urls/latest/campaign_id_placeholder",
                 "method": "GET",
                 "params": None
             },
             
             {
                 "description": "Get list of latest Grids URLs by providing incorrect campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/8573",
+                "url": f"{base_url}geo/grid/urls/latest/8573",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Get list of keywords suggestions for a business by providing CID",
-                "url": f"https://agency.beyondlocal.ai/keyword/suggestions/{business_gmb_CID}/",
+                "url": f"{base_url}keyword/suggestions/{business_gmb_CID}/",
                 "method": "GET",
                 "params":None
             },
@@ -589,7 +591,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Start campaign by provide Campaign Id",
-                "url": f"https://agency.beyondlocal.ai/campaigns/live/campaign_id_placeholder/",
+                "url": f"{base_url}campaigns/live/campaign_id_placeholder/",
                 "method": "PATCH",
                 "params": None
             },
@@ -598,53 +600,53 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get Reporting PDF with correct Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/reporting/pdf/campaign_id_placeholder",
+                "url": f"{base_url}reporting/pdf/campaign_id_placeholder",
                 "method": "GET",
                 "params":None
             },
             
             {
                 "description": "Get Reporting PDF with Incorrect Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/reporting/pdf/789456123",
+                "url": f"{base_url}reporting/pdf/789456123",
                 "method": "GET",
                 "params":None
             },
             # # ======================================
             {
                 "description": "Get Campaign Map Rank Score by providing Campaign id",
-                "url": f"https://agency.beyondlocal.ai/graphs/campaign-map-rank-score/40779/",
+                "url": f"{base_url}graphs/campaign-map-rank-score/40779/",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Keyword Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://agency.beyondlocal.ai/graphs/keyword-map-rank-score/40779/software company",
+                "url": f"{base_url}graphs/keyword-map-rank-score/40779/software company",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Competitor Map Rank Score by providing Campaign id and keyword name",
-                "url": f"https://agency.beyondlocal.ai/graphs/competitor-map-rank-score/40779/software company",
+                "url": f"{base_url}graphs/competitor-map-rank-score/40779/software company",
                 "method": "GET",
                 "params":None
             },
              # ==================================================
             {
                 "description": "Get GBP Optimization with correct Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/gbp-optimizations/campaign_id_placeholder",
+                "url": f"{base_url}gbp-optimizations/campaign_id_placeholder",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get GBP Optimization with incorrect Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/gbp-optimizations/12465896",
+                "url": f"{base_url}gbp-optimizations/12465896",
                 "method": "GET",
                 "params":None
             },
             #======================================
             {
                 "description": "Add keyword in campaign by providing campaign id",
-                "url": "https://agency.beyondlocal.ai/keyword/create/",
+                "url": f"{base_url}keyword/create/",
                 "method": "POST",
                 "params":
                     {
@@ -655,7 +657,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Add keyword which is already added in campaign by providing campaign id",
-                "url": "https://agency.beyondlocal.ai/keyword/create/",
+                "url": f"{base_url}keyword/create/",
                 "method": "POST",
                 "params":
                     {
@@ -665,7 +667,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             },
             {
                 "description": "Add keyword in campaign already having 7 keywords by providing campaign id",
-                "url": "https://agency.beyondlocal.ai/keyword/create/",
+                "url": f"{base_url}keyword/create/",
                 "method": "POST",
                 "params":
                     {
@@ -677,32 +679,32 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Delete keyword from campaign by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/keyword/delete/{Keyword_neww}/campaign_id_placeholder",
+                "url": f"{base_url}keyword/delete/{Keyword_neww}/campaign_id_placeholder",
                 "method": "DELETE",
                 "params": None
             },
             {
                 "description": "Delete keyword which is already deleted from campaign by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/keyword/delete/{Keyword_neww}/campaign_id_placeholder",
+                "url": f"{base_url}keyword/delete/{Keyword_neww}/campaign_id_placeholder",
                 "method": "DELETE",
                 "params": None
             },
             {
                 "description": "Try to delete last keyword of campaign by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/keyword/delete/hello1/{Campaign_IFrf}",
+                "url": f"{base_url}keyword/delete/hello1/{Campaign_IFrf}",
                 "method": "DELETE",
                 "params": None
             },
             # ================================================================
             {
                 "description": "Get current campaign lat/lng points by providing correct Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/get/latlng/points/campaign_id_placeholder/",
+                "url": f"{base_url}campaigns/get/latlng/points/campaign_id_placeholder/",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get current campaign lat/lng points by providing incorrect Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/get/latlng/points/51585625/",
+                "url": f"{base_url}campaigns/get/latlng/points/51585625/",
                 "method": "GET",
                 "params":None
             },
@@ -710,14 +712,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             # ================================================================
             {
                 "description": "Get business stats for a campaign and date range by providing correct Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/business-stats/campaign/campaign_id_placeholder/?start_date=2026-06-01&end_date={today}",
+                "url": f"{base_url}business-stats/campaign/campaign_id_placeholder/?start_date=2026-06-01&end_date={today}",
                 "method": "GET",
                 "params":None
             },
             # ================================================================
             {
                 "description": "Get business stats for a campaign and date range by providing incorrect Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/business-stats/campaign/51585625/?start_date=2026-06-01&end_date={today}",
+                "url": f"{base_url}business-stats/campaign/51585625/?start_date=2026-06-01&end_date={today}",
                 "method": "GET",
                 "params":None
             },
@@ -726,21 +728,21 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Delete campaign by providing campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/delete/campaign_id_placeholder/",
+                "url": f"{base_url}campaigns/delete/campaign_id_placeholder/",
                 "method": "DELETE",
                 "params": None
             },
             
             {
                 "description": "Delete campaign by providing incorrect campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/delete/1289/",
+                "url": f"{base_url}campaigns/delete/1289/",
                 "method": "DELETE",
                 "params": None
             },
             
             {
                 "description": "Delete campaign by providing already deleted campaign ID",
-                "url": f"https://agency.beyondlocal.ai/campaigns/delete/campaign_id_placeholder/",
+                "url": f"{base_url}campaigns/delete/campaign_id_placeholder/",
                 "method": "DELETE",
                 "params": None
             },
@@ -748,7 +750,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             # ======================================
             {
                 "description": "Create Quick Analysis Campaign with correct data",
-                "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/create/",
+                "url": f"{base_url}quick_analysis/campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -761,7 +763,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             # # ======================================
             {
                 "description": "Create Quick Analysis Campaign with Inccorrect GMB_CID",
-                "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/create/",
+                "url": f"{base_url}quick_analysis/campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -774,7 +776,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             # # ======================================
             {
                 "description": "Create Quick Analysis Campaign with Inccorrect User ID",
-                "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/create/",
+                "url": f"{base_url}quick_analysis/campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -787,33 +789,33 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
              # # ======================================
             {
                 "description": "Get Quick Analysis Campaign with Correct Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/quick_analysis/campaigns/campaign_id_placeholded/",
+                "url": f"{base_url}quick_analysis/campaigns/campaign_id_placeholded/",
                 "method": "GET",
                 "params":None
             },
             
             {
                 "description": "Get Quick Analysis Campaign with Incorrect Campaign ID",
-                "url": "https://agency.beyondlocal.ai/quick_analysis/campaigns/38685269/",
+                "url": f"{base_url}quick_analysis/campaigns/38685269/",
                 "method": "GET",
                 "params":None
             },
             # # ======================================
             {
                 "description": "Get Campaign Map Rank Score by providing Quick analysis campaign id",
-                "url": f"https://agency.beyondlocal.ai/graphs/campaign-map-rank-score/campaign_id_placeholded/",
+                "url": f"{base_url}graphs/campaign-map-rank-score/campaign_id_placeholded/",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Keyword Map Rank Score by providing Quick analysis campaign id and keyword name",
-                "url": f"https://agency.beyondlocal.ai/graphs/keyword-map-rank-score/campaign_id_placeholded/{keywords_for_analysis}",
+                "url": f"{base_url}graphs/keyword-map-rank-score/campaign_id_placeholded/{keywords_for_analysis}",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get Competitor Map Rank Score by providing Quick analysis campaign id and keyword name",
-                "url": f"https://agency.beyondlocal.ai/graphs/competitor-map-rank-score/campaign_id_placeholded/{keywords_for_analysis}",
+                "url": f"{base_url}graphs/competitor-map-rank-score/campaign_id_placeholded/{keywords_for_analysis}",
                 "method": "GET",
                 "params":None
             }, 
@@ -821,27 +823,27 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get list of Geo Gifs URLs by providing Quick analysis campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/campaign_id_placeholded",
+                "url": f"{base_url}geo/gifs/urls/campaign/campaign_id_placeholded",
                 "method": "GET",
                 "params": None
             },
             {
                 "description": "Get list of Geo Gifs URLs by providing incorrect Quick analysis campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/gifs/urls/campaign/1205",
+                "url": f"{base_url}geo/gifs/urls/campaign/1205",
                 "method": "GET",
                 "params": None
             },
             # # # ======================================
             {
                 "description": "Get list of Geo Grids URLs by providing Quick analysis campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/campaign_id_placeholded/",
+                "url": f"{base_url}geo/grid/urls/campaign_id_placeholded/",
                 "method": "GET",
                 "params": None
             },
             
             {
                 "description": "Get list of Geo Grids URLs by providing incorrect Quick analysis campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/1496/",
+                "url": f"{base_url}geo/grid/urls/1496/",
                 "method": "GET",
                 "params": None
             },
@@ -850,14 +852,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get list of latest Grids URLs by providing Quick analysis campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/campaign_id_placeholded",
+                "url": f"{base_url}geo/grid/urls/latest/campaign_id_placeholded",
                 "method": "GET",
                 "params": None
             },
             
             {
                 "description": "Get list of latest Grids URLs by providing incorrect Quick analysis campaign ID",
-                "url": f"https://agency.beyondlocal.ai/geo/grid/urls/latest/8573",
+                "url": f"{base_url}geo/grid/urls/latest/8573",
                 "method": "GET",
                 "params": None
             },
@@ -866,20 +868,20 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Delete Quick Analysis Campaigns with campaign id",
-                "url": f"https://agency.beyondlocal.ai/quick_analysis/campaigns/delete/campaign_id_placeholded/",
+                "url": f"{base_url}quick_analysis/campaigns/delete/campaign_id_placeholded/",
                 "method": "DELETE",
                 "params": None
             },
             
             {
                 "description": "Delete Quick Analysis Campaigns with incorrect campaign id",
-                "url": f"https://agency.beyondlocal.ai/quick_analysis/campaigns/delete/978456185/",
+                "url": f"{base_url}quick_analysis/campaigns/delete/978456185/",
                 "method": "DELETE",
                 "params": None
             }, 
             {
                 "description": "Create New Grid tracking project",
-                "url": "https://agency.beyondlocal.ai/project/create/",
+                "url": f"{base_url}project/create/",
                 "method": "POST",
                 "params":
                     {
@@ -891,7 +893,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Create New Grid tracking Campaign",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/create/",
+                "url": f"{base_url}grid_tracking/campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -910,7 +912,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                    
             {
                 "description": "Create New Grid tracking Campaign with incorrect user id",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/create/",
+                "url": f"{base_url}grid_tracking/campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -929,7 +931,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                    
             {
                 "description": "Create New Grid tracking Campaign with incorrect GMB CID",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/create/",
+                "url": f"{base_url}grid_tracking/campaigns/create/",
                 "method": "POST",
                 "params":
                     {
@@ -950,7 +952,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get Grid tracking Campaign latest gif urls by providing correct campaign id",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/campaign_id_placeholdcd/latest-gif-urls/",
+                "url": f"{base_url}grid_tracking/campaigns/campaign_id_placeholdcd/latest-gif-urls/",
                 "method": "GET",
                 "params":
                     None
@@ -959,7 +961,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get Grid tracking Campaign latest gif urls by providing incorrect campaign id",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/645790542/latest-gif-urls/",
+                "url": f"{base_url}grid_tracking/campaigns/645790542/latest-gif-urls/",
                 "method": "GET",
                 "params":
                     None
@@ -970,7 +972,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Edit Grid tracking Campaign by providing correct campaign id",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/update/campaign_id_placeholdcd/",
+                "url": f"{base_url}grid_tracking/campaigns/update/campaign_id_placeholdcd/",
                 "method": "PUT",
                 "params":
                     {
@@ -985,7 +987,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Edit Grid tracking Campaign by providing incorrect campaign id",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/update/649852542/",
+                "url": f"{base_url}grid_tracking/campaigns/update/649852542/",
                 "method": "PUT",
                 "params":
                     {
@@ -1000,13 +1002,13 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             # ==================================================
             {
                 "description": "Get GBP Optimization with correct Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/gbp-optimizations/campaign_id_placeholdcd/",
+                "url": f"{base_url}gbp-optimizations/campaign_id_placeholdcd/",
                 "method": "GET",
                 "params":None
             },
             {
                 "description": "Get GBP Optimization with incorrect Campaign ID",
-                "url": f"https://agency.beyondlocal.ai/gbp-optimizations/12465896",
+                "url": f"{base_url}gbp-optimizations/12465896",
                 "method": "GET",
                 "params":None
             },
@@ -1015,7 +1017,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Delete Grid tracking Campaign by providing correct campaign id",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/delete/campaign_id_placeholdcd/",
+                "url": f"{base_url}grid_tracking/campaigns/delete/campaign_id_placeholdcd/",
                 "method": "DELETE",
                 "params":
                     None
@@ -1024,7 +1026,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Delete Grid tracking Campaign by providing incorrect campaign id",
-                "url": "https://agency.beyondlocal.ai/grid_tracking/campaigns/delete/987654345678/",
+                "url": f"{base_url}grid_tracking/campaigns/delete/987654345678/",
                 "method": "DELETE",
                 "params":
                     None
