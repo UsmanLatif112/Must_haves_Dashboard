@@ -141,16 +141,9 @@ def run_script():
         print(f'{Campaign_Status}')
         # Pass these IDs to the init_the_testing function
         result_content = init_the_testing(campaign_id,business_id,keywordname_id,Campaign_Status)
-        
-        # Commit the API responses to the database
-        db.session.commit()
-        
-        # Import the CSV file data into the database, now passing the user_id
-        csv_file_path = "API_result.csv"
-        import_csv_to_db(db.session, csv_file_path, current_user.id)
-        
-        # Delete the CSV file after import
-        delete_file_if_exists(csv_file_path)
+
+        # Each API result is saved as it finishes. Remove the CSV afterwards.
+        delete_file_if_exists("API_result.csv")
 
         # Return the results as JSON
         return jsonify(result_content)

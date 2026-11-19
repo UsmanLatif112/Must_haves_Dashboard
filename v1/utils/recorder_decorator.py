@@ -1,10 +1,17 @@
 from functools import wraps
 from flask import request
-from utils.recorder import ScreenRecorder
 import time
+
+try:
+    from utils.recorder import ScreenRecorder
+except ImportError:
+    ScreenRecorder = None
 
 
 def record_screen(func):
+    if ScreenRecorder is None:
+        return func
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         

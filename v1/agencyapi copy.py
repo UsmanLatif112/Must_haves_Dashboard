@@ -22,6 +22,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
     # ======================================
     auth_token = Piroty_token
     # ======================================
+
+    userr_name = "test-agency-to-test-api-conection"
+    passwords = "Usman@112"
+    User_id = "4440"
+    Client_id = "4815"
+
+    # ===========================================
+    
     Campaign_StatuS = f'{Campaign_StatuSs}'
     # (API must have for 8 key)
     Campaign_ITd = "48366" #use able43187
@@ -29,7 +37,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
     Campaign_IFrf = "48367" #use able
     # (API must have Business Auth)
     Campaign_IHrt = "41706" #use able
-    Client_id = "4815"
+    
     Keyword_neww = f"{keywordname_Id}new"
     # Client name which is used to create new client
     Client_Name_New = f"-AI-TEST-apimust{Campaign_IDd}"
@@ -37,9 +45,10 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
     user_name = f"-AI-TEST-AApimust23{Campaign_IDd}"
     email = f"Apimust12{Campaign_IDd}@gmail.com"   
     password =  "Usman@112"
+    
     # data which is used to create new campaign
     # data which is used to create new campaign
-    User_id = "4440"
+    
     business_gmb_CID = f"{business_CID_Id}"
     Campaign_name = f"-AI-TEST-API must haves 23{Campaign_IDd}25"
     Client_name = "-AI-TEST-APITEST0026"
@@ -354,8 +363,8 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                 "method": "POST",
                 "params": 
                         {
-                        "user_name": "aitest-agency-api-admin",
-                        "password": "lWaBC47yRkW4!ai4"
+                        "user_name": userr_name,
+                        "password": passwords
                         }
             },
             
@@ -434,11 +443,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                 "method": "POST",
                 "params":
                     {
+                    "campaign_type": "normal",
                     "user_id": User_id,
                     "business_gmb_cid": business_gmb_CID,
                     "campaign_name": Campaign_name,
                     "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
+                    "keywords_for_analysis": keywords_for_analysis,
+                    "grid_type": 7,
+                    "grid_distance": 1
                     }
             },
             {
@@ -447,11 +459,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                 "method": "POST",
                 "params":
                     {
+                    "campaign_type": "normal",
                     "user_id": 143789,
                     "business_gmb_cid": business_gmb_CID,
                     "campaign_name": Campaign_name,
                     "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
+                    "keywords_for_analysis": keywords_for_analysis,
+                    "grid_type": 7,
+                    "grid_distance": 1
                     }
             },
             
@@ -461,11 +476,14 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                 "method": "POST",
                 "params":
                     {
+                    "campaign_type": "normal",
                     "user_id": User_id,
                     "business_gmb_cid": "98649953187944340729864995318",
                     "campaign_name": Campaign_name,
                     "client_name": Client_name,
-                    "keywords_for_analysis": keywords_for_analysis
+                    "keywords_for_analysis": keywords_for_analysis,
+                    "grid_type": 7,
+                    "grid_distance": 1
                     }
             },
             #================================
@@ -951,8 +969,17 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             # ==============================
             
             {
-                "description": "Get Grid tracking Campaign latest gif urls by providing correct campaign id",
-                "url": f"{base_url}grid_tracking/campaigns/campaign_id_placeholdcd/latest-gif-urls/",
+                "description": "Get Grid tracking Campaign latest gif urls by providing correct campaign id by device desktop",
+                "url": f"{base_url}grid_tracking/campaigns/campaign_id_placeholdcd/latest-gif-urls/?device=desktop",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            {
+                "description": "Get Grid tracking Campaign latest gif urls by providing correct campaign id by device mobile",
+                "url": f"{base_url}grid_tracking/campaigns/campaign_id_placeholdcd/latest-gif-urls/?device=mobile",
                 "method": "GET",
                 "params":
                     None
@@ -961,13 +988,85 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
             
             {
                 "description": "Get Grid tracking Campaign latest gif urls by providing incorrect campaign id",
-                "url": f"{base_url}grid_tracking/campaigns/645790542/latest-gif-urls/",
+                "url": f"{base_url}grid_tracking/campaigns/645790542/latest-gif-urls/?device=desktop",
                 "method": "GET",
                 "params":
                     None
                     
             },
             
+            {
+                "description": "Get Grid tracking Campaign grid urls of all grid tracking campaigns by device desktop",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/list/all/?device=desktop&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            {
+                "description": "Get Grid tracking Campaign grid urls of all grid tracking campaigns by device mobile",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/list/all/?device=desktop&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            
+            {
+                "description": "Get Grid tracking Campaign grid urls by providing correct campaign idy device deskop",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/campaign_id_placeholdcd?device=desktop&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            {
+                "description": "Get Grid tracking Campaign grid urls by providing correct campaign idy device mobile",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/campaign_id_placeholdcd?device=mobile&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            {
+                "description": "Get Grid tracking Campaign grid urls by providing incorrect campaign id",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/543453453?device=desktop&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            {
+                "description": "Get Grid tracking Campaign latest grid urls by providing correct campaign id by device desktop",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/latest/campaign_id_placeholdcd/?device=desktop&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            {
+                "description": "Get Grid tracking Campaign latest grid urls by providing correct campaign id by device mobile",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/latest/campaign_id_placeholdcd/?device=mobile&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
+            
+            {
+                "description": "Get Grid tracking Campaign latest grid urls by providing incorrect campaign id",
+                "url": f"{base_url}grid_tracking/campaigns/grid/urls/latest/54634532378645/?device=desktop&page=1&size=50",
+                "method": "GET",
+                "params":
+                    None
+                    
+            },
             # ==============================
             
             {
@@ -999,6 +1098,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                     }
                     
             },
+            
             # ==================================================
             {
                 "description": "Get GBP Optimization with correct Campaign ID",

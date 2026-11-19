@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -37,14 +38,16 @@ print(f"FLASK_DEBUG: {FLASK_DEBUG}")
 print(f"BS_TRAFFIC_URL: {BS_TRAFFIC_URL}")
 
 
-app.config['SESSION_COOKIE_DOMAIN'] = os.getenv('SESSION_COOKIE_DOMAIN')
+cookie_domain = os.getenv('SESSION_COOKIE_DOMAIN')
+if cookie_domain:
+    app.config['SESSION_COOKIE_DOMAIN'] = cookie_domain
 
 app.config['SESSION_COOKIE_SECURE'] = os.getenv('SESSION_COOKIE_SECURE') == 'True'
 app.config['SESSION_COOKIE_SAMESITE'] = os.getenv('SESSION_COOKIE_SAMESITE')
 
 
 if __name__ == "__main__":
-    app.run(host=FLASK_HOST, port=FLASK_PORT, debug=FLASK_DEBUG=='True')
+    app.run(host=FLASK_HOST, port=int(FLASK_PORT), debug=FLASK_DEBUG=='True')
 
     
 # from views import *

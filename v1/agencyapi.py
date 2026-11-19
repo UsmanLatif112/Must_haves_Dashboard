@@ -22,14 +22,22 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
     # ======================================
     auth_token = Piroty_token
     # ======================================
+
+    userr_name = "test-agency-to-test-api-conection"
+    passwords = "Usman@112"
+    User_id = "6387"
+    Client_id = "5636"
+
+    # ===========================================
+
     Campaign_StatuS = f'{Campaign_StatuSs}'
     # (API must have for 8 key)
-    Campaign_ITd = "48366" #use able43187
+    Campaign_ITd = "41219" #use able43187
     # (API must have for last key)
-    Campaign_IFrf = "48367" #use able
+    Campaign_IFrf = "41218" #use able
     # (API must have Business Auth)
-    Campaign_IHrt = "41706" #use able
-    Client_id = "4815"
+    Campaign_IHrt = "41217" #use able
+    
     Keyword_neww = f"{keywordname_Id}new"
     # Client name which is used to create new client
     Client_Name_New = f"-AI-TEST-apimust{Campaign_IDd}"
@@ -37,9 +45,10 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
     user_name = f"-AI-TEST-AApimust23{Campaign_IDd}"
     email = f"Apimust12{Campaign_IDd}@gmail.com"   
     password =  "Usman@112"
+    
     # data which is used to create new campaign
     # data which is used to create new campaign
-    User_id = "4440"
+    
     business_gmb_CID = f"{business_CID_Id}"
     Campaign_name = f"-AI-TEST-API must haves 23{Campaign_IDd}25"
     Client_name = "-AI-TEST-APITEST0026"
@@ -137,7 +146,7 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                 }
 
                 try:
-                    print(f"\nAPI Description: {description}\n")
+                    print(f"\nAPI Description: {description}\n", flush=True)
                     start_time = time.time()
 
                     response = requests.request(method, url, json=params, headers=headers)
@@ -246,16 +255,39 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                                 response_result,
                             ]
                         )
-                    # Print the results in the terminal
-                    # print(
-                    #     f"API: {url}, Method: {method}, Response Code: {response_code}, Result (according to response code): {result_according_to_response_code}, "
-                    #     f"Response Time: {response_time:.2f}, Response Message: {response_message}, Response Data: {response_data},Payload Data: {params}, Response Data Result: {response_result}"
-                    # )
-                    print("===================================")    
-                    print("         ")
-                    print(f"API: {url}, Response Code: {response_code}, Response Data: {response_data}")
-                    print("===================================") 
-                    print("        ")
+                    csvfile.flush()
+                    print("===================================", flush=True)
+                    print("         ", flush=True)
+                    print(
+                        f"API: {url}, Method: {method}, Response Code: {response_code}, "
+                        f"Result (according to response code): {result_according_to_response_code}, "
+                        f"Response Time: {response_time:.2f}, Response Message: {response_message}, "
+                        f"Response Data: {response_data}, Payload Data: {params}, "
+                        f"Response Data Result: {response_result}",
+                        flush=True,
+                    )
+                    print("===================================", flush=True)
+                    print("        ", flush=True)
+                    try:
+                        from flask_login import current_user
+                        from app import db
+                        from import_csv import save_api_log
+                        save_api_log(
+                            db.session,
+                            current_user.id,
+                            description,
+                            url,
+                            method,
+                            response_code,
+                            result_according_to_response_code,
+                            response_time,
+                            response_message,
+                            response_data,
+                            params,
+                            response_result,
+                        )
+                    except Exception as log_error:
+                        print(f"Could not save log: {log_error}", flush=True)
                     time.sleep(10)  
 
                 except Exception as e:
@@ -354,8 +386,8 @@ def init_the_testing(campaign_id, business_id , keywordname_id, Campaign_Status)
                 "method": "POST",
                 "params": 
                         {
-                        "user_name": "aitest-agency-api-admin",
-                        "password": "lWaBC47yRkW4!ai4"
+                        "user_name": userr_name,
+                        "password": passwords
                         }
             },
             
